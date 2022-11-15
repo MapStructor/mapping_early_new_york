@@ -1786,7 +1786,7 @@ function addAfterLabelsLayer() {
 		  
 		  afterMap.on('click', 'label-new-amsterdam', function (e) {
 			  zoom_labels_click_ev = true;
-              zoomtoNA();
+              zoomtocenter('NA');
           });
 		  
 		  afterMap.addLayer(ManhattanZoomLabel);
