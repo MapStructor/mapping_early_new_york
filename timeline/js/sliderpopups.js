@@ -256,7 +256,7 @@ function buildDutchGrantPopUpInfo(props) {
 				if(dutch_grant_lots_info[props.Lot].builds.length > 0) {
 					for(let i = 0; i < dutch_grant_lots_info[props.Lot].builds.length; i++){
 						//builds_imgs += "<img src='" + dutch_grant_lots_info[props.Lot].builds[i].url + "'  width='258' alt='" + dutch_grant_lots_info[props.Lot].builds[i].alt  + "' title='" + dutch_grant_lots_info[props.Lot].builds[i].title  + "'><br><br>";
-					        builds_imgs += "<img src='https://encyclopedia.nahc-mapping.org" + dutch_grant_lots_info[props.Lot].builds[i] + "'  width='258' ><br><br>";
+					        builds_imgs += "<img src='https://nahc-mapping.org" + dutch_grant_lots_info[props.Lot].builds[i] + "'  width='258' ><br><br>";
 					}
 				}
 				popup_html = 
