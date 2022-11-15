@@ -1799,7 +1799,7 @@ function addBeforeLabelsLayer() {
 		  
 		  beforeMap.on('click', 'label-new-amsterdam', function (e) {
 			  zoom_labels_click_ev = true;
-              zoomtoNA();
+              zoomtocenter('NA');
           });
 		  
 		  beforeMap.addLayer(ManhattanZoomLabel);
