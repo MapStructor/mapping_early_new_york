@@ -81,6 +81,26 @@
 
 		<script>
 
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  // true for mobile device
+  console.warn("mobile device");
+  console.warn("redirect");
+  window.location.href = './mobile.html'; 
+}else{
+  // false for not mobile device
+  console.warn("not mobile device");
+  //if ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) ) {
+  if ( window.innerWidth <= 670 ) {
+      console.warn("but small size");
+	  console.warn("redirect");
+	  window.location.href = './mobile.html'; 
+  } else {
+      console.warn("start");
+      console.warn("load");
+  }
+}
+
+
     // get Dutch Grants Lots Info from REST API
     var dutch_grant_lots_info = new Array(),
 	    settlements_info = new Array(),
@@ -1090,7 +1110,8 @@ my_tooltip.fadeOut(200);
 				*/
 				
 				$('.trigger-popup').click(function(e) {
-					if (modal_header_text[e.target.id].length > 0) {
+					var popup_id = ( e.target.id == "info" ) ? "about" : e.target.id;
+					if (modal_header_text[popup_id].length > 0) {
 						$("div.modal-header h1").text(modal_header_text[e.target.id]);
 						$("div.modal-content").html(modal_content_html[e.target.id]);
 						$("label#open-popup").trigger("click");
@@ -1107,6 +1128,12 @@ my_tooltip.fadeOut(200);
 				$('div.modal').click(function() {
 				    $("label#close").trigger("click");
                 });
+				
+			    setTimeout( function() {
+	                //document.getElementById("#loading").style.display = "none";
+					$("div#loading").css('display', 'none');
+	            }, 5000);
+				
 			});
 			
 			
@@ -1669,6 +1696,26 @@ function getTaxlotEventEntitiesDescrInfo() {
 		div.layer-list-row:hover {
 		    background-color: #DDD;
 		}
+		
+  #loading {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.8;
+    background-color: #fff;
+    z-index: 1000!important; /* 99!important; */
+    text-align: center;
+  }
+  
+  #loading-icon {
+    position: relative;
+    top: 38%;
+    bottom: 62%;
+	color: #20B2AA;
+  }
 		
 /* tooltip */
 .tooltip{
@@ -3111,7 +3158,10 @@ i.slash-icon { font-size: 11px; }
 		</div>
 	
 	
-	
+	    <div id="loading">
+			<i class="fa fa-sync fa-10x fa-spin" id="loading-icon"></i>
+        </div>
+		
 		<!-- MAP.JS SOURCE -->
 		<script src="timeline/js/mapinit.js"></script>
 		<script src="timeline/js/beforelayers.js"></script>
