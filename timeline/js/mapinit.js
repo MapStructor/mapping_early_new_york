@@ -1938,6 +1938,7 @@ beforeMap.on('style.load', function () {
 	console.log(yr)
 	console.log(date)
 
+/*
 	addBeforeLayers(yr, date);
 	addBeforeFarmsLayer(date);
 	addCastelloBeforeLayers();
@@ -1951,16 +1952,45 @@ beforeMap.on('style.load', function () {
 	addLongIslandCoastlineBeforeLayers();
 	addIndianPathsBeforeLayers();
 	addLongIslandNativeGroupsBeforeLayers();
-/*REPLACE THIS*/
+	
+//REPLACE THIS
 addGravesendBeforeLayers(date);
 addGravesendLinesBeforeLayers(date);
-/*REPLACE THIS*/
+//REPLACE THIS
 addKarlBeforeLayers(date);
 addKarlLinesBeforeLayers(date);
 addSettlementsBeforeLayers(date);
 addSettlementsLabelsBeforeLayers(date);
 
 addBeforeLabelsLayer();
+*/
+
+    addKarlBeforeLayers(date);
+    addKarlLinesBeforeLayers(date);
+    addSettlementsBeforeLayers(date);
+    addSettlementsLabelsBeforeLayers(date);
+
+    setTimeout( function() {
+        addGravesendBeforeLayers(date);
+        addGravesendLinesBeforeLayers(date);
+        addGrantLotsBeforeLayers(date);
+	    addGrantLotsLinesBeforeLayers(date);
+		addBeforeLayers(yr, date);
+	    addBeforeFarmsLayer(date);
+    }, 1000);
+	setTimeout( function() {
+        addBeforeLabelsLayer();
+		addCastelloBeforeLayers();
+	    addCurrentLotsBeforeLayers();
+	    addCurrentLotsLinesBeforeLayers();
+	    addCurrentBuildingsBeforeLayers();
+	    addCurrentBuildingsLinesBeforeLayers();
+	    addManahattaBeforeLayers();
+	    addLongIslandCoastlineBeforeLayers();
+	    addIndianPathsBeforeLayers();
+	    addLongIslandNativeGroupsBeforeLayers();
+    }, 2000);
+
 
 });
 
@@ -1979,6 +2009,7 @@ afterMap.on('style.load', function () {
 	console.log(yr)
 	console.log(date)
 
+/*
 	addAfterLayers(yr, date);
 	addAfterFarmsLayer(date);
 	addCastelloAfterLayers();
@@ -1993,10 +2024,10 @@ afterMap.on('style.load', function () {
 	addIndianPathsAfterLayers();
 	addLongIslandNativeGroupsAfterLayers();
 
-/*REPLACE THIS*/
+//REPLACE THIS
 addGravesendAfterLayers(date);
 addGravesendLinesAfterLayers(date);
-/*REPLACE THIS*/
+//REPLACE THIS
 
 addKarlAfterLayers(date);
 addKarlLinesAfterLayers(date);
@@ -2005,8 +2036,37 @@ addSettlementsAfterLayers(date);
 addSettlementsLabelsAfterLayers(date);
 
 addAfterLabelsLayer();
+*/
+    setTimeout( function() {
+        addKarlAfterLayers(date);
+        addKarlLinesAfterLayers(date);
+        addSettlementsAfterLayers(date);
+        addSettlementsLabelsAfterLayers(date);
+    }, 500);
+
+    setTimeout( function() {
+        addGravesendAfterLayers(date);
+        addGravesendLinesAfterLayers(date);
+        addGrantLotsAfterLayers(date);
+	    addGrantLotsLinesAfterLayers(date);
+		addAfterLayers(yr, date);
+	    addAfterFarmsLayer(date);
+    }, 1500);
+	setTimeout( function() {
+        addAfterLabelsLayer();
+		addCastelloAfterLayers();
+	    addCurrentLotsAfterLayers();
+	    addCurrentLotsLinesAfterLayers();
+	    addCurrentBuildingsAfterLayers();
+	    addCurrentBuildingsLinesAfterLayers();
+	    addManahattaAfterLayers();
+	    addLongIslandCoastlineAfterLayers();
+	    addIndianPathsAfterLayers();
+	    addLongIslandNativeGroupsAfterLayers();
+    }, 2500);
 
 });
+
 
 
 
