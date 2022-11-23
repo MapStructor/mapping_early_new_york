@@ -156,7 +156,7 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
 			
 
 			
-			
+/*		
 function simple_tooltip(target_items, name){
 $(target_items).each(function(i){
 $("body").append("<div class='"+name+"' id='"+name+i+"'><p>"+$(this).attr('title')+"</p></div>");
@@ -171,14 +171,14 @@ my_tooltip.fadeOut(200);
 });
 });
 }
-
+*/
 			
 			
 			$(document).ready(function () {
 
 				if (jQuery.browser.msie) alert('Sorry, this application uses state of the art HTML5 techniques which are not (well) supported by Internet Explorer.\nUse Google Chrome or Mozilla Firefox to experience the full power of HTML5 and this application');
                 
-				simple_tooltip("i.layer-info, i.zoom-to-layer","tooltip");
+				//simple_tooltip("i.layer-info, i.zoom-to-layer","tooltip");
 				
 				windoWidth = $(window).width();
 				//console.log(windoWidth);
@@ -2103,18 +2103,12 @@ img#logo-img {
 }
 
 /*438*/
-@media (max-width: 503px) {
-    .header a.encyclopedia, .header label#about { display: none; }
-	.header i#info { display: inline-block; }
+
+@media (max-width: 419px) {
+    img.img2 { display: none; }
 }
 
-/*555*/
-@media (max-width: 657px) {
-	/* i.layer-info { margin-right: 21px;} */
-	
-	/*
-	img.img2 { display: none; }
-	
+@media (max-width: 370px) {
 	img#logo-img-wide {  
 		display: none;
 	}
@@ -2123,6 +2117,26 @@ img#logo-img {
 	    height: 34px;
 		display: inline-block;
 	}
+	
+}
+
+
+@media (max-width: 287px) {
+
+    .header a.encyclopedia{ display: none; }
+	.header label#about { display: none; }
+	.header i#info { display: inline-block; }
+	
+	img#logo-img { display: none }
+	img#logo-img-wide { display: inline-block; }
+}
+
+/*555*/
+@media (max-width: 657px) {
+	/* i.layer-info { margin-right: 21px;} */
+	
+	/*
+	
 	*/
 	
 	#headerTextSuffix, .headerText { display: none; }
@@ -3220,6 +3234,4 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
-
-
 
