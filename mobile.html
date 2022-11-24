@@ -137,6 +137,8 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
 			var timeline_pointer_flag = true;
 			var windoWidth = 0;
 			
+			var expand_info_list_flag = false;
+			
 			var sliderStartDrag = moment("06/02/1643").unix();
 		    var sliderStart = moment("01/01/1626").unix();
 		    //var sliderEnd = moment().unix();
@@ -206,6 +208,8 @@ my_tooltip.fadeOut(200);
 				$("#long-island-maps-section1").slideUp();
 				$("#new-netherland-maps-section").slideUp();
 				$("#new-england-maps-section").slideUp();
+				
+				$("#topInfoBar").slideUp();
 					
 				$("#ruler-date1").text(moment.unix(date_ruler1).format('YYYY')); // .format('DD MMM YYYY')
 				$("#ruler-date2").text(moment.unix(date_ruler2).format('YYYY')); // .format('DD MMM YYYY')
@@ -1100,6 +1104,34 @@ my_tooltip.fadeOut(200);
 					closeCurrLotsInfo();
 									
 				});
+				
+				$('#info-list-btn').click(function() {
+				    if(expand_info_list_flag) {
+				        $("#topInfoBar").slideUp();
+						//$("#info-list-btn i").css({'-webkit-transform': 'rotate(0deg)'});
+						$("#info-list-btn i").animate({  borderSpacing: 360 }, {
+                            step: function(now,fx) {
+                               $(this).css('-webkit-transform','rotate('+now+'deg)'); 
+                               $(this).css('-moz-transform','rotate('+now+'deg)');
+                               $(this).css('transform','rotate('+now+'deg)');
+                            },
+                            duration:'slow'
+                        },'linear');
+						expand_info_list_flag = false;
+					} else {
+					    $("#topInfoBar").slideDown();
+						//$("#info-list-btn i").css('-webkit-transform', 'rotate(-180deg)');
+						$("#info-list-btn i").animate({  borderSpacing: 180 }, {
+                            step: function(now,fx) {
+                               $(this).css('-webkit-transform','rotate('+now+'deg)'); 
+                               $(this).css('-moz-transform','rotate('+now+'deg)');
+                               $(this).css('transform','rotate('+now+'deg)');
+                            },
+                            duration:'slow'
+                        },'linear');
+						expand_info_list_flag = true;
+					}
+				});
 
 				/* change timeline CSS property on mouseover & mouseout */
 				$("div.timeline").mouseover(function(){
@@ -1570,7 +1602,7 @@ function getTaxlotEventEntitiesDescrInfo() {
 			
 			<style>
 				
-				.header a.encyclopedia, .header label#about {
+				.header a.encyclopedia, .header label#about, #topInfoBar a.encyclopedia, #topInfoBar label#about {
 				  float: left;
 				  color: black;
 				  text-align: center;
@@ -1578,32 +1610,47 @@ function getTaxlotEventEntitiesDescrInfo() {
 				  text-decoration: none;
 				  font-size: 15px; 
 				  line-height: 25px;
-				  border-radius: 4px;
+				  border-radius: 5px;
 				  border: solid black;
 				  font-weight: bold;
 				  margin-top: 3px;
 					margin: 3px;
 					font-family: "Arial";
 				}
-	
-	            .header i#info { display: none; }
+				
+	            .header label#info-list-btn {
+				    color: black;
+				  text-align: center;
+				  padding: 10px;
+				  text-decoration: none;
+				  font-size: 30px; 
+				  line-height: 50px;
+				  border-radius: 5px;
+				  border: solid black;
+				  font-weight: bold;
+				  margin-top: 3px;
+					margin: 3px;
+					font-family: "Arial";
+				}
+			    
+	            .header i#info, #topInfoBar i#info { display: none; }
 				i.fa-info-circle { color: #777; }
 	
-				.header a:hover, .header label:hover {
+				.header a:hover, .header label:hover, #topInfoBar a:hover, #topInfoBar label:hover {
 				  background-color: #ddd;
 				  color: black;
 				}
 	
-				.header a.active {
+				.header a.active, #topInfoBar a.active {
 				  background-color: dodgerblue;
 				  color: white;
 				}
 	
 				.header-right {
-				float: right;
-				margin-top: 13px;
-				margin-left: 50px;
-				margin-right: 9px;
+				    float: right;
+				    margin-top: 13px;
+				    margin-left: 50px;
+				    margin-right: 9px;
 				}
 
 
@@ -1627,7 +1674,7 @@ function getTaxlotEventEntitiesDescrInfo() {
 				}
 				
 
-				.header a.encyclopedia {
+				.header a.encyclopedia, #topInfoBar a.encyclopedia {
 				background-color: #e8e1da;
 				/* color: white; */
 				}
@@ -1641,6 +1688,19 @@ function getTaxlotEventEntitiesDescrInfo() {
 				.header>a:first-child:hover {
 					background-color: inherit;
 				}
+				
+				#topInfoBar {
+	                position: absolute;
+	                right: 0;
+	                display:block;
+	                top: 100px;
+	                width: 157px;
+	                z-index: 500;
+					border: solid #b0691d 1px;
+					padding: 8px;
+					background-color: #fff;
+					top: 82px;
+                }
 
 				</style>
 
@@ -1752,7 +1812,8 @@ padding:2px 7px;
 /* hide current buildings fill layers */
 	#current_buildings_items,  #current_buildings { display: none; }
 	label[for=current_buildings_items], label[for=current_buildings] { display: none; }
-		
+	
+
 /* Style for Studio Menu */
 /* #demoLayerInfo */
 
@@ -2103,7 +2164,7 @@ img#logo-img {
 }
 
 /*438*/
-
+/*
 @media (max-width: 419px) {
     img.img2 { display: none; }
 }
@@ -2119,7 +2180,7 @@ img#logo-img {
 	}
 	
 }
-
+*/
 
 @media (max-width: 287px) {
 
@@ -2127,20 +2188,18 @@ img#logo-img {
 	.header label#about { display: none; }
 	.header i#info { display: inline-block; }
 	
+	/*
 	img#logo-img { display: none }
 	img#logo-img-wide { display: inline-block; }
+	*/
 }
 
 /*555*/
-@media (max-width: 657px) {
+@media (max-width: 500px) {
 	/* i.layer-info { margin-right: 21px;} */
 	
-	/*
-	
-	*/
-	
 	#headerTextSuffix, .headerText { display: none; }
-	
+
 }
 
 
@@ -2150,7 +2209,7 @@ img#logo-img {
 /*930*/
 @media (max-width: 1025px) {
     .map { top: 43px; }
-	
+	 #topInfoBar { top: 45px; }
 	
     /*
 	#headerTextSuffix { display: none; }
@@ -2167,14 +2226,27 @@ img#logo-img {
 				margin-right: 5px;
 				}
 				
-		
-	.header a.encyclopedia, .header label#about {
+	.header a.encyclopedia, .header label#about, #topInfoBar a.encyclopedia, #topInfoBar label#about {
 				  color: black;
 				  text-align: center;
 				  padding: 3px;
 				  text-decoration: none;
 				  font-size: 13px; 
 				  line-height: 15px;
+				  border-radius: 3px;
+				  border: solid black;
+				  font-weight: bold;
+				  margin-top: 3px;
+					margin: 3px;
+				}
+				
+			.header label#info-list-btn {
+	              color: black;
+				  text-align: center;
+				  padding: 3px 8px 3px 13px;
+				  text-decoration: none;
+				  font-size: 21px; 
+				  line-height: 35px;
 				  border-radius: 3px;
 				  border: solid black;
 				  font-weight: bold;
@@ -2289,23 +2361,7 @@ i.slash-icon { font-size: 11px; }
 				</div>
 				   
 				<div class="header-right">
-				    <!--
-					<a href="swipe.html">Swipe</a>
-					<a href="explore.html">Explore</a>
-					<a class="active" href="#home">Timeline (BETA)</a>
-					-->
-					<a class="encyclopedia" href="https://newamsterdamhistorycenter.org/full-3d-model/" target="_blank">3D Map <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
-					<a class="encyclopedia" href="https://encyclopedia.nahc-mapping.org/" target="_blank">Encyclopedia <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
-					<!--
-					<a href="about.html">About</a>
-					-->
-					<!--
-					<label for="o" id="about" title="Open">ABOUT</label>
-					<label for="o" id="info" ><i for="o" class="fa fa-2x fa-info-circle"></i></label>
-					-->
-					<label for="o" id="open-popup" style="display: none;" >Open PopUp</label>
-					<label id="about" class="trigger-popup" title="Open">ABOUT</label>
-					<i class="fa fa-2x fa-info-circle trigger-popup" id="info" ></i>
+					<label id="info-list-btn" class="trigger-menu-list">I N F <i class="fa fa-arrow-circle-down"></i></label>
 				</div>
 				
 			</div>
@@ -2316,8 +2372,17 @@ i.slash-icon { font-size: 11px; }
     <!--ADD LAYERS TOGGLE -->
 	<!---------------------->
 	
-	
-	
+	<div id="topInfoBar" >
+	    <a class="encyclopedia" href="https://newamsterdamhistorycenter.org/full-3d-model/" target="_blank">3D Map <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
+	    <br>
+		<a class="encyclopedia" href="https://encyclopedia.nahc-mapping.org/" target="_blank">Encyclopedia <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
+		<label for="o" id="open-popup" style="display: none;" >Open PopUp</label>
+		<br>
+		<label id="about" class="trigger-popup">ABOUT</label>
+		<!--
+	    <i class="fa fa-2x fa-info-circle trigger-popup" id="info" ></i>
+		-->
+	</div>
 	
 	<div id="rightInfoBar" class="rightInfoBarBorder">
 	
@@ -3234,4 +3299,6 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
+
+
 
