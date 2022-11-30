@@ -113,7 +113,7 @@ function addBeforeLayers(yr, date) {
 					PopUpHTML += "<b>Dutch Grant Lot: </b>" + e.features[0].properties.Lot + "</div>";		
 					
 					
-					coordinates = e.features[0].geometry.coordinates.slice();
+					var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -249,7 +249,7 @@ function addBeforeLayers(yr, date) {
                         { hover: true }
                     );
 					
-				coordinates = e.features[0].geometry.coordinates.slice();
+				var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -352,7 +352,7 @@ function addGrantLotsBeforeLayers(date) {
 									"</div>";
 					
 					
-					coordinates = e.features[0].geometry.coordinates.slice();
+					var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -520,7 +520,7 @@ function addGravesendBeforeLayers(date) {
 					*/
 					PopUpHTML += "<div class='infoLayerDutchGrantsPopUp'><b>Name : </b>" + e.features[0].properties.Name + "</div>";
 					
-					coordinates = e.features[0].geometry.coordinates.slice();
+					var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -681,7 +681,7 @@ function addKarlBeforeLayers(date) {
 					//e.features[0].properties.Name
 					PopUpHTML += "<div class='infoLayerDutchGrantsPopUp'><b>Name : </b>" + e.features[0].properties.corr_label + "</div>";
 					
-					coordinates = e.features[0].geometry.coordinates.slice();
+					var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -855,7 +855,7 @@ function addBeforeFarmsLayer(date) {
 					
 					//console.log(e.lngLat.lng);
                     					
-					coordinates = e.features[0].geometry.coordinates.slice();
+					var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -890,6 +890,149 @@ function addBeforeFarmsLayer(date) {
 				if(beforeMapFarmPopUp.isOpen()) beforeMapFarmPopUp.remove();
             });
             
+	
+}
+
+
+/////////////////////////
+// Info Static Layer
+/////////////////////////
+
+function addInfoBeforeLayers(date) {
+	
+	        // Add a layer showing the info.
+	        beforeMap.addLayer({
+                id: "info-points-left",
+                type: "circle",
+                source: {
+                    type: "vector",
+                    url: "mapbox://nittyjee.06hdr9o2"
+                },
+				layout: {
+                    visibility: document.getElementById('info_points').checked ? "visible" : "none",
+                },
+                "source-layer": "info_points_meny-bh1jf7",
+                paint: {
+                    'circle-color': '#008888',
+					'circle-opacity':  [
+                        'case',
+                        ['boolean', ['feature-state', 'hover'], false],
+                            0.5,
+                            1
+                        ],
+					'circle-stroke-width': 2,
+					'circle-stroke-color': '#008888',
+					'circle-stroke-opacity': [
+                        'case',
+                        ['boolean', ['feature-state', 'hover'], false],
+                            1,
+                            0
+                        ]
+                },
+                filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]]
+            });
+			
+			
+			//ON HOVER
+            beforeMap.on('mouseenter', 'info-points-left', function (e) {
+                beforeMap.getCanvas().style.cursor = 'pointer';
+				console.log(e.features[0].id);
+			    console.log(e.features[0].properties);
+			    if (e.features.length > 0) {
+                    if (hoveredInfoIdLeft) {
+                        beforeMap.setFeatureState(
+                            { source: 'info-points-left', sourceLayer: 'info_points_meny-bh1jf7', id: hoveredInfoIdLeft},
+                            { hover: false }
+                        );
+                    }
+                    hoveredInfoIdLeft = e.features[0].id;
+                    beforeMap.setFeatureState(
+                        { source: 'info-points-left', sourceLayer: 'info_points_meny-bh1jf7', id: hoveredInfoIdLeft},
+                        { hover: true }
+                    );
+					
+			    var coordinates = e.features[0].geometry.coordinates.slice();
+                //var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+
+                //BEFORE MAP POP UP CONTENTS
+                beforeMapInfoPopUp
+                    .setLngLat(coordinates)
+                    .setHTML(
+                        "<div class='infoLayerInfoPointPopUp'><b>" + e.features[0].properties.Label + "</b><br>"
+                        //+ e.features[0].properties.Date
+                         + "</div>"
+                    )
+                    .addTo(beforeMap);
+					
+				}
+			});
+			
+			//OFF HOVER
+            beforeMap.on('mouseleave', 'info-points-left', function () {
+                beforeMap.getCanvas().style.cursor = '';
+				if (hoveredInfoIdLeft) {
+                    beforeMap.setFeatureState(
+                        { source: 'info-points-left', sourceLayer: 'info_points_meny-bh1jf7', id: hoveredInfoIdLeft},
+                        { hover: false }
+                    );
+                }
+                hoveredInfoIdLeft = null;	
+				if(beforeMapInfoPopUp.isOpen()) beforeMapInfoPopUp.remove();
+            });
+	
+}
+
+
+/////////////////////////
+// Info Static Layer
+/////////////////////////
+
+function addInfoLabelsBeforeLayers(date) {
+	
+	        // Add a layer showing the places.
+	        beforeMap.addLayer({
+                id: "info-labels-left",
+                type: "symbol",
+                source: {
+                    type: "vector",
+                    url: "mapbox://nittyjee.06hdr9o2"
+                },
+				layout: {
+                    visibility: document.getElementById('info_labels').checked ? "visible" : "none",
+                    "text-field": "{Label}",
+					"text-offset": [0,2],
+                    "text-size": {
+                    stops: [
+                        [0, 4],
+                        [22, 21]
+                    ]
+                    }
+                },
+
+                "source-layer": "info_points_meny-bh1jf7",
+
+                paint: {
+                    "text-color": "#008888",
+                    "text-halo-color": "#ffffff",
+                    "text-halo-width": 5,
+                    "text-halo-blur": 1,
+                    "text-opacity": {
+                        stops: [
+                        [6, 0],
+                        [7, 1]
+                        ]
+                    }
+                },
+                filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]]
+            });
 	
 }
 
@@ -936,7 +1079,7 @@ function addSettlementsBeforeLayers(date) {
 			//ON HOVER
             beforeMap.on('mouseenter', 'settlements-left', function (e) {
                 beforeMap.getCanvas().style.cursor = 'pointer';
-			    //console.log(e.features[0].properties);
+			    console.log(e.features[0].properties);
 				if (e.features.length > 0) {
                     if (hoveredSettlementsIdLeft) {
                         beforeMap.setFeatureState(
@@ -950,7 +1093,7 @@ function addSettlementsBeforeLayers(date) {
                         { hover: true }
                     );
 					
-			    coordinates = e.features[0].geometry.coordinates.slice();
+			    var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -1135,7 +1278,7 @@ function addCastelloBeforeLayers() {
                         { hover: true }
                     );
 					
-			    coordinates = e.features[0].geometry.coordinates.slice();
+			    var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -1263,7 +1406,7 @@ function addCurrentLotsBeforeLayers() {
 									e.features[0].properties.Address + "</div>";	
 					
 					/*
-					coordinates = e.features[0].geometry.coordinates.slice();
+					var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -1537,7 +1680,7 @@ function addLongIslandNativeGroupsBeforeLayers() {
     /*
 
 	        beforeMap.addLayer({
-                id: "native-groups-lines-right",
+                id: "native-groups-lines-left",
                 type: "line",
                 source: {
                     type: "vector",
@@ -1706,7 +1849,7 @@ function addLongIslandNativeGroupsBeforeLayers() {
 					}
 					//PopUpHTML += "<div class='infoLayerCastelloPopUp'><b>Name : </b>" + e.features[0].properties.name + "</div>";
 					
-					coordinates = e.features[0].geometry.coordinates.slice();
+					var coordinates = e.features[0].geometry.coordinates.slice();
                 //var description = e.features[0].properties.description;
 
                 // Ensure that if the map is zoomed out such that multiple
@@ -1853,4 +1996,5 @@ function addBeforeLabelsLayer() {
               zoomtobounds('NewEngland');
           });
 }
+
 
