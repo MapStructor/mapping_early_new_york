@@ -119,14 +119,17 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
     // get Dutch Grants Lots Info from REST API
     var dutch_grant_lots_info = new Array(),
 	    settlements_info = new Array(),
+		infos_entity = new Array(),
 		settlements_linked_location = new Array(),
 		taxlot_event_entities_info = new Array();
 	var dutch_grant_lots_info_length = 0,
 	    settlements_info_length = 0,
+		infos_entity_length = 0,
 		taxlot_entities_info_length = 0;
 		
     getDutchGrantsInfo();
 	getSettlementsInfo();
+	getInfosEntity();
 	getTaxlotEventEntitiesDescrInfo();
 	
 	var modal_header_text = [];
@@ -136,8 +139,6 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
 		    var layer_view_flag = true;
 			var timeline_pointer_flag = true;
 			var windoWidth = 0;
-			
-			var expand_info_list_flag = false;
 			
 			var sliderStartDrag = moment("06/02/1643").unix();
 		    var sliderStart = moment("01/01/1626").unix();
@@ -203,13 +204,12 @@ my_tooltip.fadeOut(200);
 				$(".dutch_grants_layer_item").hide();
 				$(".current_lots_layer_item").hide();
                 $("#long-island-section-layers").slideUp();
+				$("#info-section-layers").slideUp();
 				$("#manahatta-maps-section").slideUp();
 				$("#long-island-maps-section").slideUp();
 				$("#long-island-maps-section1").slideUp();
 				$("#new-netherland-maps-section").slideUp();
 				$("#new-england-maps-section").slideUp();
-				
-				$("#topInfoBar").slideUp();
 					
 				$("#ruler-date1").text(moment.unix(date_ruler1).format('YYYY')); // .format('DD MMM YYYY')
 				$("#ruler-date2").text(moment.unix(date_ruler2).format('YYYY')); // .format('DD MMM YYYY')
@@ -611,6 +611,61 @@ my_tooltip.fadeOut(200);
 					}
                 });
 				
+				
+				$(".info-item").change(function () {
+                    if ($(".info-item:checked").length == $(".info-item").length) {
+                        $('#info_items').prop('checked','checked');
+                    }else{
+                        $('#info_items').prop('checked',false);  
+                    }
+                });
+				
+				$('#info_points').click(function() {
+                    if( $( this ).prop('checked') ) {
+					        // sizeOfArray(infos_entity)     for assoc arrays
+							if(infos_entity_length == 0) {
+					            getInfosEntity();
+					        }
+					        beforeMap.setLayoutProperty( "info-points-left", "visibility", "visible" ); 
+					        afterMap.setLayoutProperty( "info-points-right", "visibility", "visible" ); 
+					} else {
+					        beforeMap.setLayoutProperty( "info-points-left", "visibility", "none" ); 
+					        afterMap.setLayoutProperty( "info-points-right", "visibility", "none" );
+					    
+						if(info_layer_view_flag) { 
+							closeInfoLayerInfo();
+						}
+					}
+                });
+				
+				$('#info_labels').click(function() {
+                    if( $( this ).prop('checked') ) {
+					        beforeMap.setLayoutProperty( "info-labels-left", "visibility", "visible" ); 
+					        afterMap.setLayoutProperty( "info-labels-right", "visibility", "visible" ); 
+					} else {
+					        beforeMap.setLayoutProperty( "info-labels-left", "visibility", "none" ); 
+					        afterMap.setLayoutProperty( "info-labels-right", "visibility", "none" );
+					}
+                });
+				
+				$('#info_items').change(function(){
+                    $('.info-item').prop('checked',this.checked);
+					if( $( this ).prop('checked') ) {
+					    // sizeOfArray(infos_entity)     for assoc arrays
+					    if(infos_entity_length == 0) {
+					        getInfosEntity();
+					    }
+					    beforeMap.setLayoutProperty( "info-points-left", "visibility", "visible" ); 
+					    afterMap.setLayoutProperty( "info-points-right", "visibility", "visible" ); 
+					    beforeMap.setLayoutProperty( "info-labels-left", "visibility", "visible" ); 
+					    afterMap.setLayoutProperty( "info-labels-right", "visibility", "visible" ); 
+					} else {
+					    beforeMap.setLayoutProperty( "info-points-left", "visibility", "none" ); 
+					    afterMap.setLayoutProperty( "info-points-right", "visibility", "none" );
+						beforeMap.setLayoutProperty( "info-labels-left", "visibility", "none" ); 
+					    afterMap.setLayoutProperty( "info-labels-right", "visibility", "none" );
+					}
+                });
 				
 				
 				$('#circle_point').click(function() {
@@ -1096,6 +1151,7 @@ my_tooltip.fadeOut(200);
 					closeDemoInfo();
 					closeCastelloInfo();
 					closeSettlementsInfo();
+					closeInfoLayerInfo();
 					closeDutchGrantsInfo();
 					closeGravesendInfo();
 					closeNativeGroupsInfo();
@@ -1103,34 +1159,6 @@ my_tooltip.fadeOut(200);
 					closeFarmsInfo();
 					closeCurrLotsInfo();
 									
-				});
-				
-				$('#info-list-btn').click(function() {
-				    if(expand_info_list_flag) {
-				        $("#topInfoBar").slideUp();
-						//$("#info-list-btn i").css({'-webkit-transform': 'rotate(0deg)'});
-						$("#info-list-btn i").animate({  borderSpacing: 360 }, {
-                            step: function(now,fx) {
-                               $(this).css('-webkit-transform','rotate('+now+'deg)'); 
-                               $(this).css('-moz-transform','rotate('+now+'deg)');
-                               $(this).css('transform','rotate('+now+'deg)');
-                            },
-                            duration:'slow'
-                        },'linear');
-						expand_info_list_flag = false;
-					} else {
-					    $("#topInfoBar").slideDown();
-						//$("#info-list-btn i").css('-webkit-transform', 'rotate(-180deg)');
-						$("#info-list-btn i").animate({  borderSpacing: 180 }, {
-                            step: function(now,fx) {
-                               $(this).css('-webkit-transform','rotate('+now+'deg)'); 
-                               $(this).css('-moz-transform','rotate('+now+'deg)');
-                               $(this).css('transform','rotate('+now+'deg)');
-                            },
-                            duration:'slow'
-                        },'linear');
-						expand_info_list_flag = true;
-					}
 				});
 
 				/* change timeline CSS property on mouseover & mouseout */
@@ -1152,7 +1180,7 @@ my_tooltip.fadeOut(200);
 				*/
 				
 				$('.trigger-popup').click(function(e) {
-				    var popup_id = ( e.target.id == "info" ) ? "about" : e.target.id;
+				    var popup_id = ( e.target.id == "info" || e.target.id == "about-info" ) ? "about" : e.target.id;
 					if (modal_header_text[popup_id].length > 0) {
 						$("div.modal-header h1").text(modal_header_text[e.target.id]);
 						$("div.modal-content").html(modal_content_html[e.target.id]);
@@ -1418,6 +1446,65 @@ function getTaxlotEventEntitiesDescrInfo() {
 }
 
 
+// for test local host REST_API/info-entities-export.json
+// REST API https://encyclopedia.nahc-mapping.org/info-entities-export
+
+function getInfosEntity() {
+    
+	var data_info_index = "";
+	infos_entity_length = 0;
+	
+	$.ajax({
+				url: 'https://encyclopedia.nahc-mapping.org/info-entities-export',
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+				type: 'get',
+                dataType: 'json',
+				data: {}
+    })
+	.done(function(data) { 
+	  
+		//console.log(data);
+		if(data.length > 0) {
+		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
+		    for(let i = 0; i < data.length; i++){
+                // old api
+				//if( typeof data[i].title[0].value != "undefined" ) {
+				if( typeof data[i].nid[0].value != "undefined" ) {
+				    //console.log(data[i].title[0].value);
+					//data_info_index = data[i].title[0].value;
+					//data_info_index = data_info_index.replace(/\s+/g, '');
+					//data_info_index = data_info_index.toLowerCase();
+					data_info_index = "" + data[i].nid[0].value + "";
+
+				    infos_entity[data_info_index] = { 
+					    name: data[i].title.length > 0 ? data[i].title[0].value : "", 
+						name_html: data[i].title.length > 0 ? (  
+						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org/node/" + data_info_index + "' target='_blank'>" : "" ) +
+						     data[i].title[0].value  +
+							( data[i].path.length > 0 ? "</a>"  : "" )
+						) : "",
+						descr: data[i].body.length > 0 ? data[i].body[0].value : "" 
+					};  
+					
+                    infos_entity_length += 1;
+                    //console.log(taxlot_event_entities_info);					
+				}
+			}
+		}
+		//console.log(taxlot_entities_info);
+
+    })
+    .fail( function(xhr, textStatus, errorThrown) {
+        // LOADING ERROR!
+		console.warn("jQuery AJAX request  ERROR !!!");
+		console.log(xhr.responseText);
+        console.log(textStatus);
+    });
+	
+}
+
 
     // Function to calculate the
     // length of an array
@@ -1602,7 +1689,7 @@ function getTaxlotEventEntitiesDescrInfo() {
 			
 			<style>
 				
-				.header a.encyclopedia, .header label#about, #topInfoBar a.encyclopedia, #topInfoBar label#about {
+				.header a.encyclopedia, .header label#about {
 				  float: left;
 				  color: black;
 				  text-align: center;
@@ -1610,47 +1697,32 @@ function getTaxlotEventEntitiesDescrInfo() {
 				  text-decoration: none;
 				  font-size: 15px; 
 				  line-height: 25px;
-				  border-radius: 5px;
+				  border-radius: 4px;
 				  border: solid black;
 				  font-weight: bold;
 				  margin-top: 3px;
 					margin: 3px;
 					font-family: "Arial";
 				}
-				
-	            .header label#info-list-btn {
-				    color: black;
-				  text-align: center;
-				  padding: 10px;
-				  text-decoration: none;
-				  font-size: 30px; 
-				  line-height: 50px;
-				  border-radius: 5px;
-				  border: solid black;
-				  font-weight: bold;
-				  margin-top: 3px;
-					margin: 3px;
-					font-family: "Arial";
-				}
-			    
-	            .header i#info, #topInfoBar i#info { display: none; }
+	
+	            .header i#info { display: none; }
 				i.fa-info-circle { color: #777; }
 	
-				.header a:hover, .header label:hover, #topInfoBar a:hover, #topInfoBar label:hover {
+				.header a:hover, .header label:hover {
 				  background-color: #ddd;
 				  color: black;
 				}
 	
-				.header a.active, #topInfoBar a.active {
+				.header a.active {
 				  background-color: dodgerblue;
 				  color: white;
 				}
 	
 				.header-right {
-				    float: right;
-				    margin-top: 13px;
-				    margin-left: 50px;
-				    margin-right: 9px;
+				float: right;
+				margin-top: 13px;
+				margin-left: 50px;
+				margin-right: 9px;
 				}
 
 
@@ -1674,7 +1746,7 @@ function getTaxlotEventEntitiesDescrInfo() {
 				}
 				
 
-				.header a.encyclopedia, #topInfoBar a.encyclopedia {
+				.header a.encyclopedia {
 				background-color: #e8e1da;
 				/* color: white; */
 				}
@@ -1688,19 +1760,6 @@ function getTaxlotEventEntitiesDescrInfo() {
 				.header>a:first-child:hover {
 					background-color: inherit;
 				}
-				
-				#topInfoBar {
-	                position: absolute;
-	                right: 0;
-	                display:block;
-	                top: 100px;
-	                width: 157px;
-	                z-index: 500;
-					border: solid #b0691d 1px;
-					padding: 8px;
-					background-color: #fff;
-					top: 82px;
-                }
 
 				</style>
 
@@ -1812,8 +1871,7 @@ padding:2px 7px;
 /* hide current buildings fill layers */
 	#current_buildings_items,  #current_buildings { display: none; }
 	label[for=current_buildings_items], label[for=current_buildings] { display: none; }
-	
-
+		
 /* Style for Studio Menu */
 /* #demoLayerInfo */
 
@@ -1938,7 +1996,7 @@ padding:2px 7px;
 	background-color: silver;
 }
 
-#demoLayerInfo, #infoLayerCastello, #infoLayerGrantLots, #infoLayerDutchGrants, #infoLayerGravesend, #infoLayerNativeGroups, #infoLayerKarl, #infoLayerFarms, #infoLayerCurrLots, #infoLayerSettlements { 
+#demoLayerInfo, #infoLayerCastello, #infoLayerGrantLots, #infoLayerDutchGrants, #infoLayerGravesend, #infoLayerNativeGroups, #infoLayerKarl, #infoLayerFarms, #infoLayerCurrLots, #infoLayerSettlements, #infoLayerInfoPoint { 
     padding: 5px;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -1992,6 +2050,11 @@ button#hide-zoom-label {display: none;}
 #infoLayerDutchGrants, .infoLayerDutchGrantsPopUp { 
     background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
     border: solid #FFFF00 2px;
+}
+
+#infoLayerInfoPoint, .infoLayerInfoPointPopUp { 
+    background-color: rgb(102, 205, 170, 0.3); /* #66CDAA MediumAquamarine */
+    border: solid #66CDAA 2px;
 }
 
 /* REPLACE THIS */
@@ -2059,7 +2122,7 @@ div.layer-buttons-block { width: 111px; right: 3px; margin-right: 3px; position:
 }
 */
 
-.demoLayerInfoPopUp, .infoLayerCastelloPopUp, .infoLayerGrantLotsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerFarmsPopUp, .infoLayerCurrLotsPopUp, .infoLayerSettlementsPopUp {
+.demoLayerInfoPopUp, .infoLayerCastelloPopUp, .infoLayerGrantLotsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerFarmsPopUp, .infoLayerCurrLotsPopUp, .infoLayerSettlementsPopUp, .infoLayerInfoPointPopUp {
     padding-left: 5px;
 	padding-right: 5px;
 }
@@ -2164,7 +2227,7 @@ img#logo-img {
 }
 
 /*438*/
-/*
+
 @media (max-width: 419px) {
     img.img2 { display: none; }
 }
@@ -2180,7 +2243,7 @@ img#logo-img {
 	}
 	
 }
-*/
+
 
 @media (max-width: 287px) {
 
@@ -2188,18 +2251,20 @@ img#logo-img {
 	.header label#about { display: none; }
 	.header i#info { display: inline-block; }
 	
-	/*
 	img#logo-img { display: none }
 	img#logo-img-wide { display: inline-block; }
-	*/
 }
 
 /*555*/
-@media (max-width: 500px) {
+@media (max-width: 657px) {
 	/* i.layer-info { margin-right: 21px;} */
 	
+	/*
+	
+	*/
+	
 	#headerTextSuffix, .headerText { display: none; }
-
+	
 }
 
 
@@ -2209,7 +2274,7 @@ img#logo-img {
 /*930*/
 @media (max-width: 1025px) {
     .map { top: 43px; }
-	 #topInfoBar { top: 45px; }
+	
 	
     /*
 	#headerTextSuffix { display: none; }
@@ -2226,27 +2291,14 @@ img#logo-img {
 				margin-right: 5px;
 				}
 				
-	.header a.encyclopedia, .header label#about, #topInfoBar a.encyclopedia, #topInfoBar label#about {
+		
+	.header a.encyclopedia, .header label#about {
 				  color: black;
 				  text-align: center;
 				  padding: 3px;
 				  text-decoration: none;
 				  font-size: 13px; 
 				  line-height: 15px;
-				  border-radius: 3px;
-				  border: solid black;
-				  font-weight: bold;
-				  margin-top: 3px;
-					margin: 3px;
-				}
-				
-			.header label#info-list-btn {
-	              color: black;
-				  text-align: center;
-				  padding: 3px 8px 3px 13px;
-				  text-decoration: none;
-				  font-size: 21px; 
-				  line-height: 35px;
 				  border-radius: 3px;
 				  border: solid black;
 				  font-weight: bold;
@@ -2302,7 +2354,7 @@ i.slash-icon { font-size: 11px; }
 			 original street pattern.  Underground, archeologists have found 
 			 evidence of the plots of houses and gardens, Amsterdam yellow 
 			 brick, and pollen samples of plants.
-			<p>
+			</p>
 			You can swipe the map to compare the Castello Plan in 1660
 			 to the present,
 			 and explore each lot, where it shows what was there and who lived
@@ -2313,7 +2365,7 @@ i.slash-icon { font-size: 11px; }
 			<p>
 			We need your help to make this work happen. Donate now to
 			 develop the map and expand the research.
-			<p>
+			</p>
 	</div>
 
 <!--
@@ -2361,7 +2413,23 @@ i.slash-icon { font-size: 11px; }
 				</div>
 				   
 				<div class="header-right">
-					<label id="info-list-btn" class="trigger-menu-list">I N F <i class="fa fa-arrow-circle-down"></i></label>
+				    <!--
+					<a href="swipe.html">Swipe</a>
+					<a href="explore.html">Explore</a>
+					<a class="active" href="#home">Timeline (BETA)</a>
+					-->
+					<a class="encyclopedia" href="https://newamsterdamhistorycenter.org/full-3d-model/" target="_blank">3D Map <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
+					<a class="encyclopedia" href="https://encyclopedia.nahc-mapping.org/" target="_blank">Encyclopedia <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
+					<!--
+					<a href="about.html">About</a>
+					-->
+					<!--
+					<label for="o" id="about" title="Open">ABOUT</label>
+					<label for="o" id="info" ><i for="o" class="fa fa-2x fa-info-circle"></i></label>
+					-->
+					<label for="o" id="open-popup" style="display: none;" >Open PopUp</label>
+					<label id="about" class="trigger-popup" title="Open">ABOUT</label>
+					<i class="fa fa-2x fa-info-circle trigger-popup" id="info" ></i>
 				</div>
 				
 			</div>
@@ -2372,17 +2440,8 @@ i.slash-icon { font-size: 11px; }
     <!--ADD LAYERS TOGGLE -->
 	<!---------------------->
 	
-	<div id="topInfoBar" >
-	    <a class="encyclopedia" href="https://newamsterdamhistorycenter.org/full-3d-model/" target="_blank">3D Map <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
-	    <br>
-		<a class="encyclopedia" href="https://encyclopedia.nahc-mapping.org/" target="_blank">Encyclopedia <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
-		<label for="o" id="open-popup" style="display: none;" >Open PopUp</label>
-		<br>
-		<label id="about" class="trigger-popup">ABOUT</label>
-		<!--
-	    <i class="fa fa-2x fa-info-circle trigger-popup" id="info" ></i>
-		-->
-	</div>
+	
+	
 	
 	<div id="rightInfoBar" class="rightInfoBarBorder">
 	
@@ -2399,6 +2458,7 @@ i.slash-icon { font-size: 11px; }
 	  <div class="infoLayerElem" id="infoLayerFarms"></div>
 	  <div class="infoLayerElem" id="infoLayerCastello"></div>
 	  <div class="infoLayerElem" id="infoLayerSettlements"></div>
+	  <div class="infoLayerElem" id="infoLayerInfoPoint"></div>
 	  <div class="infoLayerElem" id="demoLayerInfo"></div>
 	  <div class="infoLayerElem" id="infoLayerCurrLots"></div>
 	
@@ -2435,7 +2495,6 @@ i.slash-icon { font-size: 11px; }
 	  <center>
 	  <b><i class="fas fa-minus-square compress-expand-icon" id="manahatta-section-caret" onclick="sectionCompressExpand('#manahatta-section-layers','#manahatta-section-caret')" ></i> &nbsp; Manhattan</b>
 	  </center>
-	  <p>
 
 	  <div id="manahatta-section-layers">
 	  
@@ -2617,12 +2676,11 @@ i.slash-icon { font-size: 11px; }
 
 	  </div>
 
-	  <p>
+	  
 		<br>
 	  <center>
 	  <b><i class="fas fa-plus-square compress-expand-icon" id="long-island-section-caret" onclick="sectionCompressExpand('#long-island-section-layers','#long-island-section-caret')" ></i> &nbsp; Long Island</b>
 	  </center>
-	  <p>
 
       <div id="long-island-section-layers" >
 
@@ -2776,6 +2834,45 @@ i.slash-icon { font-size: 11px; }
 			</div>
 			
       </div>        
+
+
+      <br>
+	  <center>
+	  <b><i class="fas fa-plus-square compress-expand-icon" id="info-section-caret" onclick="sectionCompressExpand('#info-section-layers','#info-section-caret')" ></i> &nbsp; Info</b>
+	  </center>
+
+
+      <div id="info-section-layers" >
+	    
+		
+	    <!-- Info Items -->
+	    <div class="layer-list-row" >
+		<input type="checkbox" id="info_items" name="info_items">
+		<i class="fas fa-minus-square compress-expand-icon" id="info-layer-caret" onclick="itemsCompressExpand('.info_layer_item','#info-layer-caret')" ></i>
+		<label for="info_items"> Info Items <div class="dummy-label-layer-space"></div></label>
+		<div class="layer-buttons-block">
+		    <div class="layer-buttons-list">
+		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('LongIsland')" title="Zoom to Layer" ></i>
+		        <i  class="fa fa-info-circle layer-info trigger-popup" id="about-info"  title="Layer Info" ></i>
+		    </div>
+		</div>
+	    </div>
+  
+		<!-- Info Points -->
+		<div class="layer-list-row info_layer_item" >
+		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="info-item" id="info_points" name="info_points">
+		<label for="info_points"> <i class="fa fa-circle"  style="color: #008888;" ></i>  Locations</label>
+		</div>
+
+		<!-- Info Labels -->
+		<div class="layer-list-row info_layer_item" >
+		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="info-item" id="info_labels" name="info_labels">
+		<label for="info_labels"> <i class="fa fa-comment-dots"  style="color: #008888;" ></i>  Labels</label>
+		</div>
+	  
+	  
+	  </div>
+
 
 
 	  <br>
@@ -3299,6 +3396,7 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
+
 
 
 
