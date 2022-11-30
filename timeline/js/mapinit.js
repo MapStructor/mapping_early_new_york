@@ -9,6 +9,7 @@ var grant_lots_view_id = null,
     demo_layer_view_flag = false,
     castello_layer_view_flag = false,
 	settlements_layer_view_flag = false,
+	info_layer_view_flag = false,
 	dgrants_layer_view_flag = false,
 	gravesend_layer_view_flag = false,   // REPLACE THIS
 	native_group_layer_view_flag = false,
@@ -23,6 +24,7 @@ $("#demoLayerInfo").slideUp();
 $("#infoLayerCastello").slideUp();
 $("#infoLayerCurrLots").slideUp();
 $("#infoLayerSettlements").slideUp();
+$("#infoLayerInfoPoint").slideUp();
 $("#infoLayerGravesend").slideUp();   // REPLACE THIS 
 $("#infoLayerNativeGroups").slideUp();
 $("#infoLayerKarl").slideUp();
@@ -388,6 +390,7 @@ var castello_click_ev = false,
 	farms_click_ev = false,
 	curr_layer_click_ev = false,
 	settlements_click_ev = false,
+	info_click_ev = false,
 	zoom_labels_click_ev = false;
     
 
@@ -395,7 +398,8 @@ var afterMapPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false
     beforeMapPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 
 //var coordinates = [];
-var places_popup_html = "",
+var info_popup_html = "",
+    places_popup_html = "",
     settlements_popup_html = "";
 
 var afterMapPlacesPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false }),
@@ -466,6 +470,12 @@ var afterMapSettlementsPopUp = new mapboxgl.Popup({ closeButton: false, closeOnC
 	
 var afterHighMapSettlementsPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false }),
     beforeHighMapSettlementsPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
+	
+var afterMapInfoPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false }),
+    beforeMapInfoPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
+	
+var afterHighMapInfoPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false }),
+    beforeHighMapInfoPopUp = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 
 var hoveredStateIdRight = null,
     hoveredStateIdLeft = null,
@@ -491,8 +501,11 @@ var hoveredStateIdRight = null,
 	hoveredCurrLotsIdLeft = null,
 	hoveredSettlementsIdRight = null,
 	hoveredSettlementsIdLeft = null;
+	hoveredInfoIdRight = null,
+	hoveredInfoIdLeft = null;
 	
-var clickedStateId = null,
+var clickedInfoId = null,
+    clickedStateId = null,
     clickedSettlementsId = null;
 	
 var demo_layer_features = null;
@@ -528,6 +541,10 @@ beforeMap.on("load", function () {
         }).on('click', 'settlements-left', function (e) {
               
 			SettlementsClickHandle(e);
+			  
+        }).on('click', 'info-points-left', function (e) {
+              
+			InfoClickHandle(e);
 			  
         }).on('click', 'grant-lots-left' , function (e) {
 				        
@@ -587,6 +604,10 @@ afterMap.on("load", function () {
               
 			SettlementsClickHandle(e);
 			  
+        }).on('click', 'info-points-right', function (e) {
+              
+			InfoClickHandle(e);
+			  
         }).on('click', 'grant-lots-right' , function (e) {
 				        
             GrantLotsHandle(e);
@@ -641,7 +662,7 @@ afterMap.on("error", function (e) {
 	    
 		function DefaultHandle() {
 		
-		            if(!demo_taxlot_click_ev && !castello_click_ev && !grant_lots_click_ev && !dutch_grant_click_ev && !farms_click_ev && !curr_layer_click_ev && !settlements_click_ev && !gravesend_click_ev && !native_groups_click_ev && !karl_click_ev && !zoom_labels_click_ev) {
+		            if(!demo_taxlot_click_ev && !castello_click_ev && !grant_lots_click_ev && !dutch_grant_click_ev && !farms_click_ev && !curr_layer_click_ev && !settlements_click_ev && !info_click_ev && !gravesend_click_ev && !native_groups_click_ev && !karl_click_ev && !zoom_labels_click_ev) {
                         if(windoWidth > 637)
 							if($('#view-hide-layer-panel').length > 0)
 			                    $('#view-hide-layer-panel').trigger('click');
@@ -654,6 +675,7 @@ afterMap.on("error", function (e) {
 					farms_click_ev = false;
 					curr_layer_click_ev = false;
 					settlements_click_ev = false;
+					info_click_ev = false;
 					gravesend_click_ev = false;
 					native_groups_click_ev = false;
 					karl_click_ev = false;
@@ -953,6 +975,85 @@ afterMap.on("error", function (e) {
 					settlements_layer_view_flag = true;
 			}
 		    settlements_click_ev = true;
+			
+		}
+		
+		
+		function InfoClickHandle(event) {
+			//#infoLayerInfoPoint
+			//settlements_info[event.features[0].properties.Lot]
+			console.log(event.features[0]);
+			
+			if(info_layer_view_flag && (clickedInfoId == event.features[0].id) ) {
+				        if($('#view-hide-layer-panel').length > 0)
+						    if(!layer_view_flag) {
+							    $("#rightInfoBar").css('display', 'block');
+								setTimeout( function() {
+                                    $("#rightInfoBar").slideUp();
+                                }, 500);
+							}
+				        
+						closeInfoLayerInfo();
+		    } else {
+				clickedInfoId = event.features[0].id;
+				
+				var ref_name = event.features[0].properties.nid;
+				console.log(ref_name);
+				console.log(infos_entity.length);
+				info_popup_html = "<h3>Info</h3><hr>";
+	
+				if( (typeof infos_entity[ref_name] == "undefined") || (ref_name == "") ) {
+			        info_popup_html += "<b>" + event.features[0].properties.Label + "</b><br><br>";
+			    } else {
+				    info_popup_html += "<b>" + ( infos_entity[ref_name].name_html.length > 0 ? infos_entity[ref_name].name_html : event.features[0].properties.Label ) + "</b>" +
+				                       "<br><br>" +
+					                   "<i>" + infos_entity[ref_name].descr + "</i>"
+							           ;
+			    }
+			
+			    //info_popup_html += "<br><br>";
+				
+				/*	
+					}
+				}
+				*/
+				var coordinates = [];
+				coordinates = event.features[0].geometry.coordinates.slice();
+                //var description = event.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+				    // event.features[0].properties.Name 
+					beforeHighMapInfoPopUp
+                        .setLngLat(coordinates)
+                        .setHTML("<div class='infoLayerInfoPointPopUp'><b>" + event.features[0].properties.Label + "</b><br>" +
+						// event.features[0].properties.Date + 
+						"</div>");
+					if(!beforeHighMapInfoPopUp.isOpen()) beforeHighMapInfoPopUp.addTo(beforeMap);
+					
+					// event.features[0].properties.Name 
+					afterHighMapInfoPopUp
+                        .setLngLat(coordinates)
+						.setHTML("<div class='infoLayerInfoPointPopUp'><b>" + event.features[0].properties.Label + "</b><br>" +
+						// event.features[0].properties.Date + 
+						"</div>");
+					if(!afterHighMapInfoPopUp.isOpen()) afterHighMapInfoPopUp.addTo(afterMap);
+					//if(windoWidth > 637) {
+					    if($(".infoLayerElem").first().attr("id") != "infoLayerInfoPoint")
+					        $("#infoLayerInfoPoint").insertBefore($(".infoLayerElem").first());
+					    $("#infoLayerInfoPoint").html(info_popup_html).slideDown();
+				        
+					    if(!layer_view_flag) 
+							if($('#view-hide-layer-panel').length > 0)
+							    $('#view-hide-layer-panel').trigger('click');
+					//}
+					info_layer_view_flag = true;
+			}
+		    info_click_ev = true;
 			
 		}
 	
@@ -1454,6 +1555,13 @@ afterMap.on("error", function (e) {
 					if(beforeHighMapSettlementsPopUp.isOpen()) beforeHighMapSettlementsPopUp.remove();
 				}
 				
+				function closeInfoLayerInfo(){	
+					$("#infoLayerInfoPoint").slideUp();
+	                info_layer_view_flag = false;
+					if(afterHighMapInfoPopUp.isOpen()) afterHighMapInfoPopUp.remove();
+					if(beforeHighMapInfoPopUp.isOpen()) beforeHighMapInfoPopUp.remove();
+				}
+				
 				function closeDutchGrantsInfo(){	
 					$("#infoLayerDutchGrants").slideUp(); 
 	                dgrants_layer_view_flag = false;
@@ -1597,7 +1705,12 @@ function changeDate(unixDate) {
 	
 	beforeMap.setFilter("settlements-left", dateFilter);
 	afterMap.setFilter("settlements-right", dateFilter);
+	
+	beforeMap.setFilter("info-points-left", dateFilter);
+	afterMap.setFilter("info-points-right", dateFilter);
 
+    beforeMap.setFilter("info-labels-left", dateFilter);
+	afterMap.setFilter("info-labels-right", dateFilter);
 
 /*START ADDED BY NITIN*/
 
@@ -1969,7 +2082,9 @@ addBeforeLabelsLayer();
     addKarlLinesBeforeLayers(date);
     addSettlementsBeforeLayers(date);
     addSettlementsLabelsBeforeLayers(date);
-
+    addInfoBeforeLayers(date);
+	addInfoLabelsBeforeLayers(date);
+		
     setTimeout( function() {
         addGravesendBeforeLayers(date);
         addGravesendLinesBeforeLayers(date);
@@ -1978,6 +2093,7 @@ addBeforeLabelsLayer();
 		addBeforeLayers(yr, date);
 	    addBeforeFarmsLayer(date);
     }, 1000);
+	
 	setTimeout( function() {
         addBeforeLabelsLayer();
 		addCastelloBeforeLayers();
@@ -2042,6 +2158,8 @@ addAfterLabelsLayer();
         addKarlLinesAfterLayers(date);
         addSettlementsAfterLayers(date);
         addSettlementsLabelsAfterLayers(date);
+		addInfoAfterLayers(date);
+		addInfoLabelsAfterLayers(date);
     }, 500);
 
     setTimeout( function() {
@@ -2052,6 +2170,7 @@ addAfterLabelsLayer();
 		addAfterLayers(yr, date);
 	    addAfterFarmsLayer(date);
     }, 1500);
+	
 	setTimeout( function() {
         addAfterLabelsLayer();
 		addCastelloAfterLayers();
@@ -2066,9 +2185,6 @@ addAfterLabelsLayer();
     }, 2500);
 
 });
-
-
-
 
 
 
