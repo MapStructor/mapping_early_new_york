@@ -104,14 +104,17 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
     // get Dutch Grants Lots Info from REST API
     var dutch_grant_lots_info = new Array(),
 	    settlements_info = new Array(),
+		infos_entity = new Array(),
 		settlements_linked_location = new Array(),
 		taxlot_event_entities_info = new Array();
 	var dutch_grant_lots_info_length = 0,
 	    settlements_info_length = 0,
+		infos_entity_length = 0,
 		taxlot_entities_info_length = 0;
 		
     getDutchGrantsInfo();
 	getSettlementsInfo();
+	getInfosEntity();
 	getTaxlotEventEntitiesDescrInfo();
 	
 	var modal_header_text = [];
@@ -185,6 +188,7 @@ my_tooltip.fadeOut(200);
 				$(".dutch_grants_layer_item").hide();
 				$(".current_lots_layer_item").hide();
                 $("#long-island-section-layers").slideUp();
+				$("#info-section-layers").slideUp();
 				$("#manahatta-maps-section").slideUp();
 				$("#long-island-maps-section").slideUp();
 				$("#long-island-maps-section1").slideUp();
@@ -591,6 +595,61 @@ my_tooltip.fadeOut(200);
 					}
                 });
 				
+				
+				$(".info-item").change(function () {
+                    if ($(".info-item:checked").length == $(".info-item").length) {
+                        $('#info_items').prop('checked','checked');
+                    }else{
+                        $('#info_items').prop('checked',false);  
+                    }
+                });
+				
+				$('#info_points').click(function() {
+                    if( $( this ).prop('checked') ) {
+					        // sizeOfArray(infos_entity)     for assoc arrays
+							if(infos_entity_length == 0) {
+					            getInfosEntity();
+					        }
+					        beforeMap.setLayoutProperty( "info-points-left", "visibility", "visible" ); 
+					        afterMap.setLayoutProperty( "info-points-right", "visibility", "visible" ); 
+					} else {
+					        beforeMap.setLayoutProperty( "info-points-left", "visibility", "none" ); 
+					        afterMap.setLayoutProperty( "info-points-right", "visibility", "none" );
+					    
+						if(info_layer_view_flag) { 
+							closeInfoLayerInfo();
+						}
+					}
+                });
+				
+				$('#info_labels').click(function() {
+                    if( $( this ).prop('checked') ) {
+					        beforeMap.setLayoutProperty( "info-labels-left", "visibility", "visible" ); 
+					        afterMap.setLayoutProperty( "info-labels-right", "visibility", "visible" ); 
+					} else {
+					        beforeMap.setLayoutProperty( "info-labels-left", "visibility", "none" ); 
+					        afterMap.setLayoutProperty( "info-labels-right", "visibility", "none" );
+					}
+                });
+				
+				$('#info_items').change(function(){
+                    $('.info-item').prop('checked',this.checked);
+					if( $( this ).prop('checked') ) {
+					    // sizeOfArray(infos_entity)     for assoc arrays
+					    if(infos_entity_length == 0) {
+					        getInfosEntity();
+					    }
+					    beforeMap.setLayoutProperty( "info-points-left", "visibility", "visible" ); 
+					    afterMap.setLayoutProperty( "info-points-right", "visibility", "visible" ); 
+					    beforeMap.setLayoutProperty( "info-labels-left", "visibility", "visible" ); 
+					    afterMap.setLayoutProperty( "info-labels-right", "visibility", "visible" ); 
+					} else {
+					    beforeMap.setLayoutProperty( "info-points-left", "visibility", "none" ); 
+					    afterMap.setLayoutProperty( "info-points-right", "visibility", "none" );
+						beforeMap.setLayoutProperty( "info-labels-left", "visibility", "none" ); 
+					    afterMap.setLayoutProperty( "info-labels-right", "visibility", "none" );
+					}
+                });
 				
 				
 				$('#circle_point').click(function() {
@@ -1110,7 +1169,7 @@ my_tooltip.fadeOut(200);
 				*/
 				
 				$('.trigger-popup').click(function(e) {
-					var popup_id = ( e.target.id == "info" ) ? "about" : e.target.id;
+					var popup_id = ( e.target.id == "info" || e.target.id == "about-info" ) ? "about" : e.target.id;
 					if (modal_header_text[popup_id].length > 0) {
 						$("div.modal-header h1").text(modal_header_text[e.target.id]);
 						$("div.modal-content").html(modal_content_html[e.target.id]);
@@ -1375,6 +1434,65 @@ function getTaxlotEventEntitiesDescrInfo() {
     });
 }
 
+
+// for test local host REST_API/info-entities-export.json
+// REST API https://encyclopedia.nahc-mapping.org/info-entities-export
+
+function getInfosEntity() {
+    
+	var data_info_index = "";
+	infos_entity_length = 0;
+	
+	$.ajax({
+				url: 'https://encyclopedia.nahc-mapping.org/info-entities-export',
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+				type: 'get',
+                dataType: 'json',
+				data: {}
+    })
+	.done(function(data) { 
+	  
+		//console.log(data);
+		if(data.length > 0) {
+		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
+		    for(let i = 0; i < data.length; i++){
+                // old api
+				//if( typeof data[i].title[0].value != "undefined" ) {
+				if( typeof data[i].nid[0].value != "undefined" ) {
+				    //console.log(data[i].title[0].value);
+					//data_info_index = data[i].title[0].value;
+					//data_info_index = data_info_index.replace(/\s+/g, '');
+					//data_info_index = data_info_index.toLowerCase();
+					data_info_index = "" + data[i].nid[0].value + "";
+
+				    infos_entity[data_info_index] = { 
+					    name: data[i].title.length > 0 ? data[i].title[0].value : "", 
+						name_html: data[i].title.length > 0 ? (  
+						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org/node/" + data_info_index + "' target='_blank'>" : "" ) +
+						     data[i].title[0].value  +
+							( data[i].path.length > 0 ? "</a>"  : "" )
+						) : "",
+						descr: data[i].body.length > 0 ? data[i].body[0].value : "" 
+					};  
+					
+                    infos_entity_length += 1;
+                    //console.log(taxlot_event_entities_info);					
+				}
+			}
+		}
+		//console.log(taxlot_entities_info);
+
+    })
+    .fail( function(xhr, textStatus, errorThrown) {
+        // LOADING ERROR!
+		console.warn("jQuery AJAX request  ERROR !!!");
+		console.log(xhr.responseText);
+        console.log(textStatus);
+    });
+	
+}
 
 
     // Function to calculate the
@@ -1830,7 +1948,7 @@ padding:2px 7px;
 }
 
 #studioMenu { width: 325px; } /* 300px */
-#demoLayerInfo, #infoLayerCastello, #infoLayerGrantLots, #infoLayerDutchGrants, #infoLayerGravesend, #infoLayerNativeGroups, #infoLayerKarl, #infoLayerFarms, #infoLayerCurrLots, #infoLayerSettlements { 
+#demoLayerInfo, #infoLayerCastello, #infoLayerGrantLots, #infoLayerDutchGrants, #infoLayerGravesend, #infoLayerNativeGroups, #infoLayerKarl, #infoLayerFarms, #infoLayerCurrLots, #infoLayerSettlements, #infoLayerInfoPoint { 
     padding: 5px;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -1876,6 +1994,11 @@ button#hide-zoom-label {display: none;}
 #infoLayerDutchGrants, .infoLayerDutchGrantsPopUp { 
     background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
     border: solid #FFFF00 2px;
+}
+
+#infoLayerInfoPoint, .infoLayerInfoPointPopUp { 
+    background-color: rgb(102, 205, 170, 0.3); /* #66CDAA MediumAquamarine */
+    border: solid #66CDAA 2px;
 }
 
 /* REPLACE THIS */
@@ -1943,7 +2066,7 @@ div.layer-buttons-block { width: 38px; right: 3px; margin-right: 3px; position: 
 }
 */
 
-.demoLayerInfoPopUp, .infoLayerCastelloPopUp, .infoLayerGrantLotsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerFarmsPopUp, .infoLayerCurrLotsPopUp, .infoLayerSettlementsPopUp {
+.demoLayerInfoPopUp, .infoLayerCastelloPopUp, .infoLayerGrantLotsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerFarmsPopUp, .infoLayerCurrLotsPopUp, .infoLayerSettlementsPopUp, .infoLayerInfoPointPopUp {
     padding-left: 5px;
 	padding-right: 5px;
 }
@@ -2179,7 +2302,7 @@ i.slash-icon { font-size: 11px; }
 			 original street pattern.  Underground, archeologists have found 
 			 evidence of the plots of houses and gardens, Amsterdam yellow 
 			 brick, and pollen samples of plants.
-			<p>
+			</p>
 			You can swipe the map to compare the Castello Plan in 1660
 			 to the present,
 			 and explore each lot, where it shows what was there and who lived
@@ -2190,7 +2313,7 @@ i.slash-icon { font-size: 11px; }
 			<p>
 			We need your help to make this work happen. Donate now to
 			 develop the map and expand the research.
-			<p>
+			</p>
 	</div>
 
 <!--
@@ -2277,6 +2400,7 @@ i.slash-icon { font-size: 11px; }
 	  <div class="infoLayerElem" id="infoLayerFarms"></div>
 	  <div class="infoLayerElem" id="infoLayerCastello"></div>
 	  <div class="infoLayerElem" id="infoLayerSettlements"></div>
+	  <div class="infoLayerElem" id="infoLayerInfoPoint"></div>
 	  <div class="infoLayerElem" id="demoLayerInfo"></div>
 	  <div class="infoLayerElem" id="infoLayerCurrLots"></div>
 	
@@ -2312,7 +2436,6 @@ i.slash-icon { font-size: 11px; }
 	  <center>
 	  <b><i class="fas fa-minus-square compress-expand-icon" id="manahatta-section-caret" onclick="sectionCompressExpand('#manahatta-section-layers','#manahatta-section-caret')" ></i> &nbsp; Manhattan</b>
 	  </center>
-	  <p>
 
 	  <div id="manahatta-section-layers">
 	  
@@ -2494,12 +2617,11 @@ i.slash-icon { font-size: 11px; }
 
 	  </div>
 
-	  <p>
 		<br>
 	  <center>
 	  <b><i class="fas fa-plus-square compress-expand-icon" id="long-island-section-caret" onclick="sectionCompressExpand('#long-island-section-layers','#long-island-section-caret')" ></i> &nbsp; Long Island</b>
 	  </center>
-	  <p>
+
 
       <div id="long-island-section-layers" >
 
@@ -2653,6 +2775,45 @@ i.slash-icon { font-size: 11px; }
 			</div>
 			
       </div>        
+
+
+      <br>
+	  <center>
+	  <b><i class="fas fa-plus-square compress-expand-icon" id="info-section-caret" onclick="sectionCompressExpand('#info-section-layers','#info-section-caret')" ></i> &nbsp; Info</b>
+	  </center>
+
+
+      <div id="info-section-layers" >
+	    
+		
+	    <!-- Info Items -->
+	    <div class="layer-list-row" >
+		<input type="checkbox" id="info_items" name="info_items">
+		<i class="fas fa-minus-square compress-expand-icon" id="info-layer-caret" onclick="itemsCompressExpand('.info_layer_item','#info-layer-caret')" ></i>
+		<label for="info_items"> Info Items <div class="dummy-label-layer-space"></div></label>
+		<div class="layer-buttons-block">
+		    <div class="layer-buttons-list">
+		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('LongIsland')" title="Zoom to Layer" ></i>
+		        <i  class="fa fa-info-circle layer-info trigger-popup" id="about-info"  title="Layer Info" ></i>
+		    </div>
+		</div>
+	    </div>
+  
+		<!-- Info Points -->
+		<div class="layer-list-row info_layer_item" >
+		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="info-item" id="info_points" name="info_points">
+		<label for="info_points"> <i class="fa fa-circle"  style="color: #008888;" ></i>  Locations</label>
+		</div>
+
+		<!-- Info Labels -->
+		<div class="layer-list-row info_layer_item" >
+		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="info-item" id="info_labels" name="info_labels">
+		<label for="info_labels"> <i class="fa fa-comment-dots"  style="color: #008888;" ></i>  Labels</label>
+		</div>
+	  
+	  
+	  </div>
+
 
 
 	  <br>
@@ -3172,6 +3333,5 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
-
 
 
