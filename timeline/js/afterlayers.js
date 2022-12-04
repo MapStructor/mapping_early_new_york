@@ -906,7 +906,7 @@ function addInfoAfterLayers(date) {
                 },
                 "source-layer": "info_points_meny-bh1jf7",
                 paint: {
-                    'circle-color': '#008888',
+                    'circle-color': '#0dd3d3',
 					'circle-opacity':  [
                         'case',
                         ['boolean', ['feature-state', 'hover'], false],
@@ -914,7 +914,7 @@ function addInfoAfterLayers(date) {
                             1
                         ],
 					'circle-stroke-width': 2,
-					'circle-stroke-color': '#008888',
+					'circle-stroke-color': '#046969',
 					'circle-stroke-opacity': [
                         'case',
                         ['boolean', ['feature-state', 'hover'], false],
@@ -1000,7 +1000,7 @@ function addInfoLabelsAfterLayers(date) {
 				layout: {
                     visibility: document.getElementById('info_labels').checked ? "visible" : "none",
                     "text-field": "{Label}",
-					"text-offset": [0,2],
+					"text-offset": [0,1],
                     "text-size": {
                     stops: [
                         [0, 4],
@@ -1012,7 +1012,7 @@ function addInfoLabelsAfterLayers(date) {
                 "source-layer": "info_points_meny-bh1jf7",
 
                 paint: {
-                    "text-color": "#008888",
+                    "text-color": "#2c0202",
                     "text-halo-color": "#ffffff",
                     "text-halo-width": 5,
                     "text-halo-blur": 1,
