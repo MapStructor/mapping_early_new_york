@@ -674,6 +674,7 @@ my_tooltip.fadeOut(200);
 				$('#grants_layer_items').change(function(){
                     $('.grants_layer').prop('checked',this.checked);
 					if( $( this ).prop('checked') ) {
+						console.log('checked----||||| ----')
 					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
 					    if(dutch_grant_lots_info_length == 0) {
 					        getDutchGrantsInfo();
@@ -701,8 +702,10 @@ my_tooltip.fadeOut(200);
                 });
 
 				$('#grants_layer_items_2').change(function(){
-                    $('.grants_layer').prop('checked',this.checked);
+                    $('.grants_layer_2').prop('checked',this.checked);
 					if( $( this ).prop('checked') ) {
+						alert("Clicked ---- #### ----");
+						console.log("Clicked ---- #### ----");
 					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
 					    if(dutch_grant_lots_info_length == 0) {
 					        getDutchGrantsInfo();
@@ -738,10 +741,10 @@ my_tooltip.fadeOut(200);
                 });
 
 				$(".grants_layer_2").change(function () {
-                    if ($(".grants_layer:checked").length == $(".grants_layer").length) {
-                        $('#grants_layer_items').prop('checked','checked');
+                    if ($(".grants_layer_2:checked").length == $(".grants_layer_2").length) {
+                        $('#grants_layer_items_2').prop('checked','checked');
                     }else{
-                        $('#grants_layer_items').prop('checked',false);  
+                        $('#grants_layer_items_2').prop('checked',false);  
                     }
                 });
 				
