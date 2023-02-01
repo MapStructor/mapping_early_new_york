@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
  
@@ -674,38 +675,6 @@ my_tooltip.fadeOut(200);
 				$('#grants_layer_items').change(function(){
                     $('.grants_layer').prop('checked',this.checked);
 					if( $( this ).prop('checked') ) {
-						console.log('checked----||||| ----')
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-					    if(dutch_grant_lots_info_length == 0) {
-					        getDutchGrantsInfo();
-					    }
-					    beforeMap.setLayoutProperty( "grants1-5sp9tb-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "grants1-5sp9tb-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "grants1-5sp9tb-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "grants1-5sp9tb-right-highlighted", "visibility", "visible" );
-						
-						beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "grants1-5sp9tb-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "grants1-5sp9tb-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "grants1-5sp9tb-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "grants1-5sp9tb-right-highlighted", "visibility", "none" );
-						
-						beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "none" );
-						
-						if(dgrants_layer_view_flag) { 
-							closeDutchGrantsInfo();
-						}
-					}
-                });
-
-				$('#grants_layer_items_2').change(function(){
-                    $('.grants_layer_2').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-						alert("Clicked ---- #### ----");
-						console.log("Clicked ---- #### ----");
 					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
 					    if(dutch_grant_lots_info_length == 0) {
 					        getDutchGrantsInfo();
@@ -739,14 +708,6 @@ my_tooltip.fadeOut(200);
                         $('#grants_layer_items').prop('checked',false);  
                     }
                 });
-
-				$(".grants_layer_2").change(function () {
-                    if ($(".grants_layer_2:checked").length == $(".grants_layer_2").length) {
-                        $('#grants_layer_items_2').prop('checked','checked');
-                    }else{
-                        $('#grants_layer_items_2').prop('checked',false);  
-                    }
-                });
 				
 				
 				$('#grants_layer').click(function() {
@@ -775,20 +736,6 @@ my_tooltip.fadeOut(200);
 				});
 				
 				$('#grants_layer_lines').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("grant-lots-lines-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("grant-lots-lines-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("grant-lots-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("grant-lots-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "none" );
-					}
-				});
-
-				$('#grants_layer_lines_2').click(function() {
 				    if( $( this ).prop('checked') ) {
 					    //if(beforeMap.getLayoutProperty("grant-lots-lines-left", "visibility") === "none" )
 					        beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "visible" ); 
@@ -2553,7 +2500,7 @@ i.slash-icon { font-size: 11px; }
 		
 
 	  
-	   <!-- Dutch Grants  -->
+	  <!-- Dutch Grants  -->
 	  <div class="layer-list-row" >
 	  <input type="checkbox" id="grants_layer_items" name="grants_layer_items">
 	  <i class="fas fa-plus-square compress-expand-icon" id="dutch-grants-layer-caret" onclick="itemsCompressExpand('.dutch_grants_layer_item','#dutch-grants-layer-caret')" ></i>
@@ -2566,8 +2513,6 @@ i.slash-icon { font-size: 11px; }
 		</div>
 	  </div>
 
-	  
-
 	  <!-- Dutch Grants Layers -->
 	  <div class="layer-list-row dutch_grants_layer_item" >
 	  &nbsp; &nbsp; &nbsp; <input type="checkbox" id="grants_layer" class="grants_layer" name="grants_layer">
@@ -2579,31 +2524,6 @@ i.slash-icon { font-size: 11px; }
 	  &nbsp; &nbsp; &nbsp; <input type="checkbox" id="grants_layer_lines" class="grants_layer" name="grants_layer_lines">
       <label for="grants_layer_lines"> <i class="far fa-square" style="color: #FF0000;" ></i> Lines</label>
 	  </div>
-
-	  <!-- Dutch Grants -2  -->
-	  <div class="layer-list-row_2" >
-		<input type="checkbox" id="grants_layer_items_2" name="grants_layer_items_2">
-		<i class="fas fa-plus-square compress-expand-icon" id="dutch-grants-layer-caret_2" onclick="itemsCompressExpand('.dutch_grants_layer_item_2','#dutch-grants-layer-caret_2')" ></i>
-		<label for="grants_layer_items_2"> 1640-64 | Dutch Grants -- 22  <div class="dummy-label-layer-space"></div></label>
-		  <div class="layer-buttons-block">
-			  <div class="layer-buttons-list">
-				  <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-				  <i  class="fa fa-info-circle layer-info trigger-popup" id="grants-info-layer_2"  title="Layer Info" ></i>
-			  </div>
-		  </div>
-		</div>
-
-	  <!-- Dutch Grants Layers -2 -->
-	  <div class="layer-list-row_2 dutch_grants_layer_item_2" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="grants_layer_2" class="grants_layer_2" name="grants_layer">
-		<label for="grants_layer_2"> <i class="fa fa-square" style="color: #e3ed58;" ></i> Information</label>
-		</div>
-		
-		<!-- Dutch Grants Layers Lines - 2 -->
-		<div class="layer-list-row_2 dutch_grants_layer_item_2" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="grants_layer_lines_2" class="grants_layer_2" name="grants_layer_lines_2">
-		<label for="grants_layer_lines"> <i class="far fa-square" style="color: #FF0000;" ></i> Lines</label>
-		</div>
 
 	  
 
@@ -3414,5 +3334,7 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
+
+
 
 
