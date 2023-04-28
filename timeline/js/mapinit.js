@@ -550,7 +550,7 @@ beforeMap.on("load", function () {
 				        
             GrantLotsHandle(e);
 						
-		}).on('click', 'stokes_farms_complete_5_reduc-6k9tbl-left' , function (e) {
+		}).on('click', 'original_grants_and_farms-left' , function (e) {
 					
 		    FarmsClickHandle(e);
 						
@@ -612,7 +612,7 @@ afterMap.on("load", function () {
 				        
             GrantLotsHandle(e);
 						
-		}).on('click', 'stokes_farms_complete_5_reduc-6k9tbl-right' , function (e) {
+		}).on('click', 'original_grants_and_farms-right' , function (e) {
 					
 		    FarmsClickHandle(e);
 						
@@ -1149,11 +1149,11 @@ afterMap.on("error", function (e) {
 								    farms_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'stokes_farms_complete_5_reduc-6k9tbl-right-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: farms_layer_view_id},
+                                       { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'stokes_farms_complete_5_reduc-6k9tbl-left-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: farms_layer_view_id},
+                                       { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighFarmPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1174,19 +1174,19 @@ afterMap.on("error", function (e) {
 								farms_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'stokes_farms_complete_5_reduc-6k9tbl-right-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: farms_layer_view_id},
+                                    { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
                                     { hover: false }
                                 );
 							    afterMap.setFeatureState(
-                                    { source: 'stokes_farms_complete_5_reduc-6k9tbl-right-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: event.features[0].id},
+                                    { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'stokes_farms_complete_5_reduc-6k9tbl-left-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: farms_layer_view_id},
+                                    { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'stokes_farms_complete_5_reduc-6k9tbl-left-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: event.features[0].id},
+                                    { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: event.features[0].id},
                                     { hover: true }
                                 );
                                 afterHighFarmPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1626,11 +1626,11 @@ afterMap.on("error", function (e) {
                     $("#infoLayerFarms").slideUp(); 		
 	                farms_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'stokes_farms_complete_5_reduc-6k9tbl-right-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: farms_layer_view_id},
+                        { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'stokes_farms_complete_5_reduc-6k9tbl-left-highlighted', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: farms_layer_view_id},
+                        { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighFarmPopUp.isOpen()) afterHighFarmPopUp.remove();
@@ -1683,11 +1683,11 @@ function changeDate(unixDate) {
 	beforeMap.setFilter("grants1-5sp9tb-left-highlighted", dateFilter);
 	afterMap.setFilter("grants1-5sp9tb-right-highlighted", dateFilter);
 	
-    beforeMap.setFilter("stokes_farms_complete_5_reduc-6k9tbl-left", dateFilter);
-	afterMap.setFilter("stokes_farms_complete_5_reduc-6k9tbl-right", dateFilter);
+    beforeMap.setFilter("original_grants_and_farms-left", dateFilter);
+	afterMap.setFilter("original_grants_and_farms-right", dateFilter);
 	
-	beforeMap.setFilter("stokes_farms_complete_5_reduc-6k9tbl-left-highlighted", dateFilter);
-	afterMap.setFilter("stokes_farms_complete_5_reduc-6k9tbl-right-highlighted", dateFilter);
+	beforeMap.setFilter("original_grants_and_farms-left-highlighted", dateFilter);
+	afterMap.setFilter("original_grants_and_farms-right-highlighted", dateFilter);
 	
 	beforeMap.setFilter("c7_dates-ajsksu-left", dateFilter);
 	afterMap.setFilter("c7_dates-ajsksu-right", dateFilter);
