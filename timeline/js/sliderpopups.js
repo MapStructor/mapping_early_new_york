@@ -263,6 +263,35 @@ function buildDutchGrantPopUpInfo(props) {
 				    "<h3>Dutch Grant</h3><hr>" +
 				    "<br>" +
 				    "<b>Dutch Grant Lot:</b> <a href='https://encyclopedia.nahc-mapping.org/grantlot/" + props.Lot + "' target='_blank'>" + props.Lot + "</a><br>" +
+					"<br>";
+					if( dutch_grant_lots_info[props.Lot].to_party.length > 0 ) {
+					    popup_html += "<b>To Party:</b><i>" + dutch_grant_lots_info[props.Lot].to_party + "</i><br><br>";
+					} else {
+						// to_party_unlinked -> dutch_grant_lots_info[props.Lot].name_txt
+						if( dutch_grant_lots_info[props.Lot].name_txt.length > 0 ) {
+					        popup_html += "<b>To Party:</b><i>" + dutch_grant_lots_info[props.Lot].name_txt + "</i><br><br>";
+					    }
+					}
+					if( dutch_grant_lots_info[props.Lot].from_party.length > 0 ) {
+					    popup_html += "<b>From Party:</b><i>" + dutch_grant_lots_info[props.Lot].from_party + "</i><br><br>";
+					}
+					if( dutch_grant_lots_info[props.Lot].start.length > 0 ) {
+					    popup_html += "<b>Start:</b> <i>" + dutch_grant_lots_info[props.Lot].start + "</i><br>";
+					}
+					if( dutch_grant_lots_info[props.Lot].end.length > 0 ) {
+					    popup_html += "<b>End:</b> <i>" + dutch_grant_lots_info[props.Lot].end + "</i><br><br>";
+			        }
+					if( dutch_grant_lots_info[props.Lot].descr.length > 0 ) {
+					    popup_html += "<b>Description:</b>" +
+					                  "<br>" +
+					                  "<i>" + dutch_grant_lots_info[props.Lot].descr + "</i>";
+					}
+                    popup_html += "<br><br>" +  builds_imgs;
+					
+					/*
+					"<h3>Dutch Grant</h3><hr>" +
+				    "<br>" +
+				    "<b>Dutch Grant Lot:</b> <a href='https://encyclopedia.nahc-mapping.org/grantlot/" + props.Lot + "' target='_blank'>" + props.Lot + "</a><br>" +
 					"<br>" +
 					"<b>To Party:</b>" + ( dutch_grant_lots_info[props.Lot].to_party.length > 0 ? "<br>" : "" ) + "<i>" + dutch_grant_lots_info[props.Lot].to_party + "</i><br>" +
 					"<br>" +
@@ -276,6 +305,7 @@ function buildDutchGrantPopUpInfo(props) {
 					"<i>" + dutch_grant_lots_info[props.Lot].descr + "</i><br><br>" +
                                         builds_imgs
 				        ;
+					*/
 			}
 				
     
@@ -418,6 +448,8 @@ function buildCurrLotsPopUpInfo(props) {
 	$("#infoLayerCurrLots").html(popup_html);
 
 }
+
+
 
 
 
