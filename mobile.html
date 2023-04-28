@@ -118,16 +118,19 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
 
     // get Dutch Grants Lots Info from REST API
     var dutch_grant_lots_info = new Array(),
+	    farms_grants_info = new Array(),
 	    settlements_info = new Array(),
 		infos_entity = new Array(),
 		settlements_linked_location = new Array(),
 		taxlot_event_entities_info = new Array();
 	var dutch_grant_lots_info_length = 0,
+	    farms_grants_info_length = 0,
 	    settlements_info_length = 0,
 		infos_entity_length = 0,
 		taxlot_entities_info_length = 0;
 		
     getDutchGrantsInfo();
+	getOriginalFarmsInfo();
 	getSettlementsInfo();
 	getInfosEntity();
 	getTaxlotEventEntitiesDescrInfo();
@@ -1036,18 +1039,21 @@ my_tooltip.fadeOut(200);
 				$('#farms_layer_items').change(function(){
                     $('.farms_layer').prop('checked',this.checked);
 					if( $( this ).prop('checked') ) {
-					    beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right-highlighted", "visibility", "visible" );
+					    if(farms_grants_info_length == 0) {
+					        getOriginalFarmsInfo();
+						}
+					    beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "visible" );
+						afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "visible" ); 
+						beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "visible" );
+						afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "visible" );
 						
 						beforeMap.setLayoutProperty( "farms-lines-left", "visibility", "visible" );
 						afterMap.setLayoutProperty( "farms-lines-right", "visibility", "visible" ); 
 					} else {
-					    beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right-highlighted", "visibility", "none" );
+					    beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "none" ); 
+					    afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "none" );
+						beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "visible" );
+						afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "none" );
 						
 						beforeMap.setLayoutProperty( "farms-lines-left", "visibility", "none" ); 
 					    afterMap.setLayoutProperty( "farms-lines-right", "visibility", "none" );
@@ -1069,19 +1075,22 @@ my_tooltip.fadeOut(200);
 				
 				$('#farms_layer').click(function() {
 				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("stokes_farms_complete_5_reduc-6k9tbl-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("stokes_farms_complete_5_reduc-6k9tbl-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right", "visibility", "visible" ); 
-							beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left-highlighted", "visibility", "visible" );
-							afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right-highlighted", "visibility", "visible" );
+					    if(farms_grants_info_length == 0) {
+					        getOriginalFarmsInfo();
+						}
+					    //if(beforeMap.getLayoutProperty("original_grants_and_farms-left", "visibility") === "none" )
+					        beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "visible" ); 
+						//if(afterMap.getLayoutProperty("original_grants_and_farms-right", "visibility") === "none" )
+					        afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "visible" ); 
+							beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "visible" );
+							afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "visible" );
 					} else {
-					    //if(beforeMap.getLayoutProperty("stokes_farms_complete_5_reduc-6k9tbl-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("stokes_farms_complete_5_reduc-6k9tbl-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right", "visibility", "none" );
-							beforeMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-left-highlighted", "visibility", "none" );
-							afterMap.setLayoutProperty( "stokes_farms_complete_5_reduc-6k9tbl-right-highlighted", "visibility", "none" );
+					    //if(beforeMap.getLayoutProperty("original_grants_and_farms-left", "visibility") === "visible" )
+					        beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "none" ); 
+						//if(afterMap.getLayoutProperty("original_grants_and_farms-right", "visibility") === "visible" )
+					        afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "none" );
+							beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "none" );
+							afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "none" );
 						if(farms_layer_view_flag) { 
 							closeFarmsInfo();
 						}
@@ -1311,6 +1320,68 @@ function getDutchGrantsInfo() {
     });
 }
 
+
+// for test local host REST_API/original-farms-and-grants-list-export.json
+// REST API https://encyclopedia.nahc-mapping.org/original-farms-and-grants-list-export 
+
+function getOriginalFarmsInfo() {
+    
+	var data_info_index = "";
+	farms_grants_info_length = 0;
+	
+	$.ajax({
+	            //url: 'REST_API/original-farms-and-grants-list-export.json',
+			    url: 'https://encyclopedia.nahc-mapping.org/original-farms-and-grants-list-export',
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+				type: 'get',
+                dataType: 'json',
+				data: {}
+    })
+	.done(function(data) { 
+	  
+		//console.log(data);
+		if(data.length > 0) {
+		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
+		    for(let i = 0; i < data.length; i++){
+				
+				if( typeof data[i].nid[0].value != "undefined" ) {
+				    //console.log(data[i].title[0].value);
+					//data_info_index = data[i].title[0].value;
+					//data_info_index = data_info_index.replace(/\s+/g, '');
+					//data_info_index = data_info_index.toLowerCase();
+					data_info_index = "" + data[i].nid[0].value + "";
+
+				    farms_grants_info[data_info_index] = { 
+						//title: data[i].title.length > 0 ? data[i].title[0].value : "",
+						name: data[i].title.length > 0 ? (  
+						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org" + data[i].path[0].alias + "' target='_blank'>" : "" ) +
+						     data[i].title[0].value  +
+							( data[i].path.length > 0 ? "</a>"  : "" )
+						) : "",
+						date_start: data[i].field_date_start_text_.length > 0 ? data[i].field_date_start_text_[0].value : "",
+						date_end: data[i].field_date_end_text_.length > 0 ? data[i].field_date_end_text_[0].value : "",
+						from_party: data[i].field_from_party_text_2.length > 0 ? data[i].field_from_party_text_2[0].value : "",
+						to_party: data[i].field_to_party_unlinked_.length > 0 ? data[i].field_to_party_unlinked_[0].value : "",
+						type: data[i].field_typedsfg.length > 0 ? data[i].field_typedsfg[0].value : ""
+					};  
+					
+                    farms_grants_info_length += 1;
+                    //console.log(taxlot_event_entities_info);					
+				}
+			}
+		}
+		
+
+    })
+    .fail( function(xhr, textStatus, errorThrown) {
+        // LOADING ERROR!
+		console.warn("jQuery AJAX request  ERROR !!!");
+		console.log(xhr.responseText);
+        console.log(textStatus);
+    });
+}
 
 // for test local host REST_API/places-list-export.json
 // REST API https://encyclopedia.nahc-mapping.org/places-list-export
@@ -1835,7 +1906,7 @@ function getInfosEntity() {
     left: 0;
     position: fixed;
     /* display: block; */
-    display: none;
+	display: none;
     opacity: 0.8;
     background-color: #fff;
     z-index: 1000!important; /* 99!important; */
@@ -3397,7 +3468,6 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
-
 
 
 
