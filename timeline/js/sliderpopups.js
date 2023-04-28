@@ -265,15 +265,15 @@ function buildDutchGrantPopUpInfo(props) {
 				    "<b>Dutch Grant Lot:</b> <a href='https://encyclopedia.nahc-mapping.org/grantlot/" + props.Lot + "' target='_blank'>" + props.Lot + "</a><br>" +
 					"<br>";
 					if( dutch_grant_lots_info[props.Lot].to_party.length > 0 ) {
-					    popup_html += "<b>To Party:</b><i>" + dutch_grant_lots_info[props.Lot].to_party + "</i><br><br>";
+					    popup_html += "<b>To Party:</b> <i>" + dutch_grant_lots_info[props.Lot].to_party + "</i><br><br>";
 					} else {
 						// to_party_unlinked -> dutch_grant_lots_info[props.Lot].name_txt
 						if( dutch_grant_lots_info[props.Lot].name_txt.length > 0 ) {
-					        popup_html += "<b>To Party:</b><i>" + dutch_grant_lots_info[props.Lot].name_txt + "</i><br><br>";
+					        popup_html += "<b>To Party:</b> <i>" + dutch_grant_lots_info[props.Lot].name_txt + "</i><br><br>";
 					    }
 					}
 					if( dutch_grant_lots_info[props.Lot].from_party.length > 0 ) {
-					    popup_html += "<b>From Party:</b><i>" + dutch_grant_lots_info[props.Lot].from_party + "</i><br><br>";
+					    popup_html += "<b>From Party:</b> <i>" + dutch_grant_lots_info[props.Lot].from_party + "</i><br><br>";
 					}
 					if( dutch_grant_lots_info[props.Lot].start.length > 0 ) {
 					    popup_html += "<b>Start:</b> <i>" + dutch_grant_lots_info[props.Lot].start + "</i><br>";
