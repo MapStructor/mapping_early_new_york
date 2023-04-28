@@ -754,17 +754,17 @@ function addBeforeFarmsLayer(date) {
 		//*A fill pink #FFC0CB outline #C71585
         beforeMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "stokes_farms_complete_5_reduc-6k9tbl-left-highlighted",
+			id: "original_grants_and_farms-left-highlighted",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.220x7bg9"
+				url: "mapbox://nittyjee.9qefkr2z"
 			},
 			layout: {
                 visibility: document.getElementById('farms_layer').checked ? "visible" : "none",
             },
-			"source-layer": "stokes_farms_complete_5_reduc-6k9tbl",
+			"source-layer": "removing_grants_overlapping_d-58at7f",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -782,17 +782,17 @@ function addBeforeFarmsLayer(date) {
         //*A fill pink #FFC0CB outline #C71585
         beforeMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "stokes_farms_complete_5_reduc-6k9tbl-left",
+			id: "original_grants_and_farms-left",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.220x7bg9"
+				url: "mapbox://nittyjee.9qefkr2z"
 			},
 			layout: {
                 visibility: document.getElementById('farms_layer').checked ? "visible" : "none",
             },
-			"source-layer": "stokes_farms_complete_5_reduc-6k9tbl",
+			"source-layer": "removing_grants_overlapping_d-58at7f",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -833,23 +833,23 @@ function addBeforeFarmsLayer(date) {
 
         //CURSOR ON HOVER
             //ON HOVER
-			beforeMap.on('mouseenter', 'stokes_farms_complete_5_reduc-6k9tbl-left', function (e) {
+			beforeMap.on('mouseenter', 'original_grants_and_farms-left', function (e) {
                 beforeMap.getCanvas().style.cursor = 'pointer';
 				beforeMapFarmPopUp.setLngLat(e.lngLat).addTo(beforeMap);
 			});
 			
-            beforeMap.on('mousemove', 'stokes_farms_complete_5_reduc-6k9tbl-left', function (e) {
+            beforeMap.on('mousemove', 'original_grants_and_farms-left', function (e) {
 				if (e.features.length > 0) {
                     if (hoveredFarmsIdLeft) {
                         beforeMap.setFeatureState(
-                            { source: 'stokes_farms_complete_5_reduc-6k9tbl-left', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: hoveredFarmsIdLeft},
+                            { source: 'original_grants_and_farms-left', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdLeft},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredFarmsIdLeft = e.features[0].id;
                     beforeMap.setFeatureState(
-                        { source: 'stokes_farms_complete_5_reduc-6k9tbl-left', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: hoveredFarmsIdLeft},
+                        { source: 'original_grants_and_farms-left', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdLeft},
                         { hover: true }
                     );
 					
@@ -878,11 +878,11 @@ function addBeforeFarmsLayer(date) {
             });
 
             //OFF HOVER
-			beforeMap.on('mouseleave', 'stokes_farms_complete_5_reduc-6k9tbl-left', function () {
+			beforeMap.on('mouseleave', 'original_grants_and_farms-left', function () {
                 beforeMap.getCanvas().style.cursor = '';
 				if (hoveredFarmsIdLeft) {
                     beforeMap.setFeatureState(
-                        { source: 'stokes_farms_complete_5_reduc-6k9tbl-left', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: hoveredFarmsIdLeft},
+                        { source: 'original_grants_and_farms-left', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdLeft},
                         { hover: false }
                     );
                 }
@@ -1996,5 +1996,6 @@ function addBeforeLabelsLayer() {
               zoomtobounds('NewEngland');
           });
 }
+
 
 
