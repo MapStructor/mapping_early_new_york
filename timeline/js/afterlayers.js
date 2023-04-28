@@ -1,4 +1,5 @@
 
+
 //////////////////
 // Dynamic Layers
 //////////////////
@@ -747,17 +748,17 @@ function addAfterFarmsLayer(date) {
 		//*A fill pink #FFC0CB outline #C71585
         afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "stokes_farms_complete_5_reduc-6k9tbl-right-highlighted",
+			id: "original_grants_and_farms-right-highlighted",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.220x7bg9"
+				url: "mapbox://nittyjee.9qefkr2z"
 			},
 			layout: {
                 visibility: document.getElementById('farms_layer').checked ? "visible" : "none",
             },
-			"source-layer": "stokes_farms_complete_5_reduc-6k9tbl",
+			"source-layer": "removing_grants_overlapping_d-58at7f",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -775,17 +776,17 @@ function addAfterFarmsLayer(date) {
         //*A fill pink #FFC0CB outline #C71585
         afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "stokes_farms_complete_5_reduc-6k9tbl-right",
+			id: "original_grants_and_farms-right",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.220x7bg9"
+				url: "mapbox://nittyjee.9qefkr2z"
 			},
 			layout: {
                 visibility: document.getElementById('farms_layer').checked ? "visible" : "none",
             },
-			"source-layer": "stokes_farms_complete_5_reduc-6k9tbl",
+			"source-layer": "removing_grants_overlapping_d-58at7f",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -826,24 +827,24 @@ function addAfterFarmsLayer(date) {
 
         //CURSOR ON HOVER
             //ON HOVER
-			afterMap.on('mouseenter', 'stokes_farms_complete_5_reduc-6k9tbl-right', function (e) {
+			afterMap.on('mouseenter', 'original_grants_and_farms-right', function (e) {
 				console.log(e.features[0]);
                 afterMap.getCanvas().style.cursor = 'pointer';
 				afterMapFarmPopUp.setLngLat(e.lngLat).addTo(afterMap);
 			});
 			
-            afterMap.on('mousemove', 'stokes_farms_complete_5_reduc-6k9tbl-right', function (e) {
+            afterMap.on('mousemove', 'original_grants_and_farms-right', function (e) {
 				if (e.features.length > 0) {
                     if (hoveredFarmsIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'stokes_farms_complete_5_reduc-6k9tbl-right', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: hoveredFarmsIdRight},
+                            { source: 'original_grants_and_farms-right', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredFarmsIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'stokes_farms_complete_5_reduc-6k9tbl-right', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: hoveredFarmsIdRight},
+                        { source: 'original_grants_and_farms-right', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdRight},
                         { hover: true }
                     );
 					
@@ -871,11 +872,11 @@ function addAfterFarmsLayer(date) {
             });
 
             //OFF HOVER
-			afterMap.on('mouseleave', 'stokes_farms_complete_5_reduc-6k9tbl-right', function () {
+			afterMap.on('mouseleave', 'original_grants_and_farms-right', function () {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredFarmsIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'stokes_farms_complete_5_reduc-6k9tbl-right', sourceLayer: 'stokes_farms_complete_5_reduc-6k9tbl', id: hoveredFarmsIdRight},
+                        { source: 'original_grants_and_farms-right', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdRight},
                         { hover: false }
                     );
                 }
@@ -1982,5 +1983,6 @@ function addAfterLabelsLayer() {
               zoomtobounds('NewEngland');
           });
 }
+
 
 
