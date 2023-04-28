@@ -265,15 +265,15 @@ function buildDutchGrantPopUpInfo(props) {
 				    "<b>Dutch Grant Lot:</b> <a href='https://encyclopedia.nahc-mapping.org/grantlot/" + props.Lot + "' target='_blank'>" + props.Lot + "</a><br>" +
 					"<br>";
 					if( dutch_grant_lots_info[props.Lot].to_party.length > 0 ) {
-					    popup_html += "<b>To Party:</b> <i>" + dutch_grant_lots_info[props.Lot].to_party + "</i><br><br>";
+					    popup_html += "<b>To Party:</b><i>" + dutch_grant_lots_info[props.Lot].to_party + "</i><br><br>";
 					} else {
 						// to_party_unlinked -> dutch_grant_lots_info[props.Lot].name_txt
 						if( dutch_grant_lots_info[props.Lot].name_txt.length > 0 ) {
-					        popup_html += "<b>To Party:</b> <i>" + dutch_grant_lots_info[props.Lot].name_txt + "</i><br><br>";
+					        popup_html += "<b>To Party:</b><i>" + dutch_grant_lots_info[props.Lot].name_txt + "</i><br><br>";
 					    }
 					}
 					if( dutch_grant_lots_info[props.Lot].from_party.length > 0 ) {
-					    popup_html += "<b>From Party:</b> <i>" + dutch_grant_lots_info[props.Lot].from_party + "</i><br><br>";
+					    popup_html += "<b>From Party:</b><i>" + dutch_grant_lots_info[props.Lot].from_party + "</i><br><br>";
 					}
 					if( dutch_grant_lots_info[props.Lot].start.length > 0 ) {
 					    popup_html += "<b>Start:</b> <i>" + dutch_grant_lots_info[props.Lot].start + "</i><br>";
@@ -415,7 +415,17 @@ function buildKarlPopUpInfo(props) {
 function buildFarmsPopUpInfo(props) {
 	        var popup_html = "";
 			//console.log(props);
+/*
+Date: "1646-03-15"
+DayEnd: 17000101
+DayStart: 16460315
+From: "DWIC"
+NID_num: 10548
+To: "Jan Jansen Damen"
+node_id: "/node/10548"
+*/
 
+            if( typeof farms_grants_info[props.NID_num] == "undefined" ) {
 			    popup_html = 
 				    "<h3>Original Grants &amp; Farms</h3><hr>" +
 					"<br>" +
@@ -423,6 +433,27 @@ function buildFarmsPopUpInfo(props) {
 					"<b>Date:</b> <i>" + props.Date + "</i><br>" +
 					"<br>" 
 				;
+			} else {
+				    popup_html = "<h3>Original Grants &amp; Farms</h3><hr><br>";
+					if( farms_grants_info[props.NID_num].name.length > 0 ) {
+					    popup_html += "<b>" + farms_grants_info[props.NID_num].name + "</b><br><br>";
+					}
+				    if( farms_grants_info[props.NID_num].to_party.length > 0 ) {
+					    popup_html += "<b>To Party:</b><i>" + farms_grants_info[props.NID_num].to_party + "</i><br>";
+					} 
+					if( farms_grants_info[props.NID_num].from_party.length > 0 ) {
+					    popup_html += "<b>From Party:</b><i>" + farms_grants_info[props.NID_num].from_party + "</i><br>";
+					}
+					if( farms_grants_info[props.NID_num].date_start.length > 0 ) {
+					    popup_html += "<b>Start:</b> <i>" + farms_grants_info[props.NID_num].date_start + "</i><br>";
+					}
+					if( farms_grants_info[props.NID_num].date_end.length > 0 ) {
+					    popup_html += "<b>End:</b> <i>" + farms_grants_info[props.NID_num].date_end + "</i><br>";
+			        }
+					if( farms_grants_info[props.NID_num].type.length > 0 ) {
+					    popup_html += "<br><b>Type:</b> <i>" + farms_grants_info[props.NID_num].type + "</i><br>";
+					}
+			}
 				
 			
 				
@@ -448,7 +479,6 @@ function buildCurrLotsPopUpInfo(props) {
 	$("#infoLayerCurrLots").html(popup_html);
 
 }
-
 
 
 
