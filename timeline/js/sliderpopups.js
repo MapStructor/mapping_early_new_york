@@ -439,10 +439,16 @@ node_id: "/node/10548"
 					    popup_html += "<b>" + farms_grants_info[props.NID_num].name + "</b><br><br>";
 					}
 				    if( farms_grants_info[props.NID_num].to_party.length > 0 ) {
-					    popup_html += "<b>To Party:</b><i>" + farms_grants_info[props.NID_num].to_party + "</i><br>";
+						if( farms_grants_info[props.NID_num].to_party_linked.length > 0 )
+							popup_html += "<b>To Party:</b> <a href='" +  farms_grants_info[props.NID_num].to_party_linked + "' target='_blank'>" + farms_grants_info[props.NID_num].to_party + "</a><br>"
+						else 
+					         popup_html += "<b>To Party:</b><i>" + farms_grants_info[props.NID_num].to_party + "</i><br>";
 					} 
 					if( farms_grants_info[props.NID_num].from_party.length > 0 ) {
-					    popup_html += "<b>From Party:</b><i>" + farms_grants_info[props.NID_num].from_party + "</i><br>";
+						if( farms_grants_info[props.NID_num].from_party_linked.length > 0 )
+							popup_html += "<b>From Party:</b> <a href='" +  farms_grants_info[props.NID_num].from_party_linked + "' target='_blank'>" + farms_grants_info[props.NID_num].from_party + "</a><br>"
+						else 
+					        popup_html += "<b>From Party:</b><i>" + farms_grants_info[props.NID_num].from_party + "</i><br>";
 					}
 					if( farms_grants_info[props.NID_num].date_start.length > 0 ) {
 					    popup_html += "<b>Start:</b> <i>" + farms_grants_info[props.NID_num].date_start + "</i><br>";
