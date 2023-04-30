@@ -1296,8 +1296,8 @@ function getDutchGrantsInfo() {
 					}
 					dutch_grant_lots_info[data_info_index] = { 
 					    name_txt: data[i].to_party_unlinked,
-					    to_party: data[i].to_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org"),
-					    from_party: data[i].from_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org"),
+					    to_party: data[i].to_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+					    from_party: data[i].from_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 						start: data[i].start, 
 						end: data[i].end, 
 						notes: data[i].note, 
@@ -1364,6 +1364,8 @@ function getOriginalFarmsInfo() {
 						date_end: data[i].field_date_end_text_.length > 0 ? data[i].field_date_end_text_[0].value : "",
 						from_party: data[i].field_from_party_text_2.length > 0 ? data[i].field_from_party_text_2[0].value : "",
 						to_party: data[i].field_to_party_unlinked_.length > 0 ? data[i].field_to_party_unlinked_[0].value : "",
+						from_party_linked: data[i].field_from_party_.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_from_party_[0].url : "",
+						to_party_linked: data[i].field_to_party.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_to_party[0].url : "",
 						type: data[i].field_typedsfg.length > 0 ? data[i].field_typedsfg[0].value : ""
 					};  
 					
@@ -3468,6 +3470,5 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
-
 
 
