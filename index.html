@@ -1612,6 +1612,11 @@ function getBrooklynGrantsInfo() {
 						from_party: data[i].field_from_party_1222.length > 0 ? data[i].field_from_party_1222[0].value : "",
 						from_party_linked: data[i].field_from_party_12222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_from_party_12222[0].url : "",
 						
+						title: data[i].field_original_title_temp.length > 0 ? data[i].field_original_title_temp[0].value : "",
+						
+						ancestors_link: data[i].field_related_ancestors222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_related_ancestors222[0].url : "",
+						indigenous_signatories: data[i].field_history_notes222.length > 0 ? data[i].field_history_notes222[0].value : "",
+						
 						/*
 						field_related_ancestors222
 						
@@ -3493,8 +3498,6 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
-
-
 
 
 
