@@ -1314,11 +1314,11 @@ afterMap.on("error", function (e) {
 								    gravesend_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: gravesend_layer_view_id},
+                                       { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: gravesend_layer_view_id},
+                                       { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighMapGravesendPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1339,19 +1339,19 @@ afterMap.on("error", function (e) {
 								gravesend_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: gravesend_layer_view_id},
+                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
                                     { hover: false }
                                 );
 							    afterMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: event.features[0].id},
+                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: gravesend_layer_view_id},
+                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: event.features[0].id},
+                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: event.features[0].id},
                                     { hover: true }
                                 );
                                 afterHighMapGravesendPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1581,11 +1581,11 @@ afterMap.on("error", function (e) {
 					$("#infoLayerGravesend").slideUp(); 
 	                gravesend_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: gravesend_layer_view_id},
+                        { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'gravesend_boundaries-c6qrbw', id: gravesend_layer_view_id},
+                        { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighMapGravesendPopUp.isOpen()) afterHighMapGravesendPopUp.remove();
@@ -2185,8 +2185,6 @@ addAfterLabelsLayer();
     }, 2500);
 
 });
-
-
 
 
 
