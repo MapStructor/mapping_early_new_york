@@ -488,14 +488,14 @@ function addGravesendAfterLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredGravesendIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'gravesend_boundaries-c6qrbw', id: hoveredGravesendIdRight},
+                            { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredGravesendIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'gravesend_boundaries-c6qrbw', id: hoveredGravesendIdRight},
+                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdRight},
                         { hover: true }
                     );
 					
@@ -537,7 +537,7 @@ function addGravesendAfterLayers(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredGravesendIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'gravesend_boundaries-c6qrbw', id: hoveredGravesendIdRight},
+                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdRight},
                         { hover: false }
                     );
                 }
