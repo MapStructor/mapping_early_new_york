@@ -338,6 +338,9 @@ function buildGravesendPopUpInfo(props) {
 				    if( brooklyn_grants_info[props.node].name.length > 0 ) {
 					    popup_html += "<a href='https://encyclopedia.nahc-mapping.org/node/" + props.node + "' target='_blank' >" + brooklyn_grants_info[props.node].name + "</a><br><br>";
 					}
+					if( brooklyn_grants_info[props.node].title.length > 0 ) {
+					    popup_html += "<b>" + brooklyn_grants_info[props.node].title + "</b><br><br>";
+					}
 				    if( brooklyn_grants_info[props.node].to_party.length > 0 ) {
 						if( brooklyn_grants_info[props.node].to_party_linked.length > 0 )
 							popup_html += "<b>To Party:</b> <a href='" +  brooklyn_grants_info[props.node].to_party_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].to_party + "</a><br>"
@@ -352,6 +355,12 @@ function buildGravesendPopUpInfo(props) {
 					}
 					if( brooklyn_grants_info[props.node].date_start.length > 0 ) {
 					    popup_html += "<b>Start:</b> <i>" + brooklyn_grants_info[props.node].date_start + "</i><br>";
+					}
+					if( brooklyn_grants_info[props.node].ancestors_link.length > 0 ) {
+					    popup_html += "<br><a href='" + brooklyn_grants_info[props.node].ancestors_link + "' target='_blank' >Related Ancestors</a><br>";
+					}
+					if( brooklyn_grants_info[props.node].indigenous_signatories.length > 0 ) {
+					    popup_html += "<br><b>Indigenous Signatories</b><br><i>" + brooklyn_grants_info[props.node].indigenous_signatories.replace(/\\n/g, '<br>') + "</i><br>";
 					}
 
 			}
