@@ -1,5 +1,4 @@
 
-
 //////////////////
 // Dynamic Layers
 //////////////////
@@ -425,12 +424,12 @@ function addGravesendAfterLayers(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.49p6xmnm"
+				url: "mapbox://nittyjee.5kola938"
 			},
 			layout: {
                 visibility: document.getElementById('gravesend_layer').checked ? "visible" : "none",
             },
-			"source-layer": "gravesend_boundaries-c6qrbw",
+			"source-layer": "brooklyn_grants-4jm3qn",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -453,12 +452,12 @@ function addGravesendAfterLayers(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.49p6xmnm"
+				url: "mapbox://nittyjee.5kola938"
 			},
 			layout: {
                 visibility: document.getElementById('gravesend_layer').checked ? "visible" : "none",
             },
-			"source-layer": "gravesend_boundaries-c6qrbw",
+			"source-layer": "brooklyn_grants-4jm3qn",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
