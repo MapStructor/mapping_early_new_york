@@ -317,10 +317,13 @@ function buildDutchGrantPopUpInfo(props) {
 
 /*REPLACE THIS*/
 function buildGravesendPopUpInfo(props) {
-	        var popup_html = "";
+	        var popup_html = "<h3>Boundaries</h3><hr>";
+			
+			console.log(props);
 
-			    popup_html = 
-				    "<h3>Boundaries</h3><hr>" +
+            if( typeof brooklyn_grants_info[props.node] == "undefined" ) { 
+
+			    popup_html += 
 				    //"<b>Name:</b> <i>" + props.Name + "</i><br>" +
 					"<b>" + props.Name + "</b>" +
 					//"<a href = 'https://encyclopedia.nahc-mapping.org/place/gravesend' target='_blank'>Gravesend</a>" +
@@ -330,8 +333,28 @@ function buildGravesendPopUpInfo(props) {
 					"<i>" + props['Groups Dyl'] + "</i>" +
 					"<br><br>"
 				;
+				
+			} else {
+				    if( brooklyn_grants_info[props.node].name.length > 0 ) {
+					    popup_html += "<b>" + brooklyn_grants_info[props.node].name + "</b><br><br>";
+					}
+				    if( brooklyn_grants_info[props.node].to_party.length > 0 ) {
+						if( brooklyn_grants_info[props.node].to_party_linked.length > 0 )
+							popup_html += "<b>To Party:</b> <a href='" +  brooklyn_grants_info[props.node].to_party_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].to_party + "</a><br>"
+						else 
+					         popup_html += "<b>To Party:</b><i>" + brooklyn_grants_info[props.node].to_party + "</i><br>";
+					} 
+					if( brooklyn_grants_info[props.node].from_party.length > 0 ) {
+						if( brooklyn_grants_info[props.node].from_party_linked.length > 0 )
+							popup_html += "<b>From Party:</b> <a href='" +  brooklyn_grants_info[props.node].from_party_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].from_party + "</a><br>"
+						else 
+					        popup_html += "<b>From Party:</b><i>" + brooklyn_grants_info[props.node].from_party + "</i><br>";
+					}
+					if( brooklyn_grants_info[props.node].date_start.length > 0 ) {
+					    popup_html += "<b>Start:</b> <i>" + brooklyn_grants_info[props.node].date_start + "</i><br>";
+					}
 
-
+			}
 
     
 	$("#infoLayerGravesend").html(popup_html);
@@ -485,7 +508,6 @@ function buildCurrLotsPopUpInfo(props) {
 	$("#infoLayerCurrLots").html(popup_html);
 
 }
-
 
 
 
