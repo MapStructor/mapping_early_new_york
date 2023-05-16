@@ -317,7 +317,7 @@ function buildDutchGrantPopUpInfo(props) {
 
 /*REPLACE THIS*/
 function buildGravesendPopUpInfo(props) {
-	        var popup_html = "<h3>Boundaries</h3><hr>";
+	        var popup_html = "<h3>Brooklyn Grants</h3><hr>";
 			
 			console.log(props);
 
@@ -336,7 +336,7 @@ function buildGravesendPopUpInfo(props) {
 				
 			} else {
 				    if( brooklyn_grants_info[props.node].name.length > 0 ) {
-					    popup_html += "<b>" + brooklyn_grants_info[props.node].name + "</b><br><br>";
+					    popup_html += "<a href='https://encyclopedia.nahc-mapping.org/node/" + props.node + "' target='_blank' >" + brooklyn_grants_info[props.node].name + "</a><br><br>";
 					}
 				    if( brooklyn_grants_info[props.node].to_party.length > 0 ) {
 						if( brooklyn_grants_info[props.node].to_party_linked.length > 0 )
