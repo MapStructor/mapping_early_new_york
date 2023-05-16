@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
  
@@ -108,11 +107,13 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
 	    settlements_info = new Array(),
 		infos_entity = new Array(),
 		settlements_linked_location = new Array(),
+		brooklyn_grants_info = new Array(),
 		taxlot_event_entities_info = new Array();
 	var dutch_grant_lots_info_length = 0,
 	    farms_grants_info_length = 0,
 	    settlements_info_length = 0,
 		infos_entity_length = 0,
+		brooklyn_grants_length = 0,
 		taxlot_entities_info_length = 0;
 		
     getDutchGrantsInfo();
@@ -763,6 +764,9 @@ my_tooltip.fadeOut(200);
 					        getDutchNewGrantsInfo();
 					    }
 						*/
+						if(brooklyn_grants_length == 0) {
+		                    getBrooklynGrantsInfo();
+	                    }
 					    beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left", "visibility", "visible" );
 						afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right", "visibility", "visible" ); 
 						beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left-highlighted", "visibility", "visible" );
@@ -804,6 +808,9 @@ my_tooltip.fadeOut(200);
 					        getDutchGrantsInfo();
 					    }
 						*/
+						if(brooklyn_grants_length == 0) {
+		                    getBrooklynGrantsInfo();
+	                    }
 					    //if(beforeMap.getLayoutProperty("gravesend_boundaries-c6qrbw-left", "visibility") === "none" )
 					        beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left", "visibility", "visible" ); 
 						//if(afterMap.getLayoutProperty("gravesend_boundaries-c6qrbw-right", "visibility") === "none" )
@@ -1568,6 +1575,71 @@ function getInfosEntity() {
         console.log(textStatus);
     });
 	
+}
+
+
+// for test local host REST_API/brooklyn-grant-ids-export.json
+// REST API https://encyclopedia.nahc-mapping.org/brooklyn-grant-ids-export
+
+function getBrooklynGrantsInfo() {
+    
+	var data_info_index = "";
+	brooklyn_grants_length = 0;
+	
+	$.ajax({
+				url: 'https://encyclopedia.nahc-mapping.org/brooklyn-grant-ids-export',
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+				type: 'get',
+                dataType: 'json',
+				data: {}
+    })
+	.done(function(data) { 
+	
+	    if(data.length > 0) {
+		    for(let i = 0; i < data.length; i++){
+				if( typeof data[i].nid[0].value != "undefined" ) {
+				    data_info_index = "" + data[i].nid[0].value + "";
+				    
+					brooklyn_grants_info[data_info_index] = {
+					    name: data[i].title.length > 0 ? data[i].title[0].value : "",
+						date_start: data[i].field_start_date_.length > 0 ? data[i].field_start_date_[0].value : "",
+					
+						to_party: data[i].field_to_party_1_text_.length > 0 ? data[i].field_to_party_1_text_[0].value : "",	
+						to_party_linked: data[i].field_to_party_1222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_to_party_1222[0].url : "",
+						
+						from_party: data[i].field_from_party_1222.length > 0 ? data[i].field_from_party_1222[0].value : "",
+						from_party_linked: data[i].field_from_party_12222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_from_party_12222[0].url : "",
+						
+						/*
+						field_related_ancestors222
+						
+						field_to_party_1222
+						field_to_party_1_text_
+						field_to_party_2_text222
+						field_to_party_2_text_
+						
+						field_from_party_1222
+						field_from_party_12222
+						
+						field_history_notes222
+						*/
+					};
+					
+				    brooklyn_grants_length += 1;
+				}
+	        }
+		}
+
+    })
+    .fail( function(xhr, textStatus, errorThrown) {
+        // LOADING ERROR!
+		console.warn("jQuery AJAX request  ERROR !!!");
+		console.log(xhr.responseText);
+        console.log(textStatus);
+    });
+
 }
 
 
@@ -3421,6 +3493,9 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
+
+
+
 
 
 
