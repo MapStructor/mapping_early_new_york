@@ -498,14 +498,14 @@ function addGravesendBeforeLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredGravesendIdLeft) {
                         beforeMap.setFeatureState(
-                            { source: 'gravesend_boundaries-c6qrbw-left', sourceLayer: 'gravesend_boundaries-c6qrbw', id: hoveredGravesendIdLeft},
+                            { source: 'gravesend_boundaries-c6qrbw-left', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdLeft},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredGravesendIdLeft = e.features[0].id;
                     beforeMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-left', sourceLayer: 'gravesend_boundaries-c6qrbw', id: hoveredGravesendIdLeft},
+                        { source: 'gravesend_boundaries-c6qrbw-left', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdLeft},
                         { hover: true }
                     );
 					
@@ -547,7 +547,7 @@ function addGravesendBeforeLayers(date) {
                 beforeMap.getCanvas().style.cursor = '';
 				if (hoveredGravesendIdLeft) {
                     beforeMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-left', sourceLayer: 'gravesend_boundaries-c6qrbw', id: hoveredGravesendIdLeft},
+                        { source: 'gravesend_boundaries-c6qrbw-left', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdLeft},
                         { hover: false }
                     );
                 }
@@ -1996,5 +1996,6 @@ function addBeforeLabelsLayer() {
               zoomtobounds('NewEngland');
           });
 }
+
 
 
