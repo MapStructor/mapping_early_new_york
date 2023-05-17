@@ -344,17 +344,25 @@ function buildGravesendPopUpInfo(props) {
 				    if( brooklyn_grants_info[props.node].name.length > 0 ) {
 					    popup_html += "<a href='https://encyclopedia.nahc-mapping.org/node/" + props.node + "' target='_blank' >" + brooklyn_grants_info[props.node].name + "</a><br><br>";
 					}
-				    if( brooklyn_grants_info[props.node].to_party.length > 0 ) {
+				    if(( brooklyn_grants_info[props.node].to_party.length > 0 ) || ( brooklyn_grants_info[props.node].to_party2.length > 0 )) {
+						popup_html += "<b>To Party:</b><br>";
+						
 						if( brooklyn_grants_info[props.node].to_party_linked.length > 0 )
-							popup_html += "<b>To Party:</b><br> <a href='" +  brooklyn_grants_info[props.node].to_party_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].to_party + "</a><br><br>"
+							popup_html += "<a href='" +  brooklyn_grants_info[props.node].to_party_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].to_party + "</a><br>"
 						else 
-					         popup_html += "<b>To Party:</b><br><i>" + brooklyn_grants_info[props.node].to_party + "</i><br>";
+					        popup_html += "<i>" + brooklyn_grants_info[props.node].to_party + "</i><br>";
+						
+						if( brooklyn_grants_info[props.node].to_party2_linked.length > 0 )
+							popup_html += "<a href='" +  brooklyn_grants_info[props.node].to_party2_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].to_party2 + "</a><br>"
+						else 
+					        popup_html += "<i>" + brooklyn_grants_info[props.node].to_party2 + "</i><br>";
+						
 					} 
 					if( brooklyn_grants_info[props.node].from_party.length > 0 ) {
 						if( brooklyn_grants_info[props.node].from_party_linked.length > 0 )
-							popup_html += "<b>From Party:</b><br> <a href='" +  brooklyn_grants_info[props.node].from_party_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].from_party + "</a><br><br>"
+							popup_html += "<br><b>From Party:</b><br> <a href='" +  brooklyn_grants_info[props.node].from_party_linked + "' target='_blank'>" + brooklyn_grants_info[props.node].from_party + "</a><br><br>"
 						else 
-					        popup_html += "<b>From Party:</b><br><i>" + brooklyn_grants_info[props.node].from_party + "</i><br><br>";
+					        popup_html += "<br><b>From Party:</b><br><i>" + brooklyn_grants_info[props.node].from_party + "</i><br><br>";
 					}
 					/*
 					if( brooklyn_grants_info[props.node].ancestors_link.length > 0 ) {
@@ -519,6 +527,7 @@ function buildCurrLotsPopUpInfo(props) {
 	$("#infoLayerCurrLots").html(popup_html);
 
 }
+
 
 
 
