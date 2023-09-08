@@ -8,10 +8,10 @@ function addAfterLayers(yr, date) {
     //afterMap.on('load', function () {
         
 		//REMOVING TAX LOT POINTS IF EXIST
-        if (afterMap.getLayer("c7_dates-ajsksu-right")) afterMap.removeLayer("c7_dates-ajsksu-right");
-        if (afterMap.getSource("c7_dates-ajsksu")) afterMap.removeSource("c7_dates-ajsksu");
-		if (afterMap.getLayer("grants1-5sp9tb-right")) afterMap.removeLayer("grants1-5sp9tb-right");
-        if (afterMap.getSource("grants1-5sp9tb")) afterMap.removeSource("grants1-5sp9tb");
+        if (afterMap.getLayer("taxlot_c7-78vo7n-right")) afterMap.removeLayer("taxlot_c7-78vo7n-right");
+        if (afterMap.getSource("taxlot_c7-78vo7n")) afterMap.removeSource("taxlot_c7-78vo7n");
+		if (afterMap.getLayer("dutch_grants-5ehfqe-right")) afterMap.removeLayer("dutch_grants-5ehfqe-right");
+        if (afterMap.getSource("dutch_grants-5ehfqe")) afterMap.removeSource("dutch_grants-5ehfqe");
        
 	   
 	    //ADD GRANTS POLYGONS
@@ -19,17 +19,17 @@ function addAfterLayers(yr, date) {
 		//*A#
         afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "grants1-5sp9tb-right-highlighted",
+			id: "dutch_grants-5ehfqe-right-highlighted",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.b5bpfqeb"
+				url: "mapbox://mapny.7q2vs9ar"
 			},
 			layout: {
                 visibility: document.getElementById('grants_layer').checked ? "visible" : "none",
             },
-			"source-layer": "grants1-5sp9tb",
+			"source-layer": "dutch_grants-5ehfqe",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -47,17 +47,17 @@ function addAfterLayers(yr, date) {
 
         afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "grants1-5sp9tb-right",
+			id: "dutch_grants-5ehfqe-right",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.b5bpfqeb"
+				url: "mapbox://mapny.7q2vs9ar"
 			},
 			layout: {
                 visibility: document.getElementById('grants_layer').checked ? "visible" : "none",
             },
-			"source-layer": "grants1-5sp9tb",
+			"source-layer": "dutch_grants-5ehfqe",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -76,23 +76,23 @@ function addAfterLayers(yr, date) {
 
         //CURSOR ON HOVER
             //ON HOVER
-			afterMap.on('mouseenter', 'grants1-5sp9tb-right', function (e) {
+			afterMap.on('mouseenter', 'dutch_grants-5ehfqe-right', function (e) {
                 afterMap.getCanvas().style.cursor = 'pointer';
 				afterMapDutchGrantPopUp.setLngLat(e.lngLat).addTo(afterMap);
 			});
 			
-            afterMap.on('mousemove', 'grants1-5sp9tb-right', function (e) {
+            afterMap.on('mousemove', 'dutch_grants-5ehfqe-right', function (e) {
 				if (e.features.length > 0) {
                     if (hoveredDutchGrantIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'grants1-5sp9tb-right', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdRight},
+                            { source: 'dutch_grants-5ehfqe-right', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredDutchGrantIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-right', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdRight},
+                        { source: 'dutch_grants-5ehfqe-right', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdRight},
                         { hover: true }
                     );
 					
@@ -128,11 +128,11 @@ function addAfterLayers(yr, date) {
             });
 
             //OFF HOVER
-			afterMap.on('mouseleave', 'grants1-5sp9tb-right', function () {
+			afterMap.on('mouseleave', 'dutch_grants-5ehfqe-right', function () {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredDutchGrantIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-right', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdRight},
+                        { source: 'dutch_grants-5ehfqe-right', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdRight},
                         { hover: false }
                     );
                 }
@@ -147,17 +147,17 @@ function addAfterLayers(yr, date) {
 
 		afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "c7_dates-ajsksu-right",
+			id: "taxlot_c7-78vo7n-right",
 			type: "circle",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.8krf945a"
+				url: "mapbox://mapny.du6ari4g"
 			},
 			layout: {
                 visibility: document.getElementById('circle_point').checked ? "visible" : "none",
             },
-			"source-layer": "c7_dates-ajsksu",
+			"source-layer": "taxlot_c7-78vo7n",
 			paint: {
 
 				//CIRCLE COLOR
@@ -227,18 +227,18 @@ function addAfterLayers(yr, date) {
                     
 					
 		// CHANGE TO CURSOR WHEN HOVERING
-		afterMap.on('mouseenter', 'c7_dates-ajsksu-right', function (e) {
+		afterMap.on('mouseenter', 'taxlot_c7-78vo7n-right', function (e) {
 			afterMap.getCanvas().style.cursor = 'pointer';
 					
 			        if (hoveredStateIdRightCircle) {
                         afterMap.setFeatureState(
-                            { source: 'c7_dates-ajsksu-right', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdRightCircle},
+                            { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
                             { hover: false }
                         );
                     }
                     hoveredStateIdRightCircle = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'c7_dates-ajsksu-right', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdRightCircle},
+                        { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
                         { hover: true }
                     );
 					
@@ -259,11 +259,11 @@ function addAfterLayers(yr, date) {
 		});
 
 		// CHANGE TO POINTER WHEN NOT HOVERING
-		afterMap.on('mouseleave', 'c7_dates-ajsksu-right', function () {
+		afterMap.on('mouseleave', 'taxlot_c7-78vo7n-right', function () {
 			afterMap.getCanvas().style.cursor = '';
 			    if (hoveredStateIdRightCircle) {
                     afterMap.setFeatureState(
-                        { source: 'c7_dates-ajsksu-right', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdRightCircle},
+                        { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
                         { hover: false }
                     );
                 }
@@ -279,7 +279,7 @@ function addGrantLotsAfterLayers(date) {
 	
 	//REMOVING TAX LOT POINTS IF EXIST
 	    if (afterMap.getLayer("grant-lots-right")) afterMap.removeLayer("grant-lots-right");
-        if (afterMap.getSource("grant_lot_c7-6s06if")) afterMap.removeSource("grant_lot_c7-6s06if");
+        if (afterMap.getSource("demo_divisions_grant_c7-42w8pa")) afterMap.removeSource("demo_divisions_grant_c7-42w8pa");
 		
 	// Add a layer showing the places.
 	        afterMap.addLayer({
@@ -287,12 +287,12 @@ function addGrantLotsAfterLayers(date) {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.4498iwgn"
+                    url: "mapbox://mapny.26xwjv4e"
                 },
 				layout: {
                     visibility: document.getElementById('grant_lots').checked ? "visible" : "none",
                 },
-                "source-layer": "grant_lot_c7-6s06if",
+                "source-layer": "demo_divisions_grant_c7-42w8pa",
                 paint: {
                     'fill-color': '#088',
                     'fill-opacity': [ 
@@ -319,14 +319,14 @@ function addGrantLotsAfterLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredGrantLotIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'grant-lots-right', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdRight},
+                            { source: 'grant-lots-right', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredGrantLotIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'grant-lots-right', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdRight},
+                        { source: 'grant-lots-right', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdRight},
                         { hover: true }
                     );
 					
@@ -369,7 +369,7 @@ function addGrantLotsAfterLayers(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredGrantLotIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'grant-lots-right', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdRight},
+                        { source: 'grant-lots-right', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdRight},
                         { hover: false }
                     );
                 }
@@ -383,7 +383,7 @@ function addGrantLotsLinesAfterLayers(date) {
 	
 	//REMOVING TAX LOT POINTS IF EXIST
 		if (afterMap.getLayer("grant-lots-lines-right")) afterMap.removeLayer("grant-lots-lines-right");
-        if (afterMap.getSource("dutch_grants_lines-1n0e0p")) afterMap.removeSource("dutch_grants_lines-1n0e0p");
+        if (afterMap.getSource("dutch_grants_lines-0y4gkx")) afterMap.removeSource("dutch_grants_lines-0y4gkx");
 	
 	
 	// Add a layer showing the places.
@@ -392,12 +392,12 @@ function addGrantLotsLinesAfterLayers(date) {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.1j4u7q5k"
+                    url: "mapbox://mapny.7dw0tqar"
                 },
 				layout: {
                     visibility: document.getElementById('grants_layer_lines').checked ? "visible" : "none",
                 },
-                "source-layer": "dutch_grants_lines-1n0e0p",
+                "source-layer": "dutch_grants_lines-0y4gkx",
                 paint: {
                     "line-color": "#FF0000",
 					"line-width": 3,
@@ -424,12 +424,12 @@ function addGravesendAfterLayers(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.5kola938"
+				url: "mapbox://mapny.5q4mas7d"
 			},
 			layout: {
                 visibility: document.getElementById('gravesend_layer').checked ? "visible" : "none",
             },
-			"source-layer": "brooklyn_grants-4jm3qn",
+			"source-layer": "brooklyn_grants-7qxrvu",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -452,12 +452,12 @@ function addGravesendAfterLayers(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.5kola938"
+				url: "mapbox://mapny.5q4mas7d"
 			},
 			layout: {
                 visibility: document.getElementById('gravesend_layer').checked ? "visible" : "none",
             },
-			"source-layer": "brooklyn_grants-4jm3qn",
+			"source-layer": "brooklyn_grants-7qxrvu",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -488,14 +488,14 @@ function addGravesendAfterLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredGravesendIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdRight},
+                            { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-7qxrvu', id: hoveredGravesendIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredGravesendIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdRight},
+                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-7qxrvu', id: hoveredGravesendIdRight},
                         { hover: true }
                     );
 					
@@ -537,7 +537,7 @@ function addGravesendAfterLayers(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredGravesendIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-4jm3qn', id: hoveredGravesendIdRight},
+                        { source: 'gravesend_boundaries-c6qrbw-right', sourceLayer: 'brooklyn_grants-7qxrvu', id: hoveredGravesendIdRight},
                         { hover: false }
                     );
                 }
@@ -555,12 +555,12 @@ function addGravesendLinesAfterLayers(date) {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.860jt8v9"
+                    url: "mapbox://mapny.9t6krwcz"
                 },
 				layout: {
                     visibility: document.getElementById('gravesend_layer_lines').checked ? "visible" : "none",
                 },
-                "source-layer": "gravesend_lines-7mtc93",
+                "source-layer": "brooklyn_grants_lines-8ry03u",
                 paint: {
                     "line-color": "#FF0000",
 					"line-width": 3,
@@ -587,12 +587,12 @@ function addKarlAfterLayers(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.5u30zve2"
+				url: "mapbox://mapny.dv28lnbp"
 			},
 			layout: {
                 visibility: document.getElementById('karl_layer').checked ? "visible" : "none",
             },
-			"source-layer": "karl_areas-8j4ru6",
+			"source-layer": "boundary_areas_long_island-8guvh4",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -615,12 +615,12 @@ function addKarlAfterLayers(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.5u30zve2"
+				url: "mapbox://mapny.dv28lnbp"
 			},
 			layout: {
                 visibility: document.getElementById('karl_layer').checked ? "visible" : "none",
             },
-			"source-layer": "karl_areas-8j4ru6",
+			"source-layer": "boundary_areas_long_island-8guvh4",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -651,14 +651,14 @@ function addKarlAfterLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredKarlIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'karl_long_island-right', sourceLayer: 'karl_areas-8j4ru6', id: hoveredKarlIdRight},
+                            { source: 'karl_long_island-right', sourceLayer: 'boundary_areas_long_island-8guvh4', id: hoveredKarlIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredKarlIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'karl_long_island-right', sourceLayer: 'karl_areas-8j4ru6', id: hoveredKarlIdRight},
+                        { source: 'karl_long_island-right', sourceLayer: 'boundary_areas_long_island-8guvh4', id: hoveredKarlIdRight},
                         { hover: true }
                     );
 					
@@ -701,7 +701,7 @@ function addKarlAfterLayers(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredKarlIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'karl_long_island-right', sourceLayer: 'karl_areas-8j4ru6', id: hoveredKarlIdRight},
+                        { source: 'karl_long_island-right', sourceLayer: 'boundary_areas_long_island-8guvh4', id: hoveredKarlIdRight},
                         { hover: false }
                     );
                 }
@@ -719,12 +719,12 @@ function addKarlLinesAfterLayers(date) {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.1iinsopm"
+                    url: "mapbox://mapny.ckj6h3ga"
                 },
 				layout: {
                     visibility: document.getElementById('karl_layer_lines').checked ? "visible" : "none",
                 },
-                "source-layer": "karl_long_island_lines-7hhtcy",
+                "source-layer": "boundary_lines_long_island-0c8elq",
                 paint: {
                     "line-color": "#FF0000",
 					"line-width": 3,
@@ -752,12 +752,12 @@ function addAfterFarmsLayer(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.9qefkr2z"
+				url: "mapbox://mapny.0508movm"
 			},
 			layout: {
                 visibility: document.getElementById('farms_layer').checked ? "visible" : "none",
             },
-			"source-layer": "removing_grants_overlapping_d-58at7f",
+			"source-layer": "original_farms-6me5t0",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -780,12 +780,12 @@ function addAfterFarmsLayer(date) {
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.9qefkr2z"
+				url: "mapbox://mapny.0508movm"
 			},
 			layout: {
                 visibility: document.getElementById('farms_layer').checked ? "visible" : "none",
             },
-			"source-layer": "removing_grants_overlapping_d-58at7f",
+			"source-layer": "original_farms-6me5t0",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -809,12 +809,12 @@ function addAfterFarmsLayer(date) {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.8n7ba8lp"
+                    url: "mapbox://mapny.6dwzmxth"
                 },
 				layout: {
                     visibility: document.getElementById('farms_layer_lines').checked ? "visible" : "none",
                 },
-                "source-layer": "stokes_farms_lines-apf0fk",
+                "source-layer": "original_farms_lines-57l4u7",
                 paint: {
 				    "line-color": "#FF0000",
 					"line-width": 3,
@@ -836,14 +836,14 @@ function addAfterFarmsLayer(date) {
 				if (e.features.length > 0) {
                     if (hoveredFarmsIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'original_grants_and_farms-right', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdRight},
+                            { source: 'original_grants_and_farms-right', sourceLayer: 'original_farms-6me5t0', id: hoveredFarmsIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredFarmsIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'original_grants_and_farms-right', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdRight},
+                        { source: 'original_grants_and_farms-right', sourceLayer: 'original_farms-6me5t0', id: hoveredFarmsIdRight},
                         { hover: true }
                     );
 					
@@ -875,7 +875,7 @@ function addAfterFarmsLayer(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredFarmsIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'original_grants_and_farms-right', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: hoveredFarmsIdRight},
+                        { source: 'original_grants_and_farms-right', sourceLayer: 'original_farms-6me5t0', id: hoveredFarmsIdRight},
                         { hover: false }
                     );
                 }
@@ -899,12 +899,12 @@ function addInfoAfterLayers(date) {
                 type: "circle",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.06hdr9o2"
+                    url: "mapbox://mapny.8c0cqfdz"
                 },
 				layout: {
                     visibility: document.getElementById('info_points').checked ? "visible" : "none",
                 },
-                "source-layer": "info_points_meny-bh1jf7",
+                "source-layer": "info_of_interest-17rpk9",
                 paint: {
                     'circle-color': '#0dd3d3',
 					'circle-opacity':  [
@@ -933,13 +933,13 @@ function addInfoAfterLayers(date) {
 			    if (e.features.length > 0) {
                     if (hoveredInfoIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'info-points-right', sourceLayer: 'info_points_meny-bh1jf7', id: hoveredInfoIdRight},
+                            { source: 'info-points-right', sourceLayer: 'info_of_interest-17rpk9', id: hoveredInfoIdRight},
                             { hover: false }
                         );
                     }
                     hoveredInfoIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'info-points-right', sourceLayer: 'info_points_meny-bh1jf7', id: hoveredInfoIdRight},
+                        { source: 'info-points-right', sourceLayer: 'info_of_interest-17rpk9', id: hoveredInfoIdRight},
                         { hover: true }
                     );
 					
@@ -972,7 +972,7 @@ function addInfoAfterLayers(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredInfoIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'info-points-right', sourceLayer: 'info_points_meny-bh1jf7', id: hoveredInfoIdRight},
+                        { source: 'info-points-right', sourceLayer: 'info_of_interest-17rpk9', id: hoveredInfoIdRight},
                         { hover: false }
                     );
                 }
@@ -995,7 +995,7 @@ function addInfoLabelsAfterLayers(date) {
                 type: "symbol",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.06hdr9o2"
+                    url: "mapbox://mapny.8c0cqfdz"
                 },
 				layout: {
                     visibility: document.getElementById('info_labels').checked ? "visible" : "none",
@@ -1009,7 +1009,7 @@ function addInfoLabelsAfterLayers(date) {
                     }
                 },
 
-                "source-layer": "info_points_meny-bh1jf7",
+                "source-layer": "info_of_interest-17rpk9",
 
                 paint: {
                     "text-color": "#2c0202",
@@ -1041,12 +1041,12 @@ function addSettlementsAfterLayers(date) {
                 type: "circle",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.bdnqfl4c"
+                    url: "mapbox://mapny.dm346dz9"
                 },
 				layout: {
                     visibility: document.getElementById('settlements_points').checked ? "visible" : "none",
                 },
-                "source-layer": "locations_layer_nahc-797jyh",
+                "source-layer": "settlements-5551dw",
                 paint: {
                     'circle-color': '#0b0ee5',
 					'circle-opacity':  [
@@ -1075,13 +1075,13 @@ function addSettlementsAfterLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredSettlementsIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'settlements-right', sourceLayer: 'locations_layer_nahc-797jyh', id: hoveredSettlementsIdRight},
+                            { source: 'settlements-right', sourceLayer: 'settlements-5551dw', id: hoveredSettlementsIdRight},
                             { hover: false }
                         );
                     }
                     hoveredSettlementsIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'settlements-right', sourceLayer: 'locations_layer_nahc-797jyh', id: hoveredSettlementsIdRight},
+                        { source: 'settlements-right', sourceLayer: 'settlements-5551dw', id: hoveredSettlementsIdRight},
                         { hover: true }
                     );
 					
@@ -1114,7 +1114,7 @@ function addSettlementsAfterLayers(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredSettlementsIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'settlements-right', sourceLayer: 'locations_layer_nahc-797jyh', id: hoveredSettlementsIdRight},
+                        { source: 'settlements-right', sourceLayer: 'settlements-5551dw', id: hoveredSettlementsIdRight},
                         { hover: false }
                     );
                 }
@@ -1138,7 +1138,7 @@ function addSettlementsLabelsAfterLayers(date) {
                 type: "symbol",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.bdnqfl4c"
+                    url: "mapbox://mapny.dm346dz9"
                 },
 				layout: {
                     visibility: document.getElementById('settlements_labels').checked ? "visible" : "none",
@@ -1152,7 +1152,7 @@ function addSettlementsLabelsAfterLayers(date) {
                     }
                 },
 
-                "source-layer": "locations_layer_nahc-797jyh",
+                "source-layer": "settlements-5551dw",
 
 
 
@@ -1193,12 +1193,12 @@ function addCastelloAfterLayers() {
                 type: "circle",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.ap08s4n9"
+                    url: "mapbox://mapny.cvcg7wo0"
                 },
 				layout: {
                     visibility:  document.getElementById('castello_points').checked ? "visible" : "none",
                 },
-                "source-layer": "castello_points_new-3qkr6t",
+                "source-layer": "taxlots-cpwvol",
                 paint: {
                     'circle-color': '#FF0000',
 					'circle-opacity':  [
@@ -1262,13 +1262,13 @@ function addCastelloAfterLayers() {
 				if (e.features.length > 0) {
                     if (hoveredStateIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'places-right', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdRight},
+                            { source: 'places-right', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdRight},
                             { hover: false }
                         );
                     }
                     hoveredStateIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'places-right', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdRight},
+                        { source: 'places-right', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdRight},
                         { hover: true }
                     );
 					
@@ -1299,7 +1299,7 @@ function addCastelloAfterLayers() {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredStateIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'places-right', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdRight},
+                        { source: 'places-right', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdRight},
                         { hover: false }
                     );
                 }
@@ -1318,19 +1318,19 @@ function addCurrentLotsAfterLayers() {
 	
 	//REMOVING CURRENT LOTS IF EXIST
 		if (afterMap.getLayer("curr-lots-right")) afterMap.removeLayer("curr-lots-right");
-        if (afterMap.getSource("current_lots_1-ca6kq1")) afterMap.removeSource("current_lots_1-ca6kq1");
+        if (afterMap.getSource("current_lots-94syr2")) afterMap.removeSource("current_lots-94syr2");
 	
 	    afterMap.addLayer({
                 id: "curr-lots-high-right",
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.441lyesf"
+                    url: "mapbox://mapny.8gy1c1uu"
                 },
 				layout: {
                     visibility: document.getElementById('current_lots').checked ? "visible" : "none",
                 },
-                "source-layer": "current_lots_1-ca6kq1",
+                "source-layer": "current_lots-94syr2",
                 paint: {
 				"fill-color": "#7B68EE",
 				"fill-opacity": [ 
@@ -1349,12 +1349,12 @@ function addCurrentLotsAfterLayers() {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.441lyesf"
+                    url: "mapbox://mapny.8gy1c1uu"
                 },
 				layout: {
                     visibility: document.getElementById('current_lots').checked ? "visible" : "none",
                 },
-                "source-layer": "current_lots_1-ca6kq1",
+                "source-layer": "current_lots-94syr2",
                 paint: {
 				"fill-color": "#7B68EE",
 				"fill-opacity": [ 
@@ -1380,14 +1380,14 @@ function addCurrentLotsAfterLayers() {
 				if (e.features.length > 0) {
                     if (hoveredCurrLotsIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'curr-lots-right', sourceLayer: 'current_lots_1-ca6kq1', id: hoveredCurrLotsIdRight},
+                            { source: 'curr-lots-right', sourceLayer: 'current_lots-94syr2', id: hoveredCurrLotsIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredCurrLotsIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'curr-lots-right', sourceLayer: 'current_lots_1-ca6kq1', id: hoveredCurrLotsIdRight},
+                        { source: 'curr-lots-right', sourceLayer: 'current_lots-94syr2', id: hoveredCurrLotsIdRight},
                         { hover: true }
                     );
 					
@@ -1428,7 +1428,7 @@ function addCurrentLotsAfterLayers() {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredCurrLotsIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'curr-lots-right', sourceLayer: 'current_lots_1-ca6kq1', id: hoveredCurrLotsIdRight},
+                        { source: 'curr-lots-right', sourceLayer: 'current_lots-94syr2', id: hoveredCurrLotsIdRight},
                         { hover: false }
                     );
                 }
@@ -1442,19 +1442,19 @@ function addCurrentLotsLinesAfterLayers() {
 	
 	//REMOVING CURRENT LOTS IF EXIST
 		if (afterMap.getLayer("curr-lots-lines-right")) afterMap.removeLayer("curr-lots-lines-right");
-        if (afterMap.getSource("selected_lots_lines-2qrhih")) afterMap.removeSource("selected_lots_lines-2qrhih");
+        if (afterMap.getSource("current_lots_lines-41dc4r")) afterMap.removeSource("current_lots_lines-41dc4r");
 	
 	         afterMap.addLayer({
                 id: "curr-lots-lines-right",
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.dzxpgww5"
+                    url: "mapbox://mapny.6ziby9ed"
                 },
 				layout: {
                     visibility: document.getElementById('current_lots_lines').checked ? "visible" : "none",
                 },
-                "source-layer": "selected_lots_lines-2qrhih",
+                "source-layer": "current_lots_lines-41dc4r",
                 paint: {
 				    "line-color": "#000080",
 					"line-width": 3,
@@ -1470,19 +1470,19 @@ function addCurrentBuildingsLinesAfterLayers() {
 	
 	//REMOVING CURRENT LOTS IF EXIST
 		if (afterMap.getLayer("curr-builds-lines-right")) afterMap.removeLayer("curr-builds-lines-right");
-        if (afterMap.getSource("selected_buildings_lines-2gyw2x")) afterMap.removeSource("selected_buildings_lines-2gyw2x");
+        if (afterMap.getSource("current_buildings_lines-3k97hu")) afterMap.removeSource("current_buildings_lines-3k97hu");
 	
 	         afterMap.addLayer({
                 id: "curr-builds-lines-right",
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.8icvriua"
+                    url: "mapbox://mapny.5w8vqpgq"
                 },
 				layout: {
                     visibility: document.getElementById('current_buildings_lines').checked ? "visible" : "none",
                 },
-                "source-layer": "selected_buildings_lines-2gyw2x",
+                "source-layer": "current_buildings_lines-3k97hu",
                 paint: {
 				    "line-color": "#0000FF",
 					"line-width": 2,
@@ -1504,12 +1504,12 @@ function addCurrentBuildingsAfterLayers() {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.8zoowskg"
+                    url: "mapbox://mapny.9bfdcno0"
                 },
 				layout: {
                     visibility: document.getElementById('current_buildings').checked ? "visible" : "none",
                 },
-                "source-layer": "current_buildings_1-cjgsm0",
+                "source-layer": "current_buildings-1dzyhp",
                 paint: {
 				"fill-color": "#FF7F50",
 				"fill-opacity": [ 
@@ -1532,12 +1532,12 @@ function addLongIslandCoastlineAfterLayers() {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.3lzv4797"
+                    url: "mapbox://mapny.0g0oj4rl"
                 },
 				layout: {
                     visibility: document.getElementById('longisland_coastline').checked ? "visible" : "none",
                 },
-                "source-layer": "long_island_area_1-88rdix",
+                "source-layer": "long_island_coastline_lines-0bxmn5",
                 paint: {
                 "line-color": "#006400",
                 "line-width": 3,
@@ -1552,12 +1552,12 @@ function addLongIslandCoastlineAfterLayers() {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.1i8qb0mc"
+                    url: "mapbox://mapny.c64cpp25"
                 },
 				layout: {
                     visibility: document.getElementById('longisland_area').checked ? "visible" : "none",
                 },
-                "source-layer": "long_island_area_lines_to_pol-3kvp6g",
+                "source-layer": "long_island_coastline_area-9vxity",
                 paint: {
 				"fill-color": "#00FF7F",
 				"fill-opacity": [ 
@@ -1580,12 +1580,12 @@ function addManahattaAfterLayers() {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.4kio957z"
+                    url: "mapbox://mapny.3lqznx9l"
                 },
 				layout: {
                     visibility: document.getElementById('lenape_trails').checked ? "visible" : "none",
                 },
-                "source-layer": "lenape_trails-9n6muf",
+                "source-layer": "lenape_trails-bxaww5",
                 paint: {
                 "line-color": "#FF0000",
                 "line-width": 4,
@@ -1600,12 +1600,12 @@ function addManahattaAfterLayers() {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.0q74r4c7"
+                    url: "mapbox://mapny.a0lop49m"
                 },
 				layout: {
                     visibility: document.getElementById('manahatta_shoreline').checked ? "visible" : "none",
                 },
-                "source-layer": "manahatta_shoreline-b3tcj6",
+                "source-layer": "manahatta_shoreline-1xswf8",
                 paint: {
                 "line-color": "#FFD700",
                 "line-width": 4,
@@ -1620,12 +1620,12 @@ function addManahattaAfterLayers() {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.9t5q3gv8"
+                    url: "mapbox://mapny.a9o6nugn"
                 },
 				layout: {
                     visibility: document.getElementById('manahatta_streams').checked ? "visible" : "none",
                 },
-                "source-layer": "streams-bek8e1",
+                "source-layer": "manahatta_area_streams-a2x39f",
                 paint: {
                 "line-color": "#0000FF",
                 "line-width": 4,
@@ -1644,12 +1644,12 @@ function addIndianPathsAfterLayers() {
                 type: "line",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.9ys5pa40"
+                    url: "mapbox://mapny.a39vr1hw"
                 },
 				layout: {
                     visibility: document.getElementById('indian_paths').checked ? "visible" : "none",
                 },
-                "source-layer": "indian_paths-1679y0",
+                "source-layer": "indian_paths_brooklyn-27hu9d",
                 paint: {
                 "line-color": "#FF0000",
                 "line-width": 5,
@@ -1698,12 +1698,12 @@ function addLongIslandNativeGroupsAfterLayers() {
         type: "line",
         source: {
             type: "vector",
-            url: "mapbox://nittyjee.bxsaikea"
+            url: "mapbox://mapny.bwpbasrr"
         },
         layout: {
             visibility: document.getElementById('native_groups_lines').checked ? "visible" : "none",
         },
-        "source-layer": "simplified_indian_long_island-d223sy",
+        "source-layer": "indian_borders_simplified_lon-buo3kf",
         paint: {
         //Light Blue:
         //"line-color": "#3a96f8",
@@ -1725,12 +1725,12 @@ function addLongIslandNativeGroupsAfterLayers() {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.9dmuvuk4"
+                    url: "mapbox://mapny.8in6hi37"
                 },
 				layout: {
                     visibility: document.getElementById('native_groups_area').checked ? "visible" : "none",
                 },
-                "source-layer": "long_island_indian_areas-3o4hr7",
+                "source-layer": "indian_areas_long_island-50h2dj",
                 paint: {
 				"fill-color": "#FF1493",
 				"fill-opacity": [ 
@@ -1749,12 +1749,12 @@ function addLongIslandNativeGroupsAfterLayers() {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.9dmuvuk4"
+                    url: "mapbox://mapny.8in6hi37"
                 },
 				layout: {
                     visibility: document.getElementById('native_groups_area').checked ? "visible" : "none",
                 },
-                "source-layer": "long_island_indian_areas-3o4hr7",
+                "source-layer": "indian_areas_long_island-50h2dj",
                 paint: {
 				"fill-color": "#FF1493",
 				"fill-opacity": [ 
@@ -1773,7 +1773,7 @@ function addLongIslandNativeGroupsAfterLayers() {
                 type: "symbol",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.978p2v80"
+                    url: "mapbox://mapny.5m6t979e"
                 },
 				layout: {
                     visibility: document.getElementById('settlements_labels').checked ? "visible" : "none",
@@ -1786,7 +1786,7 @@ function addLongIslandNativeGroupsAfterLayers() {
                     ]
                     }
                 },
-                "source-layer": "indian_long_island_labels-483rzu",
+                "source-layer": "indian_labels_long_island-247yi6",
                 paint: {
                     "text-color": "#000080",
                     "text-halo-color": "#ffffff",
@@ -1813,14 +1813,14 @@ function addLongIslandNativeGroupsAfterLayers() {
 				if (e.features.length > 0) {
                     if (hoveredNativeGroupsIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'native-groups-area-right', sourceLayer: 'long_island_indian_areas-3o4hr7', id: hoveredNativeGroupsIdRight},
+                            { source: 'native-groups-area-right', sourceLayer: 'indian_areas_long_island-50h2dj', id: hoveredNativeGroupsIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredNativeGroupsIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'native-groups-area-right', sourceLayer: 'long_island_indian_areas-3o4hr7', id: hoveredNativeGroupsIdRight},
+                        { source: 'native-groups-area-right', sourceLayer: 'indian_areas_long_island-50h2dj', id: hoveredNativeGroupsIdRight},
                         { hover: true }
                     );
 					
@@ -1860,7 +1860,7 @@ function addLongIslandNativeGroupsAfterLayers() {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredNativeGroupsIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'native-groups-area-right', sourceLayer: 'long_island_indian_areas-3o4hr7', id: hoveredNativeGroupsIdRight},
+                        { source: 'native-groups-area-right', sourceLayer: 'indian_areas_long_island-50h2dj', id: hoveredNativeGroupsIdRight},
                         { hover: false }
                     );
                 }

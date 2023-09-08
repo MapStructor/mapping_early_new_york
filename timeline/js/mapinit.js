@@ -86,7 +86,12 @@ const WorldBounds = [
 /////////////////////////////
 
 mapboxgl.accessToken =
-	"pk.eyJ1Ijoibml0dHlqZWUiLCJhIjoid1RmLXpycyJ9.NFk875-Fe6hoRCkGciG8yQ";
+
+//nittyjee access token
+//"pk.eyJ1Ijoibml0dHlqZWUiLCJhIjoid1RmLXpycyJ9.NFk875-Fe6hoRCkGciG8yQ";
+
+//mapny access token
+"pk.eyJ1IjoibWFwbnkiLCJhIjoiY2xtMG93amk4MnBrZTNnczUzY2VvYjg0ciJ9.MDMHYBlVbG14TJD120t6NQ";
 
 
 
@@ -97,7 +102,7 @@ mapboxgl.accessToken =
 
         var beforeMap = new mapboxgl.Map({
             container: 'before',
-            style: 'mapbox://styles/nittyjee/cjooubzup2kx52sqdf9zmmv2j',
+            style: 'mapbox://styles/mapny/clm2yrx1y025401p93v26bhyl',
             center: [0, 0],
             hash: true,
             zoom: 0,
@@ -106,7 +111,7 @@ mapboxgl.accessToken =
 
         var afterMap = new mapboxgl.Map({
             container: 'after',
-            style: 'mapbox://styles/nittyjee/cjowjzrig5pje2rmmnjb5b0y2',
+            style: 'mapbox://styles/mapny/clm2yu5fg022801phfh479c8x',
             center: [0, 0],
             hash: true,
             zoom: 0,
@@ -349,7 +354,7 @@ mapboxgl.accessToken =
 		
         function switchRightLayer(layer) {
             var rightLayerClass = layer.target.className; //*A layer.target.id;
-            afterMap.setStyle('mapbox://styles/nittyjee/' + rightLayerClass);
+            afterMap.setStyle('mapbox://styles/mapny/' + rightLayerClass);
         }
 
         for (var i = 0; i < rightInputs.length; i++) {
@@ -362,7 +367,7 @@ mapboxgl.accessToken =
 		
         function switchLeftLayer(layer) {
             var leftLayerClass = layer.target.className; //*A layer.target.id;
-            beforeMap.setStyle('mapbox://styles/nittyjee/' + leftLayerClass);
+            beforeMap.setStyle('mapbox://styles/mapny/' + leftLayerClass);
         }
 
         for (var i = 0; i < leftInputs.length; i++) {
@@ -530,7 +535,7 @@ beforeMap.on("load", function () {
     
 	
 		// CLICK AND OPEN POPUP
-		beforeMap.on('click', 'c7_dates-ajsksu-left', function (e) {
+		beforeMap.on('click', 'taxlot_c7-78vo7n-left', function (e) {
 		          
             DemoClickHandle(e);
 				  
@@ -554,7 +559,7 @@ beforeMap.on("load", function () {
 					
 		    FarmsClickHandle(e);
 						
-		}).on('click', 'grants1-5sp9tb-left' , function (e) {
+		}).on('click', 'dutch_grants-5ehfqe-left' , function (e) {
 				        
 			DutchGrantsClickHandle(e);
 						
@@ -592,7 +597,7 @@ afterMap.on("load", function () {
     
 	
 		// CLICK AND OPEN POPUP
-		afterMap.on('click', 'c7_dates-ajsksu-right', function (e) {
+		afterMap.on('click', 'taxlot_c7-78vo7n-right', function (e) {
 			
             DemoClickHandle(e);
 			
@@ -616,7 +621,7 @@ afterMap.on("load", function () {
 					
 		    FarmsClickHandle(e);
 						
-		}).on('click', 'grants1-5sp9tb-right' , function (e) {
+		}).on('click', 'dutch_grants-5ehfqe-right' , function (e) {
 					
 		    DutchGrantsClickHandle(e);
 						
@@ -712,11 +717,11 @@ afterMap.on("error", function (e) {
 								    curr_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'curr-lots-high-right', sourceLayer: 'current_lots_1-ca6kq1', id: curr_layer_view_id},
+                                       { source: 'curr-lots-high-right', sourceLayer: 'current_lots-94syr2', id: curr_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'curr-lots-high-left', sourceLayer: 'current_lots_1-ca6kq1', id: curr_layer_view_id},
+                                       { source: 'curr-lots-high-left', sourceLayer: 'current_lots-94syr2', id: curr_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighCurrLotsPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -737,19 +742,19 @@ afterMap.on("error", function (e) {
 								curr_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'curr-lots-high-right', sourceLayer: 'current_lots_1-ca6kq1', id: curr_layer_view_id},
+                                    { source: 'curr-lots-high-right', sourceLayer: 'current_lots-94syr2', id: curr_layer_view_id},
                                     { hover: false }
                                 );
 								afterMap.setFeatureState(
-                                    { source: 'curr-lots-high-right', sourceLayer: 'current_lots_1-ca6kq1', id: event.features[0].id},
+                                    { source: 'curr-lots-high-right', sourceLayer: 'current_lots-94syr2', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'curr-lots-high-left', sourceLayer: 'current_lots_1-ca6kq1', id: curr_layer_view_id},
+                                    { source: 'curr-lots-high-left', sourceLayer: 'current_lots-94syr2', id: curr_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'curr-lots-high-left', sourceLayer: 'current_lots_1-ca6kq1', id: event.features[0].id},
+                                    { source: 'curr-lots-high-left', sourceLayer: 'current_lots-94syr2', id: event.features[0].id},
                                     { hover: true }
                                 );
 								afterHighCurrLotsPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1149,11 +1154,11 @@ afterMap.on("error", function (e) {
 								    farms_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
+                                       { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'original_farms-6me5t0', id: farms_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
+                                       { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'original_farms-6me5t0', id: farms_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighFarmPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1174,19 +1179,19 @@ afterMap.on("error", function (e) {
 								farms_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
+                                    { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'original_farms-6me5t0', id: farms_layer_view_id},
                                     { hover: false }
                                 );
 							    afterMap.setFeatureState(
-                                    { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: event.features[0].id},
+                                    { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'original_farms-6me5t0', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
+                                    { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'original_farms-6me5t0', id: farms_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: event.features[0].id},
+                                    { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'original_farms-6me5t0', id: event.features[0].id},
                                     { hover: true }
                                 );
                                 afterHighFarmPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1234,11 +1239,11 @@ afterMap.on("error", function (e) {
 								    dgrants_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'grants1-5sp9tb-right-highlighted', sourceLayer: 'grants1-5sp9tb', id: dgrants_layer_view_id},
+                                       { source: 'dutch_grants-5ehfqe-right-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: dgrants_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'grants1-5sp9tb-left-highlighted', sourceLayer: 'grants1-5sp9tb', id: dgrants_layer_view_id},
+                                       { source: 'dutch_grants-5ehfqe-left-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: dgrants_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighMapGrantLotPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1259,19 +1264,19 @@ afterMap.on("error", function (e) {
 								dgrants_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'grants1-5sp9tb-right-highlighted', sourceLayer: 'grants1-5sp9tb', id: dgrants_layer_view_id},
+                                    { source: 'dutch_grants-5ehfqe-right-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: dgrants_layer_view_id},
                                     { hover: false }
                                 );
 							    afterMap.setFeatureState(
-                                    { source: 'grants1-5sp9tb-right-highlighted', sourceLayer: 'grants1-5sp9tb', id: event.features[0].id},
+                                    { source: 'dutch_grants-5ehfqe-right-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'grants1-5sp9tb-left-highlighted', sourceLayer: 'grants1-5sp9tb', id: dgrants_layer_view_id},
+                                    { source: 'dutch_grants-5ehfqe-left-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: dgrants_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'grants1-5sp9tb-left-highlighted', sourceLayer: 'grants1-5sp9tb', id: event.features[0].id},
+                                    { source: 'dutch_grants-5ehfqe-left-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: event.features[0].id},
                                     { hover: true }
                                 );
                                 afterHighMapGrantLotPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1314,11 +1319,11 @@ afterMap.on("error", function (e) {
 								    gravesend_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
+                                       { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: gravesend_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
+                                       { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: gravesend_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighMapGravesendPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1339,19 +1344,19 @@ afterMap.on("error", function (e) {
 								gravesend_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
+                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: gravesend_layer_view_id},
                                     { hover: false }
                                 );
 							    afterMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: event.features[0].id},
+                                    { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
+                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: gravesend_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: event.features[0].id},
+                                    { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: event.features[0].id},
                                     { hover: true }
                                 );
                                 afterHighMapGravesendPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1398,11 +1403,11 @@ afterMap.on("error", function (e) {
 								    native_group_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'native-groups-area-right-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: native_group_layer_view_id},
+                                       { source: 'native-groups-area-right-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: native_group_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'native-groups-area-left-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: native_group_layer_view_id},
+                                       { source: 'native-groups-area-left-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: native_group_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighMapNativeGroupsPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1423,19 +1428,19 @@ afterMap.on("error", function (e) {
 								native_group_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'native-groups-area-right-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: native_group_layer_view_id},
+                                    { source: 'native-groups-area-right-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: native_group_layer_view_id},
                                     { hover: false }
                                 );
 							    afterMap.setFeatureState(
-                                    { source: 'native-groups-area-right-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: event.features[0].id},
+                                    { source: 'native-groups-area-right-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'native-groups-area-left-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: native_group_layer_view_id},
+                                    { source: 'native-groups-area-left-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: native_group_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'native-groups-area-left-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: event.features[0].id},
+                                    { source: 'native-groups-area-left-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: event.features[0].id},
                                     { hover: true }
                                 );
                                 afterHighMapNativeGroupsPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1476,11 +1481,11 @@ afterMap.on("error", function (e) {
 								    karl_layer_view_flag = true;
 									//*A#
 									afterMap.setFeatureState(
-                                       { source: 'karl_long_island-right-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: karl_layer_view_id},
+                                       { source: 'karl_long_island-right-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: karl_layer_view_id},
                                        { hover: true }
                                     );
 									beforeMap.setFeatureState(
-                                       { source: 'karl_long_island-left-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: karl_layer_view_id},
+                                       { source: 'karl_long_island-left-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: karl_layer_view_id},
                                        { hover: true }
                                     );
 									afterHighMapKarlPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1501,19 +1506,19 @@ afterMap.on("error", function (e) {
 								karl_layer_view_flag = true;
 								//*A#
 								afterMap.setFeatureState(
-                                    { source: 'karl_long_island-right-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: karl_layer_view_id},
+                                    { source: 'karl_long_island-right-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: karl_layer_view_id},
                                     { hover: false }
                                 );
 							    afterMap.setFeatureState(
-                                    { source: 'karl_long_island-right-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: event.features[0].id},
+                                    { source: 'karl_long_island-right-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: event.features[0].id},
                                     { hover: true }
                                 );
 								beforeMap.setFeatureState(
-                                    { source: 'karl_long_island-left-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: karl_layer_view_id},
+                                    { source: 'karl_long_island-left-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: karl_layer_view_id},
                                     { hover: false }
                                 );
 							    beforeMap.setFeatureState(
-                                    { source: 'karl_long_island-left-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: event.features[0].id},
+                                    { source: 'karl_long_island-left-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: event.features[0].id},
                                     { hover: true }
                                 );
                                 afterHighMapKarlPopUp.setLngLat(event.lngLat).setHTML(highPopUpHTML);
@@ -1566,11 +1571,11 @@ afterMap.on("error", function (e) {
 					$("#infoLayerDutchGrants").slideUp(); 
 	                dgrants_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-right-highlighted', sourceLayer: 'grants1-5sp9tb', id: dgrants_layer_view_id},
+                        { source: 'dutch_grants-5ehfqe-right-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: dgrants_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-left-highlighted', sourceLayer: 'grants1-5sp9tb', id: dgrants_layer_view_id},
+                        { source: 'dutch_grants-5ehfqe-left-highlighted', sourceLayer: 'dutch_grants-5ehfqe', id: dgrants_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighMapGrantLotPopUp.isOpen()) afterHighMapGrantLotPopUp.remove();
@@ -1581,11 +1586,11 @@ afterMap.on("error", function (e) {
 					$("#infoLayerGravesend").slideUp(); 
 	                gravesend_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
+                        { source: 'gravesend_boundaries-c6qrbw-right-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: gravesend_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-4jm3qn', id: gravesend_layer_view_id},
+                        { source: 'gravesend_boundaries-c6qrbw-left-highlighted', sourceLayer: 'brooklyn_grants-7qxrvu', id: gravesend_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighMapGravesendPopUp.isOpen()) afterHighMapGravesendPopUp.remove();
@@ -1596,11 +1601,11 @@ afterMap.on("error", function (e) {
                     $("#infoLayerNativeGroups").slideUp(); 	
 	                native_group_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'native-groups-area-right-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: native_group_layer_view_id},
+                        { source: 'native-groups-area-right-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: native_group_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'native-groups-area-left-highlighted', sourceLayer: 'long_island_indian_areas-3o4hr7', id: native_group_layer_view_id},
+                        { source: 'native-groups-area-left-highlighted', sourceLayer: 'indian_areas_long_island-50h2dj', id: native_group_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighMapNativeGroupsPopUp.isOpen()) afterHighMapNativeGroupsPopUp.remove();
@@ -1611,11 +1616,11 @@ afterMap.on("error", function (e) {
                     $("#infoLayerKarl").slideUp();		
                     karl_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'karl_long_island-right-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: karl_layer_view_id},
+                        { source: 'karl_long_island-right-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: karl_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'karl_long_island-left-highlighted', sourceLayer: 'karl_areas-8j4ru6', id: karl_layer_view_id},
+                        { source: 'karl_long_island-left-highlighted', sourceLayer: 'boundary_areas_long_island-8guvh4', id: karl_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighMapKarlPopUp.isOpen()) afterHighMapKarlPopUp.remove();
@@ -1626,11 +1631,11 @@ afterMap.on("error", function (e) {
                     $("#infoLayerFarms").slideUp(); 		
 	                farms_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
+                        { source: 'original_grants_and_farms-right-highlighted', sourceLayer: 'original_farms-6me5t0', id: farms_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'removing_grants_overlapping_d-58at7f', id: farms_layer_view_id},
+                        { source: 'original_grants_and_farms-left-highlighted', sourceLayer: 'original_farms-6me5t0', id: farms_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighFarmPopUp.isOpen()) afterHighFarmPopUp.remove();
@@ -1641,11 +1646,11 @@ afterMap.on("error", function (e) {
 					$("#infoLayerCurrLots").slideUp(); 
 	                curr_layer_view_flag = false;
 					afterMap.setFeatureState(
-                        { source: 'curr-lots-high-right', sourceLayer: 'current_lots_1-ca6kq1', id: curr_layer_view_id},
+                        { source: 'curr-lots-high-right', sourceLayer: 'current_lots-94syr2', id: curr_layer_view_id},
                         { hover: false }
                     );
 					beforeMap.setFeatureState(
-                        { source: 'curr-lots-high-left', sourceLayer: 'current_lots_1-ca6kq1', id: curr_layer_view_id},
+                        { source: 'curr-lots-high-left', sourceLayer: 'current_lots-94syr2', id: curr_layer_view_id},
                         { hover: false }
                     );
 					if(afterHighCurrLotsPopUp.isOpen()) afterHighCurrLotsPopUp.remove();
@@ -1677,11 +1682,11 @@ function changeDate(unixDate) {
 
 
 	//NAHC
-	beforeMap.setFilter("grants1-5sp9tb-left", dateFilter);
-    afterMap.setFilter("grants1-5sp9tb-right", dateFilter);
+	beforeMap.setFilter("dutch_grants-5ehfqe-left", dateFilter);
+    afterMap.setFilter("dutch_grants-5ehfqe-right", dateFilter);
 	
-	beforeMap.setFilter("grants1-5sp9tb-left-highlighted", dateFilter);
-	afterMap.setFilter("grants1-5sp9tb-right-highlighted", dateFilter);
+	beforeMap.setFilter("dutch_grants-5ehfqe-left-highlighted", dateFilter);
+	afterMap.setFilter("dutch_grants-5ehfqe-right-highlighted", dateFilter);
 	
     beforeMap.setFilter("original_grants_and_farms-left", dateFilter);
 	afterMap.setFilter("original_grants_and_farms-right", dateFilter);
@@ -1689,8 +1694,8 @@ function changeDate(unixDate) {
 	beforeMap.setFilter("original_grants_and_farms-left-highlighted", dateFilter);
 	afterMap.setFilter("original_grants_and_farms-right-highlighted", dateFilter);
 	
-	beforeMap.setFilter("c7_dates-ajsksu-left", dateFilter);
-	afterMap.setFilter("c7_dates-ajsksu-right", dateFilter);
+	beforeMap.setFilter("taxlot_c7-78vo7n-left", dateFilter);
+	afterMap.setFilter("taxlot_c7-78vo7n-right", dateFilter);
 	
 	beforeMap.setFilter("grant-lots-left", dateFilter);
 	afterMap.setFilter("grant-lots-right", dateFilter);
@@ -1742,7 +1747,7 @@ function changeDate(unixDate) {
     afterMap.setFilter("karl-lines-right", dateFilter);
 
 
-    demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['c7_dates-ajsksu-right'] });
+    demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['taxlot_c7-78vo7n-right'] });
 	
 	if(demo_layer_view_flag) {
 		buildPopUpInfo(demo_layer_features[0].properties);

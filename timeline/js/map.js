@@ -15,9 +15,12 @@ $("#infoLayerCastello").slideUp();
 /////////////////////////////
 
 mapboxgl.accessToken =
-	"pk.eyJ1Ijoibml0dHlqZWUiLCJhIjoid1RmLXpycyJ9.NFk875-Fe6hoRCkGciG8yQ";
 
+//nittyjee access token
+//"pk.eyJ1Ijoibml0dHlqZWUiLCJhIjoid1RmLXpycyJ9.NFk875-Fe6hoRCkGciG8yQ";
 
+//mapny access token
+"pk.eyJ1IjoibWFwbnkiLCJhIjoiY2xtMG93amk4MnBrZTNnczUzY2VvYjg0ciJ9.MDMHYBlVbG14TJD120t6NQ";
 
 
 /////////////////////////////
@@ -26,7 +29,7 @@ mapboxgl.accessToken =
 /*
 var map = new mapboxgl.Map({
 	container: "map",
-	style: "mapbox://styles/nittyjee/ck2f3s0ks0u8o1cpfruf0qne6",
+	style: "mapbox://styles/mapny/ck2f3s0ks0u8o1cpfruf0qne6",
 	hash: true,
 	center: [-74.01229, 40.70545],
 	zoom: 16.7,
@@ -37,7 +40,7 @@ var map = new mapboxgl.Map({
 
         var beforeMap = new mapboxgl.Map({
             container: 'before',
-            style: 'mapbox://styles/nittyjee/cjooubzup2kx52sqdf9zmmv2j',
+            style: 'mapbox://styles/mapny/clm2yrx1y025401p93v26bhyl',
             center: [0, 0],
             zoom: 0,
 			attributionControl: false
@@ -45,7 +48,7 @@ var map = new mapboxgl.Map({
 
         var afterMap = new mapboxgl.Map({
             container: 'after',
-            style: 'mapbox://styles/nittyjee/cjowjzrig5pje2rmmnjb5b0y2',
+            style: 'mapbox://styles/mapny/clm2yu5fg022801phfh479c8x',
             center: [0, 0],
             zoom: 0,
 			attributionControl: false
@@ -83,12 +86,12 @@ var map = new mapboxgl.Map({
         var rightInputs = document.getElementsByName('rtoggle');
 		
         function switchRightLayer(layer) {
-            //afterMap.removeLayer('c7_dates-ajsksu');
+            //afterMap.removeLayer('taxlot_c7-78vo7n');
 			//console.warn(afterMap.getStyle().layers);
 			//afterMap.remove();
 			
             var rightLayerClass = layer.target.className; //*A layer.target.id;
-            afterMap.setStyle('mapbox://styles/nittyjee/' + rightLayerClass);
+            afterMap.setStyle('mapbox://styles/mapny/' + rightLayerClass);
         }
 
         for (var i = 0; i < rightInputs.length; i++) {
@@ -104,12 +107,12 @@ var map = new mapboxgl.Map({
 		var leftInputs = document.getElementsByName('ltoggle');
 		
         function switchLeftLayer(layer) {
-            //afterMap.removeLayer('c7_dates-ajsksu');
+            //afterMap.removeLayer('taxlot_c7-78vo7n');
 			//console.warn(afterMap.getStyle().layers);
 			//afterMap.remove();
 			
             var leftLayerClass = layer.target.className; //*A layer.target.id;
-            beforeMap.setStyle('mapbox://styles/nittyjee/' + leftLayerClass);
+            beforeMap.setStyle('mapbox://styles/mapny/' + leftLayerClass);
         }
 
         for (var i = 0; i < leftInputs.length; i++) {
@@ -245,11 +248,11 @@ beforeMap.on("load", function () {
 	});
     */
 	
-	//if (beforeMap.getLayer("c7_dates-ajsksu-left")) 
+	//if (beforeMap.getLayer("taxlot_c7-78vo7n-left")) 
 	//if (beforeMap.getLayer("places-left"))
 	
 		// CLICK AND OPEN POPUP
-		beforeMap.on('click', 'c7_dates-ajsksu-left', function (e) {
+		beforeMap.on('click', 'taxlot_c7-78vo7n-left', function (e) {
 		            if(demo_layer_view_flag) {
 				        $("#demoLayerInfo").slideUp();
 						demo_layer_view_flag = false;
@@ -320,7 +323,7 @@ beforeMap.on("load", function () {
 						
 						grant_lots_click_ev = true;
 						
-		}).on('click', 'grants1-5sp9tb-left' , function (e) {
+		}).on('click', 'dutch_grants-5ehfqe-left' , function (e) {
 				        
 						if(layer_view_flag) {
 							if(dgrants_layer_view_id == e.features[0].id) {
@@ -385,11 +388,11 @@ afterMap.on("load", function () {
 	});
 	*/
 	
-	//if (afterMap.getLayer("c7_dates-ajsksu-right"))
+	//if (afterMap.getLayer("taxlot_c7-78vo7n-right"))
     //if (afterMap.getLayer("places-right"))
 	
 		// CLICK AND OPEN POPUP
-		afterMap.on('click', 'c7_dates-ajsksu-right', function (e) {
+		afterMap.on('click', 'taxlot_c7-78vo7n-right', function (e) {
 			        if(demo_layer_view_flag) {
 				        $("#demoLayerInfo").slideUp();
 						demo_layer_view_flag = false;
@@ -459,7 +462,7 @@ afterMap.on("load", function () {
 						
 						grant_lots_click_ev = true;
 						
-		}).on('click', 'grants1-5sp9tb-right' , function (e) {
+		}).on('click', 'dutch_grants-5ehfqe-right' , function (e) {
 				        
 						if(layer_view_flag) {
 							if(dgrants_layer_view_id == e.features[0].id) {
@@ -631,16 +634,16 @@ function changeDate(unixDate) {
 
 
 	//NAHC
-	beforeMap.setFilter("grants1-5sp9tb-left", dateFilter);
-    afterMap.setFilter("grants1-5sp9tb-right", dateFilter);
+	beforeMap.setFilter("dutch_grants-5ehfqe-left", dateFilter);
+    afterMap.setFilter("dutch_grants-5ehfqe-right", dateFilter);
 	
-	beforeMap.setFilter("c7_dates-ajsksu-left", dateFilter);
-	afterMap.setFilter("c7_dates-ajsksu-right", dateFilter);
+	beforeMap.setFilter("taxlot_c7-78vo7n-left", dateFilter);
+	afterMap.setFilter("taxlot_c7-78vo7n-right", dateFilter);
 	
 	beforeMap.setFilter("grant-lots-left", dateFilter);
 	afterMap.setFilter("grant-lots-right", dateFilter);
 
-	var layer_features = afterMap.queryRenderedFeatures({ layers: ['c7_dates-ajsksu-right'] });
+	var layer_features = afterMap.queryRenderedFeatures({ layers: ['taxlot_c7-78vo7n-right'] });
 	//console.log(layer_features[0].properties.DATE2);
 	//console.log(layer_features[0].properties);
 	//buildPopUpInfo(layer_features[0].properties);
@@ -666,7 +669,7 @@ function addGrantLotsBeforeLayers(date) {
 	
 	//REMOVING TAX LOT POINTS IF EXIST
 		if (beforeMap.getLayer("grant-lots-left")) beforeMap.removeLayer("grant-lots-left");
-        if (beforeMap.getSource("grant_lot_c7-6s06if")) beforeMap.removeSource("grant_lot_c7-6s06if");
+        if (beforeMap.getSource("demo_divisions_grant_c7-42w8pa")) beforeMap.removeSource("demo_divisions_grant_c7-42w8pa");
 	
 	
 	// Add a layer showing the places.
@@ -675,12 +678,12 @@ function addGrantLotsBeforeLayers(date) {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.4498iwgn"
+                    url: "mapbox://mapny.26xwjv4e"
                 },
 				layout: {
                     visibility: document.getElementById('grant_lots').checked ? "visible" : "none",
                 },
-                "source-layer": "grant_lot_c7-6s06if",
+                "source-layer": "demo_divisions_grant_c7-42w8pa",
                 paint: {
                     'fill-color': '#088',
                     'fill-opacity': [ 
@@ -707,14 +710,14 @@ function addGrantLotsBeforeLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredGrantLotIdLeft) {
                         beforeMap.setFeatureState(
-                            { source: 'grant-lots-left', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdLeft},
+                            { source: 'grant-lots-left', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdLeft},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredGrantLotIdLeft = e.features[0].id;
                     beforeMap.setFeatureState(
-                        { source: 'grant-lots-left', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdLeft},
+                        { source: 'grant-lots-left', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdLeft},
                         { hover: true }
                     );
 					
@@ -758,7 +761,7 @@ function addGrantLotsBeforeLayers(date) {
                 beforeMap.getCanvas().style.cursor = '';
 				if (hoveredGrantLotIdLeft) {
                     beforeMap.setFeatureState(
-                        { source: 'grant-lots-left', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdLeft},
+                        { source: 'grant-lots-left', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdLeft},
                         { hover: false }
                     );
                 }
@@ -778,12 +781,12 @@ function addCastelloBeforeLayers() {
                 type: "circle",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.ap08s4n9"
+                    url: "mapbox://mapny.cvcg7wo0"
                 },
 				layout: {
                     visibility: document.getElementById('castello_points').checked ? "visible" : "none",
                 },
-                "source-layer": "castello_points_new-3qkr6t",
+                "source-layer": "taxlots-cpwvol",
                 paint: {
                     'circle-color': '#FF0000',
 					'circle-opacity':  [
@@ -843,13 +846,13 @@ function addCastelloBeforeLayers() {
 				if (e.features.length > 0) {
                     if (hoveredStateIdLeft) {
                         beforeMap.setFeatureState(
-                            { source: 'places-left', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdLeft},
+                            { source: 'places-left', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdLeft},
                             { hover: false }
                         );
                     }
                     hoveredStateIdLeft = e.features[0].id;
                     beforeMap.setFeatureState(
-                        { source: 'places-left', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdLeft},
+                        { source: 'places-left', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdLeft},
                         { hover: true }
                     );
 					
@@ -880,7 +883,7 @@ function addCastelloBeforeLayers() {
                 beforeMap.getCanvas().style.cursor = '';
 				if (hoveredStateIdLeft) {
                     beforeMap.setFeatureState(
-                        { source: 'places-left', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdLeft},
+                        { source: 'places-left', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdLeft},
                         { hover: false }
                     );
                 }
@@ -895,7 +898,7 @@ function addGrantLotsAfterLayers(date) {
 	
 	//REMOVING TAX LOT POINTS IF EXIST
 	    if (afterMap.getLayer("grant-lots-right")) afterMap.removeLayer("grant-lots-right");
-        if (afterMap.getSource("grant_lot_c7-6s06if")) afterMap.removeSource("grant_lot_c7-6s06if");
+        if (afterMap.getSource("demo_divisions_grant_c7-42w8pa")) afterMap.removeSource("demo_divisions_grant_c7-42w8pa");
 		
 	// Add a layer showing the places.
 	        afterMap.addLayer({
@@ -903,12 +906,12 @@ function addGrantLotsAfterLayers(date) {
                 type: "fill",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.4498iwgn"
+                    url: "mapbox://mapny.26xwjv4e"
                 },
 				layout: {
                     visibility: document.getElementById('grant_lots').checked ? "visible" : "none",
                 },
-                "source-layer": "grant_lot_c7-6s06if",
+                "source-layer": "demo_divisions_grant_c7-42w8pa",
                 paint: {
                     'fill-color': '#088',
                     'fill-opacity': [ 
@@ -935,14 +938,14 @@ function addGrantLotsAfterLayers(date) {
 				if (e.features.length > 0) {
                     if (hoveredGrantLotIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'grant-lots-right', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdRight},
+                            { source: 'grant-lots-right', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredGrantLotIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'grant-lots-right', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdRight},
+                        { source: 'grant-lots-right', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdRight},
                         { hover: true }
                     );
 					
@@ -985,7 +988,7 @@ function addGrantLotsAfterLayers(date) {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredGrantLotIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'grant-lots-right', sourceLayer: 'grant_lot_c7-6s06if', id: hoveredGrantLotIdRight},
+                        { source: 'grant-lots-right', sourceLayer: 'demo_divisions_grant_c7-42w8pa', id: hoveredGrantLotIdRight},
                         { hover: false }
                     );
                 }
@@ -1003,12 +1006,12 @@ function addCastelloAfterLayers() {
                 type: "circle",
                 source: {
                     type: "vector",
-                    url: "mapbox://nittyjee.ap08s4n9"
+                    url: "mapbox://mapny.cvcg7wo0"
                 },
 				layout: {
                     visibility:  document.getElementById('castello_points').checked ? "visible" : "none",
                 },
-                "source-layer": "castello_points_new-3qkr6t",
+                "source-layer": "taxlots-cpwvol",
                 paint: {
                     'circle-color': '#FF0000',
 					'circle-opacity':  [
@@ -1072,13 +1075,13 @@ function addCastelloAfterLayers() {
 				if (e.features.length > 0) {
                     if (hoveredStateIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'places-right', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdRight},
+                            { source: 'places-right', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdRight},
                             { hover: false }
                         );
                     }
                     hoveredStateIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'places-right', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdRight},
+                        { source: 'places-right', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdRight},
                         { hover: true }
                     );
 					
@@ -1109,7 +1112,7 @@ function addCastelloAfterLayers() {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredStateIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'places-right', sourceLayer: 'castello_points_new-3qkr6t', id: hoveredStateIdRight},
+                        { source: 'places-right', sourceLayer: 'taxlots-cpwvol', id: hoveredStateIdRight},
                         { hover: false }
                     );
                 }
@@ -1184,27 +1187,27 @@ function addBeforeLayers(yr, date) {
 	//beforeMap.on('load', function () {
 		
 		//REMOVING TAX LOT POINTS IF EXIST
-		if (beforeMap.getLayer("c7_dates-ajsksu-left")) beforeMap.removeLayer("c7_dates-ajsksu-left");
-        if (beforeMap.getSource("c7_dates-ajsksu")) beforeMap.removeSource("c7_dates-ajsksu");
-		if (beforeMap.getLayer("grants1-5sp9tb-left")) beforeMap.removeLayer("grants1-5sp9tb-left");
-        if (beforeMap.getSource("grants1-5sp9tb")) beforeMap.removeSource("grants1-5sp9tb");
+		if (beforeMap.getLayer("taxlot_c7-78vo7n-left")) beforeMap.removeLayer("taxlot_c7-78vo7n-left");
+        if (beforeMap.getSource("taxlot_c7-78vo7n")) beforeMap.removeSource("taxlot_c7-78vo7n");
+		if (beforeMap.getLayer("dutch_grants-5ehfqe-left")) beforeMap.removeLayer("dutch_grants-5ehfqe-left");
+        if (beforeMap.getSource("dutch_grants-5ehfqe")) beforeMap.removeSource("dutch_grants-5ehfqe");
        
 	   
 	    //ADD GRANTS POLYGONS
 
         beforeMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "grants1-5sp9tb-left",
+			id: "dutch_grants-5ehfqe-left",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.b5bpfqeb"
+				url: "mapbox://mapny.7q2vs9ar"
 			},
 			layout: {
                 visibility: document.getElementById('grants_layer').checked ? "visible" : "none",
             },
-			"source-layer": "grants1-5sp9tb",
+			"source-layer": "dutch_grants-5ehfqe",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -1223,23 +1226,23 @@ function addBeforeLayers(yr, date) {
 		
 		//CURSOR ON HOVER
             //ON HOVER
-			beforeMap.on('mouseenter', 'grants1-5sp9tb-left', function (e) {
+			beforeMap.on('mouseenter', 'dutch_grants-5ehfqe-left', function (e) {
                 beforeMap.getCanvas().style.cursor = 'pointer';
 				beforeMapDutchGrantPopUp.setLngLat(e.lngLat).addTo(beforeMap);
 			});
 			
-            beforeMap.on('mousemove', 'grants1-5sp9tb-left', function (e) {
+            beforeMap.on('mousemove', 'dutch_grants-5ehfqe-left', function (e) {
 				if (e.features.length > 0) {
                     if (hoveredDutchGrantIdLeft) {
                         beforeMap.setFeatureState(
-                            { source: 'grants1-5sp9tb-left', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdLeft},
+                            { source: 'dutch_grants-5ehfqe-left', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdLeft},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredDutchGrantIdLeft = e.features[0].id;
                     beforeMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-left', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdLeft},
+                        { source: 'dutch_grants-5ehfqe-left', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdLeft},
                         { hover: true }
                     );
 					
@@ -1273,11 +1276,11 @@ function addBeforeLayers(yr, date) {
             });
 
             //OFF HOVER
-			beforeMap.on('mouseleave', 'grants1-5sp9tb-left', function () {
+			beforeMap.on('mouseleave', 'dutch_grants-5ehfqe-left', function () {
                 beforeMap.getCanvas().style.cursor = '';
 				if (hoveredDutchGrantIdLeft) {
                     beforeMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-left', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdLeft},
+                        { source: 'dutch_grants-5ehfqe-left', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdLeft},
                         { hover: false }
                     );
                 }
@@ -1289,17 +1292,17 @@ function addBeforeLayers(yr, date) {
 		//ADD TAX LOT POINTS
 		beforeMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "c7_dates-ajsksu-left",
+			id: "taxlot_c7-78vo7n-left",
 			type: "circle",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.8krf945a"
+				url: "mapbox://mapny.du6ari4g"
 			},
 			layout: {
                 visibility: document.getElementById('circle_point').checked ? "visible" : "none",
             },
-			"source-layer": "c7_dates-ajsksu",
+			"source-layer": "taxlot_c7-78vo7n",
 			paint: {
 
 				//CIRCLE COLOR
@@ -1368,20 +1371,20 @@ function addBeforeLayers(yr, date) {
 
 
 		// CHANGE TO CURSOR WHEN HOVERING
-		beforeMap.on('mouseenter', 'c7_dates-ajsksu-left', function (e) {
+		beforeMap.on('mouseenter', 'taxlot_c7-78vo7n-left', function (e) {
 			beforeMap.getCanvas().style.cursor = 'pointer';
 			        //*A console.log(e.features[0].id);
 					//*A console.log(e.features[0]);
 					
 			        if (hoveredStateIdLeftCircle) {
                         beforeMap.setFeatureState(
-                            { source: 'c7_dates-ajsksu-left', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdLeftCircle},
+                            { source: 'taxlot_c7-78vo7n-left', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdLeftCircle},
                             { hover: false }
                         );
                     }
                     hoveredStateIdLeftCircle = e.features[0].id;
                     beforeMap.setFeatureState(
-                        { source: 'c7_dates-ajsksu-left', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdLeftCircle},
+                        { source: 'taxlot_c7-78vo7n-left', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdLeftCircle},
                         { hover: true }
                     );
 					
@@ -1403,11 +1406,11 @@ function addBeforeLayers(yr, date) {
 		});
 
 		// CHANGE TO POINTER WHEN NOT HOVERING
-		beforeMap.on('mouseleave', 'c7_dates-ajsksu-left', function () {
+		beforeMap.on('mouseleave', 'taxlot_c7-78vo7n-left', function () {
 			beforeMap.getCanvas().style.cursor = '';
 			    if (hoveredStateIdLeftCircle) {
                     beforeMap.setFeatureState(
-                        { source: 'c7_dates-ajsksu-left', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdLeftCircle},
+                        { source: 'taxlot_c7-78vo7n-left', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdLeftCircle},
                         { hover: false }
                     );
                 }
@@ -1423,27 +1426,27 @@ function addAfterLayers(yr, date) {
     //afterMap.on('load', function () {
         
 		//REMOVING TAX LOT POINTS IF EXIST
-        if (afterMap.getLayer("c7_dates-ajsksu-right")) afterMap.removeLayer("c7_dates-ajsksu-right");
-        if (afterMap.getSource("c7_dates-ajsksu")) afterMap.removeSource("c7_dates-ajsksu");
-		if (afterMap.getLayer("grants1-5sp9tb-right")) afterMap.removeLayer("grants1-5sp9tb-right");
-        if (afterMap.getSource("grants1-5sp9tb")) afterMap.removeSource("grants1-5sp9tb");
+        if (afterMap.getLayer("taxlot_c7-78vo7n-right")) afterMap.removeLayer("taxlot_c7-78vo7n-right");
+        if (afterMap.getSource("taxlot_c7-78vo7n")) afterMap.removeSource("taxlot_c7-78vo7n");
+		if (afterMap.getLayer("dutch_grants-5ehfqe-right")) afterMap.removeLayer("dutch_grants-5ehfqe-right");
+        if (afterMap.getSource("dutch_grants-5ehfqe")) afterMap.removeSource("dutch_grants-5ehfqe");
        
 	   
 	    //ADD GRANTS POLYGONS
 
         afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "grants1-5sp9tb-right",
+			id: "dutch_grants-5ehfqe-right",
 			type: "fill",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.b5bpfqeb"
+				url: "mapbox://mapny.7q2vs9ar"
 			},
 			layout: {
                 visibility: document.getElementById('grants_layer').checked ? "visible" : "none",
             },
-			"source-layer": "grants1-5sp9tb",
+			"source-layer": "dutch_grants-5ehfqe",
 			paint: {
 				"fill-color": "#e3ed58",
 				"fill-opacity": [ 
@@ -1462,23 +1465,23 @@ function addAfterLayers(yr, date) {
 
         //CURSOR ON HOVER
             //ON HOVER
-			afterMap.on('mouseenter', 'grants1-5sp9tb-right', function (e) {
+			afterMap.on('mouseenter', 'dutch_grants-5ehfqe-right', function (e) {
                 afterMap.getCanvas().style.cursor = 'pointer';
 				afterMapDutchGrantPopUp.setLngLat(e.lngLat).addTo(afterMap);
 			});
 			
-            afterMap.on('mousemove', 'grants1-5sp9tb-right', function (e) {
+            afterMap.on('mousemove', 'dutch_grants-5ehfqe-right', function (e) {
 				if (e.features.length > 0) {
                     if (hoveredDutchGrantIdRight) {
                         afterMap.setFeatureState(
-                            { source: 'grants1-5sp9tb-right', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdRight},
+                            { source: 'dutch_grants-5ehfqe-right', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdRight},
                             { hover: false }
                         );
                     }
 					//console.log(e.features[0]);
                     hoveredDutchGrantIdRight = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-right', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdRight},
+                        { source: 'dutch_grants-5ehfqe-right', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdRight},
                         { hover: true }
                     );
 					
@@ -1510,11 +1513,11 @@ function addAfterLayers(yr, date) {
             });
 
             //OFF HOVER
-			afterMap.on('mouseleave', 'grants1-5sp9tb-right', function () {
+			afterMap.on('mouseleave', 'dutch_grants-5ehfqe-right', function () {
                 afterMap.getCanvas().style.cursor = '';
 				if (hoveredDutchGrantIdRight) {
                     afterMap.setFeatureState(
-                        { source: 'grants1-5sp9tb-right', sourceLayer: 'grants1-5sp9tb', id: hoveredDutchGrantIdRight},
+                        { source: 'dutch_grants-5ehfqe-right', sourceLayer: 'dutch_grants-5ehfqe', id: hoveredDutchGrantIdRight},
                         { hover: false }
                     );
                 }
@@ -1528,17 +1531,17 @@ function addAfterLayers(yr, date) {
 
 		afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "c7_dates-ajsksu-right",
+			id: "taxlot_c7-78vo7n-right",
 			type: "circle",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://nittyjee.8krf945a"
+				url: "mapbox://mapny.du6ari4g"
 			},
 			layout: {
                 visibility: document.getElementById('circle_point').checked ? "visible" : "none",
             },
-			"source-layer": "c7_dates-ajsksu",
+			"source-layer": "taxlot_c7-78vo7n",
 			paint: {
 
 				//CIRCLE COLOR
@@ -1608,18 +1611,18 @@ function addAfterLayers(yr, date) {
                     
 					
 		// CHANGE TO CURSOR WHEN HOVERING
-		afterMap.on('mouseenter', 'c7_dates-ajsksu-right', function (e) {
+		afterMap.on('mouseenter', 'taxlot_c7-78vo7n-right', function (e) {
 			afterMap.getCanvas().style.cursor = 'pointer';
 					
 			        if (hoveredStateIdRightCircle) {
                         afterMap.setFeatureState(
-                            { source: 'c7_dates-ajsksu-right', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdRightCircle},
+                            { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
                             { hover: false }
                         );
                     }
                     hoveredStateIdRightCircle = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'c7_dates-ajsksu-right', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdRightCircle},
+                        { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
                         { hover: true }
                     );
 					
@@ -1640,11 +1643,11 @@ function addAfterLayers(yr, date) {
 		});
 
 		// CHANGE TO POINTER WHEN NOT HOVERING
-		afterMap.on('mouseleave', 'c7_dates-ajsksu-right', function () {
+		afterMap.on('mouseleave', 'taxlot_c7-78vo7n-right', function () {
 			afterMap.getCanvas().style.cursor = '';
 			    if (hoveredStateIdRightCircle) {
                     afterMap.setFeatureState(
-                        { source: 'c7_dates-ajsksu-right', sourceLayer: 'c7_dates-ajsksu', id: hoveredStateIdRightCircle},
+                        { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
                         { hover: false }
                     );
                 }
