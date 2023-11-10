@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
  
@@ -109,19 +108,23 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
 		infos_entity = new Array(),
 		settlements_linked_location = new Array(),
 		brooklyn_grants_info = new Array(),
+		taxlot_events_info = new Array(),
 		taxlot_event_entities_info = new Array();
 	var dutch_grant_lots_info_length = 0,
 	    farms_grants_info_length = 0,
 	    settlements_info_length = 0,
 		infos_entity_length = 0,
 		brooklyn_grants_length = 0,
+		taxlot_events_info_length = 0,
 		taxlot_entities_info_length = 0;
 		
     getDutchGrantsInfo();
 	getOriginalFarmsInfo();
 	getSettlementsInfo();
 	getInfosEntity();
+	getTaxlotEventsInfo();
 	getTaxlotEventEntitiesDescrInfo();
+	
 	
 	var modal_header_text = [];
 	var modal_content_html = [];
@@ -660,6 +663,10 @@ my_tooltip.fadeOut(200);
 				
 				$('#circle_point').click(function() {
 				    if( $( this ).prop('checked') ) {
+					    // sizeOfArray(taxlot_events_info)     for assoc arrays
+					    if(taxlot_events_info_length == 0) {
+					        getTaxlotEventsInfo();
+					    }
 					    //if(beforeMap.getLayoutProperty("taxlot_c7-78vo7n-left", "visibility") === "none" )
 					        beforeMap.setLayoutProperty( "taxlot_c7-78vo7n-left", "visibility", "visible" ); 
 						//if(afterMap.getLayoutProperty("taxlot_c7-78vo7n-right", "visibility") === "none" )
@@ -1508,6 +1515,86 @@ function getTaxlotEventEntitiesDescrInfo() {
 			}
 		}
 		//console.log(taxlot_entities_info);
+
+    })
+    .fail( function(xhr, textStatus, errorThrown) {
+        // LOADING ERROR!
+		console.warn("jQuery AJAX request  ERROR !!!");
+		console.log(xhr.responseText);
+        console.log(textStatus);
+    });
+}
+
+
+// for test local host REST_API/taxlot-events-export.json
+// REST API https://encyclopedia.nahc-mapping.org/taxlot-events-export
+
+function getTaxlotEventsInfo() {
+    
+	var data_info_index = "";
+	taxlot_events_info_length = 0;
+	
+	$.ajax({
+				url: 'https://encyclopedia.nahc-mapping.org/taxlot-events-export',
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+				type: 'get',
+                dataType: 'json',
+				data: {}
+    })
+	.done(function(data) { 
+	  
+		//console.log(data);
+		if(data.length > 0) {
+		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
+		    for(let i = 0; i < data.length; i++){
+				if( typeof data[i].title != "undefined" ) {
+
+                    /*
+
+	"title": "C7_1643-06-02"				
+	
+	C7
+	taxlot_C7
+	"field_taxlot": "\u003Ca href=\u0022\/taxlot\/c7\u0022 hreflang=\u0022en\u0022\u003EC7\u003C\/a\u003E, \u003Ca href=\u0022\/lots\/taxlotc7\u0022 hreflang=\u0022en\u0022\u003Etaxlot_C7\u003C\/a\u003E",
+
+
+	Willem Kieft (ID: 1,660,244)
+	"field_from": "\u003Ca href=\u0022\/ancestor\/willem-kieft-id-1660244\u0022 hreflang=\u0022en\u0022\u003EWillem Kieft (ID: 1,660,244)\u003C\/a\u003E",
+	
+	Dutch West India Company (ID: DWIC)
+	"field_from_party_1": "\u003Ca href=\u0022\/ancestor\/dutch-west-india-company-id-dwic\u0022 hreflang=\u0022en\u0022\u003EDutch West India Company (ID: DWIC)\u003C\/a\u003E",
+	
+	
+	Govert Loockermans (ID: 151)
+	"field_to": "\u003Ca href=\u0022\/ancestor\/govert-loockermans-id-151\u0022 hreflang=\u0022en\u0022\u003EGovert Loockermans (ID: 151)\u003C\/a\u003E",
+		
+	Isaac Allerton (ID: 1,660,228)   
+	"field_to_party_1": "\u003Ca href=\u0022\/ancestor\/isaac-allerton-id-1660228\u0022 hreflang=\u0022en\u0022\u003EIsaac Allerton (ID: 1,660,228)\u003C\/a\u003E",
+	
+	"field_daystart": "June 2, 1643"
+	
+					*/
+					data_info_index = "" + data[i].title + "";
+					
+				    taxlot_events_info[data_info_index] = { 
+					    title: data[i].title,
+						start : data[i].field_daystart,
+						end : '',
+						taxlot: data[i].field_taxlot.replaceAll("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						to_party: data[i].field_to.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+					    to_party2: data[i].field_to_party_1.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						from_party: data[i].field_from.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+					    from_party2: data[i].field_from_party_1.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia")
+					};  
+					
+                    taxlot_events_info_length += 1;
+                    //console.log(taxlot_events_info);					
+				}
+			}
+		}
+		//console.log(taxlot_events_info["C7_1643-06-02"].taxlot);
 
     })
     .fail( function(xhr, textStatus, errorThrown) {
