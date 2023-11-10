@@ -1,5 +1,10 @@
 function buildPopUpInfo(props) {
-				var popup_html =
+	
+	var popup_html = "";
+	
+	if( typeof taxlot_events_info[props.title] === "undefined" ) {
+		
+			    popup_html =
 
 					///////
 					//TITLE
@@ -183,12 +188,59 @@ function buildPopUpInfo(props) {
 					//PREVIOUS TAXLOT EVENT
 					//example 1: /nahc/encyclopedia/node/1528 hreflang="en" target="_blank">Land Grant or Patent</a>
 					//example 2: &nbsp;
-					'<a href=https://nahc-mapping.org/mappingNY' + props.Prev_Event +
+					'<a href=https://nahc-mapping.org/mappingNY' + props.Prev_Event + ""
+					;
+
+	} else  {
+		
+		popup_html =
+					"<b><h2>Demo Taxlot:<br>" + taxlot_events_info[props.title].taxlot + "</h2></b>" +
+					"<b>Property Type: </b> House" +
+					"<hr>" +
+					"<b> DATE: </b>" + taxlot_events_info[props.title].start +
+					"<hr>" +
+
+					props.Next +
+
+
+					//OWNER 1
+					taxlot_events_info[props.title].to_party +
+
+					//OWNER 2
+					"<br>" +
+					taxlot_events_info[props.title].to_party2 +
+					"<br>" +
+					"<br>" +
+
+					props.Tax_Event +
+
+					"<br>" +
+
+					'<a href=https://nahc-mapping.org/mappingNY' + props.EVENT1 +
+					"<hr>" +
+
+					props.Previous +
+
+
+					//FROM 1
+					"<br>" +
+					taxlot_events_info[props.title].from_party +
+
+					//FROM 21
+					"<br>" +
+					taxlot_events_info[props.title].from_party2 +
 
 
 
+					props.Event +
+					'<a href=https://nahc-mapping.org/mappingNY' + props.Prev_Event + ""
+					;
+
+		
+	}
 
 
+    popup_html +=
 
 					//LINK TO ALL TAXLOT EVENTS: "SEE ALL TAXLOT EVENTS"
 					"<br>" +
@@ -197,6 +249,9 @@ function buildPopUpInfo(props) {
 
 //NEED TO MAKE THIS OPEN IN SEPARATE TAB!!
 ;
+
+
+//console.log(props);
 
 //console.log(popup_html);
 $("#demoLayerInfo").html(popup_html);
