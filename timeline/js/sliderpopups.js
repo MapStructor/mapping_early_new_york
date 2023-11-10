@@ -197,7 +197,7 @@ function buildPopUpInfo(props) {
 					"<b><h2>Demo Taxlot:<br>" + taxlot_events_info[props.title].taxlot + "</h2></b>" +
 					"<b>Property Type: </b> House" +
 					"<hr>" +
-					"<b> DATE: </b>" + taxlot_events_info[props.title].start +
+					"<b>DATE: </b>" + taxlot_events_info[props.title].start +
 					"<hr>" +
 
 					props.Next +
@@ -210,13 +210,9 @@ function buildPopUpInfo(props) {
 					"<br>" +
 					taxlot_events_info[props.title].to_party2 +
 					"<br>" +
-					"<br>" +
 
-					props.Tax_Event +
-
-					"<br>" +
-
-					'<a href=https://nahc-mapping.org/mappingNY' + props.EVENT1 +
+					(( taxlot_events_info[props.title].taxlotevent == "" ) ? "" : "<br><b>TAXLOT EVENT: </b><br>" + taxlot_events_info[props.title].taxlotevent ) +
+					
 					"<hr>" +
 
 					props.Previous +
