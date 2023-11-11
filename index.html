@@ -1580,6 +1580,7 @@ function getTaxlotEventsInfo() {
 					
 				    taxlot_events_info[data_info_index] = { 
 					    title: data[i].title,
+						//title: data[i].field_title.replaceAll("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 						start : data[i].field_daystart,
 						end : '',
 						taxlot: data[i].field_taxlot.replaceAll("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
@@ -1587,7 +1588,25 @@ function getTaxlotEventsInfo() {
 						to_party: data[i].field_to.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 					    to_party2: data[i].field_to_party_1.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 						from_party: data[i].field_from.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-					    from_party2: data[i].field_from_party_1.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia")
+					    from_party2: data[i].field_from_party_1.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+
+						property_type: data[i].field_pro.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						to_party_1_text: data[i].field_events_to_party_1_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						to_party_1_role: data[i].field_party_role_in_transaction_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						to_party_1_entity: data[i].field_entity_description_to_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						to_party_2_text: data[i].field_asdf_to_party_2_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						to_party_2_role: data[i].field_party_role3.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						to_party_2_entity: data[i].field_entity_description_to_part.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						from_party_1_text: data[i].field_from_party_1_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						from_party_1_role: data[i].field_partyrole.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						from_party_1_entity: data[i].field_entity_desc.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						from_party_2_text: data[i].field_from_party_2_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						from_party_2_role: data[i].field_party_role2.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						from_party_2_entity: data[i].field_entity_description_from_pa.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia")
+
+
+
+
 					};  
 					
                     taxlot_events_info_length += 1;

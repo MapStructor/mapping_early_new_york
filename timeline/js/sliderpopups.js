@@ -1,258 +1,67 @@
-function buildPopUpInfo(props) {
-	
-	var popup_html = "";
-	
-	if( typeof taxlot_events_info[props.title] === "undefined" ) {
-		
-			    popup_html =
-
-					///////
-					//TITLE
-					///////
-					"<b><h2>Demo Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/c7' target='_blank'>C7</a></h2></b>" +
-                    // CAN'T GET THE TAXLOT LINK TO WORK: <a href='https://encyclopedia.nahc-mapping.org/taxlot/c7'>
-					////////////////
-					//PROPERTY TYPE
-					////////////////
-					"<b>Property Type: </b>" +
-					"House" +
-
-
-					//LINE
-					"<hr>" +
-
-
-					/////////////
-					//DATE RANGE
-					////////////
-
-					//FROM
-					//example: June 3, 1643
-					"<b> FROM: </b>" +
-					props.DATE1 +
-
-					//TO
-					//example: January 19, 1659
-					"<br>" +
-					"<b> TO: </b>" +
-					props.DATE2 +
-
-
-
-					/////////////////////////////////////////////////////////////////////////////////////////////
-					//UNKNOWN (DISPLAY TITLE AND EXPLANATION WHERE UNKNOWN OR NOTHING, %nbsp)
-					//example 1: <br><br><b>TAXLOT EVENTS UNKNOWN</b><br>Needs research beyond sources used.
-					//example 2: &nbsp;
-					//////////////////////////////////////////////////////////////////////////////////////////////
-					props.Unknown +
-
-
-
-					//LINE
-					"<hr>" +
-
-
-
-
-					//KEEP THIS AS ALTERNATIVE WAY OF LINKING:
-					//'<a href="' + props.tax_lots_3 + '" target="_blank">' + props.tax_lots_3 + '</a>'
-
-
-
-					//////////////////////////////////////////////////
-					//NEXT
-					//example 1: <b>OWNERSHIP:</b><br>
-					//example 2: <b>NEXT KNOWN OWNERSHIP:</b><br>
-					//////////////////////////////////////////////////
-					props.Next +
-
-
-
-
-					///////////////////////
-					//OWNERS EXAMPLES:
-					//////////////////////
-
-					//NOTE: Not sure if NULLs are a problem, check in the future.
-
-					//TAXLOT EVENT PARTY ROLE 1
-					//TO_PAR1 / TO_PAR2 / FROM_PAR1 / FROM PAR2
-					//example 1: /nahc/encyclopedia/node/1537 hreflang="en" target="_blank">Joint Owner</a>
-					//example 2: NULL
-
-					//FROM PARTY 1 (ANCESTOR)
-					//TO_1 / T0_2 / FROM_1 / FROM_2
-					//example 1: /nahc/encyclopedia/node/1536 hreflang="en" target="_blank">Signatory</a>
-					//example 2: NULL
-
-					//TAXLOT ENTITY DESCRIPTIONS 2
-					//TO_ENT1 / TO_ENT2 / FROM_ENT1 / FROM_ENT2
-					//example 1: /nahc/encyclopedia/node/1535 hreflang="en" target="_blank">Corporation</a>
-					//example 2: NULL
-
-
-
-
-					//////////////////////////////////////////
-					//TO OWNERS
-					//examples: See Above (OWNER EXAMPLES)
-					//////////////////////////////////////////
-
-
-
-					//OWNER 1
-					'<a href=https://nahc-mapping.org/mappingNY' + props.TO_PAR1 + ": " +
-					"<br>" +
-					'<a href=https://nahc-mapping.org/mappingNY' + props.TO_1 +
-					" (" + '<a href=https://nahc-mapping.org/mappingNY' + props.TO_ENT1 + ")" +
-					"<br>" +
-					"<br>" +
-
-					//OWNER 2
-					'<a href=https://nahc-mapping.org/mappingNY' + props.TO_PAR2 + ": " +
-					"<br>" +
-					'<a href=https://nahc-mapping.org/mappingNY' + props.TO_2 +
-					" (" + '<a href=https://nahc-mapping.org/mappingNY' + props.TO_ENT2 + ")" +
-
-					"<br>" +
-					"<br>" +
-
-
-
-					//////////////////
-					//TAXLOT EVENT
-					//////////////////
-
-					//TAXLOT EVENT TITLE
-					//example 1: <b>TAXLOT EVENT:</b>
-					//example 2: <b>NEXT TAXLOT EVENT:</b>
-					props.Tax_Event +
-
-					"<br>" +
-
-
-					//TAXLOT EVENT TYPE
-					//example: /nahc/encyclopedia/node/1528 hreflang="en" target="_blank">Land Grant or Patent</a>
-					'<a href=https://nahc-mapping.org/mappingNY' + props.EVENT1 +
-					"<hr>" +
-
-
-					//////////////////////////////
-					//FROM OWNERS
-					//examples: see above, OWNER EXAMPLES
-					//////////////////////////////
-
-
-					//FROM TITLE
-					//example 1: <b>FROM:</b>
-					//example 2: <b>PREVIOUS KNOWN FROM:</b>
-					props.Previous +
-
-					"<br>" +
-
-					//FROM 1
-
-					//TAXLOT EVENT PARTY ROLE 1
-					'<a href=https://nahc-mapping.org/mappingNY' + props.FROM_PAR1 + ": " +
-					"<br>" +
-					//FROM PARTY 1 (ANCESTOR)
-					'<a href=https://nahc-mapping.org/mappingNY' + props.FROM_1 +
-					//TAXLOT ENTITY DESCRIPTIONS 2
-					" (" + '<a href=https://nahc-mapping.org/mappingNY' + props.FROM_ENT1 + ")" +
-					"<br>" +
-					"<br>" +
-
-
-					//FROM 2
-
-					//TAXLOT EVENT PARTY ROLE 1
-					'<a href=https://nahc-mapping.org/mappingNY' + props.FROM_PAR2 + ": " +
-					"<br>" +
-					//FROM PARTY 2 (ANCESTOR)
-					'<a href=https://nahc-mapping.org/mappingNY' + props.FROM_2 +
-					//TAXLOT ENTITY DESCRIPTIONS 2
-					" (" + '<a href=https://nahc-mapping.org/mappingNY' + props.FROM_ENT2 + ")" +
-
-
-
-
-					///////////////////////////
-					//PREVIOUS TAXLOT EVENT (SHOWS UP IF TAXLOT EVENTS UNKNOWN, OTHERWISE BLANK, &nbsp;)
-					//////////////////////////
-
-					//TITLE: "PREVIOUS TAXLOT EVENT"
-					//example 1: <br><br><b>PREVIOUS TAXLOT EVENT:</b><br>
-					//example 2: &nbsp;
-					props.Event +
-
-					//PREVIOUS TAXLOT EVENT
-					//example 1: /nahc/encyclopedia/node/1528 hreflang="en" target="_blank">Land Grant or Patent</a>
-					//example 2: &nbsp;
-					'<a href=https://nahc-mapping.org/mappingNY' + props.Prev_Event + ""
-					;
-
-	} else  {
-		
-		popup_html =
-					"<b><h2>Demo Taxlot:<br>" + taxlot_events_info[props.title].taxlot + "</h2></b>" +
-					"<b>Property Type: </b> House" +
-					"<hr>" +
-					"<b>DATE: </b>" + taxlot_events_info[props.title].start +
-					"<hr>" +
-
-					props.Next +
-
-
-					//OWNER 1
-					taxlot_events_info[props.title].to_party +
-
-					//OWNER 2
-					"<br>" +
-					taxlot_events_info[props.title].to_party2 +
-					"<br>" +
-
-					(( taxlot_events_info[props.title].taxlotevent == "" ) ? "" : "<br><b>TAXLOT EVENT: </b><br>" + taxlot_events_info[props.title].taxlotevent ) +
-					
-					"<hr>" +
-
-					props.Previous +
-
-
-					//FROM 1
-					"<br>" +
-					taxlot_events_info[props.title].from_party +
-
-					//FROM 21
-					"<br>" +
-					taxlot_events_info[props.title].from_party2 +
-
-
-
-					props.Event +
-					'<a href=https://nahc-mapping.org/mappingNY' + props.Prev_Event + ""
-					;
-
-		
-	}
-
-
-    popup_html +=
-
-					//LINK TO ALL TAXLOT EVENTS: "SEE ALL TAXLOT EVENTS"
-					"<br>" +
-					"<hr>" +
-					'<b> <h3><a href="https://encyclopedia.nahc-mapping.org/taxlot-events" target="_blank">SEE ALL TAXLOT EVENTS</a></h3></b>'
-
-//NEED TO MAKE THIS OPEN IN SEPARATE TAB!!
-;
-
-
-//console.log(props);
-
-//console.log(popup_html);
-$("#demoLayerInfo").html(popup_html);
-
+function extractTextFromHTML(htmlString) {
+    return $("<div>").html(htmlString).text();
 }
+
+function addFieldToPopup(fieldContent, displayMode = "", addExtraBreak = "", defaultValue = "") {
+    let content = fieldContent ? (displayMode === "unlinked" ? extractTextFromHTML(fieldContent) : fieldContent) : defaultValue;
+    return (content ? (addExtraBreak === "break" ? "<br>" : "") + content + "<br>" : "");
+}
+
+
+function buildPopUpInfo(props) {
+    var popup_html = "<b><h2>Lot:<br>" + addFieldToPopup(taxlot_events_info[props.title].taxlot, true) + "</h2></b>";
+
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].property_type, "unlinked");
+    popup_html += "<hr>";
+
+    popup_html += "<b>DATE: </b>" + addFieldToPopup(taxlot_events_info[props.title].start, "unlinked", "", "Unknown");
+    popup_html += "<hr>";
+
+	popup_html += "<b>OWNERSHIP: </b><br>";
+
+    // To Party 1
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_1_role, "unlinked", "", "Unknown");
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_1_text);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_1_entity, "unlinked");
+
+    // To Party 2
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_2_role, "unlinked", "break");
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_2_text);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party2);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_2_entity, "unlinked");
+
+    // Taxlot Event
+    if (taxlot_events_info[props.title].taxlotevent) {
+        popup_html += "<br><b>LOT EVENT: </b><br>" + addFieldToPopup(taxlot_events_info[props.title].taxlotevent);
+    }
+
+    popup_html += "<hr>";
+
+    // From 1
+    popup_html += "<b>FROM: </b><br>";
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_1_role, "unlinked");
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_1_text);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_1_entity, "unlinked");
+
+    // From 2 - With extra line break
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_2_role, "unlinked", "break");
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_2_text);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party2);
+    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_2_entity, "unlinked");
+
+    popup_html += "<hr>";
+    popup_html += "<b>Lot Event ID:</b><br>" + addFieldToPopup(taxlot_events_info[props.title].title);
+
+    $("#demoLayerInfo").html(popup_html);
+}
+
+
+
+
+
+
 
 
 
