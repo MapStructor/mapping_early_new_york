@@ -8,8 +8,8 @@ function addAfterLayers(yr, date) {
     //afterMap.on('load', function () {
         
 		//REMOVING TAX LOT POINTS IF EXIST
-        if (afterMap.getLayer("taxlot_c7-78vo7n-right")) afterMap.removeLayer("taxlot_c7-78vo7n-right");
-        if (afterMap.getSource("taxlot_c7-78vo7n")) afterMap.removeSource("taxlot_c7-78vo7n");
+        if (afterMap.getLayer("lot_events-bf43eb-right")) afterMap.removeLayer("lot_events-bf43eb-right");
+        if (afterMap.getSource("lot_events-bf43eb")) afterMap.removeSource("lot_events-bf43eb");
 		if (afterMap.getLayer("dutch_grants-5ehfqe-right")) afterMap.removeLayer("dutch_grants-5ehfqe-right");
         if (afterMap.getSource("dutch_grants-5ehfqe")) afterMap.removeSource("dutch_grants-5ehfqe");
        
@@ -147,17 +147,17 @@ function addAfterLayers(yr, date) {
 
 		afterMap.addLayer({
 			//ID: CHANGE THIS, 1 OF 3
-			id: "taxlot_c7-78vo7n-right",
+			id: "lot_events-bf43eb-right",
 			type: "circle",
 			source: {
 				type: "vector",
 				//URL: CHANGE THIS, 2 OF 3
-				url: "mapbox://mapny.du6ari4g"
+				url: "mapbox://mapny.9s9s67wu"
 			},
 			layout: {
                 visibility: document.getElementById('circle_point').checked ? "visible" : "none",
             },
-			"source-layer": "taxlot_c7-78vo7n",
+			"source-layer": "lot_events-bf43eb",
 			paint: {
 
 				//CIRCLE COLOR
@@ -227,18 +227,18 @@ function addAfterLayers(yr, date) {
                     
 					
 		// CHANGE TO CURSOR WHEN HOVERING
-		afterMap.on('mouseenter', 'taxlot_c7-78vo7n-right', function (e) {
+		afterMap.on('mouseenter', 'lot_events-bf43eb-right', function (e) {
 			afterMap.getCanvas().style.cursor = 'pointer';
 					
 			        if (hoveredStateIdRightCircle) {
                         afterMap.setFeatureState(
-                            { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
+                            { source: 'lot_events-bf43eb-right', sourceLayer: 'lot_events-bf43eb', id: hoveredStateIdRightCircle},
                             { hover: false }
                         );
                     }
                     hoveredStateIdRightCircle = e.features[0].id;
                     afterMap.setFeatureState(
-                        { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
+                        { source: 'lot_events-bf43eb-right', sourceLayer: 'lot_events-bf43eb', id: hoveredStateIdRightCircle},
                         { hover: true }
                     );
 					
@@ -259,11 +259,11 @@ function addAfterLayers(yr, date) {
 		});
 
 		// CHANGE TO POINTER WHEN NOT HOVERING
-		afterMap.on('mouseleave', 'taxlot_c7-78vo7n-right', function () {
+		afterMap.on('mouseleave', 'lot_events-bf43eb-right', function () {
 			afterMap.getCanvas().style.cursor = '';
 			    if (hoveredStateIdRightCircle) {
                     afterMap.setFeatureState(
-                        { source: 'taxlot_c7-78vo7n-right', sourceLayer: 'taxlot_c7-78vo7n', id: hoveredStateIdRightCircle},
+                        { source: 'lot_events-bf43eb-right', sourceLayer: 'lot_events-bf43eb', id: hoveredStateIdRightCircle},
                         { hover: false }
                     );
                 }

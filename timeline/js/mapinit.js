@@ -535,7 +535,7 @@ beforeMap.on("load", function () {
     
 	
 		// CLICK AND OPEN POPUP
-		beforeMap.on('click', 'taxlot_c7-78vo7n-left', function (e) {
+		beforeMap.on('click', 'lot_events-bf43eb-left', function (e) {
 		          
             DemoClickHandle(e);
 				  
@@ -597,7 +597,7 @@ afterMap.on("load", function () {
     
 	
 		// CLICK AND OPEN POPUP
-		afterMap.on('click', 'taxlot_c7-78vo7n-right', function (e) {
+		afterMap.on('click', 'lot_events-bf43eb-right', function (e) {
 			
             DemoClickHandle(e);
 			
@@ -1694,8 +1694,8 @@ function changeDate(unixDate) {
 	beforeMap.setFilter("original_grants_and_farms-left-highlighted", dateFilter);
 	afterMap.setFilter("original_grants_and_farms-right-highlighted", dateFilter);
 	
-	beforeMap.setFilter("taxlot_c7-78vo7n-left", dateFilter);
-	afterMap.setFilter("taxlot_c7-78vo7n-right", dateFilter);
+	beforeMap.setFilter("lot_events-bf43eb-left", dateFilter);
+	afterMap.setFilter("lot_events-bf43eb-right", dateFilter);
 	
 	beforeMap.setFilter("grant-lots-left", dateFilter);
 	afterMap.setFilter("grant-lots-right", dateFilter);
@@ -1747,7 +1747,7 @@ function changeDate(unixDate) {
     afterMap.setFilter("karl-lines-right", dateFilter);
 
 
-    demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['taxlot_c7-78vo7n-right'] });
+    demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['lot_events-bf43eb-right'] });
 	
 	if(demo_layer_view_flag) {
 		buildPopUpInfo(demo_layer_features[0].properties);
