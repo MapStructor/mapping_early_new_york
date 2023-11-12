@@ -148,11 +148,11 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/
 			var timeline_pointer_flag = true;
 			var windoWidth = 0;
 			
-			var sliderStartDrag = moment("06/02/1643").unix();
-		    var sliderStart = moment("01/01/1626").unix();
+			var sliderStart = moment("01/01/1626").unix();
+			var sliderStartDrag = sliderStart; //moment("06/02/1643").unix();
 		    //var sliderEnd = moment().unix();
-			var sliderEndDrag = moment("07/04/1675").unix();
 			var sliderEnd = moment("01/01/1700").unix();
+			var sliderEndDrag = sliderEnd; //moment("07/04/1675").unix();
 				
 			//*A (sliderStart + sliderEnd)/2 = -9799671480
 			var sliderMiddle =  (sliderStart + sliderEnd)/2;
@@ -3626,6 +3626,5 @@ i.slash-icon { font-size: 11px; }
 	</body>
 
 </html>
-
 
 
