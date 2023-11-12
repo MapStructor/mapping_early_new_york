@@ -254,7 +254,7 @@ function addAfterLayers(yr, date) {
 				
 				        afterMapPopUp
 				            .setLngLat(coordinates)
-							.setHTML("<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/c7' target='_blank'>C7</a></h2></b></div>")
+							.setHTML("<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" + e.features[0].properties.TAXLOT + "' target='_blank'>" + e.features[0].properties.TAXLOT + "</a></h2></b></div>")
                             .addTo(afterMap);
 		});
 
@@ -1982,6 +1982,5 @@ function addAfterLabelsLayer() {
               zoomtobounds('NewEngland');
           });
 }
-
 
 
