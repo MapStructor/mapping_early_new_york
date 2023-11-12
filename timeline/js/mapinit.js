@@ -513,7 +513,9 @@ var clickedInfoId = null,
     clickedStateId = null,
     clickedSettlementsId = null;
 	
-var demo_layer_features = null;
+var demo_layer_props = null,
+    demo_layer_features = null,
+	demo_layer_taxlot = "";
 
 beforeMap.on("load", function () {
 	console.log("load");
@@ -843,6 +845,25 @@ afterMap.on("error", function (e) {
 						closeDemoInfo();
 					} else {
 						//if(windoWidth > 637) {
+							demo_layer_taxlot = event.features[0].properties.TAXLOT;
+
+							sliderStartDrag = sliderStart;
+							sliderEndDrag = sliderEnd;
+
+							demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['lot_events-bf43eb-right'] });
+							
+							for(let i = 0; i < demo_layer_features.length; i++){
+								if(demo_layer_features[i].properties.TAXLOT == demo_layer_taxlot) {
+                                    if(sliderStartDrag < moment(demo_layer_features[i].properties.start_date,"YYYY-MM-DD").unix())
+									    sliderStartDrag = moment(demo_layer_features[i].properties.start_date,"YYYY-MM-DD").unix();
+								    if(sliderEndDrag > moment(demo_layer_features[i].properties.end_date,"YYYY-MM-DD").unix())
+									    sliderEndDrag = moment(demo_layer_features[i].properties.end_date,"YYYY-MM-DD").unix();
+								}
+	                        }
+							
+							console.log(sliderStartDrag);
+							console.log(sliderEndDrag);
+							
 						    buildPopUpInfo(event.features[0].properties);
 						    if($(".infoLayerElem").first().attr("id") != "demoLayerInfo")
 						        $("#demoLayerInfo").insertBefore($(".infoLayerElem").first());
@@ -869,12 +890,12 @@ afterMap.on("error", function (e) {
 						
 						beforeHighDemoPopUp
                         .setLngLat(coordinates)
-                        .setHTML("<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/c7' target='_blank'>C7</a></h2></b></div>");
+                        .setHTML("<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/"+ demo_layer_taxlot +"' target='_blank'>" + demo_layer_taxlot + "</a></h2></b></div>");
 					    if(!beforeHighDemoPopUp.isOpen()) beforeHighDemoPopUp.addTo(beforeMap);
 					
 					    afterHighDemoPopUp
                         .setLngLat(coordinates)
-						.setHTML("<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/c7' target='_blank'>C7</a></h2></b></div>");
+						.setHTML("<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" + demo_layer_taxlot + "' target='_blank'>" + demo_layer_taxlot + "</a></h2></b></div>");
 					    if(!afterHighDemoPopUp.isOpen()) afterHighDemoPopUp.addTo(afterMap);
 					}
 					demo_taxlot_click_ev = true;
@@ -1748,9 +1769,14 @@ function changeDate(unixDate) {
 
 
     demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['lot_events-bf43eb-right'] });
+
+	for(let i = 0; i < demo_layer_features.length; i++){
+		if(demo_layer_features[i].properties.TAXLOT == demo_layer_taxlot)
+			demo_layer_props = demo_layer_features[i].properties;
+	}
 	
 	if(demo_layer_view_flag) {
-		buildPopUpInfo(demo_layer_features[0].properties);
+		buildPopUpInfo(demo_layer_props);  // demo_layer_features[0].properties
 	}
 	
 	
