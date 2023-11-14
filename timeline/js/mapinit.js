@@ -513,7 +513,7 @@ var clickedInfoId = null,
     clickedStateId = null,
     clickedSettlementsId = null;
 	
-var demo_layer_props = null,
+var demo_layer_feature_props = null,
     demo_layer_features = null,
 	demo_layer_taxlot = "";
 
@@ -845,24 +845,11 @@ afterMap.on("error", function (e) {
 						closeDemoInfo();
 					} else {
 						//if(windoWidth > 637) {
+							//A* Filter Algo
+							
 							demo_layer_taxlot = event.features[0].properties.TAXLOT;
-
-							sliderStartDrag = sliderStart;
-							sliderEndDrag = sliderEnd;
-
-							demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['lot_events-bf43eb-right'] });
-							
-							for(let i = 0; i < demo_layer_features.length; i++){
-								if(demo_layer_features[i].properties.TAXLOT == demo_layer_taxlot) {
-                                    if(sliderStartDrag < moment(demo_layer_features[i].properties.start_date,"YYYY-MM-DD").unix())
-									    sliderStartDrag = moment(demo_layer_features[i].properties.start_date,"YYYY-MM-DD").unix();
-								    if(sliderEndDrag > moment(demo_layer_features[i].properties.end_date,"YYYY-MM-DD").unix())
-									    sliderEndDrag = moment(demo_layer_features[i].properties.end_date,"YYYY-MM-DD").unix();
-								}
-	                        }
-							
-							console.log(sliderStartDrag);
-							console.log(sliderEndDrag);
+                           
+						    demoFilterRangeCalc();
 							
 						    buildPopUpInfo(event.features[0].properties);
 						    if($(".infoLayerElem").first().attr("id") != "demoLayerInfo")
@@ -1680,6 +1667,132 @@ afterMap.on("error", function (e) {
 	
 
 
+    function demoFilterRangeCalc() {
+        //A* demo filter range calculator
+            demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['lot_events-bf43eb-right'] });
+	        console.log(demo_layer_features.length);
+	                 
+	        
+			if(demo_layer_features.length > 0) {
+
+		                    console.log(demo_layer_features);
+		                    console.log(demo_layer_features.length);
+							var sliderStartMin = null,
+							    sliderEndMax = null,
+							    curr_start_timestamp = null,
+								curr_end_timestamp = null;
+									
+							for(let i = 0; i < demo_layer_features.length; i++){
+								if(demo_layer_features[i].properties.TAXLOT == demo_layer_taxlot) {
+									
+									demo_layer_feature_props = demo_layer_features[i].properties;
+									
+									if( typeof demo_layer_features[i].properties.DayStart === 'undefined' || demo_layer_features[i].properties.DayStart === null )
+									    curr_start_timestamp = null;
+									else 
+									    curr_start_timestamp = moment(demo_layer_features[i].properties.DayStart,"YYYYMMDD").unix();
+									if( typeof demo_layer_features[i].properties.DayEnd === 'undefined' || demo_layer_features[i].properties.DayEnd === null )
+									    curr_end_timestamp = null;
+									else 
+										curr_end_timestamp = moment(demo_layer_features[i].properties.DayEnd,"YYYYMMDD").unix();
+										
+									if((curr_start_timestamp !== null) && (curr_end_timestamp !== null)) {
+									    if(curr_start_timestamp <= curr_end_timestamp) {
+											if(sliderStartMin === null) {
+												sliderStartMin = curr_start_timestamp;
+											} else {
+                                                if(sliderStartMin > curr_start_timestamp)
+									                sliderStartMin = curr_start_timestamp;
+										    }
+											if(sliderEndMax === null) {
+												sliderEndMax = curr_end_timestamp;
+											} else {
+								                if(sliderEndMax < curr_end_timestamp)
+									                sliderEndMax = curr_end_timestamp;
+											}
+									    }
+									    if(curr_start_timestamp > curr_end_timestamp) {
+											if(sliderStartMin === null) {
+												sliderStartMin = curr_end_timestamp;
+											} else {
+                                                if(sliderStartMin > curr_end_timestamp)
+									                 sliderStartMin = curr_end_timestamp;
+										    }
+											if(sliderEndMax === null) {
+												sliderEndMax = curr_start_timestamp;
+											} else {
+								                if(sliderEndMax < curr_start_timestamp)
+									                sliderEndMax = curr_start_timestamp;
+										    }
+									    }
+									}
+									
+									if((curr_start_timestamp !== null) && (curr_end_timestamp === null)) {
+										if(sliderStartMin === null) {
+												sliderStartMin = curr_start_timestamp;
+										} else {
+                                            if(sliderStartMin > curr_start_timestamp)
+									            sliderStartMin = curr_start_timestamp;
+									    }
+										if(sliderEndMax === null) {
+												sliderEndMax = curr_start_timestamp;
+										} else {
+								            if(sliderEndMax < curr_start_timestamp)
+									            sliderEndMax = curr_start_timestamp;
+							            }
+									}
+									
+									if((curr_start_timestamp === null) && (curr_end_timestamp !== null)) {
+									    if(sliderEndMax === null) {
+										    sliderEndMax = curr_end_timestamp;
+										} else {
+								            if(sliderEndMax < curr_end_timestamp)
+									            sliderEndMax = curr_end_timestamp;
+									    }
+										if(sliderStartMin === null) {
+										    sliderStartMin = curr_end_timestamp;
+									    } else {
+                                            if(sliderStartMin > curr_end_timestamp)
+									            sliderStartMin = curr_end_timestamp;
+									    }
+									}
+									
+								}
+	                        }
+							
+					        /*
+							if(sliderStartMin === null)
+								sliderStartDrag = sliderStart;
+					        else
+							    sliderStartDrag = sliderStartMin;
+							
+							if(sliderEndMax === null)
+								sliderEndDrag = sliderEnd;
+							else
+							    sliderEndDrag = sliderEndMax;
+							*/
+							
+							if((sliderStartMin !== null) && (sliderEndMax !== null)) {
+								sliderStartDrag = sliderStartMin;
+								sliderEndDrag = sliderEndMax;
+								
+								if(demo_layer_view_flag)
+		                            buildPopUpInfo(demo_layer_feature_props); 	//demo_layer_features[i].properties
+							}
+							        
+									console.log(sliderStartMin);
+							        console.log(sliderStartDrag);
+									console.log(moment.unix(sliderStartDrag).format('DD MMM YYYY'));
+									console.log(sliderEndMax);
+							        console.log(sliderEndDrag);
+									console.log(moment.unix(sliderEndDrag).format('DD MMM YYYY'));
+									
+							
+	        }
+	    //A* demo filter range calculator
+    }
+
+
 //////////////////////////////////////////////
 //TIME LAYER FILTERING. NOT SURE HOW WORKS.
 //////////////////////////////////////////////
@@ -1768,16 +1881,7 @@ function changeDate(unixDate) {
     afterMap.setFilter("karl-lines-right", dateFilter);
 
 
-    demo_layer_features = afterMap.queryRenderedFeatures({ layers: ['lot_events-bf43eb-right'] });
-
-	for(let i = 0; i < demo_layer_features.length; i++){
-		if(demo_layer_features[i].properties.TAXLOT == demo_layer_taxlot)
-			demo_layer_props = demo_layer_features[i].properties;
-	}
-	
-	if(demo_layer_view_flag) {
-		buildPopUpInfo(demo_layer_props);  // demo_layer_features[0].properties
-	}
+    demoFilterRangeCalc();
 	
 	
 }//end function changeDate
@@ -2191,6 +2295,8 @@ addAfterLabelsLayer();
         addSettlementsLabelsAfterLayers(date);
 		addInfoAfterLayers(date);
 		addInfoLabelsAfterLayers(date);
+		
+		
     }, 500);
 
     setTimeout( function() {
@@ -2216,6 +2322,5 @@ addAfterLabelsLayer();
     }, 2500);
 
 });
-
 
 
