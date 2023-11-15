@@ -9,50 +9,52 @@ function addFieldToPopup(fieldContent, displayMode = "", addExtraBreak = "", def
 
 
 function buildPopUpInfo(props) {
-    var popup_html = "<b><h2>Lot:<br>" + addFieldToPopup(taxlot_events_info[props.title].taxlot, true) + "</h2></b>";
+	var prop_nid = "" + props.nid + "";
+	//console.log(prop_nid);
+    var popup_html = "<b><h2>Lot:<br>" + addFieldToPopup(taxlot_events_info[prop_nid].taxlot, true) + "</h2></b>";
 
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].property_type, "unlinked");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].property_type, "unlinked");
     popup_html += "<hr>";
 
-    popup_html += "<b>DATE: </b>" + addFieldToPopup(taxlot_events_info[props.title].start, "unlinked", "", "Unknown");
+    popup_html += "<b>DATE: </b>" + addFieldToPopup(taxlot_events_info[prop_nid].start, "unlinked", "", "Unknown");
     popup_html += "<hr>";
 
 	popup_html += "<b>OWNERSHIP: </b><br>";
 
     // To Party 1
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_1_role, "unlinked", "", "Unknown");
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_1_text);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_1_entity, "unlinked");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_role, "unlinked", "", "Unknown");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_text);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_entity, "unlinked");
 
     // To Party 2
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_2_role, "unlinked", "break");
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_2_text);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party2);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].to_party_2_entity, "unlinked");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_role, "unlinked", "break");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_text);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party2);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_entity, "unlinked");
 
     // Taxlot Event
-    if (taxlot_events_info[props.title].taxlotevent) {
-        popup_html += "<br><b>LOT EVENT: </b><br>" + addFieldToPopup(taxlot_events_info[props.title].taxlotevent);
+    if (taxlot_events_info[prop_nid].taxlotevent) {
+        popup_html += "<br><b>LOT EVENT: </b><br>" + addFieldToPopup(taxlot_events_info[prop_nid].taxlotevent);
     }
 
     popup_html += "<hr>";
 
     // From 1
     popup_html += "<b>FROM: </b><br>";
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_1_role, "unlinked");
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_1_text);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_1_entity, "unlinked");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_role, "unlinked");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_text);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_entity, "unlinked");
 
     // From 2 - With extra line break
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_2_role, "unlinked", "break");
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_2_text);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party2);
-    popup_html += addFieldToPopup(taxlot_events_info[props.title].from_party_2_entity, "unlinked");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_role, "unlinked", "break");
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_text);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party2);
+    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_entity, "unlinked");
 
     popup_html += "<hr>";
-    popup_html += "<b>Lot Event ID:</b><br>" + addFieldToPopup(taxlot_events_info[props.title].title);
+    popup_html += "<b>Lot Event ID:</b><br>" + addFieldToPopup(taxlot_events_info[prop_nid].title);
 
     $("#demoLayerInfo").html(popup_html);
 }
