@@ -142,10 +142,7 @@
     <script src="timeline/vendor/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="timeline/vendor/jquery.ui.touch-punch.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
-    <!--
-		<script src='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
-		<link href='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
-		-->
+    
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js"></script>
     <link
@@ -158,12 +155,6 @@
       type="text/css"
     />
     <link href="timeline/index.css" rel="stylesheet" />
-
-    <!-- Load Awesome Icons 4.7.0 -->
-    <!--
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		-->
-    <!-- Load Awesome Icons 5.15.3 -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -172,10 +163,8 @@
       referrerpolicy="no-referrer"
     />
 
-    <!-- MODAL INFO JS SOURCE -->
     <script src="timeline/js/modalinfo.js"></script>
 
-    <!-- TIMELINE FUNCTIONALITY -->
 
     <script>
       if (
@@ -190,7 +179,6 @@
       } else {
         // false for not mobile device
         console.warn("not mobile device");
-        //if ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) ) {
         if (window.innerWidth <= 670) {
           console.warn("but small size");
           console.warn("redirect");
@@ -234,12 +222,10 @@
       var windoWidth = 0;
 
       var sliderStart = moment("01/01/1626").unix();
-      var sliderStartDrag = sliderStart; //moment("06/02/1643").unix();
-      //var sliderEnd = moment().unix();
+      var sliderStartDrag = sliderStart;
       var sliderEnd = moment("01/01/1700").unix();
-      var sliderEndDrag = sliderEnd; //moment("07/04/1675").unix();
+      var sliderEndDrag = sliderEnd; 
 
-      //*A (sliderStart + sliderEnd)/2 = -9799671480
       var sliderMiddle = (sliderStart + sliderEnd) / 2;
       var tooltiPos = -100;
 
@@ -289,11 +275,10 @@
         simple_tooltip("i.layer-info, i.zoom-to-layer", "tooltip");
 
         windoWidth = $(window).width();
-        //console.log(windoWidth);
-        //555
+        
         if (windoWidth <= 637) {
           if (layer_view_flag) {
-            $("#studioMenu").css({ "margin-left": "-111%" }); //.slideUp();
+            $("#studioMenu").css({ "margin-left": "-111%" }); 
             $("#view-hide-layer-panel").css({ "margin-left": "-337px" });
             $("#mobi-hide-sidebar").css({ "margin-left": "-111%" });
             layer_view_flag = false;
@@ -304,8 +289,6 @@
         $(window).resize(function () {
           windoWidth = $(window).width();
         });
-
-        // console.log(window.name);
 
         $(".manahatta_layer_item").hide();
         $(".farms_layer_item").hide();
@@ -319,17 +302,17 @@
         $("#new-netherland-maps-section").slideUp();
         $("#new-england-maps-section").slideUp();
 
-        $("#ruler-date1").text(moment.unix(date_ruler1).format("YYYY")); // .format('DD MMM YYYY')
-        $("#ruler-date2").text(moment.unix(date_ruler2).format("YYYY")); // .format('DD MMM YYYY')
-        //$("#ruler-date3").text(moment.unix(sliderMiddle).format('DD MMM YYYY'));
+        $("#ruler-date1").text(moment.unix(date_ruler1).format("YYYY")); 
+        $("#ruler-date2").text(moment.unix(date_ruler2).format("YYYY")); 
+        
         $("#ruler-date3").html(
           "&nbsp; &#8678; &nbsp; TIME &nbsp; &nbsp; &nbsp; &nbsp; SLIDE &nbsp; &#8680;"
         );
         $("#mobi-year").html(
           "&nbsp; &#8678; &nbsp; TIME &nbsp; &nbsp; &nbsp; &nbsp; SLIDE &nbsp; &#8680;"
         );
-        $("#ruler-date4").text(moment.unix(date_ruler4).format("YYYY")); // .format('DD MMM YYYY')
-        $("#ruler-date5").text(moment.unix(date_ruler5).format("YYYY")); // .format('DD MMM YYYY')
+        $("#ruler-date4").text(moment.unix(date_ruler4).format("YYYY")); 
+        $("#ruler-date5").text(moment.unix(date_ruler5).format("YYYY")); 
 
         console.log("start:", sliderStart);
         console.log("end:", sliderEnd);
@@ -338,21 +321,14 @@
         $("#slider").slider({
           min: sliderStart,
           max: sliderEnd,
-          step: 86400, //24 hrs in unix time, set slider step to 1 day=86400 seconds
+          step: 86_400, //24 hrs in unix time, set slider step to 1 day=86400 seconds
           value: sliderMiddle, //window.name || sliderMiddle,
           slide: function (event, ui) {
             tooltiPos = ui.value < sliderMiddle ? 30 : -100;
-            /*
-					        $(ui.handle).find('.ui-slider-tooltip').css({ left: tooltiPos}).text(moment.unix(ui.value).format('MM/DD/YYYY'));
-						$("#date").val(moment.unix(ui.value).format('MM/DD/YYYY'));
-						*/
 
-            //urlHash = window.location.hash + '/' + ui.value;
-            // console.log(urlHash);
-            // hash.onMapMove();
+
             if (timeline_pointer_flag) {
               $("#ruler-date3").text(moment.unix(sliderMiddle).format("YYYY")); // .format('DD MMM YYYY')
-              //$("#mobi-year").text(moment.unix(sliderMiddle).format('YYYY'));  // .format('DD MMM YYYY')
               $("#mobi-year").css("display", "none");
               $("#ruler-date1").css("display", "block");
               $("#ruler-date2").css("display", "block");
@@ -400,13 +376,11 @@
               })
               .text(moment.unix(sliderMiddle).format("MM/DD/YYYY"));
 
-            //*A $(event.target).find('.ui-slider-handle').append(tooltip);
+
           },
           change: function (event, ui) {},
         });
 
-        //*A $("#date").val($("#slider").slider("values", 0));
-        //*A $("#date").val(moment.unix($("#slider").slider("values", 0)).format('MM/DD/YYYY'));
         $("#date").text(
           moment.unix($("#slider").slider("values", 0)).format("DD MMM YYYY")
         );
@@ -545,9 +519,8 @@
         });
 
         $("#current_lots").click(function () {
-          //console.warn(document.getElementById('current_lots').checked);
+
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("curr-lots", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "curr-lots-left",
               "visibility",
@@ -558,7 +531,6 @@
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("curr-lots", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "curr-lots-right",
               "visibility",
@@ -570,14 +542,12 @@
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("curr-lots-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty("curr-lots-left", "visibility", "none");
             beforeMap.setLayoutProperty(
               "curr-lots-high-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("curr-lots-right", "visibility") === "visible" )
             afterMap.setLayoutProperty("curr-lots-right", "visibility", "none");
             afterMap.setLayoutProperty(
               "curr-lots-high-right",
@@ -592,28 +562,23 @@
         });
 
         $("#current_lots_lines").click(function () {
-          //console.warn(document.getElementById('current_lots_lines').checked);
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("curr-lots-lines", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "curr-lots-lines-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("curr-lots-lines", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "curr-lots-lines-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("curr-lots-lines-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "curr-lots-lines-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("curr-lots-lines-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "curr-lots-lines-right",
               "visibility",
@@ -623,28 +588,23 @@
         });
 
         $("#current_buildings").click(function () {
-          //console.warn(document.getElementById('current_buildings').checked);
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("curr-builds", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "curr-builds-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("curr-builds", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "curr-builds-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("curr-builds-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "curr-builds-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("curr-builds-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "curr-builds-right",
               "visibility",
@@ -654,28 +614,23 @@
         });
 
         $("#current_buildings_lines").click(function () {
-          //console.warn(document.getElementById('current_buildings_lines').checked);
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("curr-builds-lines", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "curr-builds-lines-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("curr-builds-lines", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "curr-builds-lines-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("curr-builds-lines-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "curr-builds-lines-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("curr-builds-lines-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "curr-builds-lines-right",
               "visibility",
@@ -955,16 +910,11 @@
         });
 
         $("#castello_points").click(function () {
-          //console.warn(document.getElementById('castello_points').checked);
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("places", "visibility") === "none" )
             beforeMap.setLayoutProperty("places-left", "visibility", "visible");
-            //if(afterMap.getLayoutProperty("places", "visibility") === "none" )
             afterMap.setLayoutProperty("places-right", "visibility", "visible");
           } else {
-            //if(beforeMap.getLayoutProperty("places-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty("places-left", "visibility", "none");
-            //if(afterMap.getLayoutProperty("places-right", "visibility") === "visible" )
             afterMap.setLayoutProperty("places-right", "visibility", "none");
 
             if (castello_layer_view_flag) {
@@ -983,7 +933,6 @@
 
         $("#settlements_points").click(function () {
           if ($(this).prop("checked")) {
-            // sizeOfArray(settlements_info)     for assoc arrays
             if (settlements_info_length == 0) {
               getSettlementsInfo();
             }
@@ -1044,7 +993,6 @@
         $("#settlements_items").change(function () {
           $(".settlements").prop("checked", this.checked);
           if ($(this).prop("checked")) {
-            // sizeOfArray(settlements_info)     for assoc arrays
             if (settlements_info_length == 0) {
               getSettlementsInfo();
             }
@@ -1102,7 +1050,6 @@
 
         $("#info_points").click(function () {
           if ($(this).prop("checked")) {
-            // sizeOfArray(infos_entity)     for assoc arrays
             if (infos_entity_length == 0) {
               getInfosEntity();
             }
@@ -1163,7 +1110,6 @@
         $("#info_items").change(function () {
           $(".info-item").prop("checked", this.checked);
           if ($(this).prop("checked")) {
-            // sizeOfArray(infos_entity)     for assoc arrays
             if (infos_entity_length == 0) {
               getInfosEntity();
             }
@@ -1213,30 +1159,25 @@
 
         $("#circle_point").click(function () {
           if ($(this).prop("checked")) {
-            // sizeOfArray(taxlot_events_info)     for assoc arrays
             if (taxlot_events_info_length == 0) {
               getTaxlotEventsInfo();
             }
-            //if(beforeMap.getLayoutProperty("lot_events-bf43eb-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "lot_events-bf43eb-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("lot_events-bf43eb-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "lot_events-bf43eb-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("lot_events-bf43eb-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "lot_events-bf43eb-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("lot_events-bf43eb-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "lot_events-bf43eb-right",
               "visibility",
@@ -1340,13 +1281,11 @@
             if (dutch_grant_lots_info_length == 0) {
               getDutchGrantsInfo();
             }
-            //if(beforeMap.getLayoutProperty("dutch_grants-5ehfqe-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "dutch_grants-5ehfqe-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("dutch_grants-5ehfqe-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "dutch_grants-5ehfqe-right",
               "visibility",
@@ -1363,13 +1302,11 @@
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("dutch_grants-5ehfqe-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "dutch_grants-5ehfqe-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("dutch_grants-5ehfqe-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "dutch_grants-5ehfqe-right",
               "visibility",
@@ -1393,26 +1330,22 @@
 
         $("#grants_layer_lines").click(function () {
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("grant-lots-lines-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "grant-lots-lines-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("grant-lots-lines-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "grant-lots-lines-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("grant-lots-lines-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "grant-lots-lines-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("grant-lots-lines-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "grant-lots-lines-right",
               "visibility",
@@ -1425,12 +1358,7 @@
         $("#gravesend_layer_items").change(function () {
           $(".gravesend_layer").prop("checked", this.checked);
           if ($(this).prop("checked")) {
-            // sizeOfArray(dutch_new_grant_lots_info)     for assoc arrays
-            /*
-					    if(dutch_new_grant_lots_info_length == 0) {
-					        getDutchNewGrantsInfo();
-					    }
-						*/
+
             if (brooklyn_grants_length == 0) {
               getBrooklynGrantsInfo();
             }
@@ -1516,22 +1444,15 @@
 
         $("#gravesend_layer").click(function () {
           if ($(this).prop("checked")) {
-            /*
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-					    if(dutch_grant_lots_info_length == 0) {
-					        getDutchGrantsInfo();
-					    }
-						*/
+
             if (brooklyn_grants_length == 0) {
               getBrooklynGrantsInfo();
             }
-            //if(beforeMap.getLayoutProperty("gravesend_boundaries-c6qrbw-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "gravesend_boundaries-c6qrbw-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("gravesend_boundaries-c6qrbw-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "gravesend_boundaries-c6qrbw-right",
               "visibility",
@@ -1548,13 +1469,11 @@
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("gravesend_boundaries-c6qrbw-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "gravesend_boundaries-c6qrbw-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("gravesend_boundaries-c6qrbw-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "gravesend_boundaries-c6qrbw-right",
               "visibility",
@@ -1579,26 +1498,22 @@
 
         $("#gravesend_layer_lines").click(function () {
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("gravesend-lines-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "gravesend-lines-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("gravesend-lines-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "gravesend-lines-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("gravesend-lines-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "gravesend-lines-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("gravesend-lines-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "gravesend-lines-right",
               "visibility",
@@ -1799,26 +1714,22 @@
 
         $("#native_groups_lines").click(function () {
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("native-groups-lines-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "native-groups-lines-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("native-groups-lines-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "native-groups-lines-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("native-groups-lines-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "native-groups-lines-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("native-groups-lines-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "native-groups-lines-right",
               "visibility",
@@ -1832,12 +1743,7 @@
         $("#karl_layer_items").change(function () {
           $(".karl_layer").prop("checked", this.checked);
           if ($(this).prop("checked")) {
-            // sizeOfArray(dutch_new_grant_lots_info)     for assoc arrays
-            /*
-					    if(dutch_new_grant_lots_info_length == 0) {
-					        getDutchNewGrantsInfo();
-					    }
-						*/
+
             beforeMap.setLayoutProperty(
               "karl_long_island-left",
               "visibility",
@@ -1918,19 +1824,12 @@
 
         $("#karl_layer").click(function () {
           if ($(this).prop("checked")) {
-            /*
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-					    if(dutch_grant_lots_info_length == 0) {
-					        getDutchGrantsInfo();
-					    }
-						*/
-            //if(beforeMap.getLayoutProperty("karl_long_island-left", "visibility") === "none" )
+
             beforeMap.setLayoutProperty(
               "karl_long_island-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("karl_long_island-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "karl_long_island-right",
               "visibility",
@@ -1947,13 +1846,11 @@
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("karl_long_island-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "karl_long_island-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("karl_long_island-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "karl_long_island-right",
               "visibility",
@@ -1978,26 +1875,22 @@
 
         $("#karl_layer_lines").click(function () {
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("karl-lines-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "karl-lines-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("karl-lines-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "karl-lines-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("karl-lines-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "karl-lines-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("karl-lines-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "karl-lines-right",
               "visibility",
@@ -2098,13 +1991,11 @@
             if (farms_grants_info_length == 0) {
               getOriginalFarmsInfo();
             }
-            //if(beforeMap.getLayoutProperty("original_grants_and_farms-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "original_grants_and_farms-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("original_grants_and_farms-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "original_grants_and_farms-right",
               "visibility",
@@ -2121,13 +2012,11 @@
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("original_grants_and_farms-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "original_grants_and_farms-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("original_grants_and_farms-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "original_grants_and_farms-right",
               "visibility",
@@ -2151,26 +2040,22 @@
 
         $("#farms_layer_lines").click(function () {
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("farms-lines-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "farms-lines-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("farms-lines-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "farms-lines-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("farms-lines-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "farms-lines-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("farms-lines-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "farms-lines-right",
               "visibility",
@@ -2183,26 +2068,22 @@
 
         $("#grant_lots").click(function () {
           if ($(this).prop("checked")) {
-            //if(beforeMap.getLayoutProperty("grant-lots-left", "visibility") === "none" )
             beforeMap.setLayoutProperty(
               "grant-lots-left",
               "visibility",
               "visible"
             );
-            //if(afterMap.getLayoutProperty("grant-lots-right", "visibility") === "none" )
             afterMap.setLayoutProperty(
               "grant-lots-right",
               "visibility",
               "visible"
             );
           } else {
-            //if(beforeMap.getLayoutProperty("grant-lots-left", "visibility") === "visible" )
             beforeMap.setLayoutProperty(
               "grant-lots-left",
               "visibility",
               "none"
             );
-            //if(afterMap.getLayoutProperty("grant-lots-right", "visibility") === "visible" )
             afterMap.setLayoutProperty(
               "grant-lots-right",
               "visibility",
@@ -2219,26 +2100,25 @@
 
         $("#view-hide-layer-panel").click(function () {
           if (layer_view_flag) {
-            $("#studioMenu").animate({ "margin-left": "-337px" }, 500); //.slideUp();
+            $("#studioMenu").animate({ "margin-left": "-337px" }, 500); 
             $(this).animate({ "margin-left": "-337px" }, 500);
             $("#mobi-hide-sidebar").animate({ "margin-left": "-337px" }, 500);
             layer_view_flag = false;
             $("#dir-txt").html("&#9205;");
             $("#rightInfoBar").slideUp();
           } else {
-            $("#studioMenu").animate({ "margin-left": "0px" }, 500); //.slideDown();
+            $("#studioMenu").animate({ "margin-left": "0px" }, 500); 
             $(this).animate({ "margin-left": "0px" }, 500);
             $("#mobi-hide-sidebar").animate({ "margin-left": "0px" }, 500);
             layer_view_flag = true;
             $("#dir-txt").html("&#9204;");
-            //555
             if (windoWidth > 637) $("#rightInfoBar").slideDown();
           }
         });
 
         $("#mobi-view-sidebar").click(function () {
           if (!layer_view_flag) {
-            $("#studioMenu").animate({ "margin-left": "0px" }, 500); //.slideDown();
+            $("#studioMenu").animate({ "margin-left": "0px" }, 500); 
             $("#view-hide-layer-panel").animate({ "margin-left": "0px" }, 500);
             $("#mobi-hide-sidebar").animate({ "margin-left": "0px" }, 500);
             layer_view_flag = true;
@@ -2248,7 +2128,7 @@
 
         $("#mobi-hide-sidebar").click(function () {
           if (layer_view_flag) {
-            $("#studioMenu").animate({ "margin-left": "-111%" }, 500); //.slideUp();
+            $("#studioMenu").animate({ "margin-left": "-111%" }, 500); 
             $("#view-hide-layer-panel").animate(
               { "margin-left": "-337px" },
               500
@@ -2262,22 +2142,14 @@
         /* change timeline CSS property on mouseover & mouseout */
         $("div.timeline")
           .mouseover(function () {
-            //$("div#slider").css("opacity", 0.8);
             $("div.ui-widget-content").css("background-color", "#baddf9");
             $("a.ui-slider-handle").css("background", "red");
           })
           .mouseout(function () {
-            //$("div#slider").css("opacity", 1);
             $("div.ui-widget-content").css("background-color", "#d1ecff");
             $("a.ui-slider-handle").css("background", "");
           });
 
-        /*
-				$("a.ui-slider-handle").mouseover(function(){
-				    $("#ruler-date3").text(moment.unix(sliderMiddle).format('DD MMM YYYY'));
-					$("#mobi-year").text(moment.unix(sliderMiddle).format('DD MMM YYYY'));
-                });
-				*/
 
         $(".trigger-popup").click(function (e) {
           var popup_id =
@@ -2302,7 +2174,6 @@
         });
 
         setTimeout(function () {
-          //document.getElementById("#loading").style.display = "none";
           $("div#loading").css("display", "none");
         }, 5000);
       });
@@ -2328,60 +2199,13 @@
           data: {},
         })
           .done(function (data) {
-            //console.log(data);
             if (data.length > 0) {
-              //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
               for (let i = 0; i < data.length; i++) {
-                /* old api
-				if( typeof data[i].title[0].value != "undefined" ) {
-				    
-					data_info_index = data[i].title[0].value;
-					data_info_index = data_info_index.replace(/\s+/g, '');
-					//data_info_index = data_info_index.toLowerCase();
-					//console.log(/FortAmsterdam/.test(data_info_index));
-					if(/FortAmsterdam/.test(data_info_index)) {
-					    //console.log(data_info_index);
-						data_info_index = "Fort Amsterdam";
-					}
-					
-					//if(/J-Block-Garden-DWIC/.test(data_info_index)) {
-					//    console.log(data_info_index);
-					//}
-				   
-				    dutch_grant_lots_info[data_info_index] = { 
-					    name_txt: data[i].field_name.length > 0 ? data[i].field_name[0].value : "", 
-					    to_party: data[i].field_name.length > 0 ? (  
-						    ( data[i].field_name456.length > 0 ? "<a href='https://nahc-mapping.org" + data[i].field_name456[0].url + "' target='_blank'>" : "" ) +
-						     data[i].field_name[0].value  +
-							( data[i].field_name456.length > 0 ? "</a>"  : "" )
-						) : "", 
-					    from_party:  data[i].field_from_party_text_.length > 0 ? (
-						    ( data[i].field_from_party.length > 0 ? "<a href='https://nahc-mapping.org" + data[i].field_from_party[0].url + "' target='_blank'>" : "" ) +
-						    data[i].field_from_party_text_[0].value  +
-							( data[i].field_from_party.length > 0 ? "</a>"  : "" )
-						) : "",
-						start: data[i].field_date_end.length > 0 ? data[i].field_date_end[0].value  : "", 
-						end: data[i].field_date_end_grants.length > 0 ? data[i].field_date_end_grants[0].value  : "", 
-						notes: data[i].field_grant_notes.length > 0 ? data[i].field_grant_notes[0].value  : "", 
-						descr: data[i].field_grant_description.length > 0 ? data[i].field_grant_description[0].value : "",
-						builds: data[i].field_current_buildings_and_land.length > 0 ? data[i].field_current_buildings_and_land : []
-					};  
-          
-                    dutch_grant_lots_info_length += 1;
-                    //console.log(dutch_grant_lots_info_length);					
-				}
-				*/
-                // new api
-                //console.log(data[i].from_party);
-                //console.log(data[i].to_party);
-                //console.log(data[i].title);
-                //console.log(unescape(data[i].from_party));
-                //console.log(unescape(data[i].to_party));
+                
                 if (data[i].title != "") {
                   data_info_index = data[i].title;
                   data_info_index = data_info_index.replace(/\s+/g, "");
                   if (/FortAmsterdam/.test(data_info_index)) {
-                    //console.log(data_info_index);
                     data_info_index = "Fort Amsterdam";
                   }
                   dutch_grant_lots_info[data_info_index] = {
@@ -2435,19 +2259,15 @@
           data: {},
         })
           .done(function (data) {
-            //console.log(data);
+
             if (data.length > 0) {
-              //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
+
               for (let i = 0; i < data.length; i++) {
                 if (typeof data[i].nid[0].value != "undefined") {
-                  //console.log(data[i].title[0].value);
-                  //data_info_index = data[i].title[0].value;
-                  //data_info_index = data_info_index.replace(/\s+/g, '');
-                  //data_info_index = data_info_index.toLowerCase();
+
                   data_info_index = "" + data[i].nid[0].value + "";
 
                   farms_grants_info[data_info_index] = {
-                    //title: data[i].title.length > 0 ? data[i].title[0].value : "",
                     name:
                       data[i].title.length > 0
                         ? (data[i].path.length > 0
@@ -2491,7 +2311,6 @@
                   };
 
                   farms_grants_info_length += 1;
-                  //console.log(taxlot_event_entities_info);
                 }
               }
             }
@@ -2521,21 +2340,13 @@
           data: {},
         })
           .done(function (data) {
-            //console.log(data);
             if (data.length > 0) {
-              //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
               for (let i = 0; i < data.length; i++) {
-                // old api
-                //if( typeof data[i].title[0].value != "undefined" ) {
+
                 if (typeof data[i].nid[0].value != "undefined") {
-                  //console.log(data[i].title[0].value);
-                  //data_info_index = data[i].title[0].value;
-                  //data_info_index = data_info_index.replace(/\s+/g, '');
-                  //data_info_index = data_info_index.toLowerCase();
                   data_info_index = "" + data[i].nid[0].value + "";
 
                   settlements_info[data_info_index] = {
-                    //name: data[i].title.length > 0 ? data[i].title[0].value : "",
                     name:
                       data[i].title.length > 0
                         ? (data[i].path.length > 0
@@ -2604,11 +2415,9 @@
                     data[i].title[0].value;
 
                   settlements_info_length += 1;
-                  //console.log(settlements_info_length);
                 }
               }
             }
-            //console.log(settlements_info);
           })
           .fail(function (xhr, textStatus, errorThrown) {
             // LOADING ERROR!
@@ -2635,17 +2444,11 @@
           data: {},
         })
           .done(function (data) {
-            //console.log(data);
             if (data.length > 0) {
-              //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
               for (let i = 0; i < data.length; i++) {
-                // old api
-                //if( typeof data[i].title[0].value != "undefined" ) {
+
                 if (typeof data[i].nid[0].value != "undefined") {
-                  //console.log(data[i].title[0].value);
-                  //data_info_index = data[i].title[0].value;
-                  //data_info_index = data_info_index.replace(/\s+/g, '');
-                  //data_info_index = data_info_index.toLowerCase();
+
                   data_info_index = "" + data[i].nid[0].value + "";
 
                   taxlot_event_entities_info[data_info_index] = {
@@ -2668,11 +2471,9 @@
                   };
 
                   taxlot_entities_info_length += 1;
-                  //console.log(taxlot_event_entities_info);
                 }
               }
             }
-            //console.log(taxlot_entities_info);
           })
           .fail(function (xhr, textStatus, errorThrown) {
             // LOADING ERROR!
@@ -2699,53 +2500,15 @@
           data: {},
         })
           .done(function (data) {
-            //console.log(data);
             if (data.length > 0) {
-              //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
               for (let i = 0; i < data.length; i++) {
                 if (typeof data[i].title != "undefined") {
-                  /*
-
-	"title": "C7_1643-06-02"	
-    "title":"\u003Ca href=\u0022\/node\/1545\u0022 hreflang=\u0022en\u0022\u003EC7_1643-06-02\u003C\/a\u003E"
-	
-	C7
-	taxlot_C7
-	"field_taxlot": "\u003Ca href=\u0022\/taxlot\/c7\u0022 hreflang=\u0022en\u0022\u003EC7\u003C\/a\u003E, \u003Ca href=\u0022\/lots\/taxlotc7\u0022 hreflang=\u0022en\u0022\u003Etaxlot_C7\u003C\/a\u003E",
-
-
-	Willem Kieft (ID: 1,660,244)
-	"field_from": "\u003Ca href=\u0022\/ancestor\/willem-kieft-id-1660244\u0022 hreflang=\u0022en\u0022\u003EWillem Kieft (ID: 1,660,244)\u003C\/a\u003E",
-	
-	Dutch West India Company (ID: DWIC)
-	"field_from_party_1": "\u003Ca href=\u0022\/ancestor\/dutch-west-india-company-id-dwic\u0022 hreflang=\u0022en\u0022\u003EDutch West India Company (ID: DWIC)\u003C\/a\u003E",
-	
-	
-	Govert Loockermans (ID: 151)
-	"field_to": "\u003Ca href=\u0022\/ancestor\/govert-loockermans-id-151\u0022 hreflang=\u0022en\u0022\u003EGovert Loockermans (ID: 151)\u003C\/a\u003E",
-		
-	Isaac Allerton (ID: 1,660,228)   
-	"field_to_party_1": "\u003Ca href=\u0022\/ancestor\/isaac-allerton-id-1660228\u0022 hreflang=\u0022en\u0022\u003EIsaac Allerton (ID: 1,660,228)\u003C\/a\u003E",
-	
-	"field_daystart": "June 2, 1643"
-	
-					*/
-
-                  //data_info_index = "" + data[i].title + "";
-
-                  /*
-					console.log(data[i].title);
-					console.log(data[i].title.match(/\/node\/(.*?)\"/)[1]);
-					console.log(parseInt(data[i].title.match(/\/node\/(\d*?)\"/)[1]));
-					*/
+                  
 
                   data_info_index = data[i].title.match(/\/node\/(.*?)\"/)[1];
 
-                  //console.log(data_info_index);
-
                   if (data_info_index !== null) {
                     taxlot_events_info[data_info_index] = {
-                      //title: data[i].title,
                       title: data[i].title.replaceAll(
                         "href=\u0022",
                         "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"
@@ -2848,12 +2611,10 @@
                     };
 
                     taxlot_events_info_length += 1;
-                    //console.log(taxlot_events_info);
                   }
                 }
               }
             }
-            //console.log(taxlot_events_info["C7_1643-06-02"].taxlot);
           })
           .fail(function (xhr, textStatus, errorThrown) {
             // LOADING ERROR!
@@ -2880,17 +2641,10 @@
           data: {},
         })
           .done(function (data) {
-            //console.log(data);
             if (data.length > 0) {
-              //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
               for (let i = 0; i < data.length; i++) {
-                // old api
-                //if( typeof data[i].title[0].value != "undefined" ) {
                 if (typeof data[i].nid[0].value != "undefined") {
-                  //console.log(data[i].title[0].value);
-                  //data_info_index = data[i].title[0].value;
-                  //data_info_index = data_info_index.replace(/\s+/g, '');
-                  //data_info_index = data_info_index.toLowerCase();
+
                   data_info_index = "" + data[i].nid[0].value + "";
 
                   infos_entity[data_info_index] = {
@@ -2910,11 +2664,9 @@
                   };
 
                   infos_entity_length += 1;
-                  //console.log(taxlot_event_entities_info);
                 }
               }
             }
-            //console.log(taxlot_entities_info);
           })
           .fail(function (xhr, textStatus, errorThrown) {
             // LOADING ERROR!
@@ -2993,8 +2745,6 @@
                       data[i].field_history_notes222.length > 0
                         ? data[i].field_history_notes222[0].value
                         : "",
-
-                    //ancestors_link: data[i].field_related_ancestors222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_related_ancestors222[0].url : "",
                   };
 
                   brooklyn_grants_length += 1;
@@ -3093,9 +2843,7 @@
       .map {
         position: absolute;
         display: block;
-        /*top: 61px;*/
         top: 80px;
-        /* bottom: 0; */
         bottom: 67px;
         width: 100%;
         /* Standard */
@@ -3140,7 +2888,6 @@
         height: 30px;
       }
 
-      /* make from vertical to horizontal */
       .mapboxgl-ctrl-group > button {
         display: inline-block;
       }
@@ -3242,7 +2989,6 @@
 
       .header a.encyclopedia {
       background-color: #e8e1da;
-      /* color: white; */
       }
 
       /*Override styling for logo link*/
@@ -3569,9 +3315,6 @@
 
       #infoLayerFarms,
       .infoLayerFarmsPopUp {
-        /* background-color: rgb(255, 192, 203, 0.5); */
-        /* #FFC0CB Pink */
-        /* border: solid #FFC0CB 2px; */
         background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
         border: solid #ffff00 2px;
       }
@@ -3616,32 +3359,6 @@
         display: inline-block;
       }
 
-      /*
-.demoLayerInfoPopUp { 
-    height: 34px;
-    width: 34px;
-    background-color: green;
-	border-radius: 50%;
-	margin: 0 auto;
-} 
-.infoLayerCastelloPopUp { 
-    height: 15px;
-    width: 15px;
-    background-color: red;
-	border-radius: 50%;
-	margin: 0 auto;
-} 
-.infoLayerGrantLotsPopUp { 
-    height: 13px;
-    width: 100%;
-    background-color: #66CDAA;
-}
-.infoLayerDutchGrantsPopUp { 
-    height: 15px;
-    width: 100%;
-    background-color: #FFFF00;
-}
-*/
 
       .demoLayerInfoPopUp,
       .infoLayerCastelloPopUp,
@@ -3658,11 +3375,6 @@
 
       #view-hide-layer-panel {
         position: absolute;
-        /*
-	bottom: 135px; 
-	left: -3px; 
-	float: rigth; 
-	*/
         top: 88px;
         left: 337px; /* 300 <-> 312px | 325 <-> 312 + 25 */
         z-index: 500;
@@ -3782,19 +3494,6 @@
           justify-content: space-around;
         }
 
-        /*
-	img.img2 { display: none; }
-	
-	img#logo-img-wide {  
-		display: none;
-	}
-	
-	img#logo-img {  
-	    height: 34px;
-		display: inline-block;
-	}
-	*/
-
         #headerTextSuffix,
         .headerText {
           display: none;
@@ -3838,10 +3537,6 @@
           /* WebKit */
           max-height: -webkit-calc(100% - 134px);
         }
-
-        /*
-	#headerTextSuffix { display: none; }
-	*/
 
         .headerText {
           margin-top: 11px;
@@ -3924,18 +3619,6 @@
           </p>
         </div>
 
-        <!--
-    <div class="modal-footer">
--->
-        <!--
-      <label for="o">close</label>
-	  -->
-        <!--
-	        <b><a href="http://newamsterdamhistorycenter.org/support/">Support Us</a></b>
-			<p style="color: #b0691d; font-size: 16px; font-weight: bold;">
-				<i>MAPPING EARLY NEW YORK</i>, PHASE 1 AND 2 are made possible by a grant from the SOCIETY OF THE DAUGHTERS OF HOLLAND DAMES.</p>
-    </div>
--->
       </div>
     </div>
 
@@ -3955,20 +3638,12 @@
 
       <!--PREVIOUS HEADER-->
 
-      <!--
-			<img style="padding: 3px 3px 3px 3px; float: left;" src="http://nahc.simcenterdev.org/sites/default/files/garland_logo.JPG" height="55" align="middle">
-			-->
-
       <div id="header_text" class="headerText">
         <span id="headerTextSuffix">|</span> Mapping Early New York
       </div>
 
       <div class="header-right">
-        <!--
-					<a href="swipe.html">Swipe</a>
-					<a href="explore.html">Explore</a>
-					<a class="active" href="#home">Timeline (BETA)</a>
-					-->
+
         <a
           class="encyclopedia"
           href="https://newamsterdamhistorycenter.org/full-3d-model/"
@@ -3991,13 +3666,7 @@
             src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png"
             width="18"
         /></a>
-        <!--
-					<a href="about.html">About</a>
-					-->
-        <!--
-					<label for="o" id="about" title="Open">ABOUT</label>
-					<label for="o" id="info" ><i for="o" class="fa fa-2x fa-info-circle"></i></label>
-					-->
+
         <label for="o" id="open-popup" style="display: none">Open PopUp</label>
         <label id="about" class="trigger-popup" title="Open">ABOUT</label>
         <i class="fa fa-2x fa-info-circle trigger-popup" id="info"></i>
@@ -4031,23 +3700,12 @@
       <i id="mobi-hide-sidebar" class="fa fa-arrow-circle-left fa-3x"></i>
 
       <!--
-	  <p class="title">
         ZOOM TO LAYERS
-      </p>
-	  <button onclick="zoomtobounds('LongIsland')">Long Island</button>
-	  <button onclick="zoomtobounds('Manhattan')">Manhattan</button>
-	  <button onclick="zoomtobounds('NYC')">New York City</button>
-	  <button onclick="zoomtobounds('Bronx')">Bronx</button>
-	  <button onclick="zoomtobounds('Brooklyn')">Brooklyn</button>
-	  <button onclick="zoomtobounds('Queens')">Queens</button>
-	  <button onclick="zoomtobounds('StatenIsland')">Staten Island</button>
-	  <br><br>
+
       -->
 
       <p class="title">LAYERS</p>
-      <!-- #*A
-	  <br>
-	  -->
+
       <br />
       <center>
         <b
@@ -4890,14 +4548,9 @@
       <br />
 
       <div>
-        <!-- #*A
-		<br>
-		-->
+
         <hr />
         <p class="title">MAPS</p>
-        <!-- #*A
-		  <br>
-          -->
         <!--CURRENT SATELLITE -->
         <div class="layer-list-row">
           <input
@@ -5087,10 +4740,7 @@
 
         <br />
         <center>
-          <!--
-		    <button onclick="zoomLabels('hide')" id="show-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button>
-		    <button onclick="zoomLabels('show')" id="hide-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye-slash"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button> &nbsp;
-			-->
+ 
           <a
             class="encyclopedia"
             href="https://sandcastle.cesium.com/standalone.html#c=jVJtb9owEP4rJz5UIFUOL2q1drQaCxsKamCloYUqX0xiiMGxg+1Aw9T/PueFrVTdtE+W7567e57nzrJgIDHXYBNF03j4ADgIiFKgBWQilUAFB6wU0crnJQY5gqOQLHHKdK8Ae2JDONyAXyPZMFoMAjqmQ2d6cFoj6iiHTy4C27l0Nsns0R5eIQPahoNNDqLz9jMbxe7etZsXcy+M7rz7zsib6/n6O3Vps+n2e4ex52Ru/2s07k/pnT1Mnk0z13P3I89t5//57J6O19/ao8OmM1pvDm5/coWSUG6n6/XlUwtPPwnRfpqpcNuyqe1EQzqZKD7odWbRYnO1mvu1zz73eSC40rCjZE+kEcPJvjIFPRaxul8Lir8tuMaUE+nXzuGnzwE0kdJEfkixoyGR14D3mB49ReXjnWLQUorYONnLvXXCet4GoJU/jXOfvzYMp5ILUgHhBK2YWBDje6IjjyjdW5lmSlddDV8tU1Lo0DIrWZWCNGXEjDCID0h1+l6Zfk+nddlqNzsXOQuAEx6JpDHVdEcUwmFYr9qXwHJCBT8IEXviLSCHWBb0koRloCMC1RWB0hkjQJdgqskLVfmxHfmTFy2xygVWTItrRGW4mGrqKvsqbaatWU9YLzENODv7RxqZC/8PyPHiH3KqjWJNpcvwm1ip4uRy3rpcVP61Y6Hk1SweAqyDCOpmsUI2/mxSMIKYWFVxAzfg2nmtW0y9zVFfaJwIqSGVrI6QpUmcMKyJshZpsDH8AqXyuq51LOmGdAc0vPngsCFgxmeTWaaMPdAD8Wu3XcvgT8qYwCHlq/GOSIYzA8lpdKPW7V2ZQAh1LfPNh76v1UKwBZZv+ho1kdaJurYshXkYYKWN5pIaCkRsrTBjRGbWLw"
@@ -5657,10 +5307,7 @@
 
         <br />
         <center>
-          <!--
-		    <button onclick="zoomLabels('hide')" id="show-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button>
-		    <button onclick="zoomLabels('show')" id="hide-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye-slash"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button> &nbsp;
-			-->
+
           <button onclick="zoomtobounds('World')" id="zoom-world">
             &nbsp; &nbsp; <i class="fa fa-globe"></i> &nbsp;
             <b>Zoom to World</b> &nbsp; &nbsp; &nbsp;
@@ -5668,123 +5315,28 @@
         </center>
       </div>
 
-      <!--
-	  <br>
-	  <div class="infoLayerElem" id="infoLayerGrantLots"></div>
-	  <div class="infoLayerElem" id="infoLayerDutchGrants"></div>
-	  <div class="infoLayerElem" id="infoLayerGravesend"></div> 
-	  <div class="infoLayerElem" id="infoLayerNativeGroups"></div>
-	  <div class="infoLayerElem" id="infoLayerKarl"></div>
-	  <div class="infoLayerElem" id="infoLayerFarms"></div>
-	  <div class="infoLayerElem" id="infoLayerCastello"></div>
-	  <div class="infoLayerElem" id="infoLayerSettlements"></div>
-	  <div class="infoLayerElem" id="demoLayerInfo"></div>
-	  <div class="infoLayerElem" id="infoLayerCurrLots"></div>
-	  -->
+
     </div>
 
     <!-- MAP DIV-->
-    <!--
-		<div id="map" class="map"></div>
-		-->
+
     <div id="before" class="map"></div>
     <div id="after" class="map"></div>
 
     <!---------------------->
     <!--ADD BASEMAP TOGGLE-->
     <!---------------------->
-    <!--
-	<div id='baseMapMenu'>
 
-	</div>
-	-->
 
     <!-- BASEMAP SWITCHER DIV -->
-    <!--
-		<div id="styleSwitcher"></div>
-		-->
+
     <div id="mobi-view-sidebar"><i class="fa fa-bars fa-2x"></i></div>
 
-    <!-- NAVIGATION PANEL DIV -->
-    <!--
-		<div id='navpanel'>
-		<b>NAVIGATION</b>
-		<div style="line-height: 58px; height: 58px; vertical-align: middle; width: 100%; margin-top: 3px;">
-		<i class="fas fa-3x fas fa-3x fa-caret-square-left nav-btn" onmousedown="rotateLoopASC()" onmouseup="rotateLoopASCend()"></i>
-		// onclick="rotatex(5)"
-		<svg version="1.1" id="Layer_1" style="margin-bottom: -10px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="55px" height="55px" viewBox="0 0 512 512" enable-background="new 0 0 160 160" xml:space="preserve">
-	    <g>
-	        <g id="compass-pointer" >
-                <path class="north-arr" d="M248.156,225.531l-26.094-26.094l147.063-56.563l-56.563,147.063l-26.094-26.094c2.688-10.594,0.438-22.188-7.844-30.469 S258.75,222.813,248.156,225.531z" />
-	            <path class="south-arr"  d="M233.375,278.625c-8.281-8.281-10.563-19.875-7.844-30.469l-26.094-26.094l-56.563,147.063 l147.063-56.563l-26.094-26.094C253.25,289.188,241.656,286.906,233.375,278.625z" >
-            </g>
-	        <path  class="compass-ring" d="M512,256c0,141.375-114.625,256-256,256
-	        S0,397.375,0,256S114.625,0,256,0S512,114.625,512,256z M240,32c0,8.844,7.156,16,16,16s16-7.156,16-16s-7.156-16-16-16
-	        S240,23.156,240,32z M48,256c0-8.844-7.156-16-16-16s-16,7.156-16,16s7.156,16,16,16S48,264.844,48,256z M272,480
-	        c0-8.844-7.156-16-16-16s-16,7.156-16,16s7.156,16,16,16S272,488.844,272,480z M448,256c0-105.875-86.125-192-192-192
-	        S64,150.125,64,256s86.125,192,192,192S448,361.875,448,256z M496,256c0-8.844-7.156-16-16-16s-16,7.156-16,16s7.156,16,16,16
-	        S496,264.844,496,256z"/>
-	    </g>
-        </svg>
-		// onclick="rotatex(-5)"
-        <i class="fas fa-3x fa-caret-square-right nav-btn" onmousedown="rotateLoopDESC()" onmouseup="rotateLoopDESCend()"></i> 
-	    </div>
-	    
-		<span>
-        <i class="fas fa-3x fa-plus-square nav-btn" onclick="setZoom(1)"></i>&nbsp;
-        <i class="fas fa-3x fa-crosshairs nav-init" onclick="zoomtofit()"></i>&nbsp;
-        <i class="fas fa-3x fa-minus-square nav-btn" onclick="setZoom(-1)"></i>
-		</span>
-		
-		</div>
-        -->
 
     <!-- TIMELINE PANEL DIV -->
     <div id="datepanel">
       <b><span id="date"></span></b>
     </div>
-    <!--
-		<div id='sidepanel'>
-		
-			<div id="content">
-				<h1>NAHC Taxlot C7 Demo</h1>
-				<hr/>
-				<p class="info" style="text-align:center">
-				Show New York on:
-				<br/> +
-				<input type="text" id="date" size="4" class="y2000" value="" /> +
-				</p>
-                                -->
-    <!--
-				<div id="slider"></div>
-                                -->
-    <!--
-				<br>
-				<nav id="legend"></nav>
-				<div>
-				<span class="footnote">
-						Our goal is to go to any time and see the way New York was 
-						then, beginning in 1609.
-						This is our beta project, showing a history of a single
-						lot from 1643-1675.
-						<p>
-						Slide the timeline and click the big dot to see what was there.
-						The color changes when the lot changes hands.
-						The color first changes to green in 1659.
-						<p>
-						More buildings and data will be added soon.
-
-					</span>
-				</div>
-				</br>
-				<div id="footnotediv" style="display:none">
-
-
-					
-				</div>
-			</div>
-		</div>
-        -->
 
     <!-------------------->
     <!--ADD FOOTER DIV---->
