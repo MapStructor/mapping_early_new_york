@@ -1695,12 +1695,7 @@ function getDutchGrantsInfo() {
         }
       }
     })
-    .fail(function (xhr, textStatus, errorThrown) {
-      // LOADING ERROR!
-      console.warn("jQuery AJAX request  ERROR !!!");
-      console.log(xhr.responseText);
-      console.log(textStatus);
-    });
+    .fail(logAjaxError);
 }
 
 // for test local host REST_API/original-farms-and-grants-list-export.json
@@ -2043,12 +2038,7 @@ function getTaxlotEventsInfo() {
         }
       }
     })
-    .fail(function (xhr, textStatus, _errorThrown) {
-      // LOADING ERROR!
-      console.warn("jQuery AJAX request  ERROR !!!");
-      console.log(xhr.responseText);
-      console.log(textStatus);
-    });
+    .fail(logAjaxError);
 }
 
 // for test local host REST_API/info-entities-export.json
