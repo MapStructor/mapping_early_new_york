@@ -1,23 +1,3 @@
-const browserTestRegexp =
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/i;
-
-if (browserTestRegexp.test(navigator.userAgent)) {
-  // true for mobile device
-  console.warn("mobile device");
-  console.warn("redirect");
-  window.location.href = "./mobile.html";
-} else {
-  // false for not mobile device
-  console.warn("not mobile device");
-  if (window.innerWidth <= 670) {
-    console.warn("but small size");
-    console.warn("redirect");
-    window.location.href = "./mobile.html";
-  } else {
-    console.warn("start");
-    console.warn("load");
-  }
-}
 
 // get Dutch Grants Lots Info from REST API
 var dutch_grant_lots_info = [],
@@ -70,37 +50,6 @@ function logAjaxError(xhr, textStatus, _errorThrown) {
   console.warn("jQuery AJAX request  ERROR !!!");
   console.log(xhr.responseText);
   console.log(textStatus);
-}
-
-function simple_tooltip(target_items, name) {
-  $(target_items).each(function (i) {
-    $("body").append(
-      "<div class='" +
-        name +
-        "' id='" +
-        name +
-        i +
-        "'><p>" +
-        $(this).attr("title") +
-        "</p></div>"
-    );
-    var my_tooltip = $("#" + name + i);
-
-    $(this)
-      .removeAttr("title")
-      .mouseover(function () {
-        my_tooltip.css({ opacity: 1.0, display: "none" }).fadeIn(200);
-      })
-      .mousemove(function (kmouse) {
-        my_tooltip.css({
-          left: kmouse.pageX + 15,
-          top: kmouse.pageY + 15,
-        });
-      })
-      .mouseout(function () {
-        my_tooltip.fadeOut(200);
-      });
-  });
 }
 
 $(document).ready(function () {
@@ -2162,44 +2111,4 @@ function getBrooklynGrantsInfo() {
       }
     })
     .fail(logAjaxError);
-}
-
-// Function to calculate the
-// length of an array
-function sizeOfArray(array) {
-  // A variable to store
-  // the size of arrays
-  let size = 0;
-
-  // Traversing the array
-  for (let key in array) {
-    // Checking if key is present
-    // in arrays or not
-    if (array.hasOwnProperty(key)) {
-      size++;
-    }
-  }
-
-  // Return the size
-  return size;
-};
-
-function itemsCompressExpand(items_class, caret_id) {
-  if ($(caret_id).hasClass("fa-minus-square")) {
-    $(caret_id).removeClass("fa-minus-square").addClass("fa-plus-square");
-    $(items_class).hide();
-  } else if ($(caret_id).hasClass("fa-plus-square")) {
-    $(caret_id).removeClass("fa-plus-square").addClass("fa-minus-square");
-    $(items_class).show();
-  }
-}
-
-function sectionCompressExpand(section_id, caret_id) {
-  if ($(caret_id).hasClass("fa-minus-square")) {
-    $(caret_id).removeClass("fa-minus-square").addClass("fa-plus-square");
-    $(section_id).slideUp();
-  } else if ($(caret_id).hasClass("fa-plus-square")) {
-    $(caret_id).removeClass("fa-plus-square").addClass("fa-minus-square");
-    $(section_id).slideDown();
-  }
 }
