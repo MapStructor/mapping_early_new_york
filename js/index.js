@@ -2176,7 +2176,7 @@ function getBrooklynGrantsInfo() {
 
 // Function to calculate the
 // length of an array
-sizeOfArray = function (array) {
+function sizeOfArray(array) {
   // A variable to store
   // the size of arrays
   let size = 0;
