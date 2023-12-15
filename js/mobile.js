@@ -1,3 +1,27 @@
+const mobileCheckRegExp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/i
+
+// detecting mobile device
+if (
+  mobileCheckRegExp.test(
+    navigator.userAgent
+  )
+) {
+  // true for mobile device
+  console.warn("mobile device");
+  console.warn("load");
+  console.warn("start");
+} else {
+  // false for not mobile device
+  console.warn("not mobile device");
+  if (window.innerWidth <= 670) {
+    console.warn("but small size");
+    console.warn("load");
+    console.warn("start");
+  } else {
+    console.warn("redirect");
+    window.location.href = "./index.html";
+  }
+}
 
 // get Dutch Grants Lots Info from REST API
 var dutch_grant_lots_info = [],
@@ -16,6 +40,13 @@ var dutch_grant_lots_info_length = 0,
   taxlot_events_info_length = 0,
   taxlot_entities_info_length = 0;
 
+function logAjaxError(xhr, textStatus, _errorThrown) {
+  // LOADING ERROR!
+  console.warn("jQuery AJAX request  ERROR !!!");
+  console.log(xhr.responseText);
+  console.log(textStatus);
+}
+
 getDutchGrantsInfo();
 getOriginalFarmsInfo();
 getSettlementsInfo();
@@ -32,7 +63,7 @@ var timeline_pointer_flag = true;
 var windoWidth = 0;
 
 var sliderStart = moment("01/01/1626").unix();
-var sliderStartDrag = sliderStart;
+var sliderStartDrag = sliderStart; 
 var sliderEnd = moment("01/01/1700").unix();
 var sliderEndDrag = sliderEnd;
 
@@ -45,31 +76,16 @@ var ruler_step = (sliderEnd - sliderStart) / 10,
   date_ruler4 = sliderStart + ruler_step * 7,
   date_ruler5 = sliderStart + ruler_step * 9;
 
-function logAjaxError(xhr, textStatus, _errorThrown) {
-  // LOADING ERROR!
-  console.warn("jQuery AJAX request  ERROR !!!");
-  console.log(xhr.responseText);
-  console.log(textStatus);
-}
-
 $(document).ready(function () {
   if (jQuery.browser.msie)
     alert(
       "Sorry, this application uses state of the art HTML5 techniques which are not (well) supported by Internet Explorer.\nUse Google Chrome or Mozilla Firefox to experience the full power of HTML5 and this application"
     );
 
-  simple_tooltip("i.layer-info, i.zoom-to-layer", "tooltip");
-
   windoWidth = $(window).width();
-
-  if (windoWidth <= 637) {
-    if (layer_view_flag) {
-      $("#studioMenu").css({ "margin-left": "-111%" });
-      $("#view-hide-layer-panel").css({ "margin-left": "-337px" });
-      $("#mobi-hide-sidebar").css({ "margin-left": "-111%" });
-      layer_view_flag = false;
-      $("#dir-txt").html("&#9205;");
-    }
+  if (layer_view_flag) {
+    $("#studioMenu").slideUp();
+    layer_view_flag = false;
   }
 
   $(window).resize(function () {
@@ -88,16 +104,15 @@ $(document).ready(function () {
   $("#new-netherland-maps-section").slideUp();
   $("#new-england-maps-section").slideUp();
 
-  $("#ruler-date1").text(moment.unix(date_ruler1).format("YYYY"));
+  $("#ruler-date1").text(moment.unix(date_ruler1).format("YYYY")); 
   $("#ruler-date2").text(moment.unix(date_ruler2).format("YYYY"));
-
   $("#ruler-date3").html(
     "&nbsp; &#8678; &nbsp; TIME &nbsp; &nbsp; &nbsp; &nbsp; SLIDE &nbsp; &#8680;"
   );
   $("#mobi-year").html(
     "&nbsp; &#8678; &nbsp; TIME &nbsp; &nbsp; &nbsp; &nbsp; SLIDE &nbsp; &#8680;"
   );
-  $("#ruler-date4").text(moment.unix(date_ruler4).format("YYYY"));
+  $("#ruler-date4").text(moment.unix(date_ruler4).format("YYYY")); 
   $("#ruler-date5").text(moment.unix(date_ruler5).format("YYYY"));
 
   console.log("start:", sliderStart);
@@ -109,9 +124,8 @@ $(document).ready(function () {
     max: sliderEnd,
     step: 86_400, //24 hrs in unix time, set slider step to 1 day=86400 seconds
     value: sliderMiddle,
-    slide: function (_event, ui) {
+    slide: function (event, ui) {
       tooltiPos = ui.value < sliderMiddle ? 30 : -100;
-
       if (timeline_pointer_flag) {
         $("#ruler-date3").text(moment.unix(sliderMiddle).format("YYYY"));
         $("#mobi-year").css("display", "none");
@@ -145,7 +159,7 @@ $(document).ready(function () {
         $("#date").text(moment.unix(ui.value).format("DD MMM YYYY"));
       }
     },
-    create: function (_event, _ui) {
+    create: function (event, ui) {
       var tooltip = $('<div class="ui-slider-tooltip" />')
         .css({
           position: "absolute",
@@ -157,7 +171,7 @@ $(document).ready(function () {
         })
         .text(moment.unix(sliderMiddle).format("MM/DD/YYYY"));
     },
-    change: function (_event, _ui) {},
+    change: function (event, ui) {},
   });
 
   $("#date").text(
@@ -550,6 +564,7 @@ $(document).ready(function () {
 
   $("#settlements_points").click(function () {
     if ($(this).prop("checked")) {
+      // sizeOfArray(settlements_info)     for assoc arrays
       if (settlements_info_length == 0) {
         getSettlementsInfo();
       }
@@ -594,6 +609,7 @@ $(document).ready(function () {
   $("#settlements_items").change(function () {
     $(".settlements").prop("checked", this.checked);
     if ($(this).prop("checked")) {
+      // sizeOfArray(settlements_info)     for assoc arrays
       if (settlements_info_length == 0) {
         getSettlementsInfo();
       }
@@ -635,6 +651,7 @@ $(document).ready(function () {
 
   $("#info_points").click(function () {
     if ($(this).prop("checked")) {
+      // sizeOfArray(infos_entity)     for assoc arrays
       if (infos_entity_length == 0) {
         getInfosEntity();
       }
@@ -663,6 +680,7 @@ $(document).ready(function () {
   $("#info_items").change(function () {
     $(".info-item").prop("checked", this.checked);
     if ($(this).prop("checked")) {
+      // sizeOfArray(infos_entity)     for assoc arrays
       if (infos_entity_length == 0) {
         getInfosEntity();
       }
@@ -680,6 +698,7 @@ $(document).ready(function () {
 
   $("#circle_point").click(function () {
     if ($(this).prop("checked")) {
+      // sizeOfArray(taxlot_events_info)     for assoc arrays
       if (taxlot_events_info_length == 0) {
         getTaxlotEventsInfo();
       }
@@ -954,9 +973,6 @@ $(document).ready(function () {
 
   $("#gravesend_layer").click(function () {
     if ($(this).prop("checked")) {
-      if (brooklyn_grants_length == 0) {
-        getBrooklynGrantsInfo();
-      }
       beforeMap.setLayoutProperty(
         "gravesend_boundaries-c6qrbw-left",
         "visibility",
@@ -1023,8 +1039,6 @@ $(document).ready(function () {
     }
   });
   /* REPLACE THIS */
-
-  // Long Island Native Groups Layer Start
   $("#native_groups_layer_items").change(function () {
     $(".native_groups_layer").prop("checked", this.checked);
     if ($(this).prop("checked")) {
@@ -1244,6 +1258,10 @@ $(document).ready(function () {
   $("#karl_layer_items").change(function () {
     $(".karl_layer").prop("checked", this.checked);
     if ($(this).prop("checked")) {
+      // sizeOfArray(dutch_new_grant_lots_info)     for assoc arrays
+      if (brooklyn_grants_length == 0) {
+        getBrooklynGrantsInfo();
+      }
       beforeMap.setLayoutProperty(
         "karl_long_island-left",
         "visibility",
@@ -1515,44 +1533,36 @@ $(document).ready(function () {
     }
   });
 
-  //var layer_view_flag = true;
-
-  $("#view-hide-layer-panel").click(function () {
-    if (layer_view_flag) {
-      $("#studioMenu").animate({ "margin-left": "-337px" }, 500);
-      $(this).animate({ "margin-left": "-337px" }, 500);
-      $("#mobi-hide-sidebar").animate({ "margin-left": "-337px" }, 500);
-      layer_view_flag = false;
-      $("#dir-txt").html("&#9205;");
-      $("#rightInfoBar").slideUp();
-    } else {
-      $("#studioMenu").animate({ "margin-left": "0px" }, 500);
-      $(this).animate({ "margin-left": "0px" }, 500);
-      $("#mobi-hide-sidebar").animate({ "margin-left": "0px" }, 500);
-      layer_view_flag = true;
-      $("#dir-txt").html("&#9204;");
-      if (windoWidth > 637) $("#rightInfoBar").slideDown();
-    }
-  });
-
   $("#mobi-view-sidebar").click(function () {
     if (!layer_view_flag) {
-      $("#studioMenu").animate({ "margin-left": "0px" }, 500);
-      $("#view-hide-layer-panel").animate({ "margin-left": "0px" }, 500);
-      $("#mobi-hide-sidebar").animate({ "margin-left": "0px" }, 500);
+      $("#studioMenu").slideDown();
       layer_view_flag = true;
-      $("#dir-txt").html("&#9204;");
+      setTimeout(function () {
+        $("#shadoWall").css("display", "block");
+      }, 500);
     }
   });
 
-  $("#mobi-hide-sidebar").click(function () {
+  $("#mobi-hide-sidebar, #shadoWall").click(function () {
     if (layer_view_flag) {
-      $("#studioMenu").animate({ "margin-left": "-111%" }, 500);
-      $("#view-hide-layer-panel").animate({ "margin-left": "-337px" }, 500);
-      $(this).animate({ "margin-left": "-111%" }, 500);
+      $("#studioMenu").slideUp();
       layer_view_flag = false;
-      $("#dir-txt").html("&#9205;");
+      $("#shadoWall").css("display", "none");
     }
+  });
+
+  $("#mobi-hide-infobar").click(function () {
+    closeGrantLotsInfo();
+    closeDemoInfo();
+    closeCastelloInfo();
+    closeSettlementsInfo();
+    closeInfoLayerInfo();
+    closeDutchGrantsInfo();
+    closeGravesendInfo();
+    closeNativeGroupsInfo();
+    closeKarlInfo();
+    closeFarmsInfo();
+    closeCurrLotsInfo();
   });
 
   /* change timeline CSS property on mouseover & mouseout */
@@ -1590,7 +1600,7 @@ $(document).ready(function () {
 
   setTimeout(function () {
     $("div#loading").css("display", "none");
-  }, 5000);
+  }, 7500);
 });
 
 // for test local host REST_API/grant-lots-export.json
@@ -1655,6 +1665,7 @@ function getOriginalFarmsInfo() {
   farms_grants_info_length = 0;
 
   $.ajax({
+    //url: 'REST_API/original-farms-and-grants-list-export.json',
     url: "https://encyclopedia.nahc-mapping.org/original-farms-and-grants-list-export",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -1737,6 +1748,7 @@ function getSettlementsInfo() {
     data: {},
   })
     .done(function (data) {
+      //console.log(data);
       if (data.length > 0) {
         for (let i = 0; i < data.length; i++) {
           if (typeof data[i].nid[0].value != "undefined") {
@@ -2103,6 +2115,7 @@ function getBrooklynGrantsInfo() {
                 data[i].field_history_notes222.length > 0
                   ? data[i].field_history_notes222[0].value
                   : "",
+
             };
 
             brooklyn_grants_length += 1;

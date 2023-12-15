@@ -6,21 +6,18 @@ var dutch_grant_lots_info = [],
   infos_entity = [],
   settlements_linked_location = [],
   brooklyn_grants_info = [],
-  taxlot_events_info = [],
   taxlot_event_entities_info = [];
 var dutch_grant_lots_info_length = 0,
   farms_grants_info_length = 0,
   settlements_info_length = 0,
   infos_entity_length = 0,
   brooklyn_grants_length = 0,
-  taxlot_events_info_length = 0,
   taxlot_entities_info_length = 0;
 
 getDutchGrantsInfo();
 getOriginalFarmsInfo();
 getSettlementsInfo();
 getInfosEntity();
-getTaxlotEventsInfo();
 getTaxlotEventEntitiesDescrInfo();
 
 var modal_header_text = [];
@@ -31,10 +28,10 @@ var layer_view_flag = true;
 var timeline_pointer_flag = true;
 var windoWidth = 0;
 
+var sliderStartDrag = moment("06/02/1643").unix();
 var sliderStart = moment("01/01/1626").unix();
-var sliderStartDrag = sliderStart;
+var sliderEndDrag = moment("07/04/1675").unix();
 var sliderEnd = moment("01/01/1700").unix();
-var sliderEndDrag = sliderEnd;
 
 var sliderMiddle = (sliderStart + sliderEnd) / 2;
 var tooltiPos = -100;
@@ -52,6 +49,37 @@ function logAjaxError(xhr, textStatus, _errorThrown) {
   console.log(textStatus);
 }
 
+function simple_tooltip(target_items, name) {
+  $(target_items).each(function (i) {
+    $("body").append(
+      "<div class='" +
+        name +
+        "' id='" +
+        name +
+        i +
+        "'><p>" +
+        $(this).attr("title") +
+        "</p></div>"
+    );
+    var my_tooltip = $("#" + name + i);
+
+    $(this)
+      .removeAttr("title")
+      .mouseover(function () {
+        my_tooltip.css({ opacity: 1.0, display: "none" }).fadeIn(200);
+      })
+      .mousemove(function (kmouse) {
+        my_tooltip.css({
+          left: kmouse.pageX + 15,
+          top: kmouse.pageY + 15,
+        });
+      })
+      .mouseout(function () {
+        my_tooltip.fadeOut(200);
+      });
+  });
+}
+
 $(document).ready(function () {
   if (jQuery.browser.msie)
     alert(
@@ -61,10 +89,10 @@ $(document).ready(function () {
   simple_tooltip("i.layer-info, i.zoom-to-layer", "tooltip");
 
   windoWidth = $(window).width();
-
+  //555
   if (windoWidth <= 637) {
     if (layer_view_flag) {
-      $("#studioMenu").css({ "margin-left": "-111%" });
+      $("#studioMenu").css({ "margin-left": "-111%" }); //.slideUp();
       $("#view-hide-layer-panel").css({ "margin-left": "-337px" });
       $("#mobi-hide-sidebar").css({ "margin-left": "-111%" });
       layer_view_flag = false;
@@ -111,7 +139,6 @@ $(document).ready(function () {
     value: sliderMiddle,
     slide: function (_event, ui) {
       tooltiPos = ui.value < sliderMiddle ? 30 : -100;
-
       if (timeline_pointer_flag) {
         $("#ruler-date3").text(moment.unix(sliderMiddle).format("YYYY"));
         $("#mobi-year").css("display", "none");
@@ -550,6 +577,7 @@ $(document).ready(function () {
 
   $("#settlements_points").click(function () {
     if ($(this).prop("checked")) {
+      // sizeOfArray(settlements_info)     for assoc arrays
       if (settlements_info_length == 0) {
         getSettlementsInfo();
       }
@@ -594,6 +622,7 @@ $(document).ready(function () {
   $("#settlements_items").change(function () {
     $(".settlements").prop("checked", this.checked);
     if ($(this).prop("checked")) {
+      // sizeOfArray(settlements_info)     for assoc arrays
       if (settlements_info_length == 0) {
         getSettlementsInfo();
       }
@@ -635,6 +664,7 @@ $(document).ready(function () {
 
   $("#info_points").click(function () {
     if ($(this).prop("checked")) {
+      // sizeOfArray(infos_entity)     for assoc arrays
       if (infos_entity_length == 0) {
         getInfosEntity();
       }
@@ -663,6 +693,7 @@ $(document).ready(function () {
   $("#info_items").change(function () {
     $(".info-item").prop("checked", this.checked);
     if ($(this).prop("checked")) {
+      // sizeOfArray(infos_entity)     for assoc arrays
       if (infos_entity_length == 0) {
         getInfosEntity();
       }
@@ -680,9 +711,6 @@ $(document).ready(function () {
 
   $("#circle_point").click(function () {
     if ($(this).prop("checked")) {
-      if (taxlot_events_info_length == 0) {
-        getTaxlotEventsInfo();
-      }
       beforeMap.setLayoutProperty(
         "lot_events-bf43eb-left",
         "visibility",
@@ -714,7 +742,6 @@ $(document).ready(function () {
   $("#grants_layer_items").change(function () {
     $(".grants_layer").prop("checked", this.checked);
     if ($(this).prop("checked")) {
-      // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
       if (dutch_grant_lots_info_length == 0) {
         getDutchGrantsInfo();
       }
@@ -798,7 +825,6 @@ $(document).ready(function () {
 
   $("#grants_layer").click(function () {
     if ($(this).prop("checked")) {
-      // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
       if (dutch_grant_lots_info_length == 0) {
         getDutchGrantsInfo();
       }
@@ -1531,6 +1557,7 @@ $(document).ready(function () {
       $("#mobi-hide-sidebar").animate({ "margin-left": "0px" }, 500);
       layer_view_flag = true;
       $("#dir-txt").html("&#9204;");
+      //555
       if (windoWidth > 637) $("#rightInfoBar").slideDown();
     }
   });
@@ -1604,6 +1631,7 @@ function getDutchGrantsInfo() {
   dutch_grant_lots_info_length = 0;
 
   $.ajax({
+    //url: 'REST_API/grant-lots-export.json',
     url: "https://encyclopedia.nahc-mapping.org/grant-lots-export-properly",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -1619,6 +1647,7 @@ function getDutchGrantsInfo() {
             data_info_index = data[i].title;
             data_info_index = data_info_index.replace(/\s+/g, "");
             if (/FortAmsterdam/.test(data_info_index)) {
+              //console.log(data_info_index);
               data_info_index = "Fort Amsterdam";
             }
             dutch_grant_lots_info[data_info_index] = {
@@ -1655,6 +1684,7 @@ function getOriginalFarmsInfo() {
   farms_grants_info_length = 0;
 
   $.ajax({
+    //url: 'REST_API/original-farms-and-grants-list-export.json',
     url: "https://encyclopedia.nahc-mapping.org/original-farms-and-grants-list-export",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -1859,130 +1889,6 @@ function getTaxlotEventEntitiesDescrInfo() {
             };
 
             taxlot_entities_info_length += 1;
-          }
-        }
-      }
-    })
-    .fail(logAjaxError);
-}
-
-// for test local host REST_API/taxlot-events-export.json
-// REST API https://encyclopedia.nahc-mapping.org/taxlot-events-export
-
-function getTaxlotEventsInfo() {
-  var data_info_index = "";
-  taxlot_events_info_length = 0;
-
-  $.ajax({
-    url: "https://encyclopedia.nahc-mapping.org/taxlot-events-export",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    type: "get",
-    dataType: "json",
-    data: {},
-  })
-    .done(function (data) {
-      if (data.length > 0) {
-        for (let i = 0; i < data.length; i++) {
-          if (typeof data[i].title != "undefined") {
-            data_info_index = data[i].title.match(/\/node\/(.*?)\"/)[1];
-
-            if (data_info_index !== null) {
-              taxlot_events_info[data_info_index] = {
-                title: data[i].title.replaceAll(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                start: data[i].field_daystart,
-                end: "",
-                taxlot: data[i].field_taxlot.replaceAll(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                taxlotevent: data[i].field_taxlotevent.replaceAll(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party: data[i].field_to.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party2: data[i].field_to_party_1.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party: data[i].field_from.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party2: data[i].field_from_party_1.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-
-                property_type: data[i].field_pro.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party_1_text: data[i].field_events_to_party_1_text_.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party_1_role: data[
-                  i
-                ].field_party_role_in_transaction_.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party_1_entity: data[i].field_entity_description_to_.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party_2_text: data[i].field_asdf_to_party_2_text_.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party_2_role: data[i].field_party_role3.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party_2_entity: data[
-                  i
-                ].field_entity_description_to_part.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party_1_text: data[i].field_from_party_1_text_.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party_1_role: data[i].field_partyrole.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party_1_entity: data[i].field_entity_desc.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party_2_text: data[i].field_from_party_2_text_.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party_2_role: data[i].field_party_role2.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                from_party_2_entity: data[
-                  i
-                ].field_entity_description_from_pa.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-              };
-
-              taxlot_events_info_length += 1;
-            }
           }
         }
       }
