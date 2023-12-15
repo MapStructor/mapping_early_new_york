@@ -77,10 +77,6 @@ var LongIslandBounds = [
     [-69.708251953125, 43.97700467496408],
   ];
 
-/////////////////////////////
-//ACCESS TOKEN
-/////////////////////////////
-
 mapboxgl.accessToken =
   "pk.eyJ1IjoibWFwbnkiLCJhIjoiY2xtMG93amk4MnBrZTNnczUzY2VvYjg0ciJ9.MDMHYBlVbG14TJD120t6NQ";
 

@@ -244,7 +244,6 @@ function buildDutchGrantPopUpInfo(props) {
   $("#infoLayerDutchGrants").html(popup_html);
 }
 
-/*REPLACE THIS*/
 function buildGravesendPopUpInfo(props) {
   var popup_html = "<h3>Brooklyn Grants</h3><hr>";
 

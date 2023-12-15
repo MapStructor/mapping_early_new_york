@@ -1,7 +1,3 @@
-/////////////////////////////
-//ACCESS TOKEN
-/////////////////////////////
-
 mapboxgl.accessToken =
 	"pk.eyJ1Ijoibml0dHlqZWUiLCJhIjoid1RmLXpycyJ9.NFk875-Fe6hoRCkGciG8yQ";
 
@@ -25,10 +21,6 @@ var map = new mapboxgl.Map(mapboxConfig);
 
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, "top-left");
-
-/////////////////////////////
-//NOT SURE WHAT THIS IS
-/////////////////////////////
 
 urlHash = window.location.hash;
 

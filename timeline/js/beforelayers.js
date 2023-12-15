@@ -227,10 +227,6 @@ function addBeforeLayers(_, date) {
     filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
   });
 
-  //TAX LOT POPUP
-  // CLICK AND OPEN POPUP
-  //*A
-
   // CHANGE TO CURSOR WHEN HOVERING
   beforeMap.on("mouseenter", "lot_events-bf43eb-left", function (e) {
     beforeMap.getCanvas().style.cursor = "pointer";
@@ -257,9 +253,6 @@ function addBeforeLayers(_, date) {
 
     var coordinates = e.features[0].geometry.coordinates.slice();
 
-    // Ensure that if the map is zoomed out such that multiple
-    // copies of the feature are visible, the popup appears
-    // over the copy being pointed to.
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
@@ -292,7 +285,6 @@ function addBeforeLayers(_, date) {
     hoveredStateIdLeftCircle = null;
     if (beforeMapPopUp.isOpen()) beforeMapPopUp.remove();
   });
-  //*A });
 }
 
 function addGrantLotsBeforeLayers(date) {
@@ -379,9 +371,6 @@ function addGrantLotsBeforeLayers(date) {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
@@ -539,9 +528,6 @@ function addGravesendBeforeLayers(date) {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
@@ -694,9 +680,6 @@ function addKarlBeforeLayers(date) {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
@@ -859,9 +842,6 @@ function addBeforeFarmsLayer(date) {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
@@ -962,9 +942,6 @@ function addInfoBeforeLayers(date) {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
@@ -1262,9 +1239,6 @@ function addCastelloBeforeLayers() {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
@@ -1803,9 +1777,6 @@ function addLongIslandNativeGroupsBeforeLayers() {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }

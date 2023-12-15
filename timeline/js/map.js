@@ -10,10 +10,6 @@ $("#infoLayerDutchGrants").slideUp();
 $("#demoLayerInfo").slideUp();
 $("#infoLayerCastello").slideUp();
 
-/////////////////////////////
-//ACCESS TOKEN
-/////////////////////////////
-
 mapboxgl.accessToken =
   "pk.eyJ1IjoibWFwbnkiLCJhIjoiY2xtMG93amk4MnBrZTNnczUzY2VvYjg0ciJ9.MDMHYBlVbG14TJD120t6NQ";
 
@@ -41,10 +37,6 @@ var map = new mapboxgl.Compare(beforeMap, afterMap, {
   // Set this to enable comparing two maps by mouse movement:
   // mousemove: true
 });
-
-/////////////////////////////
-//ADD NAVIGATION CONTROLS (ZOOM IN AND OUT)
-/////////////////////////////
 
 //Before map
 var nav = new mapboxgl.NavigationControl();

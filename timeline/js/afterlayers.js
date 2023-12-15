@@ -3,85 +3,140 @@
 //////////////////
 
 function addAfterLayers(_, date) {
-  //REMOVING TAX LOT POINTS IF EXIST
-  if (afterMap.getLayer("lot_events-bf43eb-right"))
-    afterMap.removeLayer("lot_events-bf43eb-right");
-  if (afterMap.getSource("lot_events-bf43eb"))
-    afterMap.removeSource("lot_events-bf43eb");
-  if (afterMap.getLayer("dutch_grants-5ehfqe-right"))
-    afterMap.removeLayer("dutch_grants-5ehfqe-right");
-  if (afterMap.getSource("dutch_grants-5ehfqe"))
-    afterMap.removeSource("dutch_grants-5ehfqe");
+  function removeTaxLot() {
+    if (afterMap.getLayer("lot_events-bf43eb-right"))
+      afterMap.removeLayer("lot_events-bf43eb-right");
+    if (afterMap.getSource("lot_events-bf43eb"))
+      afterMap.removeSource("lot_events-bf43eb");
+    if (afterMap.getLayer("dutch_grants-5ehfqe-right"))
+      afterMap.removeLayer("dutch_grants-5ehfqe-right");
+    if (afterMap.getSource("dutch_grants-5ehfqe"))
+      afterMap.removeSource("dutch_grants-5ehfqe");
+  }
 
-  //ADD GRANTS POLYGONS
+  function addGrantsPolygon() {
+    afterMap.addLayer({
+      //ID: CHANGE THIS, 1 OF 3
+      id: "dutch_grants-5ehfqe-right-highlighted",
+      type: "fill",
+      source: {
+        type: "vector",
+        //URL: CHANGE THIS, 2 OF 3
+        url: "mapbox://mapny.7q2vs9ar",
+      },
+      layout: {
+        visibility: document.getElementById("grants_layer").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "dutch_grants-5ehfqe",
+      paint: {
+        "fill-color": "#e3ed58",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.8,
+          0,
+        ],
+        "fill-outline-color": "#FF0000",
+      },
 
-  afterMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "dutch_grants-5ehfqe-right-highlighted",
-    type: "fill",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.7q2vs9ar",
-    },
-    layout: {
-      visibility: document.getElementById("grants_layer").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "dutch_grants-5ehfqe",
-    paint: {
-      "fill-color": "#e3ed58",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0,
-      ],
-      "fill-outline-color": "#FF0000",
-    },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
 
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+    afterMap.addLayer({
+      //ID: CHANGE THIS, 1 OF 3
+      id: "dutch_grants-5ehfqe-right",
+      type: "fill",
+      source: {
+        type: "vector",
+        //URL: CHANGE THIS, 2 OF 3
+        url: "mapbox://mapny.7q2vs9ar",
+      },
+      layout: {
+        visibility: document.getElementById("grants_layer").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "dutch_grants-5ehfqe",
+      paint: {
+        "fill-color": "#e3ed58",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.8,
+          0.45,
+        ],
+        "fill-outline-color": "#FF0000",
+      },
 
-  afterMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "dutch_grants-5ehfqe-right",
-    type: "fill",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.7q2vs9ar",
-    },
-    layout: {
-      visibility: document.getElementById("grants_layer").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "dutch_grants-5ehfqe",
-    paint: {
-      "fill-color": "#e3ed58",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0.45,
-      ],
-      "fill-outline-color": "#FF0000",
-    },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
+  }
 
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  function addEventListenersOnMouseHover() {
+    afterMap.on("mouseenter", "dutch_grants-5ehfqe-right", function (e) {
+      afterMap.getCanvas().style.cursor = "pointer";
+      afterMapDutchGrantPopUp.setLngLat(e.lngLat).addTo(afterMap);
+    });
 
-  //CURSOR ON HOVER
-  //ON HOVER
-  afterMap.on("mouseenter", "dutch_grants-5ehfqe-right", function (e) {
-    afterMap.getCanvas().style.cursor = "pointer";
-    afterMapDutchGrantPopUp.setLngLat(e.lngLat).addTo(afterMap);
-  });
+    afterMap.on("mousemove", "dutch_grants-5ehfqe-right", function (e) {
+      if (e.features.length > 0) {
+        if (hoveredDutchGrantIdRight) {
+          afterMap.setFeatureState(
+            {
+              source: "dutch_grants-5ehfqe-right",
+              sourceLayer: "dutch_grants-5ehfqe",
+              id: hoveredDutchGrantIdRight,
+            },
+            { hover: false }
+          );
+        }
+        hoveredDutchGrantIdRight = e.features[0].id;
+        afterMap.setFeatureState(
+          {
+            source: "dutch_grants-5ehfqe-right",
+            sourceLayer: "dutch_grants-5ehfqe",
+            id: hoveredDutchGrantIdRight,
+          },
+          { hover: true }
+        );
 
-  afterMap.on("mousemove", "dutch_grants-5ehfqe-right", function (e) {
-    if (e.features.length > 0) {
+        var PopUpHTML = "";
+        if (
+          typeof dutch_grant_lots_info[e.features[0].properties.Lot] ==
+          "undefined"
+        ) {
+          PopUpHTML =
+            "<div class='infoLayerDutchGrantsPopUp'>" +
+            e.features[0].properties.name +
+            "<br>";
+        } else {
+          PopUpHTML =
+            "<div class='infoLayerDutchGrantsPopUp'>" +
+            (dutch_grant_lots_info[e.features[0].properties.Lot].name_txt
+              .length > 0
+              ? dutch_grant_lots_info[e.features[0].properties.Lot].name_txt
+              : e.features[0].properties.name) +
+            "<br>";
+        }
+        PopUpHTML +=
+          "<b>Dutch Grant Lot: </b>" + e.features[0].properties.Lot + "</div>";
+
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        //AFTER MAP POP UP CONTENTS
+        afterMapDutchGrantPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
+      }
+    });
+  }
+
+  function addEventListenersOnMouseOffHover() {
+    afterMap.on("mouseleave", "dutch_grants-5ehfqe-right", function () {
+      afterMap.getCanvas().style.cursor = "";
       if (hoveredDutchGrantIdRight) {
         afterMap.setFeatureState(
           {
@@ -92,245 +147,254 @@ function addAfterLayers(_, date) {
           { hover: false }
         );
       }
-      //console.log(e.features[0]);
-      hoveredDutchGrantIdRight = e.features[0].id;
+      hoveredDutchGrantIdRight = null;
+      if (afterMapDutchGrantPopUp.isOpen()) afterMapDutchGrantPopUp.remove();
+    });
+  }
+
+  function addTaxLotPoints() {
+    afterMap.addLayer({
+      //ID: CHANGE THIS, 1 OF 3
+      id: "lot_events-bf43eb-right",
+      type: "circle",
+      source: {
+        type: "vector",
+        //URL: CHANGE THIS, 2 OF 3
+        url: "mapbox://mapny.9s9s67wu",
+      },
+      layout: {
+        visibility: document.getElementById("circle_point").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "lot_events-bf43eb",
+      paint: {
+        //CIRCLE COLOR
+        "circle-color": {
+          type: "categorical",
+          property: "color",
+          stops: [
+            ["6", "#0000ee"],
+            ["5", "#097911"],
+            ["4", "#0000ee"],
+            ["3", "#097911"],
+            ["2", "#0000ee"],
+            ["1", "#097911"],
+          ],
+          default: "#FF0000",
+        },
+
+        //CIRCLE OPACITY
+        "circle-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.5,
+          1,
+        ],
+        "circle-stroke-width": 2,
+        "circle-stroke-color": {
+          type: "categorical",
+          property: "color",
+          stops: [
+            ["6", "#0000ee"],
+            ["5", "#097911"],
+            ["4", "#0000ee"],
+            ["3", "#097911"],
+            ["2", "#0000ee"],
+            ["1", "#097911"],
+          ],
+          default: "#FF0000",
+        },
+        "circle-stroke-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          1,
+          0,
+        ],
+
+        //CIRCLE RADIUS
+        "circle-radius": {
+          type: "categorical",
+          property: "TAXLOT",
+          stops: [["C7", 9]],
+        },
+      },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
+  }
+
+  function changeToCursorWhenHovering() {
+    afterMap.on("mouseenter", "lot_events-bf43eb-right", function (e) {
+      afterMap.getCanvas().style.cursor = "pointer";
+
+      if (hoveredStateIdRightCircle) {
+        afterMap.setFeatureState(
+          {
+            source: "lot_events-bf43eb-right",
+            sourceLayer: "lot_events-bf43eb",
+            id: hoveredStateIdRightCircle,
+          },
+          { hover: false }
+        );
+      }
+      hoveredStateIdRightCircle = e.features[0].id;
       afterMap.setFeatureState(
         {
-          source: "dutch_grants-5ehfqe-right",
-          sourceLayer: "dutch_grants-5ehfqe",
-          id: hoveredDutchGrantIdRight,
+          source: "lot_events-bf43eb-right",
+          sourceLayer: "lot_events-bf43eb",
+          id: hoveredStateIdRightCircle,
         },
         { hover: true }
       );
 
-      var PopUpHTML = "";
-      if (
-        typeof dutch_grant_lots_info[e.features[0].properties.Lot] ==
-        "undefined"
-      ) {
-        PopUpHTML =
-          "<div class='infoLayerDutchGrantsPopUp'>" +
-          e.features[0].properties.name +
-          "<br>";
-      } else {
-        PopUpHTML =
-          "<div class='infoLayerDutchGrantsPopUp'>" +
-          (dutch_grant_lots_info[e.features[0].properties.Lot].name_txt.length >
-          0
-            ? dutch_grant_lots_info[e.features[0].properties.Lot].name_txt
-            : e.features[0].properties.name) +
-          "<br>";
-      }
-      PopUpHTML +=
-        "<b>Dutch Grant Lot: </b>" + e.features[0].properties.Lot + "</div>";
-
       var coordinates = e.features[0].geometry.coordinates.slice();
+
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
 
-      //AFTER MAP POP UP CONTENTS
-      afterMapDutchGrantPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
-    }
-  });
+      afterMapPopUp
+        .setLngLat(coordinates)
+        .setHTML(
+          "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" +
+            e.features[0].properties.TAXLOT +
+            "' target='_blank'>" +
+            e.features[0].properties.TAXLOT +
+            "</a></h2></b></div>"
+        )
+        .addTo(afterMap);
+    });
+  }
 
-  //OFF HOVER
-  afterMap.on("mouseleave", "dutch_grants-5ehfqe-right", function () {
-    afterMap.getCanvas().style.cursor = "";
-    if (hoveredDutchGrantIdRight) {
-      afterMap.setFeatureState(
-        {
-          source: "dutch_grants-5ehfqe-right",
-          sourceLayer: "dutch_grants-5ehfqe",
-          id: hoveredDutchGrantIdRight,
-        },
-        { hover: false }
-      );
-    }
-    hoveredDutchGrantIdRight = null;
-    if (afterMapDutchGrantPopUp.isOpen()) afterMapDutchGrantPopUp.remove();
-  });
+  function changeToPointerWhenHovering() {
+    afterMap.on("mouseleave", "lot_events-bf43eb-right", function () {
+      afterMap.getCanvas().style.cursor = "";
+      if (hoveredStateIdRightCircle) {
+        afterMap.setFeatureState(
+          {
+            source: "lot_events-bf43eb-right",
+            sourceLayer: "lot_events-bf43eb",
+            id: hoveredStateIdRightCircle,
+          },
+          { hover: false }
+        );
+      }
+      hoveredStateIdRightCircle = null;
+      if (afterMapPopUp.isOpen()) afterMapPopUp.remove();
+    });
+  }
 
-  //ADD TAX LOT POINTS
-
-  afterMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "lot_events-bf43eb-right",
-    type: "circle",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.9s9s67wu",
-    },
-    layout: {
-      visibility: document.getElementById("circle_point").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "lot_events-bf43eb",
-    paint: {
-      //CIRCLE COLOR
-      "circle-color": {
-        type: "categorical",
-        property: "color",
-        stops: [
-          ["6", "#0000ee"],
-          ["5", "#097911"],
-          ["4", "#0000ee"],
-          ["3", "#097911"],
-          ["2", "#0000ee"],
-          ["1", "#097911"],
-        ],
-        default: "#FF0000",
-      },
-
-      //CIRCLE OPACITY
-      "circle-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.5,
-        1,
-      ],
-      "circle-stroke-width": 2,
-      "circle-stroke-color": {
-        type: "categorical",
-        property: "color",
-        stops: [
-          ["6", "#0000ee"],
-          ["5", "#097911"],
-          ["4", "#0000ee"],
-          ["3", "#097911"],
-          ["2", "#0000ee"],
-          ["1", "#097911"],
-        ],
-        default: "#FF0000",
-      },
-      "circle-stroke-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        1,
-        0,
-      ],
-
-      //CIRCLE RADIUS
-      "circle-radius": {
-        type: "categorical",
-        property: "TAXLOT",
-        stops: [["C7", 9]],
-      },
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
-
-  //TAX LOT POPUP
-  // CLICK AND OPEN POPUP
-
-  // CHANGE TO CURSOR WHEN HOVERING
-  afterMap.on("mouseenter", "lot_events-bf43eb-right", function (e) {
-    afterMap.getCanvas().style.cursor = "pointer";
-
-    if (hoveredStateIdRightCircle) {
-      afterMap.setFeatureState(
-        {
-          source: "lot_events-bf43eb-right",
-          sourceLayer: "lot_events-bf43eb",
-          id: hoveredStateIdRightCircle,
-        },
-        { hover: false }
-      );
-    }
-    hoveredStateIdRightCircle = e.features[0].id;
-    afterMap.setFeatureState(
-      {
-        source: "lot_events-bf43eb-right",
-        sourceLayer: "lot_events-bf43eb",
-        id: hoveredStateIdRightCircle,
-      },
-      { hover: true }
-    );
-
-    var coordinates = e.features[0].geometry.coordinates.slice();
-
-    // Ensure that if the map is zoomed out such that multiple
-    // copies of the feature are visible, the popup appears
-    // over the copy being pointed to.
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
-
-    afterMapPopUp
-      .setLngLat(coordinates)
-      .setHTML(
-        "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" +
-          e.features[0].properties.TAXLOT +
-          "' target='_blank'>" +
-          e.features[0].properties.TAXLOT +
-          "</a></h2></b></div>"
-      )
-      .addTo(afterMap);
-  });
-
-  // CHANGE TO POINTER WHEN NOT HOVERING
-  afterMap.on("mouseleave", "lot_events-bf43eb-right", function () {
-    afterMap.getCanvas().style.cursor = "";
-    if (hoveredStateIdRightCircle) {
-      afterMap.setFeatureState(
-        {
-          source: "lot_events-bf43eb-right",
-          sourceLayer: "lot_events-bf43eb",
-          id: hoveredStateIdRightCircle,
-        },
-        { hover: false }
-      );
-    }
-    hoveredStateIdRightCircle = null;
-    if (afterMapPopUp.isOpen()) afterMapPopUp.remove();
-  });
+  removeTaxLot();
+  addGrantsPolygon();
+  addEventListenersOnMouseHover();
+  addEventListenersOnMouseOffHover();
+  addTaxLotPoints();
+  changeToCursorWhenHovering();
+  changeToPointerWhenHovering();
 }
 
 function addGrantLotsAfterLayers(date) {
-  //REMOVING TAX LOT POINTS IF EXIST
-  if (afterMap.getLayer("grant-lots-right"))
-    afterMap.removeLayer("grant-lots-right");
-  if (afterMap.getSource("demo_divisions_grant_c7-42w8pa"))
-    afterMap.removeSource("demo_divisions_grant_c7-42w8pa");
+  function removeTaxLotPointsIfExist() {
+    if (afterMap.getLayer("grant-lots-right"))
+      afterMap.removeLayer("grant-lots-right");
+    if (afterMap.getSource("demo_divisions_grant_c7-42w8pa"))
+      afterMap.removeSource("demo_divisions_grant_c7-42w8pa");
+  }
 
-  // Add a layer showing the places.
-  afterMap.addLayer({
-    id: "grant-lots-right",
-    type: "fill",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.26xwjv4e",
-    },
-    layout: {
-      visibility: document.getElementById("grant_lots").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "demo_divisions_grant_c7-42w8pa",
-    paint: {
-      "fill-color": "#088",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0.5,
-      ],
-      "fill-outline-color": "#FF0000",
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  function addALayerShowingThePlaces() {
+    // Add a layer showing the places.
+    afterMap.addLayer({
+      id: "grant-lots-right",
+      type: "fill",
+      source: {
+        type: "vector",
+        url: "mapbox://mapny.26xwjv4e",
+      },
+      layout: {
+        visibility: document.getElementById("grant_lots").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "demo_divisions_grant_c7-42w8pa",
+      paint: {
+        "fill-color": "#088",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.8,
+          0.5,
+        ],
+        "fill-outline-color": "#FF0000",
+      },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
+  }
 
-  //CURSOR ON HOVER
-  //ON HOVER
-  afterMap.on("mouseenter", "grant-lots-right", function (e) {
-    afterMap.getCanvas().style.cursor = "pointer";
-    afterMapGrantLotPopUp.setLngLat(e.lngLat).addTo(afterMap);
-  });
+  function cursorOnHover() {
+    afterMap.on("mouseenter", "grant-lots-right", function (e) {
+      afterMap.getCanvas().style.cursor = "pointer";
+      afterMapGrantLotPopUp.setLngLat(e.lngLat).addTo(afterMap);
+    });
 
-  afterMap.on("mousemove", "grant-lots-right", function (e) {
-    if (e.features.length > 0) {
+    afterMap.on("mousemove", "grant-lots-right", function (e) {
+      if (e.features.length > 0) {
+        if (hoveredGrantLotIdRight) {
+          afterMap.setFeatureState(
+            {
+              source: "grant-lots-right",
+              sourceLayer: "demo_divisions_grant_c7-42w8pa",
+              id: hoveredGrantLotIdRight,
+            },
+            { hover: false }
+          );
+        }
+        hoveredGrantLotIdRight = e.features[0].id;
+        afterMap.setFeatureState(
+          {
+            source: "grant-lots-right",
+            sourceLayer: "demo_divisions_grant_c7-42w8pa",
+            id: hoveredGrantLotIdRight,
+          },
+          { hover: true }
+        );
+
+        var PopUpHTML =
+          "<div class='infoLayerGrantLotsPopUp'>" +
+          e.features[0].properties.name +
+          "<br>" +
+          "<b>Start:</b> " +
+          e.features[0].properties.day1 +
+          ", " +
+          e.features[0].properties.year1 +
+          "<br>" +
+          "<b>End:</b> " +
+          e.features[0].properties.day2 +
+          ", " +
+          e.features[0].properties.year2 +
+          "<br>" +
+          //"<br>" +
+          "<b>Lot Division: </b>" +
+          e.features[0].properties.dutchlot +
+          "</div>";
+
+        var coordinates = e.features[0].geometry.coordinates.slice();
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        //AFTER MAP POP UP CONTENTS
+        afterMapGrantLotPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
+      }
+    });
+  }
+
+  function offHover() {
+    afterMap.on("mouseleave", "grant-lots-right", function () {
+      afterMap.getCanvas().style.cursor = "";
       if (hoveredGrantLotIdRight) {
         afterMap.setFeatureState(
           {
@@ -341,95 +405,49 @@ function addGrantLotsAfterLayers(date) {
           { hover: false }
         );
       }
-      hoveredGrantLotIdRight = e.features[0].id;
-      afterMap.setFeatureState(
-        {
-          source: "grant-lots-right",
-          sourceLayer: "demo_divisions_grant_c7-42w8pa",
-          id: hoveredGrantLotIdRight,
-        },
-        { hover: true }
-      );
-
-      var PopUpHTML =
-        "<div class='infoLayerGrantLotsPopUp'>" +
-        e.features[0].properties.name +
-        "<br>" +
-        "<b>Start:</b> " +
-        e.features[0].properties.day1 +
-        ", " +
-        e.features[0].properties.year1 +
-        "<br>" +
-        "<b>End:</b> " +
-        e.features[0].properties.day2 +
-        ", " +
-        e.features[0].properties.year2 +
-        "<br>" +
-        //"<br>" +
-        "<b>Lot Division: </b>" +
-        e.features[0].properties.dutchlot +
-        "</div>";
-
-      var coordinates = e.features[0].geometry.coordinates.slice();
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      //AFTER MAP POP UP CONTENTS
-      afterMapGrantLotPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
-    }
-  });
-
-  //OFF HOVER
-  afterMap.on("mouseleave", "grant-lots-right", function () {
-    afterMap.getCanvas().style.cursor = "";
-    if (hoveredGrantLotIdRight) {
-      afterMap.setFeatureState(
-        {
-          source: "grant-lots-right",
-          sourceLayer: "demo_divisions_grant_c7-42w8pa",
-          id: hoveredGrantLotIdRight,
-        },
-        { hover: false }
-      );
-    }
-    hoveredGrantLotIdRight = null;
-    if (afterMapGrantLotPopUp.isOpen()) afterMapGrantLotPopUp.remove();
-  });
+      hoveredGrantLotIdRight = null;
+      if (afterMapGrantLotPopUp.isOpen()) afterMapGrantLotPopUp.remove();
+    });
+  }
+  removeTaxLotPointsIfExist();
+  addALayerShowingThePlaces();
+  cursorOnHover();
+  offHover();
 }
 
 function addGrantLotsLinesAfterLayers(date) {
-  //REMOVING TAX LOT POINTS IF EXIST
-  if (afterMap.getLayer("grant-lots-lines-right"))
-    afterMap.removeLayer("grant-lots-lines-right");
-  if (afterMap.getSource("dutch_grants_lines-0y4gkx"))
-    afterMap.removeSource("dutch_grants_lines-0y4gkx");
+  function removeTaxLotPointsIfExist() {
+    if (afterMap.getLayer("grant-lots-lines-right"))
+      afterMap.removeLayer("grant-lots-lines-right");
+    if (afterMap.getSource("dutch_grants_lines-0y4gkx"))
+      afterMap.removeSource("dutch_grants_lines-0y4gkx");
+  }
 
-  // Add a layer showing the places.
-  afterMap.addLayer({
-    id: "grant-lots-lines-right",
-    type: "line",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.7dw0tqar",
-    },
-    layout: {
-      visibility: document.getElementById("grants_layer_lines").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "dutch_grants_lines-0y4gkx",
-    paint: {
-      "line-color": "#FF0000",
-      "line-width": 3,
-      "line-opacity": 0.8,
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  function addALayerShowingThePlaces() {
+    afterMap.addLayer({
+      id: "grant-lots-lines-right",
+      type: "line",
+      source: {
+        type: "vector",
+        url: "mapbox://mapny.7dw0tqar",
+      },
+      layout: {
+        visibility: document.getElementById("grants_layer_lines").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "dutch_grants_lines-0y4gkx",
+      paint: {
+        "line-color": "#FF0000",
+        "line-width": 3,
+        "line-opacity": 0.8,
+      },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
+  }
+
+  removeTaxLotPointsIfExist();
+  addALayerShowingThePlaces();
 }
 
 ////////////////////////////
@@ -495,18 +513,66 @@ function addGravesendAfterLayers(date) {
     filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
   });
 
-  //CURSOR ON HOVER
-  //ON HOVER
-  afterMap.on("mouseenter", "gravesend_boundaries-c6qrbw-right", function (e) {
-    afterMap.getCanvas().style.cursor = "pointer";
-    afterMapGravesendTwoPopUp.setLngLat(e.lngLat).addTo(afterMap);
-  });
+  function cursorOnHover() {
+    afterMap.on(
+      "mouseenter",
+      "gravesend_boundaries-c6qrbw-right",
+      function (e) {
+        afterMap.getCanvas().style.cursor = "pointer";
+        afterMapGravesendTwoPopUp.setLngLat(e.lngLat).addTo(afterMap);
+      }
+    );
 
-  afterMap.on("mousemove", "gravesend_boundaries-c6qrbw-right", function (e) {
-    console.warn(e.features[0].id);
-    console.log(e.features[0].properties);
+    afterMap.on("mousemove", "gravesend_boundaries-c6qrbw-right", function (e) {
+      console.warn(e.features[0].id);
+      console.log(e.features[0].properties);
 
-    if (e.features.length > 0) {
+      if (e.features.length > 0) {
+        if (hoveredGravesendIdRight) {
+          afterMap.setFeatureState(
+            {
+              source: "gravesend_boundaries-c6qrbw-right",
+              sourceLayer: "brooklyn_grants-7qxrvu",
+              id: hoveredGravesendIdRight,
+            },
+            { hover: false }
+          );
+        }
+        hoveredGravesendIdRight = e.features[0].id;
+        afterMap.setFeatureState(
+          {
+            source: "gravesend_boundaries-c6qrbw-right",
+            sourceLayer: "brooklyn_grants-7qxrvu",
+            id: hoveredGravesendIdRight,
+          },
+          { hover: true }
+        );
+
+        var PopUpHTML = "";
+        PopUpHTML +=
+          "<div class='infoLayerDutchGrantsPopUp'><b>Name : </b>" +
+          e.features[0].properties.Name +
+          "</div>";
+
+        var coordinates = e.features[0].geometry.coordinates.slice();
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        console.log(PopUpHTML);
+        //AFTER MAP POP UP CONTENTS
+        afterMapGravesendTwoPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
+      }
+    });
+  }
+
+  function cursorOffHover() {
+    afterMap.on("mouseleave", "gravesend_boundaries-c6qrbw-right", function () {
+      afterMap.getCanvas().style.cursor = "";
       if (hoveredGravesendIdRight) {
         afterMap.setFeatureState(
           {
@@ -517,53 +583,14 @@ function addGravesendAfterLayers(date) {
           { hover: false }
         );
       }
-      hoveredGravesendIdRight = e.features[0].id;
-      afterMap.setFeatureState(
-        {
-          source: "gravesend_boundaries-c6qrbw-right",
-          sourceLayer: "brooklyn_grants-7qxrvu",
-          id: hoveredGravesendIdRight,
-        },
-        { hover: true }
-      );
+      hoveredGravesendIdRight = null;
+      if (afterMapGravesendTwoPopUp.isOpen())
+        afterMapGravesendTwoPopUp.remove();
+    });
+  }
 
-      var PopUpHTML = "";
-      PopUpHTML +=
-        "<div class='infoLayerDutchGrantsPopUp'><b>Name : </b>" +
-        e.features[0].properties.Name +
-        "</div>";
-
-      var coordinates = e.features[0].geometry.coordinates.slice();
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      console.log(PopUpHTML);
-      //AFTER MAP POP UP CONTENTS
-      afterMapGravesendTwoPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
-    }
-  });
-
-  //OFF HOVER
-  afterMap.on("mouseleave", "gravesend_boundaries-c6qrbw-right", function () {
-    afterMap.getCanvas().style.cursor = "";
-    if (hoveredGravesendIdRight) {
-      afterMap.setFeatureState(
-        {
-          source: "gravesend_boundaries-c6qrbw-right",
-          sourceLayer: "brooklyn_grants-7qxrvu",
-          id: hoveredGravesendIdRight,
-        },
-        { hover: false }
-      );
-    }
-    hoveredGravesendIdRight = null;
-    if (afterMapGravesendTwoPopUp.isOpen()) afterMapGravesendTwoPopUp.remove();
-  });
+  cursorOnHover();
+  cursorOffHover();
 }
 
 function addGravesendLinesAfterLayers(date) {
@@ -652,58 +679,59 @@ function addKarlAfterLayers(date) {
     filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
   });
 
-  //CURSOR ON HOVER
-  //ON HOVER
-  afterMap.on("mouseenter", "karl_long_island-right", function (e) {
-    afterMap.getCanvas().style.cursor = "pointer";
-    afterMapKarlTwoPopUp.setLngLat(e.lngLat).addTo(afterMap);
-  });
+  function addEventsOnHover() {
+    afterMap.on("mouseenter", "karl_long_island-right", function (e) {
+      afterMap.getCanvas().style.cursor = "pointer";
+      afterMapKarlTwoPopUp.setLngLat(e.lngLat).addTo(afterMap);
+    });
 
-  afterMap.on("mousemove", "karl_long_island-right", function (e) {
-    console.warn(e.features[0].id);
-    console.log(e.features[0].properties);
+    afterMap.on("mousemove", "karl_long_island-right", function (e) {
+      console.warn(e.features[0].id);
+      console.log(e.features[0].properties);
 
-    if (e.features.length > 0) {
-      if (hoveredKarlIdRight) {
+      if (e.features.length > 0) {
+        if (hoveredKarlIdRight) {
+          afterMap.setFeatureState(
+            {
+              source: "karl_long_island-right",
+              sourceLayer: "boundary_areas_long_island-8guvh4",
+              id: hoveredKarlIdRight,
+            },
+            { hover: false }
+          );
+        }
+        hoveredKarlIdRight = e.features[0].id;
         afterMap.setFeatureState(
           {
             source: "karl_long_island-right",
             sourceLayer: "boundary_areas_long_island-8guvh4",
             id: hoveredKarlIdRight,
           },
-          { hover: false }
+          { hover: true }
         );
+
+        var PopUpHTML = "";
+        PopUpHTML +=
+          "<div class='infoLayerDutchGrantsPopUp'><b>Name : </b>" +
+          e.features[0].properties.corr_label +
+          "</div>";
+
+        var coordinates = e.features[0].geometry.coordinates.slice();
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        console.log(PopUpHTML);
+        //AFTER MAP POP UP CONTENTS
+        afterMapKarlTwoPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
       }
-      hoveredKarlIdRight = e.features[0].id;
-      afterMap.setFeatureState(
-        {
-          source: "karl_long_island-right",
-          sourceLayer: "boundary_areas_long_island-8guvh4",
-          id: hoveredKarlIdRight,
-        },
-        { hover: true }
-      );
-
-      var PopUpHTML = "";
-      PopUpHTML +=
-        "<div class='infoLayerDutchGrantsPopUp'><b>Name : </b>" +
-        e.features[0].properties.corr_label +
-        "</div>";
-
-      var coordinates = e.features[0].geometry.coordinates.slice();
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      console.log(PopUpHTML);
-      //AFTER MAP POP UP CONTENTS
-      afterMapKarlTwoPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
-    }
-  });
+    });
+  }
+  addEventsOnHover();
 
   //OFF HOVER
   afterMap.on("mouseleave", "karl_long_island-right", function () {
@@ -751,98 +779,141 @@ function addKarlLinesAfterLayers(date) {
 /////////////////////////
 
 function addAfterFarmsLayer(date) {
-  //ADD FARMS POLYGONS
-  //*A fill pink #FFC0CB outline #C71585
-  afterMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "original_grants_and_farms-right-highlighted",
-    type: "fill",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.0508movm",
-    },
-    layout: {
-      visibility: document.getElementById("farms_layer").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "original_farms-6me5t0",
-    paint: {
-      "fill-color": "#e3ed58",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0,
-      ],
-      "fill-outline-color": "#FF0000",
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  function addFarmPolygons() {
+    afterMap.addLayer({
+      //ID: CHANGE THIS, 1 OF 3
+      id: "original_grants_and_farms-right-highlighted",
+      type: "fill",
+      source: {
+        type: "vector",
+        //URL: CHANGE THIS, 2 OF 3
+        url: "mapbox://mapny.0508movm",
+      },
+      layout: {
+        visibility: document.getElementById("farms_layer").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "original_farms-6me5t0",
+      paint: {
+        "fill-color": "#e3ed58",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.8,
+          0,
+        ],
+        "fill-outline-color": "#FF0000",
+      },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
 
-  //*A fill pink #FFC0CB outline #C71585
-  afterMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "original_grants_and_farms-right",
-    type: "fill",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.0508movm",
-    },
-    layout: {
-      visibility: document.getElementById("farms_layer").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "original_farms-6me5t0",
-    paint: {
-      "fill-color": "#e3ed58",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0.45,
-      ],
-      "fill-outline-color": "#FF0000",
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+    //*A fill pink #FFC0CB outline #C71585
+    afterMap.addLayer({
+      //ID: CHANGE THIS, 1 OF 3
+      id: "original_grants_and_farms-right",
+      type: "fill",
+      source: {
+        type: "vector",
+        //URL: CHANGE THIS, 2 OF 3
+        url: "mapbox://mapny.0508movm",
+      },
+      layout: {
+        visibility: document.getElementById("farms_layer").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "original_farms-6me5t0",
+      paint: {
+        "fill-color": "#e3ed58",
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "hover"], false],
+          0.8,
+          0.45,
+        ],
+        "fill-outline-color": "#FF0000",
+      },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
+  }
 
-  //ADD FARMS LINES
-  //*A golden #FFD700
-  afterMap.addLayer({
-    id: "farms-lines-right",
-    type: "line",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.6dwzmxth",
-    },
-    layout: {
-      visibility: document.getElementById("farms_layer_lines").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "original_farms_lines-57l4u7",
-    paint: {
-      "line-color": "#FF0000",
-      "line-width": 3,
-      "line-opacity": 0.8,
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  function addFarmLines() {
+    afterMap.addLayer({
+      id: "farms-lines-right",
+      type: "line",
+      source: {
+        type: "vector",
+        url: "mapbox://mapny.6dwzmxth",
+      },
+      layout: {
+        visibility: document.getElementById("farms_layer_lines").checked
+          ? "visible"
+          : "none",
+      },
+      "source-layer": "original_farms_lines-57l4u7",
+      paint: {
+        "line-color": "#FF0000",
+        "line-width": 3,
+        "line-opacity": 0.8,
+      },
+      filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
+    });
+  }
 
-  //CURSOR ON HOVER
-  //ON HOVER
-  afterMap.on("mouseenter", "original_grants_and_farms-right", function (e) {
-    console.log(e.features[0]);
-    afterMap.getCanvas().style.cursor = "pointer";
-    afterMapFarmPopUp.setLngLat(e.lngLat).addTo(afterMap);
-  });
+  function cursorOnHover(){
+    afterMap.on("mouseenter", "original_grants_and_farms-right", function (e) {
+      console.log(e.features[0]);
+      afterMap.getCanvas().style.cursor = "pointer";
+      afterMapFarmPopUp.setLngLat(e.lngLat).addTo(afterMap);
+    });
+  
+    afterMap.on("mousemove", "original_grants_and_farms-right", function (e) {
+      if (e.features.length > 0) {
+        if (hoveredFarmsIdRight) {
+          afterMap.setFeatureState(
+            {
+              source: "original_grants_and_farms-right",
+              sourceLayer: "original_farms-6me5t0",
+              id: hoveredFarmsIdRight,
+            },
+            { hover: false }
+          );
+        }
+        hoveredFarmsIdRight = e.features[0].id;
+        afterMap.setFeatureState(
+          {
+            source: "original_grants_and_farms-right",
+            sourceLayer: "original_farms-6me5t0",
+            id: hoveredFarmsIdRight,
+          },
+          { hover: true }
+        );
+  
+        var coordinates = e.features[0].geometry.coordinates.slice();
+  
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+  
+        //AFTER MAP POP UP CONTENTS
+        afterMapFarmPopUp
+          .setLngLat(e.lngLat)
+          .setHTML(
+            "<div class='infoLayerFarmsPopUp'>" +
+              e.features[0].properties.To +
+              "</div>"
+          );
+      }
+    });
+  }
 
-  afterMap.on("mousemove", "original_grants_and_farms-right", function (e) {
-    if (e.features.length > 0) {
+  function offHover(){
+    afterMap.on("mouseleave", "original_grants_and_farms-right", function () {
+      afterMap.getCanvas().style.cursor = "";
       if (hoveredFarmsIdRight) {
         afterMap.setFeatureState(
           {
@@ -853,52 +924,15 @@ function addAfterFarmsLayer(date) {
           { hover: false }
         );
       }
-      hoveredFarmsIdRight = e.features[0].id;
-      afterMap.setFeatureState(
-        {
-          source: "original_grants_and_farms-right",
-          sourceLayer: "original_farms-6me5t0",
-          id: hoveredFarmsIdRight,
-        },
-        { hover: true }
-      );
+      hoveredFarmsIdRight = null;
+      if (afterMapFarmPopUp.isOpen()) afterMapFarmPopUp.remove();
+    });
+  }
 
-      var coordinates = e.features[0].geometry.coordinates.slice();
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      //AFTER MAP POP UP CONTENTS
-      afterMapFarmPopUp
-        .setLngLat(e.lngLat)
-        .setHTML(
-          "<div class='infoLayerFarmsPopUp'>" +
-            e.features[0].properties.To +
-            "</div>"
-        );
-    }
-  });
-
-  //OFF HOVER
-  afterMap.on("mouseleave", "original_grants_and_farms-right", function () {
-    afterMap.getCanvas().style.cursor = "";
-    if (hoveredFarmsIdRight) {
-      afterMap.setFeatureState(
-        {
-          source: "original_grants_and_farms-right",
-          sourceLayer: "original_farms-6me5t0",
-          id: hoveredFarmsIdRight,
-        },
-        { hover: false }
-      );
-    }
-    hoveredFarmsIdRight = null;
-    if (afterMapFarmPopUp.isOpen()) afterMapFarmPopUp.remove();
-  });
+  addFarmPolygons();
+  addFarmLines();
+  cursorOnHover()
+  offHover()
 }
 
 /////////////////////////
@@ -1114,9 +1148,6 @@ function addSettlementsAfterLayers(date) {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
@@ -1385,8 +1416,6 @@ function addCurrentLotsAfterLayers() {
         { hover: true }
       );
 
-      //Address
-      //OwnerName
       var PopUpHTML =
         "<div class='infoLayerCurrLotsPopUp'>" +
         "<b>" +
@@ -1799,9 +1828,6 @@ function addLongIslandNativeGroupsAfterLayers() {
 
       var coordinates = e.features[0].geometry.coordinates.slice();
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
