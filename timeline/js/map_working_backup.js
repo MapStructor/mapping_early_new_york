@@ -1,13 +1,9 @@
-/////////////////////////////
 //ACCESS TOKEN
-/////////////////////////////
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoibml0dHlqZWUiLCJhIjoid1RmLXpycyJ9.NFk875-Fe6hoRCkGciG8yQ";
 
-/////////////////////////////
 //ADD MAP CONTAINER
-/////////////////////////////
 
 const mapConfig = {
   container: "map",
@@ -20,16 +16,12 @@ const mapConfig = {
 
 var map = new mapboxgl.Map(mapConfig);
 
-/////////////////////////////
 //ADD NAVIGATION CONTROL (ZOOM IN AND OUT)
-/////////////////////////////
 
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, "top-left");
 
-/////////////////////////////
 //NOT SURE WHAT THIS IS
-/////////////////////////////
 
 urlHash = window.location.hash;
 
@@ -44,9 +36,7 @@ map.on("error", function (e) {
   if (e && e.error !== "Error") console.log(e);
 });
 
-/////////////////////////////
 //TIME LAYER FILTERING. NOT SURE HOW WORKS.
-/////////////////////////////
 
 function changeDate(unixDate) {
   var year = parseInt(moment.unix(unixDate).format("YYYY"));
@@ -123,9 +113,7 @@ function changeDate(unixDate) {
   map.setFilter("c7-cn1j0p", dateFilter);
 } //end function changeDate
 
-/////////////////////////////
 //LAYERS AND LEGEND
-/////////////////////////////
 
 function setLayers() {
   //TOGGLE LAYERS
@@ -182,9 +170,7 @@ function setLayers() {
   }
 }
 
-/////////////////////////////
 //LAYER CHANGING
-/////////////////////////////
 
 //BASEMAP SWITCHING
 map.on("style.load", function () {
@@ -222,14 +208,10 @@ function switchStyle() {
   }
 }
 
-/////////////////////////////
 //MAP LAYERS
-/////////////////////////////
 
 function addLayers(yr, date) {
-  /////////////////
   //NAHC POINTS MAP
-  /////////////////
 
   map.on("load", function () {
     //ADD TAX LOT POINTS
@@ -269,7 +251,6 @@ function addLayers(yr, date) {
     // location of the feature, with description HTML from its properties.
     map.on("click", "c7-cn1j0p", function (e) {
       var coordinates = e.features[0].geometry.coordinates.slice();
-      var description = e.features[0].properties.description;
 
       // Ensure that if the map is zoomed out such that multiple
       // copies of the feature are visible, the popup appears

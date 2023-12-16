@@ -46,9 +46,7 @@ beforeMap.addControl(nav, "top-right");
 var nav = new mapboxgl.NavigationControl();
 afterMap.addControl(nav, "top-right");
 
-/////////////////////////////
 //BASEMAP MENU SWITCHING FUNCTIONALITY
-/////////////////////////////
 
 var rightInputs = document.getElementsByName("rtoggle");
 
@@ -72,9 +70,7 @@ for (var i = 0; i < leftInputs.length; i++) {
   leftInputs[i].onclick = switchLeftLayer;
 }
 
-/////////////////////////////
 //NOT SURE WHAT THIS IS
-/////////////////////////////
 
 urlHash = window.location.hash;
 var castello_click_ev = false,
@@ -396,9 +392,7 @@ afterMap.on("error", function (e) {
   if (e && e.error !== "Error") console.log(e);
 });
 
-//////////////////////////////////////////////
 //TIME LAYER FILTERING. NOT SURE HOW WORKS.
-//////////////////////////////////////////////
 
 function changeDate(unixDate) {
   var year = parseInt(moment.unix(unixDate).format("YYYY"));
@@ -471,9 +465,7 @@ function changeDate(unixDate) {
 
   var dateFilter = ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]];
 
-  ///////////////////////////////
   //LAYERS FOR FILTERING
-  ///////////////////////////////
 
   //NAHC
   beforeMap.setFilter("dutch_grants-5ehfqe-left", dateFilter);
@@ -493,9 +485,7 @@ function changeDate(unixDate) {
   }
 } //end function changeDate
 
-/////////////////////////////
 //LAYERS AND LEGEND
-/////////////////////////////
 
 function addGrantLotsBeforeLayers(date) {
   //REMOVING TAX LOT POINTS IF EXIST
@@ -947,14 +937,10 @@ afterMap.on("style.load", function () {
   addGrantLotsAfterLayers(date);
 });
 
-/////////////////////////////
 //MAP LAYERS
-/////////////////////////////
 
 function addBeforeLayers(yr, date) {
-  /////////////////
   //NAHC POINTS MAP
-  /////////////////
 
   //REMOVING TAX LOT POINTS IF EXIST
   if (beforeMap.getLayer("lot_events-bf43eb-left"))
@@ -1436,21 +1422,15 @@ function addAfterLayers(yr, date) {
 
 function buildPopUpInfo(props) {
   var popup_html =
-    ///////
     //TITLE
-    ///////
     "<b><h2>Demo Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/c7' target='_blank'>C7</a></h2></b>" +
     // CAN'T GET THE TAXLOT LINK TO WORK: <a href='https://encyclopedia.nahc-mapping.org/taxlot/c7'>
-    ////////////////
     //PROPERTY TYPE
-    ////////////////
     "<b>Property Type: </b>" +
     "House" +
     //LINE
     "<hr>" +
-    /////////////
     //DATE RANGE
-    ////////////
 
     //FROM
     //example: June 3, 1643
@@ -1461,19 +1441,15 @@ function buildPopUpInfo(props) {
     "<br>" +
     "<b> TO: </b>" +
     props.DATE2 +
-    /////////////////////////////////////////////////////////////////////////////////////////////
     //UNKNOWN (DISPLAY TITLE AND EXPLANATION WHERE UNKNOWN OR NOTHING, %nbsp)
     //example 1: <br><br><b>TAXLOT EVENTS UNKNOWN</b><br>Needs research beyond sources used.
     //example 2: &nbsp;
-    //////////////////////////////////////////////////////////////////////////////////////////////
     props.Unknown +
     //LINE
     "<hr>" +
-    //////////////////////////////////////////////////
     //NEXT
     //example 1: <b>OWNERSHIP:</b><br>
     //example 2: <b>NEXT KNOWN OWNERSHIP:</b><br>
-    //////////////////////////////////////////////////
     props.Next +
     //OWNER 1
     "<a href=https://nahc-mapping.org/mappingNY" +
@@ -1548,9 +1524,7 @@ function buildPopUpInfo(props) {
     "<a href=https://nahc-mapping.org/mappingNY" +
     props.FROM_ENT2 +
     ")" +
-    ///////////////////////////
     //PREVIOUS TAXLOT EVENT (SHOWS UP IF TAXLOT EVENTS UNKNOWN, OTHERWISE BLANK, &nbsp;)
-    //////////////////////////
 
     //TITLE: "PREVIOUS TAXLOT EVENT"
     //example 1: <br><br><b>PREVIOUS TAXLOT EVENT:</b><br>
