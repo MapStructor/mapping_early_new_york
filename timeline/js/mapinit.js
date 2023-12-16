@@ -80,9 +80,7 @@ var LongIslandBounds = [
 mapboxgl.accessToken =
   "pk.eyJ1IjoibWFwbnkiLCJhIjoiY2xtMG93amk4MnBrZTNnczUzY2VvYjg0ciJ9.MDMHYBlVbG14TJD120t6NQ";
 
-/////////////////////////////
 //ADD MAP CONTAINER
-/////////////////////////////
 
 var beforeMap = new mapboxgl.Map({
   container: "before",
@@ -107,9 +105,7 @@ var map = new mapboxgl.Compare(beforeMap, afterMap, {
   // mousemove: true
 });
 
-/////////////////////////////
 //ADD NAVIGATION CONTROLS (ZOOM IN AND OUT)
-/////////////////////////////
 //Before map
 var nav = new mapboxgl.NavigationControl();
 beforeMap.addControl(nav, "bottom-right");
@@ -130,7 +126,6 @@ function testZoom() {
     -74.01507471506183, 40.70239266372983, -74.00734180289922,
     40.709035402164524,
   ]; //dutch grants
-  //[-74.0128690093802, 40.705887398291175, -73.9457283353804, 40.817639419566085]; //Farms Layer
   beforeMap.fitBounds(TestBounds, { bearing: current_bearing });
   afterMap.fitBounds(TestBounds, { bearing: current_bearing });
 }
@@ -376,9 +371,7 @@ function zoomLabels(sel_opt) {
   }
 }
 
-/////////////////////////////
 //BASEMAP MENU SWITCHING FUNCTIONALITY
-/////////////////////////////
 
 //RIGHT MENU
 var rightInputs = document.getElementsByName("rtoggle");
@@ -404,9 +397,7 @@ for (var i = 0; i < leftInputs.length; i++) {
   leftInputs[i].onclick = switchLeftLayer;
 }
 
-/////////////////////////////
 // on Map events
-/////////////////////////////
 
 var urlHash = window.location.hash;
 var castello_click_ev = false,
@@ -813,9 +804,7 @@ afterMap.on("error", function (e) {
   if (e && e.error !== "Error") console.log(e);
 });
 
-//////////////////////////////////////////////
 // ===== Layers click event functions ======
-//////////////////////////////////////////////
 
 function DefaultHandle() {
   if (
@@ -1196,8 +1185,6 @@ function SettlementsClickHandle(event) {
 
 function InfoClickHandle(event) {
   //#infoLayerInfoPoint
-  //settlements_info[event.features[0].properties.Lot]
-  console.log(event.features[0]);
 
   if (info_layer_view_flag && clickedInfoId == event.features[0].id) {
     if ($("#view-hide-layer-panel").length > 0)
@@ -1213,8 +1200,6 @@ function InfoClickHandle(event) {
     clickedInfoId = event.features[0].id;
 
     var ref_name = event.features[0].properties.nid;
-    console.log(ref_name);
-    console.log(infos_entity.length);
     info_popup_html = "<h3>Info</h3><hr>";
 
     if (typeof infos_entity[ref_name] == "undefined" || ref_name == "") {
@@ -1343,8 +1328,6 @@ function CastelloClickHandle(event) {
       );
     if (!afterHighCastelloPopUp.isOpen())
       afterHighCastelloPopUp.addTo(afterMap);
-    //console.log($(".infoLayerElem").first().attr("id"));
-    //if(windoWidth > 637) {
     if ($(".infoLayerElem").first().attr("id") != "infoLayerCastello")
       $("#infoLayerCastello").insertBefore($(".infoLayerElem").first());
     $("#infoLayerCastello").html(places_popup_html).slideDown();
@@ -1352,7 +1335,6 @@ function CastelloClickHandle(event) {
     if (!layer_view_flag)
       if ($("#view-hide-layer-panel").length > 0)
         $("#view-hide-layer-panel").trigger("click");
-    //}
     castello_layer_view_flag = true;
   }
   castello_click_ev = true;
@@ -1376,16 +1358,13 @@ function FarmsClickHandle(event) {
 
       closeFarmsInfo();
     } else {
-      //if(windoWidth > 637) {
       buildFarmsPopUpInfo(event.features[0].properties);
       if ($(".infoLayerElem").first().attr("id") != "infoLayerFarms")
         $("#infoLayerFarms").insertBefore($(".infoLayerElem").first());
       $("#infoLayerFarms").slideDown();
       if ($("#view-hide-layer-panel").length > 0)
         if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-      //}
       farms_layer_view_flag = true;
-      //*A#
       afterMap.setFeatureState(
         {
           source: "original_grants_and_farms-right-highlighted",
@@ -1481,7 +1460,6 @@ function DutchGrantsClickHandle(event) {
   highPopUpHTML +=
     "<b>Dutch Grant Lot: </b>" + event.features[0].properties.Lot + "</div>";
 
-  //if(layer_view_flag) {
   if (dgrants_layer_view_id == event.features[0].id) {
     if (dgrants_layer_view_flag) {
       if ($("#view-hide-layer-panel").length > 0)
@@ -1494,16 +1472,13 @@ function DutchGrantsClickHandle(event) {
 
       closeDutchGrantsInfo();
     } else {
-      //if(windoWidth > 637) {
       buildDutchGrantPopUpInfo(event.features[0].properties);
       if ($(".infoLayerElem").first().attr("id") != "infoLayerDutchGrants")
         $("#infoLayerDutchGrants").insertBefore($(".infoLayerElem").first());
       $("#infoLayerDutchGrants").slideDown();
       if ($("#view-hide-layer-panel").length > 0)
         if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-      //}
       dgrants_layer_view_flag = true;
-      //*A#
       afterMap.setFeatureState(
         {
           source: "dutch_grants-5ehfqe-right-highlighted",
@@ -1528,16 +1503,13 @@ function DutchGrantsClickHandle(event) {
         beforeHighMapGrantLotPopUp.addTo(beforeMap);
     }
   } else {
-    //if(windoWidth > 637) {
     buildDutchGrantPopUpInfo(event.features[0].properties);
     if ($(".infoLayerElem").first().attr("id") != "infoLayerDutchGrants")
       $("#infoLayerDutchGrants").insertBefore($(".infoLayerElem").first());
     $("#infoLayerDutchGrants").slideDown();
     if ($("#view-hide-layer-panel").length > 0)
       if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-    //}
     dgrants_layer_view_flag = true;
-    //*A#
     afterMap.setFeatureState(
       {
         source: "dutch_grants-5ehfqe-right-highlighted",
@@ -1581,7 +1553,6 @@ function DutchGrantsClickHandle(event) {
   dutch_grant_click_ev = true;
 }
 
-/*REPLACE THIS*/
 function GravesendClickHandle(event) {
   var highPopUpHTML =
     "<div class='infoLayerGravesendPopUp'><b>Name : </b>" +
@@ -1600,16 +1571,13 @@ function GravesendClickHandle(event) {
 
       closeGravesendInfo();
     } else {
-      //if(windoWidth > 637) {
       buildGravesendPopUpInfo(event.features[0].properties);
       if ($(".infoLayerElem").first().attr("id") != "infoLayerGravesend")
         $("#infoLayerGravesend").insertBefore($(".infoLayerElem").first());
       $("#infoLayerGravesend").slideDown();
       if ($("#view-hide-layer-panel").length > 0)
         if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-      //}
       gravesend_layer_view_flag = true;
-      //*A#
       afterMap.setFeatureState(
         {
           source: "gravesend_boundaries-c6qrbw-right-highlighted",
@@ -1636,16 +1604,13 @@ function GravesendClickHandle(event) {
         beforeHighMapGravesendPopUp.addTo(beforeMap);
     }
   } else {
-    //if(windoWidth > 637) {
     buildGravesendPopUpInfo(event.features[0].properties);
     if ($(".infoLayerElem").first().attr("id") != "infoLayerGravesend")
       $("#infoLayerGravesend").insertBefore($(".infoLayerElem").first());
     $("#infoLayerGravesend").slideDown();
     if ($("#view-hide-layer-panel").length > 0)
       if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-    //}
     gravesend_layer_view_flag = true;
-    //*A#
     afterMap.setFeatureState(
       {
         source: "gravesend_boundaries-c6qrbw-right-highlighted",
@@ -1688,7 +1653,6 @@ function GravesendClickHandle(event) {
   gravesend_layer_view_id = event.features[0].id;
   gravesend_click_ev = true;
 }
-/*REPLACE THIS*/
 
 function NativeGroupsClickHandle(event) {
   var highPopUpHTML = "";
@@ -1724,16 +1688,13 @@ function NativeGroupsClickHandle(event) {
 
       closeNativeGroupsInfo();
     } else {
-      //if(windoWidth > 637) {
       buildNativeGroupPopUpInfo(event.features[0].properties);
       if ($(".infoLayerElem").first().attr("id") != "infoLayerNativeGroups")
         $("#infoLayerNativeGroups").insertBefore($(".infoLayerElem").first());
       $("#infoLayerNativeGroups").slideDown();
       if ($("#view-hide-layer-panel").length > 0)
         if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-      //}
       native_group_layer_view_flag = true;
-      //*A#
       afterMap.setFeatureState(
         {
           source: "native-groups-area-right-highlighted",
@@ -1762,16 +1723,13 @@ function NativeGroupsClickHandle(event) {
         beforeHighMapNativeGroupsPopUp.addTo(beforeMap);
     }
   } else {
-    //if(windoWidth > 637) {
     buildNativeGroupPopUpInfo(event.features[0].properties);
     if ($(".infoLayerElem").first().attr("id") != "infoLayerNativeGroups")
       $("#infoLayerNativeGroups").insertBefore($(".infoLayerElem").first());
     $("#infoLayerNativeGroups").slideDown();
     if ($("#view-hide-layer-panel").length > 0)
       if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-    //}
     native_group_layer_view_flag = true;
-    //*A#
     afterMap.setFeatureState(
       {
         source: "native-groups-area-right-highlighted",
@@ -1820,7 +1778,6 @@ function NativeGroupsClickHandle(event) {
 }
 
 function KarlClickHandle(event) {
-  // event.features[0].properties.Name
   var highPopUpHTML =
     "<div class='infoLayerKarlPopUp'><b>Name : </b>" +
     event.features[0].properties.corr_label +
@@ -1838,16 +1795,13 @@ function KarlClickHandle(event) {
 
       closeKarlInfo();
     } else {
-      //if(windoWidth > 637) {
       buildKarlPopUpInfo(event.features[0].properties);
       if ($(".infoLayerElem").first().attr("id") != "infoLayerKarl")
         $("#infoLayerKarl").insertBefore($(".infoLayerElem").first());
       $("#infoLayerKarl").slideDown();
       if ($("#view-hide-layer-panel").length > 0)
         if (!layer_view_flag) $("#view-hide-layer-panel").trigger("click");
-      //}
       karl_layer_view_flag = true;
-      //*A#
       afterMap.setFeatureState(
         {
           source: "karl_long_island-right-highlighted",
@@ -2216,12 +2170,9 @@ function demoFilterRangeCalc() {
     console.log(sliderEndDrag);
     console.log(moment.unix(sliderEndDrag).format("DD MMM YYYY"));
   }
-  //A* demo filter range calculator
 }
 
-//////////////////////////////////////////////
 //TIME LAYER FILTERING. NOT SURE HOW WORKS.
-//////////////////////////////////////////////
 
 function changeDate(unixDate) {
   var year = parseInt(moment.unix(unixDate).format("YYYY"));
@@ -2230,9 +2181,7 @@ function changeDate(unixDate) {
   var yrFilter = ["all", ["<=", "YearStart", year], [">=", "YearEnd", year]];
   var dateFilter = ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]];
 
-  ///////////////////////////////
   //LAYERS FOR FILTERING
-  ///////////////////////////////
 
   //NAHC
   beforeMap.setFilter("dutch_grants-5ehfqe-left", dateFilter);
@@ -2304,9 +2253,7 @@ function changeDate(unixDate) {
   demoFilterRangeCalc();
 } //end function changeDate
 
-/////////////////////////////
 //   ZOOM LABELS
-/////////////////////////////
 var lbl_color = "#482525";
 var lbl_color_hover = "#ff0000";
 
@@ -2337,7 +2284,6 @@ var LongIslandZoomLabel = {
     "text-font": ["Asap Medium"],
     "text-field": "{title}",
     "text-size": 18,
-    //"text-anchor": "center"
   },
   paint: {
     "text-color": "#000000",
@@ -2381,7 +2327,6 @@ var BrooklynZoomLabel = {
     "text-font": ["Asap Medium"],
     "text-field": "{title}",
     "text-size": 18,
-    //"text-anchor": "center"
   },
   paint: {
     "text-color": "#000000",
@@ -2425,7 +2370,6 @@ var NewAmsterdamZoomLabel = {
     "text-font": ["Asap Medium"],
     "text-field": "{title}",
     "text-size": 18,
-    //"text-anchor": "center"
   },
   paint: {
     "text-color": "#000000",
@@ -2469,7 +2413,6 @@ var ManhattanZoomLabel = {
     "text-font": ["Asap Medium"],
     "text-field": "{title}",
     "text-size": 18,
-    //"text-anchor": "center"
   },
   paint: {
     "text-color": "#000000",
@@ -2513,7 +2456,6 @@ var NewNetherlandZoomLabel = {
     "text-font": ["Asap Medium"],
     "text-field": "{title}",
     "text-size": 18,
-    //"text-anchor": "center"
   },
   paint: {
     "text-color": "#000000",
@@ -2552,7 +2494,6 @@ var NewEnglandZoomLabel = {
     "text-font": ["Asap Medium"],
     "text-field": "{title}",
     "text-size": 18,
-    //"text-anchor": "center"
   },
   paint: {
     "text-color": "#000000",
@@ -2570,9 +2511,7 @@ var NewEnglandZoomLabel = {
   },
 };
 
-/////////////////////////////
 //LAYER CHANGING
-/////////////////////////////
 
 //BASEMAP SWITCHING
 beforeMap.on("style.load", function () {

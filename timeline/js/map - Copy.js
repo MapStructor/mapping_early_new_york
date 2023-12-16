@@ -1,9 +1,7 @@
 mapboxgl.accessToken =
 	"pk.eyJ1Ijoibml0dHlqZWUiLCJhIjoid1RmLXpycyJ9.NFk875-Fe6hoRCkGciG8yQ";
 
-/////////////////////////////
 //ADD MAP CONTAINER
-/////////////////////////////
 const mapboxConfig = {
 	container: "map",
 	style: "mapbox://styles/nittyjee/ck2f3s0ks0u8o1cpfruf0qne6",
@@ -15,9 +13,7 @@ const mapboxConfig = {
 
 var map = new mapboxgl.Map(mapboxConfig);
 
-/////////////////////////////
 //ADD NAVIGATION CONTROL (ZOOM IN AND OUT)
-/////////////////////////////
 
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, "top-left");
@@ -40,9 +36,7 @@ map.on("error", function (e) {
 	if (e && e.error !== "Error") console.log(e);
 });
 
-//////////////////////////////////////////////
 //TIME LAYER FILTERING. NOT SURE HOW WORKS.
-//////////////////////////////////////////////
 
 function changeDate(unixDate) {
 	var year = parseInt(moment.unix(unixDate).format("YYYY"));
@@ -121,17 +115,13 @@ function changeDate(unixDate) {
 	}
 	var dateFilter = ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]];
 
-	///////////////////////////////
 	//LAYERS FOR FILTERING
-	///////////////////////////////
 
 	//NAHC
 	map.setFilter("c7_dates-ajsksu", dateFilter);
 }
 
-/////////////////////////////
 //LAYERS AND LEGEND
-/////////////////////////////
 
 function setLayers() {
 	//TOGGLE LAYERS
@@ -187,9 +177,7 @@ function setLayers() {
 	}
 }
 
-/////////////////////////////
 //LAYER CHANGING
-/////////////////////////////
 
 //BASEMAP SWITCHING
 map.on('style.load', function () {
@@ -228,15 +216,10 @@ function switchStyle() {
 	}
 }
 
-/////////////////////////////
 //MAP LAYERS
-/////////////////////////////
 
 function addLayers(_, date) {
-
-	/////////////////
 	//NAHC POINTS MAP
-	/////////////////
 
 	map.on('load', function () {
 
@@ -305,9 +288,7 @@ function addLayers(_, date) {
 					///////
 					"<b><h2>Taxlot: C7</h2></b>" +
 
-					////////////////
 					//PROPERTY TYPE
-					////////////////
 					"<b>House</b>" +
 					"<hr>" +
 
@@ -322,21 +303,17 @@ function addLayers(_, date) {
 					"<b> TO: </b>" +
 					e.features[0].properties.DATE2 +
 
-					/////////////////////////////////////////////////////////////////////////////////////////////
 					//UNKNOWN (DISPLAY TITLE AND EXPLANATION WHERE UNKNOWN OR NOTHING, %nbsp)
 					//example 1: <br><br><b>TAXLOT EVENTS UNKNOWN</b><br>Needs research beyond sources used.
 					//example 2: &nbsp;
-					//////////////////////////////////////////////////////////////////////////////////////////////
 					e.features[0].properties.Unknown +
 
 					//LINE
 					"<hr>" +
 
-					//////////////////////////////////////////////////
 					//NEXT
 					//example 1: <b>OWNERSHIP:</b><br>
 					//example 2: <b>NEXT KNOWN OWNERSHIP:</b><br>
-					//////////////////////////////////////////////////
 					e.features[0].properties.Next +
 
 					//OWNER 1
@@ -355,10 +332,6 @@ function addLayers(_, date) {
 
 					"<br>" +
 					"<br>" +
-
-					//////////////////
-					//TAXLOT EVENT
-					//////////////////
 
 					//TAXLOT EVENT TITLE
 					//example 1: <b>TAXLOT EVENT:</b>
@@ -401,9 +374,7 @@ function addLayers(_, date) {
 					//TAXLOT ENTITY DESCRIPTIONS 2
 					" (" + '<a href=http://thenittygritty.org' + e.features[0].properties.FROM_ENT2 + ")" +
 
-					///////////////////////////
 					//PREVIOUS TAXLOT EVENT (SHOWS UP IF TAXLOT EVENTS UNKNOWN, OTHERWISE BLANK, &nbsp;)
-					//////////////////////////
 
 					//TITLE: "PREVIOUS TAXLOT EVENT"
 					//example 1: <br><br><b>PREVIOUS TAXLOT EVENT:</b><br>

@@ -1,6 +1,4 @@
-//////////////////
 // Dynamic Layers
-//////////////////
 
 function addAfterLayers(_, date) {
   function removeTaxLot() {
@@ -450,9 +448,7 @@ function addGrantLotsLinesAfterLayers(date) {
   addALayerShowingThePlaces();
 }
 
-////////////////////////////
 // Gravesend Dynamic Layers
-////////////////////////////
 
 function addGravesendAfterLayers(date) {
   afterMap.addLayer({
@@ -616,9 +612,7 @@ function addGravesendLinesAfterLayers(date) {
   });
 }
 
-////////////////////////////
 // Karl Dynamic Layers
-////////////////////////////
 
 function addKarlAfterLayers(date) {
   afterMap.addLayer({
@@ -774,9 +768,7 @@ function addKarlLinesAfterLayers(date) {
   });
 }
 
-/////////////////////////
 // Farms Dynamic Layer
-/////////////////////////
 
 function addAfterFarmsLayer(date) {
   function addFarmPolygons() {
@@ -935,9 +927,7 @@ function addAfterFarmsLayer(date) {
   offHover()
 }
 
-/////////////////////////
 // Info Static Layer
-/////////////////////////
 
 function addInfoAfterLayers(date) {
   // Add a layer showing the info.
@@ -1038,9 +1028,7 @@ function addInfoAfterLayers(date) {
   });
 }
 
-/////////////////////////
 // Info Static Layer
-/////////////////////////
 
 function addInfoLabelsAfterLayers(date) {
   // Add a layer showing the places.
@@ -1083,9 +1071,7 @@ function addInfoLabelsAfterLayers(date) {
   });
 }
 
-/////////////////////////
 // Settlements Static Layer
-/////////////////////////
 
 function addSettlementsAfterLayers(date) {
   // Add a layer showing the places.
@@ -1183,9 +1169,7 @@ function addSettlementsAfterLayers(date) {
   });
 }
 
-/////////////////////////
 // Settlements Labels Static Layer
-/////////////////////////
 
 function addSettlementsLabelsAfterLayers(date) {
   // Add a layer showing the places.
@@ -1229,9 +1213,7 @@ function addSettlementsLabelsAfterLayers(date) {
   });
 }
 
-/////////////////////////
 // Castello Static Layer
-/////////////////////////
 
 function addCastelloAfterLayers() {
   // Add a layer showing the places.
@@ -1326,9 +1308,7 @@ function addCastelloAfterLayers() {
   });
 }
 
-/////////////////////////
 // Current Static Layers
-/////////////////////////
 
 function addCurrentLotsAfterLayers() {
   //REMOVING CURRENT LOTS IF EXIST
@@ -1855,9 +1835,7 @@ function addLongIslandNativeGroupsAfterLayers() {
   });
 }
 
-////////////////////////////////
 // Interactive Zoom Labels Layer
-////////////////////////////////
 
 function addAfterLabelsLayer() {
   afterMap.addLayer(LongIslandZoomLabel);
