@@ -98,9 +98,12 @@ function buildGrantLotsPopUpInfo(props) {
 
 function buildDutchGrantPopUpInfo(props) {
 	        var popup_html = "";
-			//console.log(props);
+			console.log(props);
 	        //console.log(dutch_grant_lots_info[props.Lot]);
-			if( typeof dutch_grant_lots_info[props.Lot] == "undefined" ) {
+			console.log(props.Lot);
+			console.log(lots_info[props.Lot]);
+			//if( typeof dutch_grant_lots_info[props.Lot] == "undefined" ) {
+			if( typeof lots_info[props.Lot] == "undefined" ) {
 			    popup_html = 
 				    "<h3>Dutch Grant</h3><hr>" +
 				    props.name + "<br>" +
@@ -114,6 +117,7 @@ function buildDutchGrantPopUpInfo(props) {
 					props.descriptio + "<br><br>"
 				;
 			} else {
+				/*
 				var builds_imgs = "";
 				if(dutch_grant_lots_info[props.Lot].builds.length > 0) {
 					for(let i = 0; i < dutch_grant_lots_info[props.Lot].builds.length; i++){
@@ -148,8 +152,43 @@ function buildDutchGrantPopUpInfo(props) {
 					                  "<br>" +
 					                  "<i>" + dutch_grant_lots_info[props.Lot].descr + "</i>";
 					}
-                    popup_html += "<br><br>" +  builds_imgs;
-					
+                popup_html += "<br><br>" +  builds_imgs;
+				*/
+
+				var builds_imgs = "";
+				if(lots_info[props.Lot].builds.length > 0) {
+					for(let i = 0; i < lots_info[props.Lot].builds.length; i++){
+					    builds_imgs += "<img src='https://encyclopedia.nahc-mapping.org" + lots_info[props.Lot].builds[i] + "'  width='258' ><br><br>";
+					}
+				}
+				popup_html = 
+				    "<h3>Dutch Grant</h3><hr>" +
+				    "<br>" +
+				    "<b>Dutch Grant Lot:</b> <a href='https://encyclopedia.nahc-mapping.org/grantlot/" + props.Lot + "' target='_blank'>" + props.Lot + "</a><br>" +
+					"<br>";
+					if( lots_info[props.Lot].to_party_linked.length > 0 ) {
+					    popup_html += "<b>To Party:</b> <i>" + lots_info[props.Lot].to_party_linked + "</i><br><br>";
+					} else if( lots_info[props.Lot].to_party.length > 0 ) {
+					    popup_html += "<b>To Party:</b> <i>" + lots_info[props.Lot].to_party + "</i><br><br>";
+					}
+					if( lots_info[props.Lot].from_party_linked.length > 0 ) {
+					    popup_html += "<b>From Party:</b> <i>" + lots_info[props.Lot].from_party_linked + "</i><br><br>";
+					} else if( lots_info[props.Lot].from_party.length > 0 ) {
+					    popup_html += "<b>From Party:</b> <i>" + lots_info[props.Lot].from_party + "</i><br><br>";
+					}
+					if( lots_info[props.Lot].date_start.length > 0 ) {
+					    popup_html += "<b>Start:</b> <i>" + lots_info[props.Lot].date_start + "</i><br>";
+					}
+					if( lots_info[props.Lot].date_end.length > 0 ) {
+					    popup_html += "<b>End:</b> <i>" + lots_info[props.Lot].date_end + "</i><br><br>";
+			        }
+					if( lots_info[props.Lot].descr.length > 0 ) {
+					    popup_html += "<b>Description:</b>" +
+					                  "<br>" +
+					                  "<i>" + lots_info[props.Lot].descr + "</i>";
+					}
+                popup_html += "<br><br>" +  builds_imgs;
+				
 					/*
 					"<h3>Dutch Grant</h3><hr>" +
 				    "<br>" +
@@ -183,7 +222,8 @@ function buildGravesendPopUpInfo(props) {
 			
 			console.log(props);
 
-            if( typeof brooklyn_grants_info[props.node] == "undefined" ) { 
+            //if( typeof brooklyn_grants_info[props.node] == "undefined" ) { 
+            if( typeof lots_info[props.node] == "undefined" ) { 
 
 			    popup_html += 
 				    //"<b>Name:</b> <i>" + props.Name + "</i><br>" +
@@ -197,6 +237,7 @@ function buildGravesendPopUpInfo(props) {
 				;
 				
 			} else {
+				/*
 					if( brooklyn_grants_info[props.node].title.length > 0 ) {
 						popup_html += "<b>" + brooklyn_grants_info[props.node].title + "</b><br><br>";
 					}
@@ -226,15 +267,51 @@ function buildGravesendPopUpInfo(props) {
 						else 
 					        popup_html += "<br><b>From Party:</b><br><i>" + brooklyn_grants_info[props.node].from_party + "</i><br><br>";
 					}
-					/*
-					if( brooklyn_grants_info[props.node].ancestors_link.length > 0 ) {
-					    popup_html += "<br><a href='" + brooklyn_grants_info[props.node].ancestors_link + "' target='_blank' >Related Ancestors</a><br><br>";
-					}
-					*/
+					//if( brooklyn_grants_info[props.node].ancestors_link.length > 0 ) {
+					//    popup_html += "<br><a href='" + brooklyn_grants_info[props.node].ancestors_link + "' target='_blank' >Related Ancestors</a><br><br>";
+					//}
 					if( brooklyn_grants_info[props.node].indigenous_signatories.length > 0 ) {
 					    popup_html += "<b>Indigenous Signatories:</b><br><i>" + brooklyn_grants_info[props.node].indigenous_signatories.replace(/\\n/g, '<br>') + "</i><br>";
 					}
-
+			    */
+				
+					if( lots_info[props.node].title.length > 0 ) {
+						popup_html += "<b>" + lots_info[props.node].title + "</b><br><br>";
+					}
+					if( lots_info[props.node].date_start.length > 0 ) {
+					    popup_html += "<b>Start:</b> <i>" + lots_info[props.node].date_start + "</i><br><br>";
+					}
+				    if( lots_info[props.node].title.length > 0 ) {   //name -> title   !!!
+					    popup_html += "<a href='https://encyclopedia.nahc-mapping.org/node/" + props.node + "' target='_blank' >" + lots_info[props.node].title + "</a><br><br>";
+					}
+				    if(( lots_info[props.node].to_party.length > 0 ) || ( lots_info[props.node].to_party2.length > 0 )) {
+						popup_html += "<b>To Party:</b><br>";
+						
+						if( lots_info[props.node].to_party_linked.length > 0 )
+							popup_html += "<i>" +  lots_info[props.node].to_party_linked + "</i><br>"
+						else 
+					        popup_html += "<i>" + lots_info[props.node].to_party + "</i><br>";
+						
+						if( lots_info[props.node].to_party2_linked.length > 0 )
+							popup_html += "<i>" + lots_info[props.node].to_party2_linked + "</i><br>"
+						else 
+					        popup_html += "<i>" + lots_info[props.node].to_party2 + "</i><br>";
+						
+					} 
+					if( lots_info[props.node].from_party.length > 0 ) {
+						if( lots_info[props.node].from_party_linked.length > 0 )
+							popup_html += "<br><b>From Party:</b><br> <a href='" +  lots_info[props.node].from_party_linked + "' target='_blank'>" + lots_info[props.node].from_party + "</a><br><br>"
+						else 
+					        popup_html += "<br><b>From Party:</b><br><i>" + lots_info[props.node].from_party + "</i><br><br>";
+					}
+					/*
+					if( lots_info[props.node].ancestors_link.length > 0 ) {
+					    popup_html += "<br><a href='" + lots_info[props.node].ancestors_link + "' target='_blank' >Related Ancestors</a><br><br>";
+					}
+					*/
+					if( lots_info[props.node].indigenous_signatories.length > 0 ) {
+					    popup_html += "<b>Indigenous Signatories:</b><br><i>" + lots_info[props.node].indigenous_signatories.replace(/\\n/g, '<br>') + "</i><br>";
+					}
 			}
 
     
@@ -329,6 +406,7 @@ To: "Jan Jansen Damen"
 node_id: "/node/10548"
 */
 
+            /*
             if( typeof farms_grants_info[props.NID_num] == "undefined" ) {
 			    popup_html = 
 				    "<h3>Original Grants &amp; Farms</h3><hr>" +
@@ -364,9 +442,47 @@ node_id: "/node/10548"
 					    popup_html += "<br><b>Type:</b> <i>" + farms_grants_info[props.NID_num].type + "</i><br>";
 					}
 			}
-				
+			*/	
 			
-				
+			//A* farms_grants_info -> lots_info
+			
+			if( typeof lots_info[props.NID_num] == "undefined" ) {
+			    popup_html = 
+				    "<h3>Original Grants &amp; Farms</h3><hr>" +
+					"<br>" +
+					"<b>To:</b> <i>" + props.To + "</i><br>" +
+					"<b>Date:</b> <i>" + props.Date + "</i><br>" +
+					"<br>" 
+				;
+			} else {
+				    popup_html = "<h3>Original Grants &amp; Farms</h3><hr><br>";
+					if( lots_info[props.NID_num].title_linked.length > 0 ) {
+					    popup_html += "<b>" + lots_info[props.NID_num].title_linked + "</b><br><br>";
+					} else if( lots_info[props.NID_num].title.length > 0 ) {
+					    popup_html += "<b>" + lots_info[props.NID_num].title + "</b><br><br>";
+					}
+				    if( lots_info[props.NID_num].to_party.length > 0 ) {
+						if( lots_info[props.NID_num].to_party_linked.length > 0 )
+							popup_html += "<b>To Party:</b> <i>" +  lots_info[props.NID_num].to_party_linked + "</i><br>"
+						else
+					         popup_html += "<b>To Party:</b> <i>" + lots_info[props.NID_num].to_party + "</i><br>";
+					} 
+					if( lots_info[props.NID_num].from_party.length > 0 ) {
+						if( lots_info[props.NID_num].from_party_linked.length > 0 )
+							popup_html += "<b>From Party:</b> <i>" +  lots_info[props.NID_num].from_party_linked + "</i><br>"
+						else 
+					        popup_html += "<b>From Party:</b> <i>" + lots_info[props.NID_num].from_party + "</i><br>";
+					}
+					if( lots_info[props.NID_num].date_start.length > 0 ) {
+					    popup_html += "<b>Start:</b> <i>" + lots_info[props.NID_num].date_start + "</i><br>";
+					}
+					if( lots_info[props.NID_num].date_end.length > 0 ) {
+					    popup_html += "<b>End:</b> <i>" + lots_info[props.NID_num].date_end + "</i><br>";
+			        }
+					if( lots_info[props.NID_num].type.length > 0 ) {
+					    popup_html += "<br><b>Type:</b> <i>" + lots_info[props.NID_num].type + "</i><br>";
+					}
+			}	
     
 	$("#infoLayerFarms").html(popup_html);
 
