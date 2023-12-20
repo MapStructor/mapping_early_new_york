@@ -1812,7 +1812,7 @@ function getLotsInfo() {
                     if( data[i].field_old_nid != "" ) {
 					    
 						if( data[i].field_content_type == "Grant Lots" ) {
-						    data_info_index = data[i].title;
+						    data_info_index = data[i].field_old_title;
 					        data_info_index = data_info_index.replace(/\s+/g, '');
 					        if(/FortAmsterdam/.test(data_info_index)) {
 						        data_info_index = "Fort Amsterdam";
