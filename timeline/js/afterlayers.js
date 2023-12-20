@@ -1,37 +1,3 @@
-function getLayer(layerId){
-  return layers.find(({id})=> id === layerId)
-}
-
-function addMapLayer(map, layerConfig, date) {
-  if (date){
-    map.addLayer({
-      ...layerConfig,
-      filter:["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-    });
-  } else {
-    map.addLayer({
-      ...layerConfig
-    })
-  }
-}
-
-function removeTaxPoints(map, points){
-  points.forEach(point => {
-    switch (point.type){
-      case 'source':
-        if(map.getSource(point.id)){
-          map.removeSource(point.id)
-        }
-        return
-
-      case 'layer':
-        if(map.getLayer(points.id)){
-          map.removeLayer(points.id)
-        }
-    }
-  })
-}
-
 function addAfterLayers(_, date) {
   removeTaxPoints(afterMap, [
     {type: "layer", id: "lot_events-bf43eb-right"},
@@ -671,7 +637,6 @@ function addSettlementsAfterLayers(date) {
 // Settlements Labels Static Layer
 
 function addSettlementsLabelsAfterLayers(date) {
-  // Add a layer showing the places.
   addMapLayer(afterMap, getLayer("settlements-labels-right"), date)
 }
 
