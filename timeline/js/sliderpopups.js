@@ -166,6 +166,11 @@ function buildDutchGrantPopUpInfo(props) {
 				    "<br>" +
 				    "<b>Dutch Grant Lot:</b> <a href='https://encyclopedia.nahc-mapping.org/grantlot/" + props.Lot + "' target='_blank'>" + props.Lot + "</a><br>" +
 					"<br>";
+				        if( lots_info[props.Lot].title_linked.length > 0 ) {
+					    popup_html += "<b>" + lots_info[props.Lot].title_linked + "</b><br><br>";
+					} else if( lots_info[props.Lot].title.length > 0 ) {
+					    popup_html += "<b>" + lots_info[props.Lot].title + "</b><br><br>";
+					}
 					if( lots_info[props.Lot].to_party_linked.length > 0 ) {
 					    popup_html += "<b>To Party:</b> <i>" + lots_info[props.Lot].to_party_linked + "</i><br><br>";
 					} else if( lots_info[props.Lot].to_party.length > 0 ) {
