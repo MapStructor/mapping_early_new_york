@@ -1456,7 +1456,7 @@ function getSettlementsInfo() {
 						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org" + data[i].path[0].alias + "' target='_blank'>" : "" ) +
 						     data[i].title[0].value  +
 							( data[i].path.length > 0 ? "</a>"  : "" )
-						) : ""
+						) : "",
 						curr_loc: data[i].field_current_location_text_.length > 0 ? (  
 						    ( data[i].field_current_location_linked_.length > 0 ? "<a href='https://nahc-mapping.org" + data[i].field_current_location_linked_[0].url + "' target='_blank'>" : "" ) +
 						     data[i].field_current_location_text_[0].value  +
@@ -1750,11 +1750,6 @@ function getBrooklynGrantsInfo() {
 				    
 					brooklyn_grants_info[data_info_index] = {
 						
-						//RESTORE THIS:
-						//WHY IS THIS NOT WORKING???
-						//All I did was replace with "origtitle", also in sliderpopup.html, and it's not working!!
-						//origtitle: data[i].field_old_title.length > 0 ? data[i].field_old_title[0].value : "",
-
 					    name: data[i].title.length > 0 ? data[i].title[0].value : "",
 						date_start: data[i].field_start_date_.length > 0 ? data[i].field_start_date_[0].value : "",
 					
@@ -1828,9 +1823,11 @@ function getLotsInfo() {
 				        lots_info[data_info_index] = {
 						    name: data[i].field_content_type,
                             title: data[i].field_old_title,
-							title_linked: data[i].title.replace(/>[^<]+<\/a>/, ">" + data[i].field_old_title + "</a>").replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022"),
+							//title_linked: data[i].title.replace(/>[^<]+<\/a>/, ">" + data[i].field_old_title + "</a>").replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022"),
+							title_linked: data[i].title.replace(/>[^<]+<\/a>/, ">" + data[i].field_old_title + "</a>").replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https://encyclopedia.nahc-mapping.org/"),
 							//title_linked: data[i].title.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party_linked: data[i].field_to_party_1222.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+						    brooklyn_title: data[i].field_original_title_temp,
+							to_party_linked: data[i].field_to_party_1222.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 					        from_party_linked: data[i].field_from_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 						    to_party: data[i].field_to_party_1_text_,
 							from_party: data[i].field_from_party_text_,

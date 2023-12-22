@@ -245,21 +245,16 @@ function buildGravesendPopUpInfo(props) {
 				
 			} else {
 
-					
-					//RESTORE THIS:
-					//WHY IS THIS NOT WORKING???
-					//All I did was replace with "origtitle", also in index.html, and it's not working!!
-					/*
-					if( brooklyn_grants_info[props.node].origtitle.length > 0 ) {
-						popup_html += "<b>" + brooklyn_grants_info[props.node].origtitle + "</b><br><br>";
+					if( lots_info[props.node].brooklyn_title.length > 0 ) {
+						popup_html += "<b>" + lots_info[props.node].brooklyn_title + "</b><br><br>";
 					}
-					*/
 
-					//This went before "Start" below. For now, it is going on top.
-					//THIS IS NOT LINKING TO THE RIGHT LOCATION:
-					if( lots_info[props.node].title.length > 0 ) {   //name -> title   !!!
-						popup_html += "<a href='https://encyclopedia.nahc-mapping.org/node/" + props.node + "' target='_blank' >" + lots_info[props.node].title + "</a><br><br>";
+					if( lots_info[props.node].title_linked.length > 0 ) {
+					    popup_html += "<b>" + lots_info[props.node].title_linked + "</b><br><br>";
+					} else if( lots_info[props.node].title.length > 0 ) {
+					    popup_html += "<b>" + lots_info[props.node].title + "</b><br><br>";
 					}
+
 
 					if( lots_info[props.node].date_start.length > 0 ) {
 					    popup_html += "<b>Start:</b> <i>" + lots_info[props.node].date_start + "</i><br><br>";
