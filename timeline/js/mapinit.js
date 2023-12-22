@@ -1096,8 +1096,10 @@ afterMap.on("error", function (e) {
 						"<br>" +
 						"<b>" + "Encyclopedia Page: " + "</b>" + 
 						"<br>" +
-						'<a href="' + event.features[0].properties.new_link + '" target="_blank">' + event.features[0].properties.new_link + '</a>';
-				
+						//'<a href="' + event.features[0].properties.new_link + '" target="_blank">' + event.features[0].properties.new_link + '</a>';
+						'<a href="https://encyclopedia.nahc-mapping.org/lots/taxlot' + event.features[0].properties.LOT2 + '" target="_blank">https://encyclopedia.nahc-mapping.org/lots/taxlot' + event.features[0].properties.LOT2 + '</a>';
+
+
 				var coordinates = [];
 				coordinates = event.features[0].geometry.coordinates.slice();
                 //var description = event.features[0].properties.description;

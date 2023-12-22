@@ -285,8 +285,10 @@ beforeMap.on("load", function () {
 						"<br>" +
 						"<b>" + "Encyclopedia Page: " + "</b>" + 
 						"<br>" +
-						'<a href="' + e.features[0].properties.new_link + '" target="_blank">' + e.features[0].properties.new_link + '</a>';
-					
+						//'<a href="' + e.features[0].properties.new_link + '" target="_blank">' + e.features[0].properties.new_link + '</a>';
+						'<a href="https://encyclopedia.nahc-mapping.org/lots/taxlot' + e.features[0].properties.LOT2 + '" target="_blank">https://encyclopedia.nahc-mapping.org/lots/taxlot' + e.features[0].properties.LOT2 + '</a>';
+
+
 					$("#infoLayerCastello").html(places_popup_html).slideDown();
 				    castello_layer_view_flag = true;
 					if(!layer_view_flag) $('#view-hide-layer-panel').trigger('click');
@@ -424,8 +426,11 @@ afterMap.on("load", function () {
 						"<br>" +
 						"<b>" + "Encyclopedia Page: " + "</b>" + 
 						"<br>" +
-						'<a href="' + e.features[0].properties.new_link + '" target="_blank">' + e.features[0].properties.new_link + '</a>';
-					
+						//'<a href="' + e.features[0].properties.new_link + '" target="_blank">' + e.features[0].properties.new_link + '</a>';
+						'<a href="https://encyclopedia.nahc-mapping.org/lots/taxlot' + e.features[0].properties.LOT2 + '" target="_blank">https://encyclopedia.nahc-mapping.org/lots/taxlot' + e.features[0].properties.LOT2 + '</a>';
+
+
+
 					$("#infoLayerCastello").html(places_popup_html).slideDown();
 				    castello_layer_view_flag = true;
 					if(!layer_view_flag) $('#view-hide-layer-panel').trigger('click');

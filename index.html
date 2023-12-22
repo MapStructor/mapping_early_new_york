@@ -1456,7 +1456,7 @@ function getSettlementsInfo() {
 						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org" + data[i].path[0].alias + "' target='_blank'>" : "" ) +
 						     data[i].title[0].value  +
 							( data[i].path.length > 0 ? "</a>"  : "" )
-						) : "",
+						) : ""
 						curr_loc: data[i].field_current_location_text_.length > 0 ? (  
 						    ( data[i].field_current_location_linked_.length > 0 ? "<a href='https://nahc-mapping.org" + data[i].field_current_location_linked_[0].url + "' target='_blank'>" : "" ) +
 						     data[i].field_current_location_text_[0].value  +
@@ -1749,6 +1749,12 @@ function getBrooklynGrantsInfo() {
 				    data_info_index = "" + data[i].nid[0].value + "";
 				    
 					brooklyn_grants_info[data_info_index] = {
+						
+						//RESTORE THIS:
+						//WHY IS THIS NOT WORKING???
+						//All I did was replace with "origtitle", also in sliderpopup.html, and it's not working!!
+						//origtitle: data[i].field_old_title.length > 0 ? data[i].field_old_title[0].value : "",
+
 					    name: data[i].title.length > 0 ? data[i].title[0].value : "",
 						date_start: data[i].field_start_date_.length > 0 ? data[i].field_start_date_[0].value : "",
 					
@@ -1760,8 +1766,6 @@ function getBrooklynGrantsInfo() {
 						
 						from_party: data[i].field_from_party_1222.length > 0 ? data[i].field_from_party_1222[0].value : "",
 						from_party_linked: data[i].field_from_party_12222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_from_party_12222[0].url : "",
-						
-						title: data[i].field_original_title_temp.length > 0 ? data[i].field_original_title_temp[0].value : "",
 						
 						indigenous_signatories: data[i].field_history_notes222.length > 0 ? data[i].field_history_notes222[0].value : "",
 						
@@ -1824,7 +1828,8 @@ function getLotsInfo() {
 				        lots_info[data_info_index] = {
 						    name: data[i].field_content_type,
                             title: data[i].field_old_title,
-							title_linked: data[i].title.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
+							title_linked: data[i].title.replace(/>[^<]+<\/a>/, ">" + data[i].field_old_title + "</a>").replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022"),
+							//title_linked: data[i].title.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 						    to_party_linked: data[i].field_to_party_1222.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 					        from_party_linked: data[i].field_from_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 						    to_party: data[i].field_to_party_1_text_,
@@ -1832,11 +1837,11 @@ function getLotsInfo() {
 							to_party2: data[i].field_to_party_2_text222,
 						    to_party2_linked: data[i].field_to_party_2_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
 							date_start: data[i].field_date_start_text_, 
-						    date_end: "",   // !!!  absent
+							date_end: data[i].field_date_end_text_, 
 						    indigenous_signatories: data[i].field_history_notes222,  // getBrooklynGrantsInfo()
 							notes: "", // ???
-						    descr: "", // !!!  absent
-						    builds: [], // !!!  absent
+							descr: data[i].field_grant_description,
+							builds: data[i].field_current_buildings_and_land.length > 0 ? data[i].field_current_buildings_and_land.split(", ") : [],
 						    type: data[i].field_proptype.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia")
 						};  
 					
