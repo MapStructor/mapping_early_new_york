@@ -256,7 +256,7 @@ function buildGravesendPopUpInfo(props) {
 					*/
 
 					//This went before "Start" below. For now, it is going on top.
-					//HOWEVER IT IS NOT LINKING TO THE RIGHT LOCATION:
+					//THIS IS NOT LINKING TO THE RIGHT LOCATION:
 					if( lots_info[props.node].title.length > 0 ) {   //name -> title   !!!
 						popup_html += "<a href='https://encyclopedia.nahc-mapping.org/node/" + props.node + "' target='_blank' >" + lots_info[props.node].title + "</a><br><br>";
 					}
