@@ -35,8 +35,8 @@ const WorldBounds = [
   //For Sidebar Open
   //Alaska and Eastern most tip of Russia cut off
   //Shows less but still too much of Greenland which is projected too large
-  [-179, -59], // [west, south]
-  [135, 77], // [east, north]
+  [-179, -59],
+  [135, 77],
 ];
 
 // area bounds
@@ -422,7 +422,6 @@ var afterMapPopUp = new mapboxgl.Popup({
     closeOnClick: false,
   });
 
-//var coordinates = [];
 var info_popup_html = "",
   places_popup_html = "",
   settlements_popup_html = "";
@@ -749,11 +748,6 @@ beforeMap.on("load", function () {
 });
 
 afterMap.on("load", function () {
-  console.log("load");
-  var sliderVal = moment($("#date").val()).unix();
-  var yr = parseInt(moment.unix(sliderVal).format("YYYY"));
-  var date = parseInt(moment.unix(sliderVal).format("YYYYMMDD"));
-
   // CLICK AND OPEN POPUP
   afterMap
     .on("click", "lot_events-bf43eb-right", function (e) {

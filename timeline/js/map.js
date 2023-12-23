@@ -701,37 +701,13 @@ function addCastelloBeforeLayers() {
 
 function addGrantLotsAfterLayers(date) {
   //REMOVING TAX LOT POINTS IF EXIST
-  if (afterMap.getLayer("grant-lots-right"))
-    afterMap.removeLayer("grant-lots-right");
-  if (afterMap.getSource("demo_divisions_grant_c7-42w8pa"))
-    afterMap.removeSource("demo_divisions_grant_c7-42w8pa");
-
+  removeTaxPoints(afterMap, [
+    {type: "layer", id: "grant-lots-right"},
+    {type: "source", id: "demo_divisions_grant_c7-42w8pa"}
+  ])
+  
   // Add a layer showing the places.
-  afterMap.addLayer({
-    id: "grant-lots-right",
-    type: "fill",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.26xwjv4e",
-    },
-    layout: {
-      visibility: document.getElementById("grant_lots").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "demo_divisions_grant_c7-42w8pa",
-    paint: {
-      "fill-color": "#088",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0.5,
-      ],
-      "fill-outline-color": "#FF0000",
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  addMapLayer(afterMap, getLayer("grant-lots-right"), date)
 
   //CURSOR ON HOVER
   //ON HOVER
@@ -815,37 +791,8 @@ function addGrantLotsAfterLayers(date) {
 
 function addCastelloAfterLayers() {
   // Add a layer showing the places.
-  afterMap.addLayer({
-    id: "places-right",
-    type: "circle",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.cvcg7wo0",
-    },
-    layout: {
-      visibility: document.getElementById("castello_points").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "taxlots-cpwvol",
-    paint: {
-      "circle-color": "#FF0000",
-      "circle-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.5,
-        1,
-      ],
-      "circle-stroke-width": 2,
-      "circle-stroke-color": "#FF0000",
-      "circle-stroke-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        1,
-        0,
-      ],
-    },
-  });
+  addMapLayer(afterMap, getLayer("places-right"))
+  
 
   //ON HOVER
   afterMap.on("mouseenter", "places-right", function (e) {
@@ -912,7 +859,6 @@ function addCastelloAfterLayers() {
 beforeMap.on("style.load", function () {
   //on the 'style.load' event, switch "basemaps" and then re-add layers
   //this is necessary because basemaps aren't a concept in Mapbox, all layers are added via the same primitives
-  console.log("style change");
   var sliderVal = moment($("#date").text()).unix();
   var yr = parseInt(moment.unix(sliderVal).format("YYYY"));
   var date = parseInt(moment.unix(sliderVal).format("YYYYMMDD"));
@@ -943,45 +889,9 @@ function addBeforeLayers(yr, date) {
   //NAHC POINTS MAP
 
   //REMOVING TAX LOT POINTS IF EXIST
-  if (beforeMap.getLayer("lot_events-bf43eb-left"))
-    beforeMap.removeLayer("lot_events-bf43eb-left");
-  if (beforeMap.getSource("lot_events-bf43eb"))
-    beforeMap.removeSource("lot_events-bf43eb");
-  if (beforeMap.getLayer("dutch_grants-5ehfqe-left"))
-    beforeMap.removeLayer("dutch_grants-5ehfqe-left");
-  if (beforeMap.getSource("dutch_grants-5ehfqe"))
-    beforeMap.removeSource("dutch_grants-5ehfqe");
+  removeTaxPoints(beforeMap, [{type: "layer", id: "lot_events-bf43eb-left"}, {type: "source", id: "lot_events-bf43eb"}, {type: "layer", id: "dutch_grants-5ehfqe-left"}, {type: "source", id: "dutch_grants-5ehfqe"}])
 
-  //ADD GRANTS POLYGONS
-
-  beforeMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "dutch_grants-5ehfqe-left",
-    type: "fill",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.7q2vs9ar",
-    },
-    layout: {
-      visibility: document.getElementById("grants_layer").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "dutch_grants-5ehfqe",
-    paint: {
-      "fill-color": "#e3ed58",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0.5,
-      ],
-      "fill-outline-color": "#000000",
-    },
-
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  addMapLayer(beforeMap, getBeforeLayer("dutch_grants-5ehfqe-left"), date)
 
   //CURSOR ON HOVER
   //ON HOVER
@@ -1052,75 +962,8 @@ function addBeforeLayers(yr, date) {
   });
 
   //ADD TAX LOT POINTS
-  beforeMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "lot_events-bf43eb-left",
-    type: "circle",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.9s9s67wu",
-    },
-    layout: {
-      visibility: document.getElementById("circle_point").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "lot_events-bf43eb",
-    paint: {
-      //CIRCLE COLOR
-      "circle-color": {
-        type: "categorical",
-        property: "color",
-        stops: [
-          ["6", "#0000ee"],
-          ["5", "#097911"],
-          ["4", "#0000ee"],
-          ["3", "#097911"],
-          ["2", "#0000ee"],
-          ["1", "#097911"],
-        ],
-        default: "#FF0000",
-      },
-
-      //CIRCLE OPACITY
-      "circle-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.5,
-        1,
-      ],
-      "circle-stroke-width": 2,
-      "circle-stroke-color": {
-        type: "categorical",
-        property: "color",
-        stops: [
-          ["6", "#0000ee"],
-          ["5", "#097911"],
-          ["4", "#0000ee"],
-          ["3", "#097911"],
-          ["2", "#0000ee"],
-          ["1", "#097911"],
-        ],
-        default: "#FF0000",
-      },
-      "circle-stroke-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        1,
-        0,
-      ],
-
-      //CIRCLE RADIUS
-      "circle-radius": {
-        type: "categorical",
-        property: "TAXLOT",
-        stops: [["C7", 9]],
-      },
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
-
+  addMapLayer(beforeMap, getBeforeLayer("lot_events-bf43eb-left"), date)
+  
   // CHANGE TO CURSOR WHEN HOVERING
   beforeMap.on("mouseenter", "lot_events-bf43eb-left", function (e) {
     beforeMap.getCanvas().style.cursor = "pointer";
@@ -1181,46 +1024,10 @@ function addBeforeLayers(yr, date) {
 }
 
 function addAfterLayers(yr, date) {
-  //REMOVING TAX LOT POINTS IF EXIST
-  if (afterMap.getLayer("lot_events-bf43eb-right"))
-    afterMap.removeLayer("lot_events-bf43eb-right");
-  if (afterMap.getSource("lot_events-bf43eb"))
-    afterMap.removeSource("lot_events-bf43eb");
-  if (afterMap.getLayer("dutch_grants-5ehfqe-right"))
-    afterMap.removeLayer("dutch_grants-5ehfqe-right");
-  if (afterMap.getSource("dutch_grants-5ehfqe"))
-    afterMap.removeSource("dutch_grants-5ehfqe");
-
+  removeTaxPoints(afterMap, [{type: "layer", id: "lot_events-bf43eb-right"}, {type: "source", id: "lot_events-bf43eb"}, {type: "layer", id: "dutch_grants-5ehfqe-right"}, {type: "source", id: "dutch_grants-5ehfqe"}])
+  
   //ADD GRANTS POLYGONS
-
-  afterMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "dutch_grants-5ehfqe-right",
-    type: "fill",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.7q2vs9ar",
-    },
-    layout: {
-      visibility: document.getElementById("grants_layer").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "dutch_grants-5ehfqe",
-    paint: {
-      "fill-color": "#e3ed58",
-      "fill-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.8,
-        0.5,
-      ],
-      "fill-outline-color": "#000000",
-    },
-
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  addMapLayer(afterMap, getLayer("dutch_grants-5ehfqe-right"), date)
 
   //CURSOR ON HOVER
   //ON HOVER
@@ -1291,75 +1098,7 @@ function addAfterLayers(yr, date) {
   });
 
   //ADD TAX LOT POINTS
-
-  afterMap.addLayer({
-    //ID: CHANGE THIS, 1 OF 3
-    id: "lot_events-bf43eb-right",
-    type: "circle",
-    source: {
-      type: "vector",
-      //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.9s9s67wu",
-    },
-    layout: {
-      visibility: document.getElementById("circle_point").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "lot_events-bf43eb",
-    paint: {
-      //CIRCLE COLOR
-      "circle-color": {
-        type: "categorical",
-        property: "color",
-        stops: [
-          ["6", "#0000ee"],
-          ["5", "#097911"],
-          ["4", "#0000ee"],
-          ["3", "#097911"],
-          ["2", "#0000ee"],
-          ["1", "#097911"],
-        ],
-        default: "#FF0000",
-      },
-
-      //CIRCLE OPACITY
-      "circle-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.5,
-        1,
-      ],
-      "circle-stroke-width": 2,
-      "circle-stroke-color": {
-        type: "categorical",
-        property: "color",
-        stops: [
-          ["6", "#0000ee"],
-          ["5", "#097911"],
-          ["4", "#0000ee"],
-          ["3", "#097911"],
-          ["2", "#0000ee"],
-          ["1", "#097911"],
-        ],
-        default: "#FF0000",
-      },
-      "circle-stroke-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        1,
-        0,
-      ],
-
-      //CIRCLE RADIUS
-      "circle-radius": {
-        type: "categorical",
-        property: "TAXLOT",
-        stops: [["C7", 9]],
-      },
-    },
-    filter: ["all", ["<=", "DayStart", date], [">=", "DayEnd", date]],
-  });
+  addMapLayer(afterMap, getLayer("lot_events-bf43eb-right"), date)
 
   // CHANGE TO CURSOR WHEN HOVERING
   afterMap.on("mouseenter", "lot_events-bf43eb-right", function (e) {
