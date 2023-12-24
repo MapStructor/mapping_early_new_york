@@ -8,7 +8,8 @@
  * itemSelector?: string;
  * zoomTo?: string;
  * infoId: string;
- * type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings"
+ * type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings";
+ * iconType?: "square"
  * }[]} layers
  * @returns {string}
  */
@@ -51,7 +52,33 @@ function renderLayers(layers) {
       r += renderCastelloPointsLayerRow(layer);
     } else if (layer.type === "current-buildings"){
       r += lastBitOfManhattanSectionTemplate;
-      r += renderLayerRow(layer)
+      r += `<div class="layer-list-row">
+      <input
+        type="checkbox"
+        class="current_buildings"
+        id="current_buildings_lines"
+        name="current_buildings_lines"
+      />
+      <label for="current_buildings_lines">
+        <i class="far fa-square" style="color: #0000ff"></i> Current
+        Buildings
+        <div class="dummy-label-layer-space"></div
+      ></label>
+      <div class="layer-buttons-block">
+        <div class="layer-buttons-list">
+          <i
+            class="fa fa-crosshairs zoom-to-layer"
+            onclick="zoomtocenter('NA')"
+            title="Zoom to Layer"
+          ></i>
+          <i
+            class="fa fa-info-circle layer-info trigger-popup"
+            id="current-buildings-lines-info-layer"
+            title="Layer Info"
+          ></i>
+        </div>
+      </div>
+    </div>`
     } else {
       r += renderManahattaLayerItem(layer);
     }
@@ -76,6 +103,7 @@ const layerSectionObjects = [
     iconColor: "#ff0000",
     className: "manahatta",
     topLayerClass: "manahatta_layer",
+    isSolid: true
   },
   {
     id: "manahatta_shoreline",
@@ -84,6 +112,7 @@ const layerSectionObjects = [
     label: "Manahatta Shoreline",
     iconColor: "#ffd700",
     topLayerClass: "manahatta_layer",
+    isSolid: true
   },
   {
     id: "manahatta_streams",
@@ -92,6 +121,7 @@ const layerSectionObjects = [
     className: "manahatta",
     iconColor: "#0000ff",
     topLayerClass: "manahatta_layer",
+    isSolid: true
   },
   {
     id: "farms_layer_items",
@@ -109,6 +139,8 @@ const layerSectionObjects = [
     iconColor: "#e3ed58",
     label: "Information",
     topLayerClass: "farms_layer",
+    iconType: "square",
+    isSolid: true
   },
   {
     id: "farms_layer_lines",
@@ -117,6 +149,8 @@ const layerSectionObjects = [
     iconColor: "#ff0000",
     label: "Lines",
     topLayerClass: "farms_layer",
+    iconType: "square",
+    isSolid: false
   },
   {
     id: "grants_layer_items",
@@ -134,6 +168,8 @@ const layerSectionObjects = [
     iconColor: "#e3ed58",
     label: "Information",
     topLayerClass: "dutch_grants_layer",
+    iconType: "square",
+    isSolid: true
   },
   {
     id: "grants_layer_lines",
@@ -142,6 +178,8 @@ const layerSectionObjects = [
     iconColor: "#ff0000",
     label: "Lines",
     topLayerClass: "dutch_grants_layer",
+    iconType: "square",
+    isSolid: false
   },
   {
     id: "circle_point",
@@ -187,6 +225,8 @@ const layerSectionObjects = [
     iconColor: "#7b68ee",
     label: "Information",
     topLayerClass: "current_lots_layer",
+    isSolid: true,
+    iconType: "square"
   },
   {
     className: "current_lots",
@@ -195,6 +235,8 @@ const layerSectionObjects = [
     iconColor: "#000080",
     label: "Lines",
     topLayerClass: "current_lots_layer",
+    iconType: "square",
+    isSolid: false
   },
   {
     className: 'current_buildings',
@@ -232,7 +274,7 @@ function renderLayerRow(layerData) {
           <div class="layer-buttons-list">
             <i
               class="fa fa-crosshairs zoom-to-layer"
-              onclick="zoomtobounds('${layerData.zoomTo || ""}')"
+              onclick="${(layerData.id === "current_lots_items" || layerData.id === "grants_layer_items")? "zoomtocenter('NA')" :`zoomtobounds('${layerData.zoomTo || ""}')`}"
               title="Zoom to Layer"
             ></i>
             <i
@@ -246,7 +288,23 @@ function renderLayerRow(layerData) {
     `;
   return html;
 }
-
+/**
+ * 
+ * @param {{
+ *  id: string;
+* name?: string;
+* caretId?: string;
+* label: string;
+* iconColor?: string;
+* itemSelector?: string;
+* zoomTo?: string;
+* infoId: string;
+* type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings";
+* iconType?: "square";
+* isSolid?: boolean;
+* }} layerData 
+ * @returns {string}
+ */
 function renderManahattaLayerItem(layerData) {
   const html = `
       <div class="layer-list-row ${layerData.topLayerClass}_item">
@@ -258,7 +316,7 @@ function renderManahattaLayerItem(layerData) {
           name="${layerData.name || "lenape_trails"}"
         />
         <label for="${layerData.id || "lenape_trails"}">
-          <i class="fas fa-slash slash-icon" style="color: ${
+          <i class="${layerData.isSolid? "fas" : "far"} fa-${layerData.iconType || "slash"} ${layerData.iconType === "square"? "" : "slash-icon"}" style="color: ${
             layerData.iconColor || "#ff0000"
           }"></i>
           ${layerData.label || "Lenape Trails"}
@@ -269,6 +327,22 @@ function renderManahattaLayerItem(layerData) {
   return html;
 }
 
+/**
+ * 
+ * @param {{
+*  id: string;
+* name?: string;
+* caretId?: string;
+* label: string;
+* iconColor?: string;
+* itemSelector?: string;
+* zoomTo?: string;
+* infoId: string;
+* type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings";
+* iconType?: "square"
+* }} layerData 
+ * @returns {string}
+ */
 function renderCirclePointLayerRow(layerData) {
   const html = `
       <div class="layer-list-row">
@@ -306,6 +380,22 @@ function renderCirclePointLayerRow(layerData) {
   return html;
 }
 
+/**
+ * 
+ * @param {{
+*  id: string;
+* name?: string;
+* caretId?: string;
+* label: string;
+* iconColor?: string;
+* itemSelector?: string;
+* zoomTo?: string;
+* infoId: string;
+* type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings";
+* iconType?: "square"
+* }} layerData 
+ * @returns {string}
+ */
 function renderGrantLotsLayerRow(layerData) {
   const html = `
       <div class="layer-list-row">
@@ -341,6 +431,22 @@ function renderGrantLotsLayerRow(layerData) {
   return html;
 }
 
+/**
+ * 
+ * @param {{
+*  id: string;
+* name?: string;
+* caretId?: string;
+* label: string;
+* iconColor?: string;
+* itemSelector?: string;
+* zoomTo?: string;
+* infoId: string;
+* type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings";
+* iconType?: "square"
+* }} layerData 
+ * @returns {string}
+ */
 function renderCastelloPointsLayerRow(layerData) {
   const html = `
       <div class="layer-list-row">
