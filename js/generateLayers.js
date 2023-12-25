@@ -13,7 +13,7 @@
  * }[]} layers
  * @returns {string}
  */
-function renderLayers(layers) {
+function renderManhattanLayers(layers) {
   const lastBitOfManhattanSectionTemplate = `
 <div class="layer-list-row">
   <input
@@ -86,8 +86,75 @@ function renderLayers(layers) {
   return r;
 }
 
+/**
+ * @param {{
+*  id: string;
+* name?: string;
+* caretId?: string;
+* label: string;
+* iconColor?: string;
+* itemSelector?: string;
+* zoomTo?: string;
+* infoId: string;
+* type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings" | "custom_indian_paths";
+* iconType?: "square"
+* }[]} layers
+* @returns {string}
+*/
+function renderLongIslandLayers(layers){
+  let r = ''
+  const customIndianTemplate = `<div class="layer-list-row">
+  <input type="checkbox" id="indian_paths" name="indian_paths" />
+  <label for="indian_paths">
+    <i class="fas fa-slash slash-icon" style="color: #ff0000"></i>
+    1600-64 | Paths
+    <div class="dummy-label-layer-space"></div
+  ></label>
+  <div class="layer-buttons-block">
+    <div class="layer-buttons-list">
+      <i
+        class="fa fa-crosshairs zoom-to-layer"
+        onclick="zoomtobounds('Brooklyn')"
+        title="Zoom to Layer"
+      ></i>
+      <i
+        class="fa fa-info-circle layer-info trigger-popup"
+        id="indian-paths-info-layer"
+        title="Layer Info"
+      ></i>
+    </div>
+  </div>
+</div>`
+  layers.forEach(layer => {
+    if(layer.type === "group"){
+      r += renderLayerRow(layer);
+    } else if(layer.type === "custom_indian_paths"){
+      r+= customIndianTemplate;
+    } else {
+      r+= renderManahattaLayerItem(layer)
+    }
+  })
+  return r;
+}
 
 
+/**
+ * 
+ * @param {{
+*  id: string;
+* name?: string;
+* caretId?: string;
+* label: string;
+* iconColor?: string;
+* itemSelector?: string;
+* zoomTo?: string;
+* infoId: string;
+* type?: "group" | "lots-events" | "grants-lots" | "castello-points" | "current-buildings";
+* iconType?: "square";
+* isSolid?: boolean;
+* }} layerData 
+ * @returns {string}
+ */
 function renderLayerRow(layerData) {
   const html = `
       <div class="layer-list-row">
@@ -154,7 +221,7 @@ function renderManahattaLayerItem(layerData) {
           name="${layerData.name || "lenape_trails"}"
         />
         <label for="${layerData.id || "lenape_trails"}">
-          <i class="${layerData.isSolid? "fas" : "far"} fa-${layerData.iconType || "slash"} ${layerData.iconType === "square"? "" : "slash-icon"}" style="color: ${
+          <i class="${layerData.isSolid? "fas" : "far"} fa-${layerData.iconType || "slash"} ${["square", "circle", "comment-dots"].includes(layerData.iconType)? "" : "slash-icon"}" style="color: ${
             layerData.iconColor || "#ff0000"
           }"></i>
           ${layerData.label || "Lenape Trails"}
@@ -214,7 +281,6 @@ function renderCirclePointLayerRow(layerData) {
       </div>
     `;
 
-  // Assuming you want to append this HTML to the body
   return html;
 }
 
@@ -265,7 +331,6 @@ function renderGrantLotsLayerRow(layerData) {
       </div>
     `;
 
-  // Assuming you want to append this HTML to the body
   return html;
 }
 
@@ -316,13 +381,18 @@ function renderCastelloPointsLayerRow(layerData) {
       </div>
     `;
 
-  // Assuming you want to append this HTML to the body
   return html;
 }
 
 
 
+
+try{
+$("#long-island-section-layers").html(renderLongIslandLayers(longIslandLayerSections))
 $("#manahatta-section-layers").html(
-  renderLayers(layerSectionObjects)
+  renderManhattanLayers(manhattanLayerSections)
 );
+}catch(error){
+  console.log(error)
+}
 console.log("generateLayer script ran successfully :)");
