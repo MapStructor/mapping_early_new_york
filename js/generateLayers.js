@@ -386,12 +386,12 @@ function renderCastelloPointsLayerRow(layerData) {
 
 
 
-
 try{
 $("#long-island-section-layers").html(renderLongIslandLayers(longIslandLayerSections))
 $("#manahatta-section-layers").html(
   renderManhattanLayers(manhattanLayerSections)
 );
+$("#info-section-layers").html(renderLongIslandLayers(informationOfInterest))
 }catch(error){
   console.log(error)
 }

@@ -328,3 +328,37 @@ const longIslandLayerSections = [
     isSolid: true
   }
 ];
+
+const informationOfInterest = [
+  {
+    id: 'info_items',
+    name: 'info_items',
+    caretId: 'info-layer-caret',
+    label: 'Information of Interest',
+    zoomTo: 'LongIsland',
+    infoId: 'info-points-items',
+    itemSelector: '.info_layer_item' ,
+    type: "group"
+  },
+  {
+    className: 'info-item',
+    id: 'info_points',
+    name: 'info_points',
+    iconColor: '#008888',
+    label: 'Locations',
+    iconType: "circle",
+    topLayerClass: "info_layer",
+    iconType: "circle",
+    isSolid: true
+  },
+  {
+    className: 'info-item',
+    id: 'info_labels',
+    name: 'info_labels',
+    iconColor: '#008888',
+    label: 'Labels',
+    iconType: 'comment-dots',
+    topLayerClass: "info_layer",
+    isSolid: true
+  }
+]
