@@ -127,7 +127,7 @@ function renderLongIslandLayers(layers){
 </div>`
   layers.forEach(layer => {
     if(layer.type === "group"){
-      r += renderLayerRow(layer);
+      r += renderLayerRow(layer, true);
     } else if(layer.type === "custom_indian_paths"){
       r+= customIndianTemplate;
     } else {
@@ -155,7 +155,7 @@ function renderLongIslandLayers(layers){
 * }} layerData 
  * @returns {string}
  */
-function renderLayerRow(layerData) {
+function renderLayerRow(layerData, isMinus=false) {
   const html = `
       <div class="layer-list-row">
         <input
@@ -165,7 +165,7 @@ function renderLayerRow(layerData) {
           name="${layerData.name || "manahatta_items"}"
         />
         <i
-          class="fas fa-plus-square compress-expand-icon"
+          class="fas fa-${isMinus? "minus" : "plus"}-square compress-expand-icon"
           id="${layerData.caretId || "manahatta-layer-caret"}"
           onclick="itemsCompressExpand('${layerData.itemSelector || ""}','#${
     layerData.caretId || ""
