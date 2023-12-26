@@ -1213,29 +1213,81 @@ function InfoClickHandle(event) {
 }
 
 function CastelloClickHandle(event) {
-  const { features } = event;
-  const clickedFeature = features[0];
+  if (castello_layer_view_flag && clickedStateId == event.features[0].id) {
+    if ($("#view-hide-layer-panel").length > 0)
+      if (!layer_view_flag) {
+        $("#rightInfoBar").css("display", "block");
+        setTimeout(function () {
+          $("#rightInfoBar").slideUp();
+        }, 500);
+      }
 
-  if (castello_layer_view_flag && clickedStateId == clickedFeature.id) {
     closeCastelloInfo();
-    handleRightInfoBar();
   } else {
-    clickedStateId = clickedFeature.id;
+    clickedStateId = event.features[0].id;
 
-    const coordinates = handleCoordinates(clickedFeature, event);
+    places_popup_html =
+      "<h3>Castello Taxlot (1660)</h3><hr>" +
+      "<br>" +
+      "<b>" +
+      "Taxlot: " +
+      "</b>" +
+      event.features[0].properties.LOT2 +
+      "<br>" +
+      "<b>" +
+      "Property Type: " +
+      "</b>" +
+      event.features[0].properties.tax_lots_1 +
+      "<br>" +
+      "<br>" +
+      "<b>" +
+      "Encyclopedia Page: " +
+      "</b>" +
+      "<br>" +
+      '<a href="' +
+      event.features[0].properties.new_link +
+      '" target="_blank">' +
+      event.features[0].properties.new_link +
+      "</a>";
 
-    const placesPopupHTML = buildPlacesPopupHTML(clickedFeature);
-    showHighCastelloPopUp(beforeHighCastelloPopUp, coordinates, placesPopupHTML, beforeMap);
-    showHighCastelloPopUp(afterHighCastelloPopUp, coordinates, placesPopupHTML, afterMap);
+    var coordinates = [];
+    coordinates = event.features[0].geometry.coordinates.slice();
 
-    handleInfoLayerCastello(placesPopupHTML);
-
-    if (!layer_view_flag && $("#view-hide-layer-panel").length > 0) {
-      $("#view-hide-layer-panel").trigger("click");
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
     }
+
+    beforeHighCastelloPopUp
+      .setLngLat(coordinates)
+      .setHTML(
+        "<div class='infoLayerCastelloPopUp'><b>Taxlot (1660):</b><br>" +
+          event.features[0].properties.LOT2 +
+          "</div>"
+      );
+    if (!beforeHighCastelloPopUp.isOpen())
+      beforeHighCastelloPopUp.addTo(beforeMap);
+
+    afterHighCastelloPopUp
+      .setLngLat(coordinates)
+      .setHTML(
+        "<div class='infoLayerCastelloPopUp'><b>Taxlot (1660):</b><br>" +
+          event.features[0].properties.LOT2 +
+          "</div>"
+      );
+    if (!afterHighCastelloPopUp.isOpen())
+      afterHighCastelloPopUp.addTo(afterMap);
+    if ($(".infoLayerElem").first().attr("id") != "infoLayerCastello")
+      $("#infoLayerCastello").insertBefore($(".infoLayerElem").first());
+    $("#infoLayerCastello").html(places_popup_html).slideDown();
+
+    if (!layer_view_flag)
+      if ($("#view-hide-layer-panel").length > 0)
+        $("#view-hide-layer-panel").trigger("click");
     castello_layer_view_flag = true;
   }
-
   castello_click_ev = true;
 }
 
