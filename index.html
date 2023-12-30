@@ -1,3730 +1,518 @@
 <!DOCTYPE html>
 <html>
- 
-	<head>
+  <head>
+    <!-- SOURCES-->
 
-		<!-- SOURCES-->
+    <title>Mapping Early New York - New Amsterdam History</title>
 
-		<title>Mapping Early New York - New Amsterdam History</title>
-		
-		<meta name="description" content="New Amsterdam - Early New York Interactive Map with History Timeline">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta name="robots" content="all" />
+    <meta
+      name="description"
+      content="New Amsterdam - Early New York Interactive Map with History Timeline"
+    />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="robots" content="all" />
 
-<!--  Essential META Tags -->
-<meta property="og:title" content="Mapping Early New York - New Amsterdam History">
-<meta property="og:type" content="website" />
-<meta property="og:image" content="https://nahc-mapping.org/mappingNY/icons/FortAmsterdam.jpg">
-<meta property="og:url" content="https://nahc-mapping.org/mappingNY/">
-<meta name="twitter:card" content="new_amsterdam_icon">
+    <!--  Essential META Tags -->
+    <meta
+      property="og:title"
+      content="Mapping Early New York - New Amsterdam History"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://nahc-mapping.org/mappingNY/icons/FortAmsterdam.jpg"
+    />
+    <meta property="og:url" content="https://nahc-mapping.org/mappingNY/" />
+    <meta name="twitter:card" content="new_amsterdam_icon" />
 
-<!--  Non-Essential, But Recommended -->
-<meta property="og:description" content="New Amsterdam - Early New York Interactive Map with History Timeline">
-<meta property="og:site_name" content="New Amsterdam History">
-<meta name="twitter:image:alt" content="New Amsterdam Icon">
-		
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="theme-color" content="#00A2E5">
-    <meta name="apple-mobile-web-app-title" content="Mapping Early New York | New Amsterdam History">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-	
-	<link rel="manifest" href="manifest.json">
+    <!--  Non-Essential, But Recommended -->
+    <meta
+      property="og:description"
+      content="New Amsterdam - Early New York Interactive Map with History Timeline"
+    />
+    <meta property="og:site_name" content="New Amsterdam History" />
+    <meta name="twitter:image:alt" content="New Amsterdam Icon" />
 
-    <link rel="apple-touch-icon" type="image/png" href="./icons/icon.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="./icons/icon_57x57.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="./icons/icon_60x60.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="./icons/icon_72x72.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="./icons/icon_76x76.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="./icons/icon_114x114.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="./icons/icon_120x120.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="144x144" href="./icons/icon_144x144.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="./icons/icon_152x152.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="167x167" href="./icons/icon_167x167.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="./icons/icon_180x180.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="./icons/icon_192x192.png">
-    <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="./icons/icon_512x512.png">
-		
-		
-		<link rel="shortcut icon" href="./icons/icon_32x32.ico"  type="image/x-icon" />
-        <link rel="icon" href="./icons/icon_32x32.ico"  type="image/x-icon" />
-		
-		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600italic' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="timeline/vendor/jquery-ui-1.10.3.custom/css/ui-darkness/jquery-ui-1.10.3.custom.css" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script src="timeline/vendor/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="timeline/vendor/jquery.ui.touch-punch.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
-		<!--
-		<script src='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js'></script>
-		<link href='https://api.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css' rel='stylesheet' />
-		-->
-		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
-        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js'></script>
-		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
-        <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css' type='text/css' />
-		<link href='timeline/index.css' rel='stylesheet' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#00A2E5" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Mapping Early New York | New Amsterdam History"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-        <!-- Load Awesome Icons 4.7.0 -->
-		<!--
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		-->
-		<!-- Load Awesome Icons 5.15.3 -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="manifest.json" />
 
-        <!-- MODAL INFO JS SOURCE -->
-		<script src="timeline/js/modalinfo.js"></script>
+    <link rel="apple-touch-icon" type="image/png" href="./icons/icon.png" />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="57x57"
+      href="./icons/icon_57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="60x60"
+      href="./icons/icon_60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="72x72"
+      href="./icons/icon_72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="76x76"
+      href="./icons/icon_76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="114x114"
+      href="./icons/icon_114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="120x120"
+      href="./icons/icon_120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="144x144"
+      href="./icons/icon_144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="152x152"
+      href="./icons/icon_152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="167x167"
+      href="./icons/icon_167x167.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="180x180"
+      href="./icons/icon_180x180.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="192x192"
+      href="./icons/icon_192x192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="512x512"
+      href="./icons/icon_512x512.png"
+    />
 
+    <link
+      rel="shortcut icon"
+      href="./icons/icon_32x32.ico"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="./icons/icon_32x32.ico" type="image/x-icon" />
 
-		<!-- TIMELINE FUNCTIONALITY -->
-
-		<script>
-
-if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-  // true for mobile device
-  console.warn("mobile device");
-  console.warn("redirect");
-  window.location.href = './mobile.html'; 
-}else{
-  // false for not mobile device
-  console.warn("not mobile device");
-  //if ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) ) {
-  if ( window.innerWidth <= 670 ) {
-      console.warn("but small size");
-	  console.warn("redirect");
-	  window.location.href = './mobile.html'; 
-  } else {
-      console.warn("start");
-      console.warn("load");
-  }
-}
-
-
-    // get Dutch Grants Lots Info from REST API
-    var dutch_grant_lots_info = new Array(),
-	    farms_grants_info = new Array(),
-	    settlements_info = new Array(),
-		infos_entity = new Array(),
-		settlements_linked_location = new Array(),
-		brooklyn_grants_info = new Array(),
-		taxlot_events_info = new Array(),
-		taxlot_event_entities_info = new Array();
-	var dutch_grant_lots_info_length = 0,
-	    farms_grants_info_length = 0,
-	    settlements_info_length = 0,
-		infos_entity_length = 0,
-		brooklyn_grants_length = 0,
-		taxlot_events_info_length = 0,
-		taxlot_entities_info_length = 0;
-	
-	var lots_info = new Array();
-	var lots_info_length = 0;
-	getLotsInfo();
-	
-    //getDutchGrantsInfo();
-	//getOriginalFarmsInfo();
-	//getBrooklynGrantsInfo();
-	getSettlementsInfo();
-	getInfosEntity();
-	getTaxlotEventsInfo();
-	getTaxlotEventEntitiesDescrInfo();
-	
-	
-	var modal_header_text = [];
-	var modal_content_html = [];
-	getInfoText(modal_header_text, modal_content_html);
-
-		    var layer_view_flag = true;
-			var timeline_pointer_flag = true;
-			var windoWidth = 0;
-			
-			
-		    var sliderStart = moment("01/01/1626").unix();
-			var sliderStartDrag = sliderStart; //moment("06/02/1643").unix();
-		    //var sliderEnd = moment().unix();
-			var sliderEnd = moment("01/01/1700").unix();
-			var sliderEndDrag = sliderEnd; //moment("07/04/1675").unix();
-			
-			//*A (sliderStart + sliderEnd)/2 = -9799671480
-			var sliderMiddle =  (sliderStart + sliderEnd)/2;
-			var tooltiPos = -100;
-			
-			var ruler_step = (sliderEnd - sliderStart)/10,
-				date_ruler1 = sliderStart + ruler_step,
-				date_ruler2 = sliderStart + ruler_step*3,
-				date_ruler4 = sliderStart + ruler_step*7,
-				date_ruler5 = sliderStart + ruler_step*9;
-			
-			
-function simple_tooltip(target_items, name){
-$(target_items).each(function(i){
-$("body").append("<div class='"+name+"' id='"+name+i+"'><p>"+$(this).attr('title')+"</p></div>");
-var my_tooltip = $("#"+name+i);
-
-$(this).removeAttr("title").mouseover(function(){
-my_tooltip.css({opacity:1.0, display:"none"}).fadeIn(200);
-}).mousemove(function(kmouse){
-my_tooltip.css({left:kmouse.pageX+15, top:kmouse.pageY+15});
-}).mouseout(function(){
-my_tooltip.fadeOut(200);
-});
-});
-}
-
-			
-			
-			$(document).ready(function () {
-				if (jQuery.browser.msie) alert('Sorry, this application uses state of the art HTML5 techniques which are not (well) supported by Internet Explorer.\nUse Google Chrome or Mozilla Firefox to experience the full power of HTML5 and this application');
-                
-				simple_tooltip("i.layer-info, i.zoom-to-layer","tooltip");
-				
-				windoWidth = $(window).width();
-				//console.log(windoWidth);
-				//555
-				if(windoWidth <= 637) {
-				    if(layer_view_flag) {
-				        $("#studioMenu").css({'margin-left' : "-111%"});//.slideUp();
-						$("#view-hide-layer-panel").css({'margin-left' : "-337px"});
-						$("#mobi-hide-sidebar").css({'margin-left' : "-111%"});
-						layer_view_flag = false;
-						$("#dir-txt").html("&#9205;");
-					}
-			    }
-                
-				$(window).resize(function(){
-				    windoWidth = $(window).width();
-				});
-				
-				// console.log(window.name);
-				
-				$(".manahatta_layer_item").hide();
-				$(".farms_layer_item").hide();
-				$(".dutch_grants_layer_item").hide();
-				$(".current_lots_layer_item").hide();
-                $("#long-island-section-layers").slideUp();
-				$("#info-section-layers").slideUp();
-				$("#manahatta-maps-section").slideUp();
-				$("#long-island-maps-section").slideUp();
-				$("#long-island-maps-section1").slideUp();
-				$("#new-netherland-maps-section").slideUp();
-				$("#new-england-maps-section").slideUp();
-					
-				$("#ruler-date1").text(moment.unix(date_ruler1).format('YYYY')); // .format('DD MMM YYYY')
-				$("#ruler-date2").text(moment.unix(date_ruler2).format('YYYY')); // .format('DD MMM YYYY')
-				//$("#ruler-date3").text(moment.unix(sliderMiddle).format('DD MMM YYYY'));
-				$("#ruler-date3").html("&nbsp; &#8678; &nbsp; TIME &nbsp; &nbsp; &nbsp; &nbsp; SLIDE &nbsp; &#8680;");
-				$("#mobi-year").html("&nbsp; &#8678; &nbsp; TIME &nbsp; &nbsp; &nbsp; &nbsp; SLIDE &nbsp; &#8680;");
-				$("#ruler-date4").text(moment.unix(date_ruler4).format('YYYY')); // .format('DD MMM YYYY')
-				$("#ruler-date5").text(moment.unix(date_ruler5).format('YYYY')); // .format('DD MMM YYYY')
-				
-				console.log("start:", sliderStart);
-				console.log("end:", sliderEnd);
-				console.log("window:", window.name);
-
-				$("#slider").slider({
-					min: sliderStart,
-					max: sliderEnd,
-					step: 86400, //24 hrs in unix time, set slider step to 1 day=86400 seconds
-					value: sliderMiddle, //window.name || sliderMiddle,
-					slide: function (event, ui) {
-						tooltiPos = ((ui.value < sliderMiddle ) ? 30 : -100);
-						/*
-					        $(ui.handle).find('.ui-slider-tooltip').css({ left: tooltiPos}).text(moment.unix(ui.value).format('MM/DD/YYYY'));
-						$("#date").val(moment.unix(ui.value).format('MM/DD/YYYY'));
-						*/
-						
-						//urlHash = window.location.hash + '/' + ui.value;
-						// console.log(urlHash);
-						// hash.onMapMove();
-						if(timeline_pointer_flag) {
-						    $("#ruler-date3").text(moment.unix(sliderMiddle).format('YYYY')); // .format('DD MMM YYYY')
-					        //$("#mobi-year").text(moment.unix(sliderMiddle).format('YYYY'));  // .format('DD MMM YYYY')
-							$("#mobi-year").css("display", "none");
-							$("#ruler-date1").css("display", "block");
-							$("#ruler-date2").css("display", "block");
-							$("#ruler-date3").css("display", "block");
-							$("#ruler-date4").css("display", "block");
-							$("#ruler-date5").css("display", "block");
-						    timeline_pointer_flag = false;
-						}
-						
-						if(demo_layer_view_flag) { 
-						    if(ui.value <= sliderStartDrag){
-                                $(this).slider('value', sliderStartDrag);
-								changeDate(sliderStartDrag);
-								$("#date").text(moment.unix(sliderStartDrag).format('DD MMM YYYY'));
-                                return false
-                            }
-                            if(ui.value >= sliderEndDrag){
-                                $(this).slider('value', sliderEndDrag);
-								changeDate(sliderEndDrag);
-								$("#date").text(moment.unix(sliderEndDrag).format('DD MMM YYYY'));
-                                return false
-                            }
-							if ((ui.value <= sliderEndDrag) && (ui.value >= sliderStartDrag)) {
-							    changeDate(ui.value);
-								$("#date").text(moment.unix(ui.value).format('DD MMM YYYY'));
-							}
-						} else {
-						    changeDate(ui.value);
-							$("#date").text(moment.unix(ui.value).format('DD MMM YYYY'));
-						}
-						
-					},
-					create: function( event, ui ) {
-				                var tooltip = $('<div class="ui-slider-tooltip" />').css({
-					              position: 'absolute',
-					              top: 32,
-					              left: tooltiPos,
-					              color: "red",
-					              width: "100px",
-					              size: "1"
-				                }).text(moment.unix(sliderMiddle).format('MM/DD/YYYY'));
-
-				                      //*A $(event.target).find('.ui-slider-handle').append(tooltip);
-			                        },
-			                        change: function(event, ui) {}
-				});
-
-				//*A $("#date").val($("#slider").slider("values", 0));
-                                //*A $("#date").val(moment.unix($("#slider").slider("values", 0)).format('MM/DD/YYYY'));
-				$("#date").text(moment.unix($("#slider").slider("values", 0)).format('DD MMM YYYY'));
-				
-				$('.footnote').click(function () {
-				$('#footnotediv').toggle('slide');
-				});
-				
-				
-				$('#current_lots_items').change(function(){
-                    $('.current_lots').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    beforeMap.setLayoutProperty( "curr-lots-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "curr-lots-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "curr-lots-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "curr-lots-lines-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "curr-lots-high-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "curr-lots-high-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "curr-lots-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "curr-lots-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "curr-lots-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "curr-lots-lines-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "curr-lots-high-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "curr-lots-high-right", "visibility", "none" );
-						
-						if(curr_layer_view_flag) { 
-							closeCurrLotsInfo();
-						}
-					}
-                });
-
-                $(".current_lots").change(function () {
-                    if ($(".current_lots:checked").length == $(".current_lots").length) {
-                        $('#current_lots_items').prop('checked','checked');
-                    }else{
-                        $('#current_lots_items').prop('checked',false);  
-                    }
-                });
-				
-				
-				$('#current_buildings_items').change(function(){
-                    $('.current_buildings').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    beforeMap.setLayoutProperty( "curr-builds-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "curr-builds-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "curr-builds-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "curr-builds-lines-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "curr-builds-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "curr-builds-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "curr-builds-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "curr-builds-lines-right", "visibility", "none" );
-					}
-                });
-
-                $(".current_buildings").change(function () {
-                    if ($(".current_buildings:checked").length == $(".current_buildings").length) {
-                        $('#current_buildings_items').prop('checked','checked');
-                    }else{
-                        $('#current_buildings_items').prop('checked',false);  
-                    }
-                });
-				
-				
-				$('#current_lots').click(function() {
-				    //console.warn(document.getElementById('current_lots').checked);
-                    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("curr-lots", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "curr-lots-left", "visibility", "visible" );
-							beforeMap.setLayoutProperty( "curr-lots-high-left", "visibility", "visible" );
-						//if(afterMap.getLayoutProperty("curr-lots", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "curr-lots-right", "visibility", "visible" ); 
-							afterMap.setLayoutProperty( "curr-lots-high-right", "visibility", "visible" );
-					} else {
-					    //if(beforeMap.getLayoutProperty("curr-lots-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "curr-lots-left", "visibility", "none" ); 
-							beforeMap.setLayoutProperty( "curr-lots-high-left", "visibility", "none" );
-						//if(afterMap.getLayoutProperty("curr-lots-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "curr-lots-right", "visibility", "none" );
-							afterMap.setLayoutProperty( "curr-lots-high-right", "visibility", "none" );
-							
-						if(curr_layer_view_flag) { 
-							closeCurrLotsInfo();
-						}
-					}
-                });
-				
-				$('#current_lots_lines').click(function() {
-				    //console.warn(document.getElementById('current_lots_lines').checked);
-                    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("curr-lots-lines", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "curr-lots-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("curr-lots-lines", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "curr-lots-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("curr-lots-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "curr-lots-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("curr-lots-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "curr-lots-lines-right", "visibility", "none" );
-					}
-                });
-				
-				
-				$('#current_buildings').click(function() {
-				    //console.warn(document.getElementById('current_buildings').checked);
-                    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("curr-builds", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "curr-builds-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("curr-builds", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "curr-builds-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("curr-builds-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "curr-builds-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("curr-builds-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "curr-builds-right", "visibility", "none" );
-					}
-                });
-				
-				$('#current_buildings_lines').click(function() {
-				    //console.warn(document.getElementById('current_buildings_lines').checked);
-                    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("curr-builds-lines", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "curr-builds-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("curr-builds-lines", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "curr-builds-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("curr-builds-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "curr-builds-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("curr-builds-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "curr-builds-lines-right", "visibility", "none" );
-					}
-                });
-				
-				$(".long_island").change(function () {
-                    if ($(".long_island:checked").length == $(".long_island").length) {
-                        $('#longisland_items').prop('checked','checked');
-                    }else{
-                        $('#longisland_items').prop('checked',false);  
-                    }
-                });
-				
-				$('#longisland_coastline').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "long-island-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "long-island-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "long-island-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "long-island-right", "visibility", "none" );
-					}
-                });
-				
-				$('#longisland_area').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "long-island-area-left", "visibility", "visible" );
-					        afterMap.setLayoutProperty( "long-island-area-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "long-island-area-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "long-island-area-right", "visibility", "none" );
-					}
-                });
-				
-				$('#longisland_items').change(function(){
-                    $('.long_island').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    beforeMap.setLayoutProperty( "long-island-left", "visibility", "visible" ); 
-					    afterMap.setLayoutProperty( "long-island-right", "visibility", "visible" ); 
-					    beforeMap.setLayoutProperty( "long-island-area-left", "visibility", "visible" );
-					    afterMap.setLayoutProperty( "long-island-area-right", "visibility", "visible" );
-					} else {
-					    beforeMap.setLayoutProperty( "long-island-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "long-island-right", "visibility", "none" ); 
-					    beforeMap.setLayoutProperty( "long-island-area-left", "visibility", "none" );
-					    afterMap.setLayoutProperty( "long-island-area-right", "visibility", "none" );
-					}
-                });
-				
-				
-				$('#indian_paths').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "indian-paths-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "indian-paths-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "indian-paths-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "indian-paths-right", "visibility", "none" );
-					}
-                });
-				
-				
-				$('#lenape_trails').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "lenape-trails-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "lenape-trails-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "lenape-trails-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "lenape-trails-right", "visibility", "none" );
-					}
-                });
-				
-				$('#manahatta_shoreline').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "manahatta-shoreline-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "manahatta-shoreline-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "manahatta-shoreline-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "manahatta-shoreline-right", "visibility", "none" );
-					}
-                });
-				
-				$('#manahatta_streams').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "streams-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "streams-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "streams-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "streams-right", "visibility", "none" );
-					}
-                });
-				
-				$(".manahatta").change(function () {
-                    if ($(".manahatta:checked").length == $(".manahatta").length) {
-                        $('#manahatta_items').prop('checked','checked');
-                    }else{
-                        $('#manahatta_items').prop('checked',false);  
-                    }
-                });
-				
-				$('#manahatta_items').change(function(){
-                    $('.manahatta').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    beforeMap.setLayoutProperty( "lenape-trails-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "lenape-trails-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "manahatta-shoreline-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "manahatta-shoreline-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "streams-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "streams-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "lenape-trails-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "lenape-trails-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "manahatta-shoreline-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "manahatta-shoreline-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "streams-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "streams-right", "visibility", "none" );
-					}
-                });
-				
-				
-				$('#castello_points').click(function() {
-				    //console.warn(document.getElementById('castello_points').checked);
-                    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("places", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "places-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("places", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "places-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("places-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "places-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("places-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "places-right", "visibility", "none" );
-							
-						if(castello_layer_view_flag) { 
-						    closeCastelloInfo();
-						}	
-						
-					}
-                });
-				
-				
-				$(".settlements").change(function () {
-                    if ($(".settlements:checked").length == $(".settlements").length) {
-                        $('#settlements_items').prop('checked','checked');
-                    }else{
-                        $('#settlements_items').prop('checked',false);  
-                    }
-                });
-				
-				$('#settlements_points').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        // sizeOfArray(settlements_info)     for assoc arrays
-					        if(settlements_info_length == 0) {
-					            getSettlementsInfo();
-					        }
-					        beforeMap.setLayoutProperty( "settlements-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "settlements-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "settlements-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "settlements-right", "visibility", "none" );
-							
-						if(settlements_layer_view_flag) { 
-							closeSettlementsInfo();
-						}
-					}
-                });
-
-				$('#settlements_labels').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "settlements-labels-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "settlements-labels-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "settlements-labels-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "settlements-labels-right", "visibility", "none" );
-					}
-                });
-				
-				$('#settlements_items').change(function(){
-                    $('.settlements').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    // sizeOfArray(settlements_info)     for assoc arrays
-					    if(settlements_info_length == 0) {
-					        getSettlementsInfo();
-					    }
-					    beforeMap.setLayoutProperty( "settlements-left", "visibility", "visible" ); 
-					    afterMap.setLayoutProperty( "settlements-right", "visibility", "visible" ); 
-					    beforeMap.setLayoutProperty( "settlements-labels-left", "visibility", "visible" ); 
-					    afterMap.setLayoutProperty( "settlements-labels-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "settlements-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "settlements-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "settlements-labels-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "settlements-labels-right", "visibility", "none" );
-					}
-                });
-				
-				
-				$(".info-item").change(function () {
-                    if ($(".info-item:checked").length == $(".info-item").length) {
-                        $('#info_items').prop('checked','checked');
-                    }else{
-                        $('#info_items').prop('checked',false);  
-                    }
-                });
-				
-				$('#info_points').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        // sizeOfArray(infos_entity)     for assoc arrays
-							if(infos_entity_length == 0) {
-					            getInfosEntity();
-					        }
-					        beforeMap.setLayoutProperty( "info-points-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "info-points-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "info-points-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "info-points-right", "visibility", "none" );
-					    
-						if(info_layer_view_flag) { 
-							closeInfoLayerInfo();
-						}
-					}
-                });
-				
-				$('#info_labels').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "info-labels-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "info-labels-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "info-labels-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "info-labels-right", "visibility", "none" );
-					}
-                });
-				
-				$('#info_items').change(function(){
-                    $('.info-item').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    // sizeOfArray(infos_entity)     for assoc arrays
-					    if(infos_entity_length == 0) {
-					        getInfosEntity();
-					    }
-					    beforeMap.setLayoutProperty( "info-points-left", "visibility", "visible" ); 
-					    afterMap.setLayoutProperty( "info-points-right", "visibility", "visible" ); 
-					    beforeMap.setLayoutProperty( "info-labels-left", "visibility", "visible" ); 
-					    afterMap.setLayoutProperty( "info-labels-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "info-points-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "info-points-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "info-labels-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "info-labels-right", "visibility", "none" );
-					}
-                });
-				
-				
-				$('#circle_point').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    // sizeOfArray(taxlot_events_info)     for assoc arrays
-					    if(taxlot_events_info_length == 0) {
-					        getTaxlotEventsInfo();
-					    }
-					    //if(beforeMap.getLayoutProperty("lot_events-bf43eb-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "lot_events-bf43eb-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("lot_events-bf43eb-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "lot_events-bf43eb-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("lot_events-bf43eb-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "lot_events-bf43eb-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("lot_events-bf43eb-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "lot_events-bf43eb-right", "visibility", "none" );
-							
-						if(demo_layer_view_flag) { 
-						    closeDemoInfo();
-						}
-					}
-				});
-				
-				
-				$('#grants_layer_items').change(function(){
-                    $('.grants_layer').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-						/*
-					    if(dutch_grant_lots_info_length == 0) {
-					        getDutchGrantsInfo();
-					    }
-						*/
-						if(lots_info_length == 0) {
-					        getLotsInfo();
-						}
-					    beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right-highlighted", "visibility", "visible" );
-						
-						beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right-highlighted", "visibility", "none" );
-						
-						beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "none" );
-						
-						if(dgrants_layer_view_flag) { 
-							closeDutchGrantsInfo();
-						}
-					}
-                });
-
-                $(".grants_layer").change(function () {
-                    if ($(".grants_layer:checked").length == $(".grants_layer").length) {
-                        $('#grants_layer_items').prop('checked','checked');
-                    }else{
-                        $('#grants_layer_items').prop('checked',false);  
-                    }
-                });
-				
-				
-				$('#grants_layer').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-					    /*
-						if(dutch_grant_lots_info_length == 0) {
-					        getDutchGrantsInfo();
-					    }
-						*/
-						if(lots_info_length == 0) {
-					        getLotsInfo();
-						}
-					    //if(beforeMap.getLayoutProperty("dutch_grants-5ehfqe-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("dutch_grants-5ehfqe-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right", "visibility", "visible" ); 
-							beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left-highlighted", "visibility", "visible" );
-							afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right-highlighted", "visibility", "visible" );
-					} else {
-					    //if(beforeMap.getLayoutProperty("dutch_grants-5ehfqe-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("dutch_grants-5ehfqe-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right", "visibility", "none" );
-							beforeMap.setLayoutProperty( "dutch_grants-5ehfqe-left-highlighted", "visibility", "none" );
-							afterMap.setLayoutProperty( "dutch_grants-5ehfqe-right-highlighted", "visibility", "none" );
-						if(dgrants_layer_view_flag) { 
-							closeDutchGrantsInfo();
-						}
-					}
-				});
-				
-				$('#grants_layer_lines').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("grant-lots-lines-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("grant-lots-lines-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("grant-lots-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "grant-lots-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("grant-lots-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "grant-lots-lines-right", "visibility", "none" );
-					}
-				});
-				
-				
-				/* REPLACE THIS */
-				$('#gravesend_layer_items').change(function(){
-                    $('.gravesend_layer').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    // sizeOfArray(dutch_new_grant_lots_info)     for assoc arrays
-						/*
-						if(brooklyn_grants_length == 0) {
-		                    getBrooklynGrantsInfo();
-	                    }
-						*/
-						if(lots_info_length == 0) {
-					        getLotsInfo();
-						}
-					    beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right-highlighted", "visibility", "visible" );
-						
-						beforeMap.setLayoutProperty( "gravesend-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "gravesend-lines-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right-highlighted", "visibility", "none" );
-						
-						beforeMap.setLayoutProperty( "gravesend-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "gravesend-lines-right", "visibility", "none" );
-						
-						
-						if(gravesend_layer_view_flag) { 
-							closeGravesendInfo();
-						}
-						
-					}
-                });
-
-                $(".gravesend_layer").change(function () {
-                    if ($(".gravesend_layer:checked").length == $(".gravesend_layer").length) {
-                        $('#gravesend_layer_items').prop('checked','checked');
-                    }else{
-                        $('#gravesend_layer_items').prop('checked',false);  
-                    }
-                });
-				
-				
-				$('#gravesend_layer').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-						/*
-						if(brooklyn_grants_length == 0) {
-		                    getBrooklynGrantsInfo();
-	                    }
-						*/
-						if(lots_info_length == 0) {
-					        getLotsInfo();
-						}
-					    //if(beforeMap.getLayoutProperty("gravesend_boundaries-c6qrbw-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("gravesend_boundaries-c6qrbw-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right", "visibility", "visible" ); 
-							beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left-highlighted", "visibility", "visible" );
-							afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right-highlighted", "visibility", "visible" );
-					} else {
-					    //if(beforeMap.getLayoutProperty("gravesend_boundaries-c6qrbw-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("gravesend_boundaries-c6qrbw-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right", "visibility", "none" );
-							beforeMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-left-highlighted", "visibility", "none" );
-							afterMap.setLayoutProperty( "gravesend_boundaries-c6qrbw-right-highlighted", "visibility", "none" );
-						
-						if(gravesend_layer_view_flag) { 
-							closeGravesendInfo();
-						}
-					}
-				});
-				
-				$('#gravesend_layer_lines').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("gravesend-lines-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "gravesend-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("gravesend-lines-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "gravesend-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("gravesend-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "gravesend-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("gravesend-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "gravesend-lines-right", "visibility", "none" );
-					}
-				});
-				/* REPLACE THIS */
-				
-				
-				// Long Island Native Groups Layer Start
-				$('#native_groups_layer_items').change(function(){
-                    $('.native_groups_layer').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-					    if(taxlot_entities_info_length == 0) {
-					        getTaxlotEventEntitiesDescrInfo();
-					    }
-					    beforeMap.setLayoutProperty( "native-groups-area-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "native-groups-area-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "native-groups-area-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "native-groups-area-right-highlighted", "visibility", "visible" );
-						
-						beforeMap.setLayoutProperty( "native-groups-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "native-groups-lines-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "native-groups-labels-left", "visibility", "visible" ); 
-					    afterMap.setLayoutProperty( "native-groups-labels-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "native-groups-area-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "native-groups-area-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "native-groups-area-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "native-groups-area-right-highlighted", "visibility", "none" );
-						
-						beforeMap.setLayoutProperty( "native-groups-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "native-groups-lines-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "native-groups-labels-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "native-groups-labels-right", "visibility", "none" );
-						
-						if(native_group_layer_view_flag) { 
-							closeNativeGroupsInfo();
-						}
-					}
-                });
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,600italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="timeline/vendor/jquery-ui-1.10.3.custom/css/ui-darkness/jquery-ui-1.10.3.custom.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="timeline/vendor/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="timeline/vendor/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
     
-                $(".native_groups_layer").change(function () {
-                    if ($(".native_groups_layer:checked").length == $(".native_groups_layer").length) {
-                        $('#native_groups_layer_items').prop('checked','checked');
-                    }else{
-                        $('#native_groups_layer_items').prop('checked',false);  
-                    }
-                });
-				
-				
-				$('#native_groups_area').click(function() {
-				    if( $( this ).prop('checked') ) {
-                            // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-					        if(taxlot_entities_info_length == 0) {
-					            getTaxlotEventEntitiesDescrInfo();
-					        }
-					        beforeMap.setLayoutProperty( "native-groups-area-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "native-groups-area-right", "visibility", "visible" ); 
-							beforeMap.setLayoutProperty( "native-groups-area-left-highlighted", "visibility", "visible" );
-							afterMap.setLayoutProperty( "native-groups-area-right-highlighted", "visibility", "visible" );
-					} else {
-					        beforeMap.setLayoutProperty( "native-groups-area-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "native-groups-area-right", "visibility", "none" );
-							beforeMap.setLayoutProperty( "native-groups-area-left-highlighted", "visibility", "none" );
-							afterMap.setLayoutProperty( "native-groups-area-right-highlighted", "visibility", "none" );
-
-						if(native_group_layer_view_flag) { 
-							closeNativeGroupsInfo();
-						}
-					}
-				});
-				
-				
-				$('#native_groups_labels').click(function() {
-                    if( $( this ).prop('checked') ) {
-					        beforeMap.setLayoutProperty( "native-groups-labels-left", "visibility", "visible" ); 
-					        afterMap.setLayoutProperty( "native-groups-labels-right", "visibility", "visible" ); 
-					} else {
-					        beforeMap.setLayoutProperty( "native-groups-labels-left", "visibility", "none" ); 
-					        afterMap.setLayoutProperty( "native-groups-labels-right", "visibility", "none" );
-					}
-                });
-				
-				$('#native_groups_lines').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("native-groups-lines-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "native-groups-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("native-groups-lines-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "native-groups-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("native-groups-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "native-groups-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("native-groups-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "native-groups-lines-right", "visibility", "none" );
-					}
-				});
-				// Long Island Native Groups Layer End
-				
-				
-				// Karl Layer Start
-				$('#karl_layer_items').change(function(){
-                    $('.karl_layer').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    // sizeOfArray(dutch_new_grant_lots_info)     for assoc arrays
-						/*
-					    if(dutch_new_grant_lots_info_length == 0) {
-					        getDutchNewGrantsInfo();
-					    }
-						*/
-					    beforeMap.setLayoutProperty( "karl_long_island-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "karl_long_island-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "karl_long_island-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "karl_long_island-right-highlighted", "visibility", "visible" );
-						
-						beforeMap.setLayoutProperty( "karl-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "karl-lines-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "karl_long_island-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "karl_long_island-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "karl_long_island-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "karl_long_island-right-highlighted", "visibility", "none" );
-						
-						beforeMap.setLayoutProperty( "karl-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "karl-lines-right", "visibility", "none" );
-						
-						
-						if(karl_layer_view_flag) { 
-							closeKarlInfo();
-						}
-						
-					}
-                });
-
-                $(".karl_layer").change(function () {
-                    if ($(".karl_layer:checked").length == $(".karl_layer").length) {
-                        $('#karl_layer_items').prop('checked','checked');
-                    }else{
-                        $('#karl_layer_items').prop('checked',false);  
-                    }
-                });
-				
-				
-				$('#karl_layer').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    /*
-					    // sizeOfArray(dutch_grant_lots_info)     for assoc arrays
-					    if(dutch_grant_lots_info_length == 0) {
-					        getDutchGrantsInfo();
-					    }
-						*/
-					    //if(beforeMap.getLayoutProperty("karl_long_island-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "karl_long_island-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("karl_long_island-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "karl_long_island-right", "visibility", "visible" ); 
-							beforeMap.setLayoutProperty( "karl_long_island-left-highlighted", "visibility", "visible" );
-							afterMap.setLayoutProperty( "karl_long_island-right-highlighted", "visibility", "visible" );
-					} else {
-					    //if(beforeMap.getLayoutProperty("karl_long_island-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "karl_long_island-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("karl_long_island-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "karl_long_island-right", "visibility", "none" );
-							beforeMap.setLayoutProperty( "karl_long_island-left-highlighted", "visibility", "none" );
-							afterMap.setLayoutProperty( "karl_long_island-right-highlighted", "visibility", "none" );
-						
-						if(karl_layer_view_flag) { 
-							closeKarlInfo();
-						}
-					}
-				});
-				
-				$('#karl_layer_lines').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("karl-lines-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "karl-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("karl-lines-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "karl-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("karl-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "karl-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("karl-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "karl-lines-right", "visibility", "none" );
-					}
-				});
-				// Karl Layer End
-				
-				
-				// Farms Layer Start
-				
-				$('#farms_layer_items').change(function(){
-                    $('.farms_layer').prop('checked',this.checked);
-					if( $( this ).prop('checked') ) {
-					    /*
-					    if(farms_grants_info_length == 0) {
-					        getOriginalFarmsInfo();
-						}
-						*/
-						if(lots_info_length == 0) {
-					        getLotsInfo();
-						}
-					    beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "visible" ); 
-						beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "visible" );
-						
-						beforeMap.setLayoutProperty( "farms-lines-left", "visibility", "visible" );
-						afterMap.setLayoutProperty( "farms-lines-right", "visibility", "visible" ); 
-					} else {
-					    beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "none" );
-						beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "visible" );
-						afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "none" );
-						
-						beforeMap.setLayoutProperty( "farms-lines-left", "visibility", "none" ); 
-					    afterMap.setLayoutProperty( "farms-lines-right", "visibility", "none" );
-						
-						if(farms_layer_view_flag) { 
-							closeFarmsInfo();
-						}
-					}
-                });
-
-                $(".farms_layer").change(function () {
-                    if ($(".farms_layer:checked").length == $(".farms_layer").length) {
-                        $('#farms_layer_items').prop('checked','checked');
-                    }else{
-                        $('#farms_layer_items').prop('checked',false);  
-                    }
-                });
-				
-				
-				$('#farms_layer').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    /*
-					    if(farms_grants_info_length == 0) {
-					        getOriginalFarmsInfo();
-						}
-						*/
-						if(lots_info_length == 0) {
-					        getLotsInfo();
-						}
-					    //if(beforeMap.getLayoutProperty("original_grants_and_farms-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("original_grants_and_farms-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "visible" ); 
-							beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "visible" );
-							afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "visible" );
-					} else {
-					    //if(beforeMap.getLayoutProperty("original_grants_and_farms-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "original_grants_and_farms-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("original_grants_and_farms-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "original_grants_and_farms-right", "visibility", "none" );
-							beforeMap.setLayoutProperty( "original_grants_and_farms-left-highlighted", "visibility", "none" );
-							afterMap.setLayoutProperty( "original_grants_and_farms-right-highlighted", "visibility", "none" );
-						if(farms_layer_view_flag) { 
-							closeFarmsInfo();
-						}
-					}
-				});
-				
-				$('#farms_layer_lines').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("farms-lines-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "farms-lines-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("farms-lines-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "farms-lines-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("farms-lines-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "farms-lines-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("farms-lines-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "farms-lines-right", "visibility", "none" );
-					}
-				});
-				
-				// Farms Layer End
-				
-				
-				$('#grant_lots').click(function() {
-				    if( $( this ).prop('checked') ) {
-					    //if(beforeMap.getLayoutProperty("grant-lots-left", "visibility") === "none" )
-					        beforeMap.setLayoutProperty( "grant-lots-left", "visibility", "visible" ); 
-						//if(afterMap.getLayoutProperty("grant-lots-right", "visibility") === "none" )
-					        afterMap.setLayoutProperty( "grant-lots-right", "visibility", "visible" ); 
-					} else {
-					    //if(beforeMap.getLayoutProperty("grant-lots-left", "visibility") === "visible" )
-					        beforeMap.setLayoutProperty( "grant-lots-left", "visibility", "none" ); 
-						//if(afterMap.getLayoutProperty("grant-lots-right", "visibility") === "visible" )
-					        afterMap.setLayoutProperty( "grant-lots-right", "visibility", "none" );
-							
-						if(grant_lots_view_flag) { 
-							closeGrantLotsInfo();
-						}
-					}
-				});
-				
-				
-				//var layer_view_flag = true;
-				
-				$('#view-hide-layer-panel').click(function() {
-				    if(layer_view_flag) {
-				        $("#studioMenu").animate({'margin-left' : "-337px"},500);//.slideUp();
-						$(this).animate({'margin-left' : "-337px"},500);
-						$('#mobi-hide-sidebar').animate({'margin-left' : "-337px"},500);
-						layer_view_flag = false;
-						$("#dir-txt").html("&#9205;");
-						$("#rightInfoBar").slideUp();
-					} else {
-					    $("#studioMenu").animate({'margin-left' : "0px"},500);//.slideDown();
-						$(this).animate({'margin-left' : "0px"},500);
-						$('#mobi-hide-sidebar').animate({'margin-left' : "0px"},500);
-						layer_view_flag = true;
-						$("#dir-txt").html("&#9204;");
-						//555
-						if(windoWidth > 637)
-						    $("#rightInfoBar").slideDown();
-					}
-				});
-				
-				$('#mobi-view-sidebar').click(function() {
-				    if(!layer_view_flag) {
-				        $("#studioMenu").animate({'margin-left' : "0px"},500);//.slideDown();
-						$("#view-hide-layer-panel").animate({'margin-left' : "0px"},500);
-						$("#mobi-hide-sidebar").animate({'margin-left' : "0px"},500);
-						layer_view_flag = true;
-						$("#dir-txt").html("&#9204;");
-					}
-				});
-				
-				$('#mobi-hide-sidebar').click(function() {
-				    if(layer_view_flag) {
-				        $("#studioMenu").animate({'margin-left' : "-111%"},500);//.slideUp();
-						$("#view-hide-layer-panel").animate({'margin-left' : "-337px"},500);
-						$(this).animate({'margin-left' : "-111%"},500);
-						layer_view_flag = false;
-						$("#dir-txt").html("&#9205;");
-					}
-				});
-
-				/* change timeline CSS property on mouseover & mouseout */
-				$("div.timeline").mouseover(function(){
-				    //$("div#slider").css("opacity", 0.8);
-					$("div.ui-widget-content").css("background-color", "#baddf9");
-                    $("a.ui-slider-handle").css("background", "red");
-                }).mouseout(function(){
-				    //$("div#slider").css("opacity", 1);
-					$("div.ui-widget-content").css("background-color", "#d1ecff");
-                    $("a.ui-slider-handle").css("background", "");
-                });
-				
-				/*
-				$("a.ui-slider-handle").mouseover(function(){
-				    $("#ruler-date3").text(moment.unix(sliderMiddle).format('DD MMM YYYY'));
-					$("#mobi-year").text(moment.unix(sliderMiddle).format('DD MMM YYYY'));
-                });
-				*/
-				
-				$('.trigger-popup').click(function(e) {
-					var popup_id = ( e.target.id == "info" || e.target.id == "about-info" ) ? "about" : e.target.id;
-					if (modal_header_text[popup_id].length > 0) {
-						$("div.modal-header h1").text(modal_header_text[e.target.id]);
-						$("div.modal-content").html(modal_content_html[e.target.id]);
-						$("label#open-popup").trigger("click");
-					}
-				});
-				
-	
-				// close modal by click outside the box
-				
-				$('div.modal-body').click(function(e){
-                    e.stopPropagation();
-                });
-				
-				$('div.modal').click(function() {
-				    $("label#close").trigger("click");
-                });
-				
-			    setTimeout( function() {
-	                //document.getElementById("#loading").style.display = "none";
-					$("div#loading").css('display', 'none');
-	            }, 5000);
-				
-			});
-			
-			
-// for test local host REST_API/grant-lots-export.json
-// for test remote host https://lifecourse.xyz/upwork/test/ny/grant-lots-export.json
-// REST API https://nahc-mapping.org/mappingNY/dev/grant-lots-export
-// REST API https://encyclopedia.nahc-mapping.org/grant-lots-export
-// REST API new https://encyclopedia.nahc-mapping.org/grant-lots-export-properly
-
-function getDutchGrantsInfo() {
-    
-	var data_info_index = "";
-	dutch_grant_lots_info_length = 0;
-	
-	$.ajax({
-	            //url: 'REST_API/grant-lots-export.json',
-			    url: 'https://encyclopedia.nahc-mapping.org/grant-lots-export-properly',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	  
-		//console.log(data);
-		if(data.length > 0) {
-		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
-		    for(let i = 0; i < data.length; i++){
-                /* old api
-				if( typeof data[i].title[0].value != "undefined" ) {
-				    
-					data_info_index = data[i].title[0].value;
-					data_info_index = data_info_index.replace(/\s+/g, '');
-					//data_info_index = data_info_index.toLowerCase();
-					//console.log(/FortAmsterdam/.test(data_info_index));
-					if(/FortAmsterdam/.test(data_info_index)) {
-					    //console.log(data_info_index);
-						data_info_index = "Fort Amsterdam";
-					}
-					
-					//if(/J-Block-Garden-DWIC/.test(data_info_index)) {
-					//    console.log(data_info_index);
-					//}
-				   
-				    dutch_grant_lots_info[data_info_index] = { 
-					    name_txt: data[i].field_name.length > 0 ? data[i].field_name[0].value : "", 
-					    to_party: data[i].field_name.length > 0 ? (  
-						    ( data[i].field_name456.length > 0 ? "<a href='https://nahc-mapping.org" + data[i].field_name456[0].url + "' target='_blank'>" : "" ) +
-						     data[i].field_name[0].value  +
-							( data[i].field_name456.length > 0 ? "</a>"  : "" )
-						) : "", 
-					    from_party:  data[i].field_from_party_text_.length > 0 ? (
-						    ( data[i].field_from_party.length > 0 ? "<a href='https://nahc-mapping.org" + data[i].field_from_party[0].url + "' target='_blank'>" : "" ) +
-						    data[i].field_from_party_text_[0].value  +
-							( data[i].field_from_party.length > 0 ? "</a>"  : "" )
-						) : "",
-						start: data[i].field_date_end.length > 0 ? data[i].field_date_end[0].value  : "", 
-						end: data[i].field_date_end_grants.length > 0 ? data[i].field_date_end_grants[0].value  : "", 
-						notes: data[i].field_grant_notes.length > 0 ? data[i].field_grant_notes[0].value  : "", 
-						descr: data[i].field_grant_description.length > 0 ? data[i].field_grant_description[0].value : "",
-						builds: data[i].field_current_buildings_and_land.length > 0 ? data[i].field_current_buildings_and_land : []
-					};  
-          
-                    dutch_grant_lots_info_length += 1;
-                    //console.log(dutch_grant_lots_info_length);					
-				}
-				*/
-				// new api
-				//console.log(data[i].from_party);
-				//console.log(data[i].to_party);
-				//console.log(data[i].title);
-				//console.log(unescape(data[i].from_party));
-				//console.log(unescape(data[i].to_party));
-				if( data[i].title != "" ) {
-				    data_info_index = data[i].title;
-					data_info_index = data_info_index.replace(/\s+/g, '');
-					if(/FortAmsterdam/.test(data_info_index)) {
-					    //console.log(data_info_index);
-						data_info_index = "Fort Amsterdam";
-					}
-					dutch_grant_lots_info[data_info_index] = { 
-					    name_txt: data[i].to_party_unlinked,
-					    to_party: data[i].to_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-					    from_party: data[i].from_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						start: data[i].start, 
-						end: data[i].end, 
-						notes: data[i].note, 
-						descr: data[i].description,
-						builds: data[i].images.length > 0 ?  data[i].images.split(", ") : []
-					};  
-          
-                    dutch_grant_lots_info_length += 1;
-			    }
-			}
-		}
-		
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-}
-
-
-// for test local host REST_API/original-farms-and-grants-list-export.json
-// REST API https://encyclopedia.nahc-mapping.org/original-farms-and-grants-list-export 
-
-function getOriginalFarmsInfo() {
-    
-	var data_info_index = "";
-	farms_grants_info_length = 0;
-	
-	$.ajax({
-	            //url: 'REST_API/original-farms-and-grants-list-export.json',
-			    url: 'https://encyclopedia.nahc-mapping.org/original-farms-and-grants-list-export',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	  
-		//console.log(data);
-		if(data.length > 0) {
-		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
-		    for(let i = 0; i < data.length; i++){
-				
-				if( typeof data[i].nid[0].value != "undefined" ) {
-				    //console.log(data[i].title[0].value);
-					//data_info_index = data[i].title[0].value;
-					//data_info_index = data_info_index.replace(/\s+/g, '');
-					//data_info_index = data_info_index.toLowerCase();
-					data_info_index = "" + data[i].nid[0].value + "";
-
-				    farms_grants_info[data_info_index] = { 
-						//title: data[i].title.length > 0 ? data[i].title[0].value : "",
-						name: data[i].title.length > 0 ? (  
-						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org" + data[i].path[0].alias + "' target='_blank'>" : "" ) +
-						     data[i].title[0].value  +
-							( data[i].path.length > 0 ? "</a>"  : "" )
-						) : "",
-						date_start: data[i].field_date_start_text_.length > 0 ? data[i].field_date_start_text_[0].value : "",
-						date_end: data[i].field_date_end_text_.length > 0 ? data[i].field_date_end_text_[0].value : "",
-						from_party: data[i].field_from_party_text_2.length > 0 ? data[i].field_from_party_text_2[0].value : "",
-						to_party: data[i].field_to_party_unlinked_.length > 0 ? data[i].field_to_party_unlinked_[0].value : "",
-						from_party_linked: data[i].field_from_party_.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_from_party_[0].url : "",
-						to_party_linked: data[i].field_to_party.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_to_party[0].url : "",
-						type: data[i].field_typedsfg.length > 0 ? data[i].field_typedsfg[0].value : ""
-					};  
-					
-                    farms_grants_info_length += 1;
-                    //console.log(taxlot_event_entities_info);					
-				}
-			}
-		}
-		
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-}
-
-
-// for test local host REST_API/places-list-export.json
-// REST API https://encyclopedia.nahc-mapping.org/places-list-export
-
-function getSettlementsInfo() {
-    
-	var data_info_index = "";
-	settlements_info_length = 0;
-	
-	$.ajax({
-				url: 'https://encyclopedia.nahc-mapping.org/places-list-export',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	  
-		//console.log(data);
-		if(data.length > 0) {
-		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
-		    for(let i = 0; i < data.length; i++){
-                // old api
-				//if( typeof data[i].title[0].value != "undefined" ) {
-				if( typeof data[i].nid[0].value != "undefined" ) {
-				    //console.log(data[i].title[0].value);
-					//data_info_index = data[i].title[0].value;
-					//data_info_index = data_info_index.replace(/\s+/g, '');
-					//data_info_index = data_info_index.toLowerCase();
-					data_info_index = "" + data[i].nid[0].value + "";
-
-				    settlements_info[data_info_index] = { 
-					    //name: data[i].title.length > 0 ? data[i].title[0].value : "", 
-						name: data[i].title.length > 0 ? (  
-						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org" + data[i].path[0].alias + "' target='_blank'>" : "" ) +
-						     data[i].title[0].value  +
-							( data[i].path.length > 0 ? "</a>"  : "" )
-						) : "",
-						curr_loc: data[i].field_current_location_text_.length > 0 ? (  
-						    ( data[i].field_current_location_linked_.length > 0 ? "<a href='https://nahc-mapping.org" + data[i].field_current_location_linked_[0].url + "' target='_blank'>" : "" ) +
-						     data[i].field_current_location_text_[0].value  +
-							( data[i].field_current_location_linked_.length > 0 ? "</a>"  : "" )
-						) : "",
-						curr_loc_name: ( data[i].field_current_location_text_.length > 0 ? data[i].field_current_location_text_[0].value : "" ),
-						curr_loc_url: ( data[i].field_current_location_linked_.length > 0 ? data[i].field_current_location_linked_[0].url : "" ),
-						curr_loc_target: ( data[i].field_current_location_linked_.length > 0 ? data[i].field_current_location_linked_[0].target_id : "" ),
-						date: data[i].field_date_text_.length > 0 ? data[i].field_date_text_[0].value : "", 
-						descr: data[i].field_description10.length > 0 ? data[i].field_description10[0].value : "",
-						curr_loc_txt: data[i].field_current_location_text_.length > 0 ? data[i].field_current_location_text_[0].value : "",
-						curr_loc_link: data[i].field_current_location_linked_.length > 0 ? data[i].field_current_location_linked_[0].url : "",
-						img1: data[i].field_image1_1.length > 0 ? data[i].field_image1_1[0].url : "",
-						img2: data[i].field_image_2.length > 0 ? data[i].field_image_2[0].url : "",
-						img3: data[i].field_image_3.length > 0 ? data[i].field_image_3[0].url : ""
-					};  
-                    
-		            settlements_linked_location[data[i].nid[0].value] = data[i].title[0].value;
-					
-                    settlements_info_length += 1;
-                    //console.log(settlements_info_length);					
-				}
-			}
-		}
-		//console.log(settlements_info);
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-}
-
-
-// for test local host REST_API/taxlot-entities-export.json
-// REST API https://encyclopedia.nahc-mapping.org/taxlot-entities-export
-
-function getTaxlotEventEntitiesDescrInfo() {
-    
-	var data_info_index = "";
-	taxlot_entities_info_length = 0;
-	
-	$.ajax({
-				url: 'https://encyclopedia.nahc-mapping.org/taxlot-entities-export',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	  
-		//console.log(data);
-		if(data.length > 0) {
-		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
-		    for(let i = 0; i < data.length; i++){
-                // old api
-				//if( typeof data[i].title[0].value != "undefined" ) {
-				if( typeof data[i].nid[0].value != "undefined" ) {
-				    //console.log(data[i].title[0].value);
-					//data_info_index = data[i].title[0].value;
-					//data_info_index = data_info_index.replace(/\s+/g, '');
-					//data_info_index = data_info_index.toLowerCase();
-					data_info_index = "" + data[i].nid[0].value + "";
-
-				    taxlot_event_entities_info[data_info_index] = { 
-					    name: data[i].title.length > 0 ? data[i].title[0].value : "", 
-						name_html: data[i].title.length > 0 ? (  
-						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org/node/" + data_info_index + "' target='_blank'>" : "" ) +
-						     data[i].title[0].value  +
-							( data[i].path.length > 0 ? "</a>"  : "" )
-						) : "",
-						descr: data[i].field_description14.length > 0 ? data[i].field_description14[0].value : "" 
-					};  
-					
-                    taxlot_entities_info_length += 1;
-                    //console.log(taxlot_event_entities_info);					
-				}
-			}
-		}
-		//console.log(taxlot_entities_info);
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-}
-
-
-// for test local host REST_API/taxlot-events-export.json
-// REST API https://encyclopedia.nahc-mapping.org/taxlot-events-export
-
-function getTaxlotEventsInfo() {
-    
-	var data_info_index = "";
-	taxlot_events_info_length = 0;
-	
-	$.ajax({
-				url: 'https://encyclopedia.nahc-mapping.org/taxlot-events-export',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	  
-		//console.log(data);
-		if(data.length > 0) {
-		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
-		    for(let i = 0; i < data.length; i++){
-				if( typeof data[i].title != "undefined" ) {
-
-                    /*
-
-	"title": "C7_1643-06-02"	
-    "title":"\u003Ca href=\u0022\/node\/1545\u0022 hreflang=\u0022en\u0022\u003EC7_1643-06-02\u003C\/a\u003E"
-	
-	C7
-	taxlot_C7
-	"field_taxlot": "\u003Ca href=\u0022\/taxlot\/c7\u0022 hreflang=\u0022en\u0022\u003EC7\u003C\/a\u003E, \u003Ca href=\u0022\/lots\/taxlotc7\u0022 hreflang=\u0022en\u0022\u003Etaxlot_C7\u003C\/a\u003E",
-
-
-	Willem Kieft (ID: 1,660,244)
-	"field_from": "\u003Ca href=\u0022\/ancestor\/willem-kieft-id-1660244\u0022 hreflang=\u0022en\u0022\u003EWillem Kieft (ID: 1,660,244)\u003C\/a\u003E",
-	
-	Dutch West India Company (ID: DWIC)
-	"field_from_party_1": "\u003Ca href=\u0022\/ancestor\/dutch-west-india-company-id-dwic\u0022 hreflang=\u0022en\u0022\u003EDutch West India Company (ID: DWIC)\u003C\/a\u003E",
-	
-	
-	Govert Loockermans (ID: 151)
-	"field_to": "\u003Ca href=\u0022\/ancestor\/govert-loockermans-id-151\u0022 hreflang=\u0022en\u0022\u003EGovert Loockermans (ID: 151)\u003C\/a\u003E",
-		
-	Isaac Allerton (ID: 1,660,228)   
-	"field_to_party_1": "\u003Ca href=\u0022\/ancestor\/isaac-allerton-id-1660228\u0022 hreflang=\u0022en\u0022\u003EIsaac Allerton (ID: 1,660,228)\u003C\/a\u003E",
-	
-	"field_daystart": "June 2, 1643"
-	
-					*/
-					
-					//data_info_index = "" + data[i].title + "";
-					
-					/*
-					console.log(data[i].title);
-					console.log(data[i].title.match(/\/node\/(.*?)\"/)[1]);
-					console.log(parseInt(data[i].title.match(/\/node\/(\d*?)\"/)[1]));
-					*/
-					
-					data_info_index = data[i].title.match(/\/node\/(.*?)\"/)[1];
-					
-					//console.log(data_info_index);
-				    
-					if( data_info_index !== null ) {
-					
-				        taxlot_events_info[data_info_index] = { 
-					        //title: data[i].title,
-						    title: data[i].title.replaceAll("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    start : data[i].field_daystart,
-						    end : '',
-						    taxlot: data[i].field_taxlot.replaceAll("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    taxlotevent: data[i].field_taxlotevent.replaceAll("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party: data[i].field_to.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-					        to_party2: data[i].field_to_party_1.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    from_party: data[i].field_from.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-					        from_party2: data[i].field_from_party_1.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-
-						    property_type: data[i].field_pro.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party_1_text: data[i].field_events_to_party_1_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party_1_role: data[i].field_party_role_in_transaction_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party_1_entity: data[i].field_entity_description_to_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party_2_text: data[i].field_asdf_to_party_2_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party_2_role: data[i].field_party_role3.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party_2_entity: data[i].field_entity_description_to_part.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    from_party_1_text: data[i].field_from_party_1_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    from_party_1_role: data[i].field_partyrole.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    from_party_1_entity: data[i].field_entity_desc.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    from_party_2_text: data[i].field_from_party_2_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    from_party_2_role: data[i].field_party_role2.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    from_party_2_entity: data[i].field_entity_description_from_pa.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia")
-
-					    };  
-					
-                        taxlot_events_info_length += 1;
-                        //console.log(taxlot_events_info);		
-                    }						
-				}
-			}
-		}
-		//console.log(taxlot_events_info["C7_1643-06-02"].taxlot);
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-}
-
-
-// for test local host REST_API/info-entities-export.json
-// REST API https://encyclopedia.nahc-mapping.org/info-entities-export
-
-function getInfosEntity() {
-    
-	var data_info_index = "";
-	infos_entity_length = 0;
-	
-	$.ajax({
-				url: 'https://encyclopedia.nahc-mapping.org/info-entities-export',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	  
-		//console.log(data);
-		if(data.length > 0) {
-		    //console.warn("\n\n\nLOAD JSON REST API\n\n\n");
-		    for(let i = 0; i < data.length; i++){
-                // old api
-				//if( typeof data[i].title[0].value != "undefined" ) {
-				if( typeof data[i].nid[0].value != "undefined" ) {
-				    //console.log(data[i].title[0].value);
-					//data_info_index = data[i].title[0].value;
-					//data_info_index = data_info_index.replace(/\s+/g, '');
-					//data_info_index = data_info_index.toLowerCase();
-					data_info_index = "" + data[i].nid[0].value + "";
-
-				    infos_entity[data_info_index] = { 
-					    name: data[i].title.length > 0 ? data[i].title[0].value : "", 
-						name_html: data[i].title.length > 0 ? (  
-						    ( data[i].path.length > 0 ? "<a href='https://encyclopedia.nahc-mapping.org/node/" + data_info_index + "' target='_blank'>" : "" ) +
-						     data[i].title[0].value  +
-							( data[i].path.length > 0 ? "</a>"  : "" )
-						) : "",
-						descr: data[i].body.length > 0 ? data[i].body[0].value : "" 
-					};  
-					
-                    infos_entity_length += 1;
-                    //console.log(taxlot_event_entities_info);					
-				}
-			}
-		}
-		//console.log(taxlot_entities_info);
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-	
-}
-
-
-// for test local host REST_API/brooklyn-grant-ids-export.json
-// REST API https://encyclopedia.nahc-mapping.org/brooklyn-grant-ids-export
-
-function getBrooklynGrantsInfo() {
-    
-	var data_info_index = "";
-	brooklyn_grants_length = 0;
-	
-	$.ajax({
-				url: 'https://encyclopedia.nahc-mapping.org/brooklyn-grant-ids-export',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	
-	    if(data.length > 0) {
-		    for(let i = 0; i < data.length; i++){
-				if( typeof data[i].nid[0].value != "undefined" ) {
-				    data_info_index = "" + data[i].nid[0].value + "";
-				    
-					brooklyn_grants_info[data_info_index] = {
-						
-					    name: data[i].title.length > 0 ? data[i].title[0].value : "",
-						date_start: data[i].field_start_date_.length > 0 ? data[i].field_start_date_[0].value : "",
-					
-						to_party: data[i].field_to_party_1_text_.length > 0 ? data[i].field_to_party_1_text_[0].value.split("\n")[0] : "",	
-						to_party_linked: data[i].field_to_party_1222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_to_party_1222[0].url : "",
-						
-						to_party2: data[i].field_to_party_2_text222.length > 0 ? data[i].field_to_party_2_text222[0].value : "",
-						to_party2_linked: data[i].field_to_party_2_text_.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_to_party_2_text_[0].url : "",
-						
-						from_party: data[i].field_from_party_1222.length > 0 ? data[i].field_from_party_1222[0].value : "",
-						from_party_linked: data[i].field_from_party_12222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_from_party_12222[0].url : "",
-						
-						indigenous_signatories: data[i].field_history_notes222.length > 0 ? data[i].field_history_notes222[0].value : "",
-						
-						//ancestors_link: data[i].field_related_ancestors222.length > 0 ? "https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia" + data[i].field_related_ancestors222[0].url : "",
-
-					};
-					
-				    brooklyn_grants_length += 1;
-				}
-	        }
-		}
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-
-}
-
-
-// for test local host REST_API/lots-export2.json
-// REST API https://encyclopedia.nahc-mapping.org/lots-export2
-
-function getLotsInfo() {
-    
-	var data_info_index = "";
-	lots_info_length = 0;
-	
-	$.ajax({
-	            //url: 'REST_API/lots-export2.json',
-			    url: 'https://encyclopedia.nahc-mapping.org/lots-export2',
-				headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-				type: 'get',
-                dataType: 'json',
-				data: {}
-    })
-	.done(function(data) { 
-	  
-
-		if(data.length > 0) {
-		    for(let i = 0; i < data.length; i++){
-				if( typeof data[i].field_old_nid != "undefined" ) {
-                    if( data[i].field_old_nid != "" ) {
-					    
-						if( data[i].field_content_type == "Grant Lots" ) {
-						    data_info_index = data[i].field_old_title;
-					        data_info_index = data_info_index.replace(/\s+/g, '');
-					        if(/FortAmsterdam/.test(data_info_index)) {
-						        data_info_index = "Fort Amsterdam";
-					        }
-						} else {
-					        data_info_index = "" + data[i].field_old_nid + "";
-                        }
-						
-				        lots_info[data_info_index] = {
-						    name: data[i].field_content_type,
-                            title: data[i].field_old_title,
-							//title_linked: data[i].title.replace(/>[^<]+<\/a>/, ">" + data[i].field_old_title + "</a>").replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022"),
-							title_linked: data[i].title.replace(/>[^<]+<\/a>/, ">" + data[i].field_old_title + "</a>").replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https://encyclopedia.nahc-mapping.org/"),
-							//title_linked: data[i].title.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    brooklyn_title: data[i].field_original_title_temp,
-							to_party_linked: data[i].field_to_party_1222.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-					        from_party_linked: data[i].field_from_party.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-						    to_party: data[i].field_to_party_1_text_,
-							from_party: data[i].field_from_party_text_,
-							to_party2: data[i].field_to_party_2_text222,
-						    to_party2_linked: data[i].field_to_party_2_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"),
-							date_start: data[i].field_date_start_text_, 
-							date_end: data[i].field_date_end_text_, 
-						    indigenous_signatories: data[i].field_history_notes222,  // getBrooklynGrantsInfo()
-							notes: "", // ???
-							descr: data[i].field_grant_description,
-							builds: data[i].field_current_buildings_and_land.length > 0 ? data[i].field_current_buildings_and_land.split(", ") : [],
-						    type: data[i].field_proptype.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia")
-						};  
-					
-					    /*
-						    getDutchGrantsInfo()
-						    end: "",   // !!!  absent
-						    notes: data[i].field_history_notes222,   // ???  data[i].note
-						    descr: "", // !!!  absent
-						    builds: [] // !!!  absent
-							
-					        getOriginalFarmsInfo()  
-                            date_end: "",   // !!!  absent                    
-					   
-					        getBrooklynGrantsInfo() 
-					   
-					    */
-					
-                        lots_info_length += 1;
-                         //console.log(taxlot_event_entities_info);	
-						//if(data[i].field_to_party_2_text222.lenght > 0)
-						//console.log(data[i].field_to_party_2_text_.replace("href=\u0022", "target=\u0022_blank\u0022 href=\u0022https:\/\/nahc-mapping.org\/mappingNY\/encyclopedia"));
-						//console.log(data[i].field_to_party_2_text222);
-                    }						 
-				}
-			}
-		}
-		
-
-    })
-    .fail( function(xhr, textStatus, errorThrown) {
-        // LOADING ERROR!
-		console.warn("jQuery AJAX request  ERROR !!!");
-		console.log(xhr.responseText);
-        console.log(textStatus);
-    });
-}
-
-
-    // Function to calculate the
-    // length of an array
-    sizeOfArray = function (array) {
- 
-        // A variable to store
-        // the size of arrays
-        let size = 0;
- 
-        // Traversing the array
-        for (let key in array) {
- 
-            // Checking if key is present
-            // in arrays or not
-            if (array.hasOwnProperty(key)) {
-                size++;
-            }
-        }
- 
-        // Return the size
-        return size;
-    }
-
-
-    function itemsCompressExpand(items_class,caret_id) {
-	    if($(caret_id).hasClass("fa-minus-square")) {
-		    $(caret_id).removeClass("fa-minus-square").addClass("fa-plus-square");
-			$(items_class).hide();
-		} else if($(caret_id).hasClass("fa-plus-square")) {
-		    $(caret_id).removeClass("fa-plus-square").addClass("fa-minus-square");
-			$(items_class).show();
-		}
-	}
-
-    function sectionCompressExpand(section_id,caret_id) {
-	    if($(caret_id).hasClass("fa-minus-square")) {
-		    $(caret_id).removeClass("fa-minus-square").addClass("fa-plus-square");
-			$(section_id).slideUp();
-		} else if($(caret_id).hasClass("fa-plus-square")) {
-		    $(caret_id).removeClass("fa-plus-square").addClass("fa-minus-square");
-			$(section_id).slideDown();
-		}
-	}
-
-		</script>
-
-		<script type="text/javascript">
-			// Google Analytics
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-28801666-1']);
-			_gaq.push(['_trackPageview']);
-
-			(function () {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
-
-
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-159545294-1"></script>
-		<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'UA-159545294-1');
-		</script>
-
-
-
-
-	</head>
-
-	<body>
-
-
-
-		<!-- MAP STYLE-->
-		
-		<style>
-		
-
-				.map {
-						position: absolute;
-						display:block;
-						/*top: 61px;*/
-						top:80px;
-						/* bottom: 0; */
-						bottom: 67px;
-						width: 100%;
-						/* Standard */
-			            /* width: calc(100% - 230px); */
-				        /* Opera */
-                        /* width: -o-calc(100% - 230px); */
-				        /* Firefox */
-				        /* width: -moz-calc(100% - 230px); */
-				        /* WebKit */
-                        /* width: -webkit-calc(100% - 230px); */
-						/* right: 0; */
-						border-top: 2px solid #b0691d;
-
-                        
-
-					}
-			
-				body {
-					overflow: hidden;
-				}
-				
-				body { margin:0; padding:0; }
-	
-				body * {
-				   -webkit-touch-callout: none;
-					 -webkit-user-select: none;
-						-moz-user-select: none;
-						 -ms-user-select: none;
-							 user-select: none;
-				}
-				
-				
-				.mapboxgl-ctrl-bottom-left {
-                     display: none !important;
-                }
-				
-				.mapboxgl-ctrl-bottom-right {
-					bottom: 17px;
-					right: 275px;
-				}
-				
-				.mapboxgl-ctrl-group {
-				    height: 30px;
-				}
-				
-				/* make from vertical to horizontal */  
-				.mapboxgl-ctrl-group > button {
-				    display: inline-block;
-				}
-				
-				.mapboxgl-ctrl-group > button + button {
-				    border-top: 0; 
-                    border-left: 1px solid #ddd;
-                }
-
-				
-			</style>
-			
-			
-			<!-- HEADER STYLE-->
-	
-			
-			<style>
-			
-				#header { 
-					position:absolute;
-					top:0;
-					
-					bottom: 80px;
-					
-					width:100%;
-					background: #f5f6f7
-					url(body.png)
-					min-width: 100px;
-
-					text-color: #ffffff;
-					text-shadow: #717c9b 0px 1px 3px;
-					font-size: 1.40em;
-
-				}
-	  
-				#link {
-					color: #000000c2;
-					<!-- Other colors: #e0e0e0 #e6e6dc -->
-			
-				}
-				
-			</style>
-	
-			<!-- HEADER ELEMENTS STYLES-->
-			
-			<style>
-				
-				.header a.encyclopedia, .header label#about {
-				  float: left;
-				  color: black;
-				  text-align: center;
-				  padding: 10px;
-				  text-decoration: none;
-				  font-size: 15px; 
-				  line-height: 25px;
-				  border-radius: 4px;
-				  border: solid black;
-				  font-weight: bold;
-				  margin-top: 3px;
-					margin: 3px;
-					font-family: "Arial";
-				}
-	
-	            .header i#info { display: none; }
-				i.fa-info-circle { color: #777; }
-	
-				.header a:hover, .header label:hover {
-				  background-color: #ddd;
-				  color: black;
-				}
-	
-				.header a.active {
-				  background-color: dodgerblue;
-				  color: white;
-				}
-	
-				.header-right {
-				float: right;
-				margin-top: 13px;
-				margin-left: 50px;
-				margin-right: 9px;
-				}
-
-
-				.headerText {
-					display: inline-block;
-					/*margin-top: 15px;*/
-					margin-top: 19px;
-					repeat-x 50% 0;
-					text-shadow: #717c9b 0px 1px 3px;
-					/*font-size: 1.40em;*/
-					font-size: 1.7em;
-					/*Center*/
-					margin-left: 10em;
-					/*Left*/
-					/*margin-left: 2.2em;*/
-
-					margin-left: 10px;
-					font-family: 'Consolas';
-                    margin-bottom: 21px;
-
-				}
-				
-
-				.header a.encyclopedia {
-				background-color: #e8e1da;
-				/* color: white; */
-				}
-
-				/*Override styling for logo link*/
-				.header>a:first-child {
-					border: none;
-					margin: 0;
-					padding: 0;
-				}
-				.header>a:first-child:hover {
-					background-color: inherit;
-				}
-
-				</style>
-
-
-				<!-- EXTERNAL LINK ICON STYLE -->
-
-
-				<style>
-				.img2 {
-					vertical-align: text-top;
-					padding-left: 2px;
-				}
-				
-				
-				button.active {
-				  background-color: steelblue;
-				  color: white;
-				}
-				</style>
-			
-		
-		<!-- FOOTER ELEMENTS STYLES-->
-			
-		<style>
-		
-			#footer { 
-					position:absolute;
-					
-					bottom: 0px;
-					
-					width:100%;
-					/* height: 35px; */
-					height: 67px;
-					background: #f5f6f7
-					min-width: 100px;
-
-					border-top: 2px solid #b0691d;
-					
-					font-size: 15px;
-                                        padding-left: 10px;
-					padding-right: 10px;
-				}
-			
-		</style>
-		
-    
-	<!-- BASEMAP MENU STYLE -->
-
-    <style>
-        #baseMapMenu {
-            position: absolute;
-            background: #b3b3b3;
-            padding: 10px 18px 10px 10px;
-            font-family: 'Open Sans', sans-serif;
-            border-radius: 5px;
-            bottom: 175px;
-            right: 20px;
-        }
-		
-		div.layer-list-row {
-		    width: 100%;
-		}
-		
-		div.layer-list-row:hover {
-		    background-color: #DDD;
-		}
-		
-  #loading {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    /* display: block; */
-    display: none;
-    opacity: 0.8;
-    background-color: #fff;
-    z-index: 1000!important; /* 99!important; */
-    text-align: center;
-  }
-  
-  #loading-icon {
-    position: relative;
-    top: 38%;
-    bottom: 62%;
-	color: #20B2AA;
-  }
-		
-/* tooltip */
-.tooltip{
-position:absolute;
-z-index:999;
-left:-9999px;
-background-color:#dedede;
-padding:3px;
-border:1px solid #fff;
-width:100px;
-text-align: center;
-}
-.tooltip p{
-margin:0;
-padding:0;
-color:#fff;
-background-color:#23579B;
-padding:2px 7px;
-}
-
-/* hide current buildings fill layers */
-	#current_buildings_items,  #current_buildings { display: none; }
-	label[for=current_buildings_items], label[for=current_buildings] { display: none; }
-		
-/* Style for Studio Menu */
-/* #demoLayerInfo */
-
-#rightInfoBar {
-    position: absolute;
-	display:block;
-	/* top: 80px; */
-	top: 82px;
-	right: 0;
-
-	/* Standard */
-	max-height: calc(100% - 230px);
-	/* Opera */
-	max-height: -o-calc(100% - 230px);
-	/* Firefox */
-	max-height: -moz-calc(100% - 230px);
-	/* WebKit */
-	max-height: -webkit-calc(100% - 230px);
-    overflow: auto;
-	/* background-color: transparent !important; */
-	background-color: #fff!important;
-	z-index: 100;
-}
-
-.rightInfoBarBorder {
-    border: solid #FFFFFF 3px;
-}
-
-#studioMenu {
-    position: absolute;
-	display:block;
-	/* top: 80px; */
-	top: 82px;
-	                    /* Standard */
-			            height: calc(100% - 171px);
-				        /* Opera */
-                        height: -o-calc(100% - 171px);
-				        /* Firefox */
-				        height: -moz-calc(100% - 171px);
-				        /* WebKit */
-                        height: -webkit-calc(100% - 171px);
-	/* Standard */
-	max-height: calc(100% - 171px);
-	/* Opera */
-	max-height: -o-calc(100% - 171px);
-	/* Firefox */
-	max-height: -moz-calc(100% - 171px);
-	/* WebKit */
-	max-height: -webkit-calc(100% - 171px);
-    overflow: auto;
-	box-shadow: 0 0 10px 2px rgba(31,51,73,.1)!important;
-	background-color: #fff!important;
-	padding: 10px 2px 10px 10px;
-	/* border-top: 2px solid #b0691d; */
-	z-index: 100;
-}
-
-
-/* width */
-#studioMenu::-webkit-scrollbar, #rightInfoBar::-webkit-scrollbar {
-  width: 7px;
-}
-
-/* Track */
-#studioMenu::-webkit-scrollbar-track, #rightInfoBar::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-#studioMenu::-webkit-scrollbar-thumb, #rightInfoBar::-webkit-scrollbar-thumb {
-  background: steelblue; /* #888; */
-}
-
-/* Handle on hover */
-#studioMenu::-webkit-scrollbar-thumb:hover, #rightInfoBar::-webkit-scrollbar-thumb:hover {
-  background: blue; /* #555; */
-}
-
-#studioMenu .title {
-	color: #23374d;
-	font-weight: bold;
-	font-size: 17px;
-	padding-bottom: 8px;
-	text-align: center;
-	/* #*A border-bottom: 1px solid #c6d2e1; */
-	border-bottom: 1px solid #ce5c00;
-	margin-bottom: 8px;
-}
-
-#studioMenu { width: 325px; } /* 300px */
-#demoLayerInfo, #infoLayerCastello, #infoLayerGrantLots, #infoLayerDutchGrants, #infoLayerGravesend, #infoLayerNativeGroups, #infoLayerKarl, #infoLayerFarms, #infoLayerCurrLots, #infoLayerSettlements, #infoLayerInfoPoint { 
-    padding: 5px;
-	margin-top: 1px;
-	margin-bottom: 1px;
-    width: 270px; /* left: 258px; width: 300px; */ 
-  /* dont break out a link */
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-
-  -ms-word-break: break-all;
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  /* word-break: break-all; */
-  /* Instead use this non-standard one: */
-  word-break: break-word;
-
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-
-button#zoom-world, button.zoom-labels { padding: 5px 0 5px 0; cursor: pointer; }
-button#zoom-world > i, button.zoom-labels > i  { color: #555; }
-button#hide-zoom-label {display: none;}
-
-#demoLayerInfo, .demoLayerInfoPopUp { 
-    background-color: rgb(50, 205, 50, 0.3); /* #32CD32 LimeGreen */
-    border: solid #32CD32 2px;
-} 
-#infoLayerCastello, .infoLayerCastelloPopUp { 
-    background-color: rgb(255, 192, 203, 0.3);  /* #FFC0CB Pink */
-    border: solid pink 2px;
-} 
-#infoLayerSettlements, .infoLayerSettlementsPopUp { 
-    background-color: rgb(11, 14, 229, 0.2);  /* #0b0ee5 */
-    border: solid #0b0ee5 2px;
-} 
-#infoLayerGrantLots, .infoLayerGrantLotsPopUp { 
-    background-color: rgb(102, 205, 170, 0.3); /* #66CDAA MediumAquamarine */
-    border: solid #66CDAA 2px;
-}
-#infoLayerDutchGrants, .infoLayerDutchGrantsPopUp { 
-    background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
-    border: solid #FFFF00 2px;
-}
-
-#infoLayerInfoPoint, .infoLayerInfoPointPopUp { 
-    background-color: rgb(102, 205, 170, 0.3); /* #66CDAA MediumAquamarine */
-    border: solid #66CDAA 2px;
-}
-
-/* REPLACE THIS */
-#infoLayerGravesend, .infoLayerGravesendPopUp { 
-    background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
-    border: solid #FFFF00 2px;
-}
-/* REPLACE THIS */
-
-#infoLayerNativeGroups, .infoLayerNativeGroupsPopUp { 
-    background-color: rgb(255, 192, 203, 0.3);  /* #FFC0CB Pink */
-    border: solid pink 2px;
-}
-
-#infoLayerKarl, .infoLayerKarlPopUp { 
-    background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
-    border: solid #FFFF00 2px;
-}
-
-#infoLayerFarms, .infoLayerFarmsPopUp { 
-    /* background-color: rgb(255, 192, 203, 0.5); */
-	/* #FFC0CB Pink */
-    /* border: solid #FFC0CB 2px; */
-	background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
-    border: solid #FFFF00 2px;
-}
-#infoLayerCurrLots, .infoLayerCurrLotsPopUp { 
-    background-color: rgb(123, 104, 238, 0.3); /* #7B68EE MediumSlateBlue */
-    border: solid #7B68EE 2px;
-}
-
-i.compress-expand-icon { cursor: pointer; color: #555; }
-i.zoom-to-layer { color: #1d43de; }
-i.layer-info, i.zoom-to-layer { cursor: pointer; }  /* float: right; margin-top: 2px; margin-right: 5px; */
-i.layer-info:hover, i.zoom-to-layer:hover, i.compress-expand-icon:hover { opacity: 0.7; }
-
-div.dummy-label-layer-space { width: 37px; display: inline-block; }
-div.layer-buttons-list { width: 100%; display: flex; flex-direction: row; justify-content: space-between; }
-div.layer-buttons-block { width: 38px; right: 3px; margin-right: 3px; position: absolute; display: inline-block; }
-
-/*
-.demoLayerInfoPopUp { 
-    height: 34px;
-    width: 34px;
-    background-color: green;
-	border-radius: 50%;
-	margin: 0 auto;
-} 
-.infoLayerCastelloPopUp { 
-    height: 15px;
-    width: 15px;
-    background-color: red;
-	border-radius: 50%;
-	margin: 0 auto;
-} 
-.infoLayerGrantLotsPopUp { 
-    height: 13px;
-    width: 100%;
-    background-color: #66CDAA;
-}
-.infoLayerDutchGrantsPopUp { 
-    height: 15px;
-    width: 100%;
-    background-color: #FFFF00;
-}
-*/
-
-.demoLayerInfoPopUp, .infoLayerCastelloPopUp, .infoLayerGrantLotsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerDutchGrantsPopUp, .infoLayerFarmsPopUp, .infoLayerCurrLotsPopUp, .infoLayerSettlementsPopUp, .infoLayerInfoPointPopUp {
-    padding-left: 5px;
-	padding-right: 5px;
-}
-
-#view-hide-layer-panel {
-    position: absolute; 
-	/*
-	bottom: 135px; 
-	left: -3px; 
-	float: rigth; 
-	*/
-	top: 88px;
-	left: 337px; /* 300 <-> 312px | 325 <-> 312 + 25 */
-	z-index: 500; 
-	cursor: pointer;
-	border: solid sliver;
-}
-
-
-/* hide mapbox gl js close button icon  */
-/*
-.mapboxgl-popup-close-button { display: none; }
-*/
-
-i#mobi-hide-sidebar { 
-    color: blue;
-	position: absolute;
-    margin-top: -11px;	
-}
-
-i#mobi-hide-sidebar:hover { 
-    color: darkblue;
-}
-
-div#mobi-view-sidebar { 
-    color: #000;
-	position: absolute;
-    float: right;
-    bottom: 128px;
-    right: 20px;
-	height: 50px;
-    width: 50px;
-	text-align: center;
-    background-color: #fff;
-    border-radius: 50%;
-	border: 2px solid #000;
-}
-
-div#mobi-view-sidebar:hover { 
-    background-color: #ccc;
-}
-
-div#mobi-view-sidebar>i {
-   margin-top: 9px;
-}
-
-
-/* adaptive | responsive  design */
-div#mobi-year {
-    display: none;
-	width: 100%;
-	text-align: center;
-}
-   
-img#logo-img-wide {   
-    padding: 6px 0px 0px 21px; 
-    float: left;
-	height: 70px;
-}
-
-img#logo-img {   
-    padding: 5px 0px 0px 8px; 
-    float: left;
-	display: none;
-}
-
-@media (max-width: 1000px) {
-    span#ruler-date1, span#ruler-date2, span#ruler-date3, span#ruler-date4, span#ruler-date5 {
-	    display: none;
-	}
-	
-    div#mobi-year {
-	    margin-top: 5px;
-	    margin-bottom: -5px;
-        display: block;
-	}
-}
-
-@media (max-width: 930px) {
-    .mapboxgl-ctrl-bottom-right {
-	    bottom: 7px;
-	    right: 170px;
-	}
-}
-
-/*438*/
-@media (max-width: 503px) {
-    .header a.encyclopedia, .header label#about { display: none; }
-	.header i#info { display: inline-block; }
-}
-
-/*555*/
-@media (max-width: 657px) {
-    #studioMenu { width: 100%; }
-	#view-hide-layer-panel { display: none; }
-	#rightInfoBar { display: none; }
-	/* i.layer-info { margin-right: 21px;} */
-	div.layer-buttons-block { width: 111px; }
-	div.dummy-label-layer-space { width: 100px; }
-	div.layer-buttons-list { justify-content: space-around; }
-	
-	/*
-	img.img2 { display: none; }
-	
-	img#logo-img-wide {  
-		display: none;
-	}
-	
-	img#logo-img {  
-	    height: 34px;
-		display: inline-block;
-	}
-	*/
-	
-	#headerTextSuffix, .headerText { display: none; }
-	
-}
-
-
-/*555*/
-@media (min-width: 657px) {
-    #mobi-hide-sidebar, #mobi-view-sidebar { display: none; }
-}
-
-/*930*/
-@media (max-width: 1025px) {
-    .map { top: 43px; }
-	
-	#rightInfoBar { top: 45px; }
-	
-	#studioMenu { 
-	    top: 45px; 
-		/* Standard */
-			            height: calc(100% - 134px);
-				        /* Opera */
-                        height: -o-calc(100% - 134px);
-				        /* Firefox */
-				        height: -moz-calc(100% - 134px);
-				        /* WebKit */
-                        height: -webkit-calc(100% - 134px);
-	/* Standard */
-	max-height: calc(100% - 134px);
-	/* Opera */
-	max-height: -o-calc(100% - 134px);
-	/* Firefox */
-	max-height: -moz-calc(100% - 134px);
-	/* WebKit */
-	max-height: -webkit-calc(100% - 134px);
-	}
-	
-    /*
-	#headerTextSuffix { display: none; }
-	*/
-	
-	.headerText {
-					margin-top: 11px;
-					font-size: 13pt;
-					margin-left: 10px;
-				}
-	
-	.header-right {
-				margin-left: 5px;
-				margin-right: 5px;
-				}
-				
-		
-	.header a.encyclopedia, .header label#about {
-				  color: black;
-				  text-align: center;
-				  padding: 3px;
-				  text-decoration: none;
-				  font-size: 13px; 
-				  line-height: 15px;
-				  border-radius: 3px;
-				  border: solid black;
-				  font-weight: bold;
-				  margin-top: 3px;
-					margin: 3px;
-				}
-		
-    img#logo-img-wide {  
-		height: 39px;
-		padding: 2px 0px 0px 3px; 
-	}
-	
-	.header-right {
-	    margin-top: 5px;
-	}
-	
-
-}
-	    
-i.slash-icon { font-size: 11px; }
-
-	</style>
-	
-<!-------------------->
-<!---ADD MODAL DIV---->
-<!-------------------->
-	
-<input class="checker" type="checkbox" id="o" hidden>
-<div class="modal">
-  
-  <div class="modal-body">
-   <div class="modal-header">
-   <h1>ABOUT</h1><label for="o" id="close" title="Close">&times;</label>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css"
+      type="text/css"
+    />
+    <link href="timeline/index.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="js/layerSectionData.js"></script>
+    <script src="timeline/js/modalinfo.js"></script>
+    <script src="js/handle-mobile-devices.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
+    <script src="./js/google-analytics.js" type="text/javascript"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-159545294-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-159545294-1");
+    </script>
+    <link rel="stylesheet" href="./css/index.css">
+  </head>
+
+  <body>
+
+    <!-------------------->
+    <!---ADD MODAL DIV---->
+    <!-------------------->
+
+    <input class="checker" type="checkbox" id="o" hidden />
+    <div class="modal">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h1>ABOUT</h1>
+          <label for="o" id="close" title="Close">&times;</label>
+        </div>
+        <div class="modal-content">
+          New York City was founded by the Dutch in 1624 as
+          <i>New Amsterdam</i>, the capital of New Netherland. The New Amsterdam
+          History Center is devoted to documenting and mapping New Amsterdam,
+          its diverse people, landscapes, institutions and global legacy today.
+          <p>
+            We’ve presented several versions of the <i>Castello Plan</i> and the
+            <i>Dutch Grants Map</i> here. You can see the settlement of houses,
+            farms, taverns and workshops, surrounded by walls. Over the three
+            centuries that followed, the area became the Financial District. The
+            east wall was torn down and named Wall Street. The canals were paved
+            over and turned into streets and in between developed skysrapers,
+            and the island was expanded with infill. Above ground, almost
+            nothing remains of New Amsterdam except the original street pattern.
+            Underground, archeologists have found evidence of the plots of
+            houses and gardens, Amsterdam yellow brick, and pollen samples of
+            plants.
+          </p>
+          You can swipe the map to compare the Castello Plan in 1660 to the
+          present, and explore each lot, where it shows what was there and who
+          lived there. Our next steps are to expand through the full history of
+          New Amsterdam with a timeline from 1624 to 1664, when it was taken
+          over by the English.
+          <p>
+            We need your help to make this work happen. Donate now to develop
+            the map and expand the research.
+          </p>
+        </div>
+
+      </div>
     </div>
-    <div class="modal-content">
-            New York City was founded by the Dutch in 1624 as <i>New Amsterdam</i>,
-			 the capital of New Netherland. The New Amsterdam History Center
-			 is devoted to documenting and mapping New Amsterdam, its
-			 diverse people, landscapes, institutions and global legacy today.
-			<p>
-			We’ve presented several versions of the <i>Castello Plan</i> and the 
-			 <i>Dutch Grants Map</i> here.
-			 You can see the settlement of houses, farms,
-			 taverns and workshops, surrounded by walls. Over the three
-			 centuries that followed, the area became the Financial District.
-			 The east wall was torn down and named Wall Street. The canals
-			 were paved over and turned into streets and in between developed
-			 skysrapers, and the island was expanded with infill.
-			 Above ground, almost nothing remains of New Amsterdam except the 
-			 original street pattern.  Underground, archeologists have found 
-			 evidence of the plots of houses and gardens, Amsterdam yellow 
-			 brick, and pollen samples of plants.
-			</p>
-			You can swipe the map to compare the Castello Plan in 1660
-			 to the present,
-			 and explore each lot, where it shows what was there and who lived
-			 there. Our next steps are to expand through the full history
-			 of New Amsterdam with a timeline from 1624 to 1664, when it
-			 was taken over
-			 by the English.
-			<p>
-			We need your help to make this work happen. Donate now to
-			 develop the map and expand the research.
-			</p>
-	</div>
+<!-- HEADER -->
+    <div class="header">
+      <a href="http://newamsterdamhistorycenter.org" class="logo">
+        <img
+          id="logo-img-wide"
+          src="http://newamsterdamhistorycenter.org/wp-content/uploads/2018/02/cropped-cropped-sprite-1.png"
+          align="middle"
+        />
+        <img id="logo-img" src="icons/icon_57x57.png" align="middle" />
+      </a>
 
-<!--
-    <div class="modal-footer">
--->
-	  <!--
-      <label for="o">close</label>
-	  -->
-<!--
-	        <b><a href="http://newamsterdamhistorycenter.org/support/">Support Us</a></b>
-			<p style="color: #b0691d; font-size: 16px; font-weight: bold;">
-				<i>MAPPING EARLY NEW YORK</i>, PHASE 1 AND 2 are made possible by a grant from the SOCIETY OF THE DAUGHTERS OF HOLLAND DAMES.</p>
+      <!--PREVIOUS HEADER-->
+
+      <div id="header_text" class="headerText">
+        <span id="headerTextSuffix">|</span> Mapping Early New York
+      </div>
+
+      <div class="header-right">
+
+        <a
+          class="encyclopedia"
+          href="https://newamsterdamhistorycenter.org/full-3d-model/"
+          target="_blank"
+          >3D Map
+          <img
+            class="img2"
+            height="18"
+            src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png"
+            width="18"
+        /></a>
+        <a
+          class="encyclopedia"
+          href="https://encyclopedia.nahc-mapping.org/"
+          target="_blank"
+          >Encyclopedia
+          <img
+            class="img2"
+            height="18"
+            src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png"
+            width="18"
+        /></a>
+
+        <label for="o" id="open-popup" style="display: none">Open PopUp</label>
+        <label id="about" class="trigger-popup" title="Open">ABOUT</label>
+        <i class="fa fa-2x fa-info-circle trigger-popup" id="info"></i>
+      </div>
     </div>
--->
-   
-  </div>
-</div>
 
-		
-			<!-------------------->
-			<!--ADD HEADER DIV---->
-			<!-------------------->
-			
-			<div class="header">
-			
-				<a href="http://newamsterdamhistorycenter.org" class="logo">
-					<img id="logo-img-wide"
-						src="http://newamsterdamhistorycenter.org/wp-content/uploads/2018/02/cropped-cropped-sprite-1.png"
-						align="middle">
-					<img id="logo-img"
-						src="icons/icon_57x57.png"
-						align="middle">
-				</a>
-
-			<!--PREVIOUS HEADER-->
-	
-			<!--
-			<img style="padding: 3px 3px 3px 3px; float: left;" src="http://nahc.simcenterdev.org/sites/default/files/garland_logo.JPG" height="55" align="middle">
-			-->
-			  
-				<div id="header_text" class="headerText">
-					<span id="headerTextSuffix">|</span> Mapping Early New York
-				</div>
-				   
-				<div class="header-right">
-				    <!--
-					<a href="swipe.html">Swipe</a>
-					<a href="explore.html">Explore</a>
-					<a class="active" href="#home">Timeline (BETA)</a>
-					-->
-					<a class="encyclopedia" href="https://newamsterdamhistorycenter.org/full-3d-model/" target="_blank">3D Map <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
-					<a class="encyclopedia" href="https://encyclopedia.nahc-mapping.org/" target="_blank">Encyclopedia <img class="img2" height="18" src="https://encyclopedia.nahc-mapping.org/sites/default/files/inline-images/external_link_icon.png" width="18" /></a>
-					<!--
-					<a href="about.html">About</a>
-					-->
-					<!--
-					<label for="o" id="about" title="Open">ABOUT</label>
-					<label for="o" id="info" ><i for="o" class="fa fa-2x fa-info-circle"></i></label>
-					-->
-					<label for="o" id="open-popup" style="display: none;" >Open PopUp</label>
-					<label id="about" class="trigger-popup" title="Open">ABOUT</label>
-					<i class="fa fa-2x fa-info-circle trigger-popup" id="info" ></i>
-				</div>
-				
-			</div>
-
-
-
-    <!---------------------->
-    <!--ADD LAYERS TOGGLE -->
-	<!---------------------->
-	
-	<button id="view-hide-layer-panel" ><br> <span id="dir-txt" >&#9204;</span> <br><br></button>
-	
-	
-	
-	<div id="rightInfoBar" class="rightInfoBarBorder">
-	
-	  <div class="infoLayerElem" id="infoLayerGrantLots"></div>
-	  <div class="infoLayerElem" id="infoLayerDutchGrants"></div>
-	  <div class="infoLayerElem" id="infoLayerGravesend"></div> 
-	  <div class="infoLayerElem" id="infoLayerNativeGroups"></div>
-	  <div class="infoLayerElem" id="infoLayerKarl"></div>
-	  <div class="infoLayerElem" id="infoLayerFarms"></div>
-	  <div class="infoLayerElem" id="infoLayerCastello"></div>
-	  <div class="infoLayerElem" id="infoLayerSettlements"></div>
-	  <div class="infoLayerElem" id="infoLayerInfoPoint"></div>
-	  <div class="infoLayerElem" id="demoLayerInfo"></div>
-	  <div class="infoLayerElem" id="infoLayerCurrLots"></div>
-	
-	</div>
-	
-	
-	
+<!-- LAYER TOGGLE -->
+    <button id="view-hide-layer-panel">
+      <br />
+      <span id="dir-txt">&#9204;</span> <br /><br />
+    </button>
+    <div id="rightInfoBar" class="rightInfoBarBorder">
+      <div class="infoLayerElem" id="infoLayerGrantLots"></div>
+      <div class="infoLayerElem" id="infoLayerDutchGrants"></div>
+      <div class="infoLayerElem" id="infoLayerGravesend"></div>
+      <div class="infoLayerElem" id="infoLayerNativeGroups"></div>
+      <div class="infoLayerElem" id="infoLayerKarl"></div>
+      <div class="infoLayerElem" id="infoLayerFarms"></div>
+      <div class="infoLayerElem" id="infoLayerCastello"></div>
+      <div class="infoLayerElem" id="infoLayerSettlements"></div>
+      <div class="infoLayerElem" id="infoLayerInfoPoint"></div>
+      <div class="infoLayerElem" id="demoLayerInfo"></div>
+      <div class="infoLayerElem" id="infoLayerCurrLots"></div>
+    </div>
     <div id="studioMenu">
-	  
-	  <i id="mobi-hide-sidebar"  class="fa fa-arrow-circle-left fa-3x"></i>
-	  
-	  <!--
-	  <p class="title">
-        ZOOM TO LAYERS
-      </p>
-	  <button onclick="zoomtobounds('LongIsland')">Long Island</button>
-	  <button onclick="zoomtobounds('Manhattan')">Manhattan</button>
-	  <button onclick="zoomtobounds('NYC')">New York City</button>
-	  <button onclick="zoomtobounds('Bronx')">Bronx</button>
-	  <button onclick="zoomtobounds('Brooklyn')">Brooklyn</button>
-	  <button onclick="zoomtobounds('Queens')">Queens</button>
-	  <button onclick="zoomtobounds('StatenIsland')">Staten Island</button>
-	  <br><br>
-      -->
-	  
-      <p class="title">
-        LAYERS
-      </p>
-	  <!-- #*A
-	  <br>
-	  -->
-	  <br>
-	  <center>
-	  <b><i class="fas fa-minus-square compress-expand-icon" id="manahatta-section-caret" onclick="sectionCompressExpand('#manahatta-section-layers','#manahatta-section-caret')" ></i> &nbsp; Manhattan</b>
-	  </center>
-
-	  <div id="manahatta-section-layers">
-	  
-	  <!-- Manahatta Items -->
-	  <div class="layer-list-row" >
-		<input type="checkbox" class="manahatta_items" id="manahatta_items" name="manahatta_items">
-		<i class="fas fa-plus-square compress-expand-icon" id="manahatta-layer-caret" onclick="itemsCompressExpand('.manahatta_layer_item','#manahatta-layer-caret')" ></i>
-		<label for="manahatta_items"> 1609 | Manahatta  <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('Manhattan')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="manahatta-info"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-		
-		<!-- Lenape Trails -->
-		<div class="layer-list-row manahatta_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="manahatta" id="lenape_trails" name="lenape_trails">
-		<label for="lenape_trails"> <i class="fas fa-slash slash-icon" style="color: #FF0000;"></i> Lenape Trails</label>
-		</div>
-		
-		<!-- Manahatta Shoreline -->
-		<div class="layer-list-row manahatta_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="manahatta"  id="manahatta_shoreline" name="manahatta_shoreline">
-		<label for="manahatta_shoreline"> <i class="fas fa-slash slash-icon" style="color: #FFD700;"></i> Manahatta Shoreline</label>
-		</div>
-		
-		<!-- Streams (c 1600) -->
-		<div class="layer-list-row manahatta_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="manahatta" id="manahatta_streams" name="manahatta_streams">
-		<label for="manahatta_streams"> <i class="fas fa-slash slash-icon" style="color: #0000FF;"></i> Streams (c 1600)</label>
-		</div>
-		
-
-	  <!-- Farms Layers Items -->
-	  <div class="layer-list-row" >
-		<input type="checkbox" id="farms_layer_items" name="farms_layer_items">
-		<i class="fas fa-plus-square compress-expand-icon" id="farms-layer-caret" onclick="itemsCompressExpand('.farms_layer_item','#farms-layer-caret')" ></i>
-		<label for="farms_layer_items"> 1638-83 | Original Grants &amp; Farms <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Original Grants')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="farms-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-  
-		
-		<!-- Farms Layers #FFC0CB -->
-		<div class="layer-list-row farms_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="farms_layer" class="farms_layer" name="farms_layer">
-		<label for="farms_layer"> <i class="fa fa-square" style="color: #e3ed58;" ></i> Information</label>
-		</div>
-		
-		<!-- Farms Layers Lines #FFD700 -->
-		<div class="layer-list-row farms_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="farms_layer_lines" class="farms_layer" name="farms_layer_lines">
-		<label for="farms_layer_lines"> <i class="far fa-square" style="color: #FF0000;" ></i> Lines</label>
-		</div>
-		
-
-	  
-	  <!-- Dutch Grants  -->
-	  <div class="layer-list-row" >
-	  <input type="checkbox" id="grants_layer_items" name="grants_layer_items">
-	  <i class="fas fa-plus-square compress-expand-icon" id="dutch-grants-layer-caret" onclick="itemsCompressExpand('.dutch_grants_layer_item','#dutch-grants-layer-caret')" ></i>
-      <label for="grants_layer_items"> 1640-64 | Dutch Grants  <div class="dummy-label-layer-space"></div></label>
-	    <div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="grants-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-	  </div>
-
-	  <!-- Dutch Grants Layers -->
-	  <div class="layer-list-row dutch_grants_layer_item" >
-	  &nbsp; &nbsp; &nbsp; <input type="checkbox" id="grants_layer" class="grants_layer" name="grants_layer">
-      <label for="grants_layer"> <i class="fa fa-square" style="color: #e3ed58;" ></i> Information</label>
-	  </div>
-	  
-	  <!-- Dutch Grants Layers Lines -->
-	  <div class="layer-list-row dutch_grants_layer_item" >
-	  &nbsp; &nbsp; &nbsp; <input type="checkbox" id="grants_layer_lines" class="grants_layer" name="grants_layer_lines">
-      <label for="grants_layer_lines"> <i class="far fa-square" style="color: #FF0000;" ></i> Lines</label>
-	  </div>
-
-	  
-
-	  <!-- Circle -->
-	  <div class="layer-list-row" >
-		<input type="checkbox" id="circle_point" name="circle_point" checked="checked" > <!-- disabled="disabled" -->
-		<label for="circle_point"> <i class="fa fa-play-circle"  style="color: #097911;" ></i>1643-75 | Lot Events <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="demo-taxlot-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-
-		<!-- Grants Layers -->
-		<div class="layer-list-row" >
-		<input type="checkbox" id="grant_lots" name="grant_lots">
-		<label for="grant_lots"> <i class="fa fa-square" style="color: #008888;" ></i> 1643-67 | Demo Grant Divisions: C7 <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="demo-grant-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-
-	  
-	  <!-- Castello Points -->
-	  <div class="layer-list-row" >
-	  <input type="checkbox" id="castello_points" name="castello_points">
-      <label for="castello_points"> <i class="fa fa-circle"  style="color: #FF0000;" ></i>  1660 | Castello Taxlots  <div class="dummy-label-layer-space"></div></label>
-	    <div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="castello-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-	  </div>
-	  
-	  
-
-
-	  <!-- Current Lots Items -->
-	  <div class="layer-list-row" >
-	  <input type="checkbox" id="current_lots_items" name="current_lots_items">
-	  <i class="fas fa-plus-square compress-expand-icon" id="current-lots-layer-caret" onclick="itemsCompressExpand('.current_lots_layer_item','#current-lots-layer-caret')" ></i>
-      <label for="current_lots_items"> Current Lots  <div class="dummy-label-layer-space"></div></label>
-	    <div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="current-lots-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-	  </div>
-	  
-      <!-- Current Lots -->
-	  <div class="layer-list-row current_lots_layer_item" >
-	  &nbsp; &nbsp; &nbsp; <input type="checkbox" class="current_lots" id="current_lots" name="current_lots">
-      <label for="current_lots"> <i class="fa fa-square" style="color: #7B68EE;" ></i> Information</label>
-	  </div>
-	  
-	  <!-- Current Lots Lines -->
-	  <div class="layer-list-row current_lots_layer_item" >
-	  &nbsp; &nbsp; &nbsp; <input type="checkbox" class="current_lots" id="current_lots_lines" name="current_lots_lines">
-      <label for="current_lots_lines"> <i class="far fa-square" style="color: #000080;"></i> Lines</label>
-	  </div>
-	  
-	  <!-- Current Buildings Items -->
-	  <div class="layer-list-row" >
-	  <input type="checkbox" id="current_buildings_items" name="current_buildings_items">
-      <label for="current_buildings_items"> <i class="fas fa-caret-down"></i> Current Buildings  <div class="dummy-label-layer-space"></div></label>
-	  </div>
-	  
-	  <!-- Current Buildings -->
-	  <div class="layer-list-row" >
-	  <input type="checkbox" class="current_buildings" id="current_buildings" name="current_buildings">
-      <label for="current_buildings"> <i class="fa fa-square" style="color: #FF7F50;" ></i> Current Buildings</label>
-	  </div>
-	  
-	  <!-- Current Buildings Lines -->
-	  <div class="layer-list-row" >
-	  <input type="checkbox" class="current_buildings" id="current_buildings_lines" name="current_buildings_lines">
-      <label for="current_buildings_lines"> <i class="far fa-square" style="color: #0000FF;"></i> Current Buildings <div class="dummy-label-layer-space"></div></label>
-	    <div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="current-buildings-lines-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-	  </div>
-
-	  </div>
-
-		<br>
-	  <center>
-	  <b><i class="fas fa-plus-square compress-expand-icon" id="long-island-section-caret" onclick="sectionCompressExpand('#long-island-section-layers','#long-island-section-caret')" ></i> &nbsp; Long Island</b>
-	  </center>
-
-
-      <div id="long-island-section-layers" >
-
-      <!-- Settlements Items -->
-	  <div class="layer-list-row" >
-		<input type="checkbox" id="settlements_items" name="settlements_items">
-		<i class="fas fa-minus-square compress-expand-icon" id="settlements-layer-caret" onclick="itemsCompressExpand('.settlements_layer_item','#settlements-layer-caret')" ></i>
-		<label for="settlements_items"> 1600-64 | Settlements  <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('Brooklyn')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="settlements-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-  
-		<!-- Settlements Points -->
-		<div class="layer-list-row settlements_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="settlements" id="settlements_points" name="settlements_points">
-		<label for="settlements_points"> <i class="fa fa-circle"  style="color: #0b0ee5;" ></i>  Locations</label>
-		</div>
-
-  
-		<!-- Settlements Labels -->
-		<div class="layer-list-row settlements_layer_item" >
-		  &nbsp; &nbsp; &nbsp; <input type="checkbox" class="settlements" id="settlements_labels" name="settlements_labels">
-		  <label for="settlements_labels"> <i class="fa fa-comment-dots"  style="color: #0b0ee5;" ></i>  Labels</label>
-		  </div>
-
-
-		<!-- Indian Paths -->
-		<div class="layer-list-row" >
-			<input type="checkbox" id="indian_paths" name="indian_paths">
-			<label for="indian_paths"> <i class="fas fa-slash slash-icon"  style="color: #FF0000;" ></i> 1600-64 | Paths  <div class="dummy-label-layer-space"></div></label>
-			<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('Brooklyn')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="indian-paths-info-layer"  title="Layer Info" ></i>
-		    </div>
-		    </div>
-			</div>
-
-        <!-- Long Island Native Groups Layers -->
-        <div class="layer-list-row" >
-		<input type="checkbox" id="native_groups_layer_items" name="native_groups_layer_items">
-		<i class="fas fa-minus-square compress-expand-icon" id="native-groups-layer-caret" onclick="itemsCompressExpand('.native_groups_layer_item','#native-groups-layer-caret')" ></i>
-		<label for="native_groups_layer_items"> 1600s | Long Island Tribes  <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('LongIsland')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="native-groups-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-  
-        <!-- Long Island Native Groups Labels -->
-		<div class="layer-list-row native_groups_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="native_groups_layer" id="native_groups_labels" name="native_groups_labels">
-		<label for="native_groups_labels"> <i class="fa fa-comment-dots"  style="color: #0b0ee5;" ></i>  Labels</label>
-		</div>
-  
-		<!-- Long Island Native Groups Area -->
-		<div class="layer-list-row native_groups_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="native_groups_area" class="native_groups_layer" name="native_groups_area">
-		<label for="native_groups_area"> <i class="fa fa-square" style="color: #FF1493;" ></i> Area</label>
-		</div>
-		
-		<!-- Long Island Native Groups Lines -->
-		<div class="layer-list-row native_groups_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="native_groups_lines" class="native_groups_layer" name="native_groups_lines">
-		<label for="native_groups_lines"> <i class="far fa-square" style="color: #FF0000;" ></i> Borders</label>
-		</div>
-
-
-      <!-- REPLACE THIS -->
-      <!-- Gravesend Layers -->
-	  <div class="layer-list-row" >
-		<input type="checkbox" id="gravesend_layer_items" name="gravesend_layer_items">
-		<i class="fas fa-minus-square compress-expand-icon" id="gravesend-layer-caret" onclick="itemsCompressExpand('.gravesend_layer_item','#gravesend-layer-caret')" ></i>
-		<label for="gravesend_layer_items"> 1609-Present | Brooklyn Grants  <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('Brooklyn')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="boundaries-info-layer"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-  
-		<!-- Gravesend Area -->
-		<div class="layer-list-row gravesend_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="gravesend_layer" class="gravesend_layer" name="gravesend_layer">
-		<label for="gravesend_layer"> <i class="fa fa-square" style="color: #e3ed58;" ></i> Information</label>
-		</div>
-		
-		<!-- Gravesend Lines -->
-		<div class="layer-list-row gravesend_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="gravesend_layer_lines" class="gravesend_layer" name="gravesend_layer_lines">
-		<label for="gravesend_layer_lines"> <i class="far fa-square" style="color: #FF0000;" ></i> Lines</label>
-		</div>
-		<!-- REPLACE THIS -->
-		
-      <!-- Karl Long Island Lyers -->
-	  <div class="layer-list-row" >
-		<input type="checkbox" id="karl_layer_items" name="karl_layer_items">
-		<i class="fas fa-minus-square compress-expand-icon" id="karl-layer-caret" onclick="itemsCompressExpand('.karl_layer_item','#karl-layer-caret')" ></i>
-		<label for="karl_layer_items"> 1636-Present | Long Island Towns  <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('LongIsland')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="ny_towns"  title="Layer Info" ></i>
-		    </div>
-		</div>
-		</div>
-  
-		<!-- Karl Long Island Area -->
-		<div class="layer-list-row karl_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="karl_layer" class="karl_layer" name="karl_layer">
-		<label for="karl_layer"> <i class="fa fa-square" style="color: #e3ed58;" ></i> Information</label>
-		</div>
-		
-		<!-- Karl Long Island Lines -->
-		<div class="layer-list-row karl_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" id="karl_layer_lines" class="karl_layer" name="karl_layer_lines">
-		<label for="karl_layer_lines"> <i class="far fa-square" style="color: #FF0000;" ></i> Lines</label>
-	  </div>
-
-
-  	  <!-- Long Island Items -->
-		<div class="layer-list-row" >
-			<input type="checkbox" id="longisland_items" name="longisland_items">
-			<i class="fas fa-minus-square compress-expand-icon" id="long-island-caret" onclick="itemsCompressExpand('.long_island_item','#long-island-caret')" ></i>
-			<label for="longisland_items">Long Island Area Coastline  <div class="dummy-label-layer-space"></div></label>
-			<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('LongIsland')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="longisland-info-layer"  title="Layer Info" ></i>
-		    </div>
-		    </div>
-			</div>
-			
-			<!-- Long Island Area -->
-			<div class="layer-list-row long_island_item" >
-			&nbsp; &nbsp; &nbsp; <input type="checkbox" class="long_island" id="longisland_area" name="longisland_area">
-			<label for="longisland_area"> <i class="fa fa-square" style="color: #00FF7F;" ></i> Area</label>
-			</div>
-			
-			<!-- Long Island Coastline -->
-			<div class="layer-list-row long_island_item" >
-			&nbsp; &nbsp; &nbsp; <input type="checkbox" class="long_island" id="longisland_coastline" name="longisland_coastline">
-			<label for="longisland_coastline"> <i class="fas fa-slash slash-icon"  style="color: #006400;" ></i> Coastline</label>
-			</div>
-			
-      </div>        
-
-
-      <br>
-	  <center>
-	  <b><i class="fas fa-plus-square compress-expand-icon" id="info-section-caret" onclick="sectionCompressExpand('#info-section-layers','#info-section-caret')" ></i> &nbsp; Information of Interest</b>
-	  </center>
-
-
-      <div id="info-section-layers" >
-	    
-		
-	    <!-- Info Items -->
-	    <div class="layer-list-row" >
-		<input type="checkbox" id="info_items" name="info_items">
-		<i class="fas fa-minus-square compress-expand-icon" id="info-layer-caret" onclick="itemsCompressExpand('.info_layer_item','#info-layer-caret')" ></i>
-		<label for="info_items"> Information of Interest <div class="dummy-label-layer-space"></div></label>
-		<div class="layer-buttons-block">
-		    <div class="layer-buttons-list">
-		        <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('LongIsland')" title="Zoom to Layer" ></i>
-		        <i  class="fa fa-info-circle layer-info trigger-popup" id="info-points-items"  title="Layer Info" ></i>
-		    </div>
-		</div>
-	    </div>
-  
-		<!-- Info Points -->
-		<div class="layer-list-row info_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="info-item" id="info_points" name="info_points">
-		<label for="info_points"> <i class="fa fa-circle"  style="color: #008888;" ></i>  Locations</label>
-		
-		</div>
-
-		<!-- Info Labels -->
-		<div class="layer-list-row info_layer_item" >
-		&nbsp; &nbsp; &nbsp; <input type="checkbox" class="info-item" id="info_labels" name="info_labels">
-		<label for="info_labels"> <i class="fa fa-comment-dots"  style="color: #008888;" ></i>  Labels</label>
-		</div>
-	  
-	  
-	  </div>
-
-
-
-	  <br>
-
-
-
-
+      <i id="mobi-hide-sidebar" class="fa fa-arrow-circle-left fa-3x"></i>
+      <p class="title">LAYERS</p>
+      <br />
+      <center>
+        <b
+          ><i
+            class="fas fa-minus-square compress-expand-icon"
+            id="manahatta-section-caret"
+            onclick="sectionCompressExpand('#manahatta-section-layers','#manahatta-section-caret')"
+          ></i>
+          &nbsp; Manhattan</b
+        >
+      </center>
+      <div id="manahatta-section-layers"></div>
+      <br />
+      <center>
+        <b
+          ><i
+            class="fas fa-plus-square compress-expand-icon"
+            id="long-island-section-caret"
+            onclick="sectionCompressExpand('#long-island-section-layers','#long-island-section-caret')"
+          ></i>
+          &nbsp; Long Island</b
+        >
+      </center>
+      <div id="long-island-section-layers"></div>
+      <br />
+      <center>
+        <b
+          ><i
+            class="fas fa-plus-square compress-expand-icon"
+            id="info-section-caret"
+            onclick="sectionCompressExpand('#info-section-layers','#info-section-caret')"
+          ></i>
+          &nbsp; Information of Interest</b
+        >
+      </center>
+      <div id="info-section-layers"></div>
+      <br />
       <div>
-        <!-- #*A
-		<br>
-		-->
-		<hr>
-		<p class="title">
-			MAPS
-		  </p>
-		  <!-- #*A
-		  <br>
-          -->
-		<!--CURRENT SATELLITE -->
-		<div class="layer-list-row" >
-			<input class='clm2yrx1y025401p93v26bhyl' type='radio' name='ltoggle' value='clm2yrx1y025401p93v26bhyl' checked="checked">
-			<input class='clm2yrx1y025401p93v26bhyl' type='radio' name='rtoggle' value='clm2yrx1y025401p93v26bhyl'>
-			&nbsp;
-			<label for='clm2yrx1y025401p93v26bhyl'>Current Satellite <div class="dummy-label-layer-space"></div></label>
-			<div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  style="width: 16px;"></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="satellite-image"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-			</div>
-	
-			<br>
-			<center>
-			<b><i class="fas fa-minus-square compress-expand-icon" id="castello-maps-section-caret" onclick="sectionCompressExpand('#castello-maps-section','#castello-maps-section-caret')" ></i> &nbsp; 1660 | Castello Plan</b>
-			</center>
-			
-          
-		<div id="castello-maps-section">
-		  
-		<!--CASTELLO COLORED (DEFAULT)-->
-		<div class="layer-list-row" >
-		<input class='clm2yu5fg022801phfh479c8x' type='radio' name='ltoggle' value='clm2yu5fg022801phfh479c8x'>
-		<input class='clm2yu5fg022801phfh479c8x' type='radio' name='rtoggle' value='clm2yu5fg022801phfh479c8x' checked="checked">
-		&nbsp;
-		<label for='clm2yu5fg022801phfh479c8x'>Castello Redrawn (Default) <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="castello-redrawn-plan"  title="Layer Info" ></i>
-		        </div>
-		    </div>
+        <script src="js/generateLayers.js"></script>
+        <hr />
+        <p class="title">MAPS</p>
+        <!--CURRENT SATELLITE -->
+        <div class="layer-list-row">
+          <input
+            class="clm2yrx1y025401p93v26bhyl"
+            type="radio"
+            name="ltoggle"
+            value="clm2yrx1y025401p93v26bhyl"
+            checked="checked"
+          />
+          <input
+            class="clm2yrx1y025401p93v26bhyl"
+            type="radio"
+            name="rtoggle"
+            value="clm2yrx1y025401p93v26bhyl"
+          />
+          &nbsp;
+          <label for="clm2yrx1y025401p93v26bhyl"
+            >Current Satellite
+            <div class="dummy-label-layer-space"></div
+          ></label>
+          <div class="layer-buttons-block">
+            <div class="layer-buttons-list">
+              <i style="width: 16px"></i>
+              <i
+                class="fa fa-info-circle layer-info trigger-popup"
+                id="satellite-image"
+                title="Layer Info"
+              ></i>
+            </div>
+          </div>
         </div>
+        <br />
+        <center>
+          <b
+            ><i
+              class="fas fa-minus-square compress-expand-icon"
+              id="castello-maps-section-caret"
+              onclick="sectionCompressExpand('#castello-maps-section','#castello-maps-section-caret')"
+            ></i>
+            &nbsp; 1660 | Castello Plan</b
+          >
+        </center>
+        <div id="castello-maps-section"></div>
+        <br />
+        <center>
+          <a
+            class="encyclopedia"
+            href="https://sandcastle.cesium.com/standalone.html#c=jVJtb9owEP4rJz5UIFUOL2q1drQaCxsKamCloYUqX0xiiMGxg+1Aw9T/PueFrVTdtE+W7567e57nzrJgIDHXYBNF03j4ADgIiFKgBWQilUAFB6wU0crnJQY5gqOQLHHKdK8Ae2JDONyAXyPZMFoMAjqmQ2d6cFoj6iiHTy4C27l0Nsns0R5eIQPahoNNDqLz9jMbxe7etZsXcy+M7rz7zsib6/n6O3Vps+n2e4ex52Ru/2s07k/pnT1Mnk0z13P3I89t5//57J6O19/ao8OmM1pvDm5/coWSUG6n6/XlUwtPPwnRfpqpcNuyqe1EQzqZKD7odWbRYnO1mvu1zz73eSC40rCjZE+kEcPJvjIFPRaxul8Lir8tuMaUE+nXzuGnzwE0kdJEfkixoyGR14D3mB49ReXjnWLQUorYONnLvXXCet4GoJU/jXOfvzYMp5ILUgHhBK2YWBDje6IjjyjdW5lmSlddDV8tU1Lo0DIrWZWCNGXEjDCID0h1+l6Zfk+nddlqNzsXOQuAEx6JpDHVdEcUwmFYr9qXwHJCBT8IEXviLSCHWBb0koRloCMC1RWB0hkjQJdgqskLVfmxHfmTFy2xygVWTItrRGW4mGrqKvsqbaatWU9YLzENODv7RxqZC/8PyPHiH3KqjWJNpcvwm1ip4uRy3rpcVP61Y6Hk1SweAqyDCOpmsUI2/mxSMIKYWFVxAzfg2nmtW0y9zVFfaJwIqSGVrI6QpUmcMKyJshZpsDH8AqXyuq51LOmGdAc0vPngsCFgxmeTWaaMPdAD8Wu3XcvgT8qYwCHlq/GOSIYzA8lpdKPW7V2ZQAh1LfPNh76v1UKwBZZv+ho1kdaJurYshXkYYKWN5pIaCkRsrTBjRGbWLw"
+            target="_blank"
+            ><button id="zoom-world">
+              &nbsp; &nbsp; <i class="fa fa-globe"></i> &nbsp;
+              <b>3D New Amsterdam</b> &nbsp; &nbsp; &nbsp;
+            </button></a
+          >
+          <br />
+        </center>
+        <br />
+        <center>
+          <b
+            ><i
+              class="fas fa-plus-square compress-expand-icon"
+              id="manahatta-maps-section-caret"
+              onclick="sectionCompressExpand('#manahatta-maps-section','#manahatta-maps-section-caret')"
+            ></i>
+            &nbsp; Manhattan and Surrounding</b
+          >
+        </center>
+        <div id="manahatta-maps-section"></div>
+        <br />
+        <center>
+          <b
+            ><i
+              class="fas fa-plus-square compress-expand-icon"
+              id="long-island-maps-section-caret"
+              onclick="sectionCompressExpand('#long-island-maps-section','#long-island-maps-section-caret')"
+            ></i>
+            &nbsp; Long Island</b
+          >
+        </center>
+        <div id="long-island-maps-section"></div>
+        <br />
+        <center>
+          <b
+            ><i
+              class="fas fa-plus-square compress-expand-icon"
+              id="new-netherland-maps-section-caret"
+              onclick="sectionCompressExpand('#new-netherland-maps-section','#new-netherland-maps-section-caret')"
+            ></i>
+            &nbsp; New Netherland</b
+          >
+        </center>
+        <div id="new-netherland-maps-section"></div>
+        <br />
+        <center>
+          <b
+            ><i
+              class="fas fa-plus-square compress-expand-icon"
+              id="new-england-maps-section-caret"
+              onclick="sectionCompressExpand('#new-england-maps-section','#new-england-maps-section-caret')"
+            ></i>
+            &nbsp; New England</b
+          >
+        </center>
+        <div id="new-england-maps-section"></div>
+        <br />
+        <center>
 
-		<!--ORIGINAL CASTELLO-->
-		<div class="layer-list-row" >
-		<input class='clm9xh68b031301qx6k446vtt' type='radio' name='ltoggle' value='clm9xh68b031301qx6k446vtt'>
-		<input class='clm9xh68b031301qx6k446vtt' type='radio' name='rtoggle' value='clm9xh68b031301qx6k446vtt'>
-		&nbsp;
-		<label for='clm9xh68b031301qx6k446vtt'>1660 Original Castello Plan <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="original-castello-plan"  title="Layer Info" ></i>
-		        </div>
-		    </div>
+          <button onclick="zoomtobounds('World')" id="zoom-world">
+            &nbsp; &nbsp; <i class="fa fa-globe"></i> &nbsp;
+            <b>Zoom to World</b> &nbsp; &nbsp; &nbsp;
+          </button>
+        </center>
+      </div>
+    </div>
+
+    <!-- MAP DIV-->
+    <div id="before" class="map"></div>
+    <div id="after" class="map"></div>
+
+    <!-- BASEMAP SWITCHER DIV -->
+    <div id="mobi-view-sidebar"><i class="fa fa-bars fa-2x"></i></div>
+
+    <!-- TIMELINE PANEL DIV -->
+    <div id="datepanel">
+      <b><span id="date"></span></b>
+    </div>
+
+    <div id="footer">
+      <!-- TIMELINE slider DIV -->
+      <div id="slider">
+        <!-- TIMELINE mobile info -->
+        <div id="mobi-year">...</div>
+
+        <!-- TIMELINE ruler DIV -->
+        <div class="timeline">
+          <div class="year">
+            <span id="ruler-date1"> ... </span
+            ><span class="timeline-ruler"></span>
+          </div>
+          <div class="year">
+            <span id="ruler-date2"> ... </span
+            ><span class="timeline-ruler"></span>
+          </div>
+          <div class="year">
+            <span id="ruler-date3"> ... </span
+            ><span class="timeline-ruler"></span>
+          </div>
+          <div class="year">
+            <span id="ruler-date4"> ... </span
+            ><span class="timeline-ruler"></span>
+          </div>
+          <div class="year">
+            <span id="ruler-date5"> ... </span
+            ><span class="timeline-ruler"></span>
+          </div>
         </div>
+      </div>
+    </div>
 
-		<!--STOKES KEY-->
-		<div class="layer-list-row" >
-		<input class='clm2yu70i025501p9fzblgnct' type='radio' name='ltoggle' value='clm2yu70i025501p9fzblgnct'>
-		<input class='clm2yu70i025501p9fzblgnct' type='radio' name='rtoggle' value='clm2yu70i025501p9fzblgnct'>
-		&nbsp;
-		<label for='clm2yu70i025501p9fzblgnct'>Stokes Key to Castello Plan <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="stokes-key-castello"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-        </div>
+    <div id="loading">
+      <i class="fa fa-sync fa-10x fa-spin" id="loading-icon"></i>
+    </div>
 
-		<!--COLORED KEY-->
-		<div class="layer-list-row" >
-		<input class='clm2yu8oz026k01qxacnq84jb' type='radio' name='ltoggle' value='clm2yu8oz026k01qxacnq84jb'>
-		<input class='clm2yu8oz026k01qxacnq84jb' type='radio' name='rtoggle' value='clm2yu8oz026k01qxacnq84jb'>
-		&nbsp;
-        <label for='clm2yu8oz026k01qxacnq84jb'>Legend of New Amsterdam <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="new-amsterdam-legend"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-        </div>
-
-        </div>
-
-		<br>
-		<center>
-		    <!--
-		    <button onclick="zoomLabels('hide')" id="show-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button>
-		    <button onclick="zoomLabels('show')" id="hide-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye-slash"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button> &nbsp;
-			-->
-			<a class="encyclopedia" href="https://sandcastle.cesium.com/standalone.html#c=jVJtb9owEP4rJz5UIFUOL2q1drQaCxsKamCloYUqX0xiiMGxg+1Aw9T/PueFrVTdtE+W7567e57nzrJgIDHXYBNF03j4ADgIiFKgBWQilUAFB6wU0crnJQY5gqOQLHHKdK8Ae2JDONyAXyPZMFoMAjqmQ2d6cFoj6iiHTy4C27l0Nsns0R5eIQPahoNNDqLz9jMbxe7etZsXcy+M7rz7zsib6/n6O3Vps+n2e4ex52Ru/2s07k/pnT1Mnk0z13P3I89t5//57J6O19/ao8OmM1pvDm5/coWSUG6n6/XlUwtPPwnRfpqpcNuyqe1EQzqZKD7odWbRYnO1mvu1zz73eSC40rCjZE+kEcPJvjIFPRaxul8Lir8tuMaUE+nXzuGnzwE0kdJEfkixoyGR14D3mB49ReXjnWLQUorYONnLvXXCet4GoJU/jXOfvzYMp5ILUgHhBK2YWBDje6IjjyjdW5lmSlddDV8tU1Lo0DIrWZWCNGXEjDCID0h1+l6Zfk+nddlqNzsXOQuAEx6JpDHVdEcUwmFYr9qXwHJCBT8IEXviLSCHWBb0koRloCMC1RWB0hkjQJdgqskLVfmxHfmTFy2xygVWTItrRGW4mGrqKvsqbaatWU9YLzENODv7RxqZC/8PyPHiH3KqjWJNpcvwm1ip4uRy3rpcVP61Y6Hk1SweAqyDCOpmsUI2/mxSMIKYWFVxAzfg2nmtW0y9zVFfaJwIqSGVrI6QpUmcMKyJshZpsDH8AqXyuq51LOmGdAc0vPngsCFgxmeTWaaMPdAD8Wu3XcvgT8qYwCHlq/GOSIYzA8lpdKPW7V2ZQAh1LfPNh76v1UKwBZZv+ho1kdaJurYshXkYYKWN5pIaCkRsrTBjRGbWLw" target="_blank"><button id="zoom-world"> &nbsp; &nbsp; <i class="fa fa-globe"></i> &nbsp; <b>3D New Amsterdam</	b> &nbsp; &nbsp; &nbsp; </button></a>
-
-		<br>
-		</center>
-
-		<br>
-		<center>
-		<b><i class="fas fa-plus-square compress-expand-icon" id="manahatta-maps-section-caret" onclick="sectionCompressExpand('#manahatta-maps-section','#manahatta-maps-section-caret')" ></i> &nbsp; Manhattan and Surrounding</b>
-		</center>
-	
-
-        <div id="manahatta-maps-section">
-
-        <!-- Manahatta MAP -->
-		<div class="layer-list-row" >
-			<input class='clm2yu8w6025m01qb8p2khqxd' type='radio' name='ltoggle' value='clm2yu8w6025m01qb8p2khqxd'>
-					<input class='clm2yu8w6025m01qb8p2khqxd' type='radio' name='rtoggle' value='clm2yu8w6025m01qb8p2khqxd'>
-			&nbsp;
-					<label for='clm2yu8w6025m01qb8p2khqxd'>1609 | Manahatta <div class="dummy-label-layer-space"></div></label>
-			<div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('Manhattan')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="manahatta-map"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-			</div>
-
-	    <!-- Manatus Map -->
-		<div class="layer-list-row" >
-            <input class='clm2yucmy022j01mahf7qggow' type='radio' name='ltoggle' value='clm2yucmy022j01mahf7qggow'>
-                    <input class='clm2yucmy022j01mahf7qggow' type='radio' name='rtoggle' value='clm2yucmy022j01mahf7qggow'>
-		&nbsp;
-				<label for='clm2yucmy022j01mahf7qggow'>1639 | Manatus Map <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Manatus Map')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="manatus-map"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-			
-		<!-- Original Grants and Farms, Stokes 1914-16 -->
-		<div class="layer-list-row" >
-			<input class='clm2yuef7026401qr35ikben6' type='radio' name='ltoggle' value='clm2yuef7026401qr35ikben6'>
-					<input class='clm2yuef7026401qr35ikben6' type='radio' name='rtoggle' value='clm2yuef7026401qr35ikben6'>
-			&nbsp;
-					<label for='clm2yuef7026401qr35ikben6'>1638-83 Original Grants & Farms <div class="dummy-label-layer-space"></div></label>
-			<div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Original Grants')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="original-grants-map"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-			</div>
-		
-			
-
-        <!--DUTCH GRANTS-->
-		<div class="layer-list-row" >
-		<input class='clm2yuhe9023501nshfr78fna' type='radio' name='ltoggle' value='clm2yuhe9023501nshfr78fna'>
-        <input class='clm2yuhe9023501nshfr78fna' type='radio' name='rtoggle' value='clm2yuhe9023501nshfr78fna'>
-		&nbsp;
-        <label for='clm2yuhe9023501nshfr78fna'>1640-64 | Dutch Grants <div class="dummy-label-layer-space"></div></label>
-        <!--//ck7xni5u51kur1iqdokpijm0u-->
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="dutch-grants-stokes"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-
-
-		<!-- A Plan of the City of New York, 1730 -->
-		<div class="layer-list-row" >
-			<input class='clm2yugcw025n01qbapsc2nkc' type='radio' name='ltoggle' value='clm2yugcw025n01qbapsc2nkc'>
-					<input class='clm2yugcw025n01qbapsc2nkc' type='radio' name='rtoggle' value='clm2yugcw025n01qbapsc2nkc'>
-			&nbsp;
-					<label for='clm2yugcw025n01qbapsc2nkc'>1730 | Plan of City of New York <div class="dummy-label-layer-space"></div></label>
-			<div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NYC plan')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="nyc-map-plan"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-			</div>
-
-
-	    <!--RATZER MAP-->
-		<div class="layer-list-row" >
-		<input class='clm2yuguw01zy01p7dulscxyb' type='radio' name='ltoggle' value='clm2yuguw01zy01p7dulscxyb'>
-                <input class='clm2yuguw01zy01p7dulscxyb' type='radio' name='rtoggle' value='clm2yuguw01zy01p7dulscxyb'>
-		&nbsp;
-                <label for='clm2yuguw01zy01p7dulscxyb'>1766 | Ratzer Map <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Ratzer Map')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="ratzer-map"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-        </div>
-
-
-        <br>
-
-		<center><b><i class="fas fa-plus-square compress-expand-icon" id="long-island-maps-section-caret" onclick="sectionCompressExpand('#long-island-maps-section','#long-island-maps-section-caret')" ></i> &nbsp; Long Island</b></center>
-	      
-        <div id="long-island-maps-section">
-
-
-		<!-- Indian Paths and Places -->
-		<div class="layer-list-row" >
-			<input class='clm2yuk8t023601nsgs112fvn' type='radio' name='ltoggle' value='clm2yuk8t023601nsgs112fvn'>
-					<input class='clm2yuk8t023601nsgs112fvn' type='radio' name='rtoggle' value='clm2yuk8t023601nsgs112fvn'>
-		&nbsp;
-				<label for='clm2yuk8t023601nsgs112fvn'>1600-64 | Indian Paths & Places <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('Brooklyn')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="indian-paths-places"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-	    <!-- Indian Groups of Long Island -->
-		<div class="layer-list-row" >
-            <input class='clm2yukk3026301qibumt9t0a' type='radio' name='ltoggle' value='clm2yukk3026301qibumt9t0a'>
-                    <input class='clm2yukk3026301qibumt9t0a' type='radio' name='rtoggle' value='clm2yukk3026301qibumt9t0a'>
-		&nbsp;
-				<label for='clm2yukk3026301qibumt9t0a'>1600-1700s | Indian Tribes L.I. <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtobounds('LongIsland')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="indians-long-island"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-
-	    <!-- Long Island 1734 -->
-		<div class="layer-list-row" >
-            <input class='clm2yukk901zz01p7953m4i53' type='radio' name='ltoggle' value='clm2yukk901zz01p7953m4i53'>
-                    <input class='clm2yukk901zz01p7953m4i53' type='radio' name='rtoggle' value='clm2yukk901zz01p7953m4i53'>
-		&nbsp;
-				<label for='clm2yukk901zz01p7953m4i53'>1734 | Long Island <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Long Island')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="long-island-1734"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-
-	    <!-- NY Bay and Harbor MAP -->
-		<div class="layer-list-row" >
-            <input class='clm2yumma022k01ma52i8c5b5' type='radio' name='ltoggle' value='clm2yumma022k01ma52i8c5b5'>
-                    <input class='clm2yumma022k01ma52i8c5b5' type='radio' name='rtoggle' value='clm2yumma022k01ma52i8c5b5'>
-		&nbsp;
-				<label for='clm2yumma022k01ma52i8c5b5'>1844 | NY Bay and Harbor <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NY Bay')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="ny-bay-and-harbor"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-
-        <!-- REPLACE THIS -->
-		<!-- REPLACED  -->
-        <!-- Gravesend Map -->
-		<div class="layer-list-row" >
-            <input class='clm2yunpm026501qrejxb4k0r' type='radio' name='ltoggle' value='clm2yunpm026501qrejxb4k0r'>
-                    <input class='clm2yunpm026501qrejxb4k0r' type='radio' name='rtoggle' value='clm2yunpm026501qrejxb4k0r'>
-		&nbsp;
-				<label for='clm2yunpm026501qrejxb4k0r'>1873 | Gravesend Map <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Gravesend Map')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="gravesend-map"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-		<!-- REPLACE THIS -->
-
-
-        <!--Beer's Map -->
-		<div class="layer-list-row" >
-            <input class='clm2yupsh026401qi2lpwhhx9' type='radio' name='ltoggle' value='clm2yupsh026401qi2lpwhhx9'>
-                    <input class='clm2yupsh026401qi2lpwhhx9' type='radio' name='rtoggle' value='clm2yupsh026401qi2lpwhhx9'>
-		&nbsp;
-				<label for='clm2yupsh026401qi2lpwhhx9'>1873 | Long Island <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Long Island 1873')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="beers-long-island-map"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-		
-		</div>
-		
-
-		<br>
-		<center><b><i class="fas fa-plus-square compress-expand-icon" id="new-netherland-maps-section-caret" onclick="sectionCompressExpand('#new-netherland-maps-section','#new-netherland-maps-section-caret')" ></i> &nbsp; New Netherland</b></center>
-	      
-		<div id="new-netherland-maps-section">
-		  
-	      <!-- Novi Belgii MAP -->
-		<div class="layer-list-row" >
-		<input class='clm2yuqr1022l01ma0s5z4m59' type='radio' name='ltoggle' value='clm2yuqr1022l01ma0s5z4m59'>
-                <input class='clm2yuqr1022l01ma0s5z4m59' type='radio' name='rtoggle' value='clm2yuqr1022l01ma0s5z4m59'>
-		&nbsp;
-                <label for='clm2yuqr1022l01ma0s5z4m59'>1651 | Belgii Novi <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('Belgii Novi')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="novi-belgii-map"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>
-
-        </div>
-
-
-		<br>
-		<center><b><i class="fas fa-plus-square compress-expand-icon" id="new-england-maps-section-caret" onclick="sectionCompressExpand('#new-england-maps-section','#new-england-maps-section-caret')" ></i> &nbsp; New England</b></center>
-	     
-		<div id="new-england-maps-section">
-		
-	      <!--New England 1670 -->
-		<div class="layer-list-row" >
-		<input class='clm2yus81025601p99sd68y0v' type='radio' name='ltoggle' value='clm2yus81025601p99sd68y0v'>
-                <input class='clm2yus81025601p99sd68y0v' type='radio' name='rtoggle' value='clm2yus81025601p99sd68y0v'>
-		&nbsp;
-                <label for='clm2yus81025601p99sd68y0v'>1670 | New England <div class="dummy-label-layer-space"></div></label>
-		    <div class="layer-buttons-block">
-		        <div class="layer-buttons-list">
-		            <i  class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('New England')" title="Zoom to Layer" ></i>
-		            <i  class="fa fa-info-circle layer-info trigger-popup" id="new-england-1670"  title="Layer Info" ></i>
-		        </div>
-		    </div>
-		</div>    
-
-        </div>
-        
-		<br>
-		<center>
-		    <!--
-		    <button onclick="zoomLabels('hide')" id="show-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button>
-		    <button onclick="zoomLabels('show')" id="hide-zoom-label" class="zoom-labels"> &nbsp; &nbsp; <i class="fa fa-eye-slash"></i> &nbsp; <b>Labels</b> &nbsp; &nbsp; &nbsp; </button> &nbsp;
-			-->
-            <button onclick="zoomtobounds('World')" id="zoom-world"> &nbsp; &nbsp; <i class="fa fa-globe"></i> &nbsp; <b>Zoom to World</b> &nbsp; &nbsp; &nbsp; </button>
-		</center>
-
-	  </div>
-
-	 
-	  <!--
-	  <br>
-	  <div class="infoLayerElem" id="infoLayerGrantLots"></div>
-	  <div class="infoLayerElem" id="infoLayerDutchGrants"></div>
-	  <div class="infoLayerElem" id="infoLayerGravesend"></div> 
-	  <div class="infoLayerElem" id="infoLayerNativeGroups"></div>
-	  <div class="infoLayerElem" id="infoLayerKarl"></div>
-	  <div class="infoLayerElem" id="infoLayerFarms"></div>
-	  <div class="infoLayerElem" id="infoLayerCastello"></div>
-	  <div class="infoLayerElem" id="infoLayerSettlements"></div>
-	  <div class="infoLayerElem" id="demoLayerInfo"></div>
-	  <div class="infoLayerElem" id="infoLayerCurrLots"></div>
-	  -->
-	 
-	  
-	</div>
-
-		<!-- MAP DIV-->
-        <!--
-		<div id="map" class="map"></div>
-		-->
-		<div id='before' class='map'></div>
-        <div id='after' class='map'></div>
-
-
-    
-
-    <!---------------------->
-    <!--ADD BASEMAP TOGGLE-->
-	<!---------------------->
-    <!--
-	<div id='baseMapMenu'>
-
-	</div>
-	-->
-
-
-		<!-- BASEMAP SWITCHER DIV -->
-        <!--
-		<div id="styleSwitcher"></div>
-		-->
-		<div id="mobi-view-sidebar" ><i  class="fa fa-bars fa-2x"></i></div>
-
-        <!-- NAVIGATION PANEL DIV -->
-		<!--
-		<div id='navpanel'>
-		<b>NAVIGATION</b>
-		<div style="line-height: 58px; height: 58px; vertical-align: middle; width: 100%; margin-top: 3px;">
-		<i class="fas fa-3x fas fa-3x fa-caret-square-left nav-btn" onmousedown="rotateLoopASC()" onmouseup="rotateLoopASCend()"></i>
-		// onclick="rotatex(5)"
-		<svg version="1.1" id="Layer_1" style="margin-bottom: -10px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="55px" height="55px" viewBox="0 0 512 512" enable-background="new 0 0 160 160" xml:space="preserve">
-	    <g>
-	        <g id="compass-pointer" >
-                <path class="north-arr" d="M248.156,225.531l-26.094-26.094l147.063-56.563l-56.563,147.063l-26.094-26.094c2.688-10.594,0.438-22.188-7.844-30.469 S258.75,222.813,248.156,225.531z" />
-	            <path class="south-arr"  d="M233.375,278.625c-8.281-8.281-10.563-19.875-7.844-30.469l-26.094-26.094l-56.563,147.063 l147.063-56.563l-26.094-26.094C253.25,289.188,241.656,286.906,233.375,278.625z" >
-            </g>
-	        <path  class="compass-ring" d="M512,256c0,141.375-114.625,256-256,256
-	        S0,397.375,0,256S114.625,0,256,0S512,114.625,512,256z M240,32c0,8.844,7.156,16,16,16s16-7.156,16-16s-7.156-16-16-16
-	        S240,23.156,240,32z M48,256c0-8.844-7.156-16-16-16s-16,7.156-16,16s7.156,16,16,16S48,264.844,48,256z M272,480
-	        c0-8.844-7.156-16-16-16s-16,7.156-16,16s7.156,16,16,16S272,488.844,272,480z M448,256c0-105.875-86.125-192-192-192
-	        S64,150.125,64,256s86.125,192,192,192S448,361.875,448,256z M496,256c0-8.844-7.156-16-16-16s-16,7.156-16,16s7.156,16,16,16
-	        S496,264.844,496,256z"/>
-	    </g>
-        </svg>
-		// onclick="rotatex(-5)"
-        <i class="fas fa-3x fa-caret-square-right nav-btn" onmousedown="rotateLoopDESC()" onmouseup="rotateLoopDESCend()"></i> 
-	    </div>
-	    
-		<span>
-        <i class="fas fa-3x fa-plus-square nav-btn" onclick="setZoom(1)"></i>&nbsp;
-        <i class="fas fa-3x fa-crosshairs nav-init" onclick="zoomtofit()"></i>&nbsp;
-        <i class="fas fa-3x fa-minus-square nav-btn" onclick="setZoom(-1)"></i>
-		</span>
-		
-		</div>
-        -->
-		
-		<!-- TIMELINE PANEL DIV -->
-		<div id='datepanel'><b><span id="date"></span></b></div>
-		<!--
-		<div id='sidepanel'>
-		
-			<div id="content">
-				<h1>NAHC Taxlot C7 Demo</h1>
-				<hr/>
-				<p class="info" style="text-align:center">
-				Show New York on:
-				<br/> +
-				<input type="text" id="date" size="4" class="y2000" value="" /> +
-				</p>
-                                -->
-				<!--
-				<div id="slider"></div>
-                                -->
-		                <!--
-				<br>
-				<nav id="legend"></nav>
-				<div>
-				<span class="footnote">
-						Our goal is to go to any time and see the way New York was 
-						then, beginning in 1609.
-						This is our beta project, showing a history of a single
-						lot from 1643-1675.
-						<p>
-						Slide the timeline and click the big dot to see what was there.
-						The color changes when the lot changes hands.
-						The color first changes to green in 1659.
-						<p>
-						More buildings and data will be added soon.
-
-					</span>
-				</div>
-				</br>
-				<div id="footnotediv" style="display:none">
-
-
-					
-				</div>
-			</div>
-		</div>
-        -->
-	
-	        
-	    <!-------------------->
-		<!--ADD FOOTER DIV---->
-		<!-------------------->
-		<div id="footer">
-		
-			<!-- TIMELINE slider DIV -->
-			<div id="slider">
-			 
-			    <!-- TIMELINE mobile info -->
-			    <div id="mobi-year"> ... </div>
-				
-			    <!-- TIMELINE ruler DIV -->
-			    <div class="timeline">
-			        <div class="year"><span id="ruler-date1"> ... </span><span class="timeline-ruler"></span></div>
-                    <div class="year"><span id="ruler-date2"> ... </span><span class="timeline-ruler"></span></div>
-                    <div class="year"><span id="ruler-date3"> ... </span><span class="timeline-ruler"></span></div>
-                    <div class="year"><span id="ruler-date4"> ... </span><span class="timeline-ruler"></span></div>
-                    <div class="year"><span id="ruler-date5"> ... </span><span class="timeline-ruler"></span></div>
-                </div>
-				
-		    </div>
-			
-		</div>
-	
-	
-	    <div id="loading">
-			<i class="fa fa-sync fa-10x fa-spin" id="loading-icon"></i>
-        </div>
-		
-		<!-- MAP.JS SOURCE -->
-		<script src="timeline/js/mapinit.js"></script>
-		<script src="timeline/js/beforelayers.js"></script>
-		<script src="timeline/js/afterlayers.js"></script>
-		<script src="timeline/js/sliderpopups.js"></script>
-        
-
-	</body>
-
+    <!-- MAP.JS SOURCE -->
+    <script src="js/mapData.js"></script>
+    <script src="js/generateMaps.js"></script>
+    <script src="timeline/js/removeTaxPoints.js"></script>
+    <script src="timeline/js/getBeforeLayer.js"></script>
+    <script src="timeline/js/addMapLayer.js"></script>
+    <script src="timeline/js/getLayer.js"></script>
+    <script src="timeline/js/layersList.js"></script>
+    <script src="timeline/js/mapinit.js"></script>
+    <script src="timeline/js/beforelayers.js"></script>
+    <script src="timeline/js/afterlayers.js"></script>
+    <script src="timeline/js/sliderpopups.js"></script>
+  </body>
 </html>
-

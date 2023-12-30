@@ -14,7 +14,7 @@ function getInfoText(modal_header_text, modal_content_html) {
 				}
 			}
 		}
-	}).fail(function (xhr, textStatus, errorThrown) {
+	}).fail(function (xhr, textStatus) {
 		console.warn("jQuery AJAX request  ERROR !!!");
 		console.log(xhr.responseText);
 		console.log(textStatus);

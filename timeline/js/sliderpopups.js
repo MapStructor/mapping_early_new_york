@@ -1,100 +1,156 @@
 function extractTextFromHTML(htmlString) {
-    return $("<div>").html(htmlString).text();
+  return $("<div>").html(htmlString).text();
 }
 
-function addFieldToPopup(fieldContent, displayMode = "", addExtraBreak = "", defaultValue = "") {
-    let content = fieldContent ? (displayMode === "unlinked" ? extractTextFromHTML(fieldContent) : fieldContent) : defaultValue;
-    return (content ? (addExtraBreak === "break" ? "<br>" : "") + content + "<br>" : "");
+function addFieldToPopup(
+  fieldContent,
+  displayMode = "",
+  addExtraBreak = "",
+  defaultValue = ""
+) {
+  let content = fieldContent
+    ? displayMode === "unlinked"
+      ? extractTextFromHTML(fieldContent)
+      : fieldContent
+    : defaultValue;
+  return content
+    ? (addExtraBreak === "break" ? "<br>" : "") + content + "<br>"
+    : "";
 }
-
 
 function buildPopUpInfo(props) {
-	var prop_nid = "" + props.nid + "";
-	//console.log(prop_nid);
-    var popup_html = "<b><h2>Lot:<br>" + addFieldToPopup(taxlot_events_info[prop_nid].taxlot, true) + "</h2></b>";
+  var prop_nid = "" + props.nid + "";
+  var popup_html =
+    "<b><h2>Lot:<br>" +
+    addFieldToPopup(taxlot_events_info[prop_nid].taxlot, true) +
+    "</h2></b>";
 
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].property_type, "unlinked");
-    popup_html += "<hr>";
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].property_type,
+    "unlinked"
+  );
+  popup_html += "<hr>";
 
-    popup_html += "<b>DATE: </b>" + addFieldToPopup(taxlot_events_info[prop_nid].start, "unlinked", "", "Unknown");
-    popup_html += "<hr>";
+  popup_html +=
+    "<b>DATE: </b>" +
+    addFieldToPopup(
+      taxlot_events_info[prop_nid].start,
+      "unlinked",
+      "",
+      "Unknown"
+    );
+  popup_html += "<hr>";
 
-	popup_html += "<b>OWNERSHIP: </b><br>";
+  popup_html += "<b>OWNERSHIP: </b><br>";
 
-    // To Party 1
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_role, "unlinked", "", "Unknown");
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_text);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_entity, "unlinked");
+  // To Party 1
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].to_party_1_role,
+    "unlinked",
+    "",
+    "Unknown"
+  );
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_text);
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party);
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].to_party_1_entity,
+    "unlinked"
+  );
 
-    // To Party 2
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_role, "unlinked", "break");
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_text);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party2);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_entity, "unlinked");
+  // To Party 2
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].to_party_2_role,
+    "unlinked",
+    "break"
+  );
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_text);
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party2);
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].to_party_2_entity,
+    "unlinked"
+  );
 
-    // Taxlot Event
-    if (taxlot_events_info[prop_nid].taxlotevent) {
-        popup_html += "<br><b>LOT EVENT: </b><br>" + addFieldToPopup(taxlot_events_info[prop_nid].taxlotevent);
-    }
+  // Taxlot Event
+  if (taxlot_events_info[prop_nid].taxlotevent) {
+    popup_html +=
+      "<br><b>LOT EVENT: </b><br>" +
+      addFieldToPopup(taxlot_events_info[prop_nid].taxlotevent);
+  }
 
-    popup_html += "<hr>";
+  popup_html += "<hr>";
 
-    // From 1
-    popup_html += "<b>FROM: </b><br>";
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_role, "unlinked");
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_text);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_entity, "unlinked");
+  // From 1
+  popup_html += "<b>FROM: </b><br>";
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].from_party_1_role,
+    "unlinked"
+  );
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_text);
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party);
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].from_party_1_entity,
+    "unlinked"
+  );
 
-    // From 2 - With extra line break
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_role, "unlinked", "break");
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_text);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party2);
-    popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_entity, "unlinked");
+  // From 2 - With extra line break
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].from_party_2_role,
+    "unlinked",
+    "break"
+  );
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_text);
+  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party2);
+  popup_html += addFieldToPopup(
+    taxlot_events_info[prop_nid].from_party_2_entity,
+    "unlinked"
+  );
 
-    popup_html += "<hr>";
-    popup_html += "<b>Lot Event ID:</b><br>" + addFieldToPopup(taxlot_events_info[prop_nid].title);
+  popup_html += "<hr>";
+  popup_html +=
+    "<b>Lot Event ID:</b><br>" +
+    addFieldToPopup(taxlot_events_info[prop_nid].title);
 
-    $("#demoLayerInfo").html(popup_html);
+  $("#demoLayerInfo").html(popup_html);
 }
-
-
-
-
-
-
-
-
 
 function buildGrantLotsPopUpInfo(props) {
-				var popup_html =
-				    "<h3>Grant Lot Division</h3><hr>" +
-					"<br>" +
-					"<b>Original Dutch Grant: </b>" + props.Lot +
-					"<br>" +
-					"<b>Lot Division: </b>" + props.dutchlot +
-				    "<br>" +
-					"<b>Castello Taxlot (1660): </b>" + props.castello +
-					"<br>" +
-				    "<br>" +
-				    "<b>Ownership:</b> " + props.name + "<br>" +
-				    "<b>From:</b> " + props.from +
-					"<br>" +
-				    "<br>" +
-					"<b>Start:</b> " + props.day1 + ", " + props.year1 + "<br>" +
-					"<b>End:</b> " + props.day2 + ", " + props.year2 + "<br>" +
-				    "<br>" +
-				    "<b>Description:</b> " + "<br>" +
-					props.descriptio + "<br><br>"
-				;
-				//console.log(props);
-    
-	$("#infoLayerGrantLots").html(popup_html);
-
+  var popup_html =
+    "<h3>Grant Lot Division</h3><hr>" +
+    "<br>" +
+    "<b>Original Dutch Grant: </b>" +
+    props.Lot +
+    "<br>" +
+    "<b>Lot Division: </b>" +
+    props.dutchlot +
+    "<br>" +
+    "<b>Castello Taxlot (1660): </b>" +
+    props.castello +
+    "<br>" +
+    "<br>" +
+    "<b>Ownership:</b> " +
+    props.name +
+    "<br>" +
+    "<b>From:</b> " +
+    props.from +
+    "<br>" +
+    "<br>" +
+    "<b>Start:</b> " +
+    props.day1 +
+    ", " +
+    props.year1 +
+    "<br>" +
+    "<b>End:</b> " +
+    props.day2 +
+    ", " +
+    props.year2 +
+    "<br>" +
+    "<br>" +
+    "<b>Description:</b> " +
+    "<br>" +
+    props.descriptio +
+    "<br><br>";
+  $("#infoLayerGrantLots").html(popup_html);
 }
-
-
 
 function buildDutchGrantPopUpInfo(props) {
 	        var popup_html = "";
@@ -219,15 +275,11 @@ function buildDutchGrantPopUpInfo(props) {
     
 	$("#infoLayerDutchGrants").html(popup_html);
 
+  $("#infoLayerDutchGrants").html(popup_html);
 }
 
-
-
-/*REPLACE THIS*/
 function buildGravesendPopUpInfo(props) {
-	        var popup_html = "<h3>Brooklyn Grants</h3><hr>";
-			
-			console.log(props);
+  var popup_html = "<h3>Brooklyn Grants</h3><hr>";
 
             //if( typeof brooklyn_grants_info[props.node] == "undefined" ) { 
             if( typeof lots_info[props.node] == "undefined" ) { 
@@ -293,81 +345,65 @@ function buildGravesendPopUpInfo(props) {
     
 	$("#infoLayerGravesend").html(popup_html);
 
+  $("#infoLayerGravesend").html(popup_html);
 }
-/*REPLACE THIS*/
-
-
 
 function buildNativeGroupPopUpInfo(props) {
-	        var popup_html = "<h3>Long Island Tribes</h3><hr>";
-                
-			if( (typeof taxlot_event_entities_info[props.nid] == "undefined") || (props.nid == "") ) {
-			    popup_html += "<b>" + props.name + "</b>";
-			} else {
-				popup_html += "<b>" + ( taxlot_event_entities_info[props.nid].name_html.length > 0 ? taxlot_event_entities_info[props.nid].name_html : props.name ) + "</b>" +
-				              "<br><br>" +
-							  "<b>Description:</b>" +
-					          "<br>" +
-					          taxlot_event_entities_info[props.nid].descr + "<br><br>"
-							  ;
-			}
-			
-			popup_html += "<br><br>";
-			
-			console.log(props);
+  var popup_html = "<h3>Long Island Tribes</h3><hr>";
 
-	$("#infoLayerNativeGroups").html(popup_html);
+  if (
+    typeof taxlot_event_entities_info[props.nid] == "undefined" ||
+    props.nid == ""
+  ) {
+    popup_html += "<b>" + props.name + "</b>";
+  } else {
+    popup_html +=
+      "<b>" +
+      (taxlot_event_entities_info[props.nid].name_html.length > 0
+        ? taxlot_event_entities_info[props.nid].name_html
+        : props.name) +
+      "</b>" +
+      "<br><br>" +
+      "<b>Description:</b>" +
+      "<br>" +
+      taxlot_event_entities_info[props.nid].descr +
+      "<br><br>";
+  }
 
+  popup_html += "<br><br>";
+
+  console.log(props);
+
+  $("#infoLayerNativeGroups").html(popup_html);
 }
-
-
-
 
 function buildKarlPopUpInfo(props) {
-	        var popup_html = "";
-            //var ref_name = props.Name.replace(/\s+/g, '');
-			//var ref_name = props.enc_name.replace(/\s+/g, '');
-			var node_id = props.node_id.replace(/\/node\//g, '');
-			
-			    popup_html = 
-				    "<h3>Long Island Towns</h3><hr>";
-				    //"<b>Name:</b> <i>" + props.Name + "</i><br>" 
-					//if( typeof settlements_info[ref_name] == "undefined" ) {
-					if( typeof settlements_info[node_id] == "undefined" ) {
-						//popup_html += "<b>" + props.Name + "</b>";
-						popup_html += "<b>" + props.enc_name + "</b>";
-				    } else {
-						//popup_html += "<b>" + settlements_info[ref_name].name + "</b>";
-						popup_html += "<b>" + settlements_info[node_id].name + "</b><br>" +
-						              "<b>Date:</b> <i>" + settlements_info[node_id].date + "</i>" +
-									  "<br><br>" +
-					                  "<b>Description:</b>" +
-					                  "<br>" +
-					                  "<i>" + settlements_info[node_id].descr + "</i>";
-									  
-					}
-					
-					
-				popup_html +=	
-					"<br>";
-					// +
-					//props.TownStart + "-" + props.TownEnd +
-					//"<a href = 'https://encyclopedia.nahc-mapping.org/place/karl' target='_blank'>Karl</a>" +
-					/*
-					"<br><br>" +
-					props.YearDisp +
-					"<br>" +
-					props.Event
-					*/
-				;
+  var popup_html = "";
+  var node_id = props.node_id.replace(/\/node\//g, "");
 
-    console.log(props);
+  popup_html = "<h3>Long Island Towns</h3><hr>";
+  if (typeof settlements_info[node_id] == "undefined") {
+    popup_html += "<b>" + props.enc_name + "</b>";
+  } else {
+    popup_html +=
+      "<b>" +
+      settlements_info[node_id].name +
+      "</b><br>" +
+      "<b>Date:</b> <i>" +
+      settlements_info[node_id].date +
+      "</i>" +
+      "<br><br>" +
+      "<b>Description:</b>" +
+      "<br>" +
+      "<i>" +
+      settlements_info[node_id].descr +
+      "</i>";
+  }
 
-    
-	$("#infoLayerKarl").html(popup_html);
+  popup_html += "<br>";
 
+  $("#infoLayerKarl").html(popup_html);
 }
-
 
 function buildFarmsPopUpInfo(props) {
 	        var popup_html = "";
@@ -466,27 +502,23 @@ node_id: "/node/10548"
     
 	$("#infoLayerFarms").html(popup_html);
 
+  $("#infoLayerFarms").html(popup_html);
 }
-
 
 function buildCurrLotsPopUpInfo(props) {
-				var popup_html = 
-					"<h3>Current Lot</h3><hr>" +
-					"<b>Owner:</b>" + "<br>" + props.OwnerName + "<br><br>" +
-					"<b>Address:</b>" + "<br>" + props.Address + "<br><br>" +
-					"<b>Lot:</b>" + "<br>" + props.BBL + "<br><br>"
-				;
-
-
-
-
-				//console.log(props);
-    
-	$("#infoLayerCurrLots").html(popup_html);
-
+  var popup_html =
+    "<h3>Current Lot</h3><hr>" +
+    "<b>Owner:</b>" +
+    "<br>" +
+    props.OwnerName +
+    "<br><br>" +
+    "<b>Address:</b>" +
+    "<br>" +
+    props.Address +
+    "<br><br>" +
+    "<b>Lot:</b>" +
+    "<br>" +
+    props.BBL +
+    "<br><br>";
+  $("#infoLayerCurrLots").html(popup_html);
 }
-
-
-
-
-
