@@ -667,13 +667,10 @@ beforeMap.on("style.load", function () {
 afterMap.on("style.load", function () {
   //on the 'style.load' event, switch "basemaps" and then re-add layers
   //this is necessary because basemaps aren't a concept in Mapbox, all layers are added via the same primitives
-  console.log("style change after");
   var sliderVal = moment($("#date").text()).unix();
   var yr = parseInt(moment.unix(sliderVal).format("YYYY"));
   var date = parseInt(moment.unix(sliderVal).format("YYYYMMDD"));
-  console.log(sliderVal);
-  console.log(yr);
-  console.log(date);
+
 
   addAfterLayers(yr, date);
   addCastelloAfterLayers();

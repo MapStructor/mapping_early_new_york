@@ -261,7 +261,7 @@ function addGravesendAfterLayers(date) {
 
     afterMap.on("mousemove", "gravesend_boundaries-c6qrbw-right", function (e) {
       console.warn(e.features[0].id);
-      console.log(e.features[0].properties);
+
 
       if (e.features.length > 0) {
         if (hoveredGravesendIdRight) {
@@ -299,7 +299,6 @@ function addGravesendAfterLayers(date) {
           coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
-        console.log(PopUpHTML);
         //AFTER MAP POP UP CONTENTS
         afterMapGravesendTwoPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
       }
@@ -343,7 +342,6 @@ function addKarlAfterLayers(date) {
 
     afterMap.on("mousemove", "karl_long_island-right", function (e) {
       console.warn(e.features[0].id);
-      console.log(e.features[0].properties);
 
       if (e.features.length > 0) {
         if (hoveredKarlIdRight) {
@@ -380,8 +378,6 @@ function addKarlAfterLayers(date) {
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
           coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
-
-        console.log(PopUpHTML);
         //AFTER MAP POP UP CONTENTS
         afterMapKarlTwoPopUp.setLngLat(e.lngLat).setHTML(PopUpHTML);
       }
@@ -420,7 +416,6 @@ function addAfterFarmsLayer(date) {
 
   function cursorOnHover() {
     afterMap.on("mouseenter", "original_grants_and_farms-right", function (e) {
-      console.log(e.features[0]);
       afterMap.getCanvas().style.cursor = "pointer";
       afterMapFarmPopUp.setLngLat(e.lngLat).addTo(afterMap);
     });

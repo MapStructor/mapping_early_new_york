@@ -490,8 +490,6 @@ function addInfoBeforeLayers(date) {
   //ON HOVER
   beforeMap.on("mouseenter", "info-points-left", function (e) {
     beforeMap.getCanvas().style.cursor = "pointer";
-    console.log(e.features[0].id);
-    console.log(e.features[0].properties);
     if (e.features.length > 0) {
       if (hoveredInfoIdLeft) {
         beforeMap.setFeatureState(
@@ -566,7 +564,6 @@ function addSettlementsBeforeLayers(date) {
   //ON HOVER
   beforeMap.on("mouseenter", "settlements-left", function (e) {
     beforeMap.getCanvas().style.cursor = "pointer";
-    console.log(e.features[0].properties);
     if (e.features.length > 0) {
       if (hoveredSettlementsIdLeft) {
         beforeMap.setFeatureState(
