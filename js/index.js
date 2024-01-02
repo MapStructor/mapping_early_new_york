@@ -2192,6 +2192,11 @@ function getLotsInfo() {
                     "target=\u0022_blank\u0022 href=\u0022https://encyclopedia.nahc-mapping.org/"
                   ),
                 brooklyn_title: data[i].field_original_title_temp,
+
+
+
+
+
                 to_party_linked: data[i].field_to_party_1222.replace(
                   "href=\u0022",
                   "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
@@ -2207,6 +2212,25 @@ function getLotsInfo() {
                   "href=\u0022",
                   "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
                 ),
+
+                //ADDED FIELDS
+                to_party_linked2: data[i].field_name456
+                ? data[i].field_name456.replace(
+                    "href=\"",
+                    "target=\"_blank\" href=\"https://your-link-prefix/"
+                  )
+                : "",
+                to_party_text2: data[i].field_name || "",
+        
+                from_party_linked2: data[i].field_from_party_12222
+                  ? data[i].field_from_party_12222.replace(
+                      "href=\"",
+                      "target=\"_blank\" href=\"https://your-link-prefix/"
+                    )
+                  : "",
+                from_party_text2: data[i].field_from_party_1222 || "",
+                //END ADDED FIELDS
+
                 date_start: data[i].field_date_start_text_,
                 date_end: data[i].field_date_end_text_,
                 indigenous_signatories: data[i].field_history_notes222,

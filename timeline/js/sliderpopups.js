@@ -411,6 +411,37 @@ function buildFarmsPopUpInfo(props) {
           lots_info[props.NID_num].to_party +
           "</i><br>";
     }
+      // Check if to_party2_linked is defined and has content, and use it first
+      if (lots_info[props.NID_num].to_party2_linked && lots_info[props.NID_num].to_party2_linked.length > 0) {
+        popup_html +=
+          "<b>To Party 2:</b> <i>" +
+          lots_info[props.NID_num].to_party2_linked.replace(
+          //  /href="\u0022/g,
+              /href="/g,
+            "target=\"_blank\" href=\"https://nahc-mapping.org/mappingNY/encyclopedia"
+          ) +
+          "</i><br>";
+      }
+      // We only add the plain text version if to_party2_linked is not present
+      else if (lots_info[props.NID_num].to_party2 && lots_info[props.NID_num].to_party2.length > 0) {
+        popup_html +=
+          "<b>To Party 2:</b> <i>" + lots_info[props.NID_num].to_party2 + "</i><br>";
+      }
+
+
+      // Inside the else block, where other properties are added:
+      if (lots_info[props.NID_num].to_party_linked2.length > 0) {
+        popup_html +=
+          "<b>To Party 2:</b> <i>" +
+          lots_info[props.NID_num].to_party_linked2 +
+          "</i><br>";
+      } else if (lots_info[props.NID_num].to_party_text2.length > 0) {
+        popup_html +=
+          "<b>To Party 2:</b> <i>" +
+          lots_info[props.NID_num].to_party_text2 +
+          "</i><br>";
+      }
+
     if (lots_info[props.NID_num].from_party.length > 0) {
       if (lots_info[props.NID_num].from_party_linked.length > 0)
         //RESTORE THIS TOO:
@@ -424,6 +455,22 @@ function buildFarmsPopUpInfo(props) {
           lots_info[props.NID_num].from_party +
           "</i><br>";
     }
+
+
+    if (lots_info[props.NID_num].from_party_linked2.length > 0) {
+      popup_html +=
+        "<b>From Party 2:</b> <i>" +
+        lots_info[props.NID_num].from_party_linked2 +
+        "</i><br>";
+    } else if (lots_info[props.NID_num].from_party_text2.length > 0) {
+      popup_html +=
+        "<b>From Party 2:</b> <i>" +
+        lots_info[props.NID_num].from_party_text2 +
+        "</i><br>";
+    }
+
+
+
     if (lots_info[props.NID_num].date_start.length > 0) {
       popup_html +=
         "<b>Start:</b> <i>" + lots_info[props.NID_num].date_start + "</i><br>";
