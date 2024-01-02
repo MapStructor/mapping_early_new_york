@@ -39,7 +39,7 @@ function renderManhattanLayers(layers) {
     Buildings</label
   >
 </div>
-`;
+`; 
   let r = "";
   layers.forEach((layer) => {
     if (layer.type === "group") {
@@ -179,7 +179,7 @@ function renderLayerRow(layerData, isMinus=false) {
           <div class="layer-buttons-list">
             <i
               class="fa fa-crosshairs zoom-to-layer"
-              onclick="${(layerData.id === "current_lots_items" || layerData.id === "grants_layer_items")? "zoomtocenter('NA')" :`zoomtobounds('${layerData.zoomTo || ""}')`}"
+              onclick="${(layerData.id === "current_lots_items" || layerData.id === "grants_layer_items")? "zoomtocenter('NA')" :(layerData.id === "farms_layer_items"? `zoomtocenter('${layerData.zoomTo}')`:`zoomtobounds('${layerData.zoomTo || ""}')`)}"
               title="Zoom to Layer"
             ></i>
             <i
