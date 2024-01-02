@@ -5,21 +5,25 @@ const castelloMaps = [
     name: "Castello Redrawn (Default)",
     checked: true,
     infoId: "castello-redrawn-plan",
+    zoomFunction: "zoomtocenter('NA')",
   },
   {
     id: "clm9xh68b031301qx6k446vtt",
     name: "1660 Original Castello Plan",
     infoId: "original-castello-plan",
+    zoomFunction: "zoomtocenter('NA')",
   },
   {
     id: "clm2yu70i025501p9fzblgnct",
     name: "Stokes Key to Castello Plan",
     infoId: "stokes-key-castello",
+    zoomFunction: "zoomtocenter('NA')",
   },
   {
     id: "clm2yu8oz026k01qxacnq84jb",
     name: "Legend of New Amsterdam",
     infoId: "new-amsterdam-legend",
+    zoomFunction: "zoomtocenter('NA')",
   },
 ];
 

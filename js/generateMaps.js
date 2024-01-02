@@ -7,7 +7,7 @@ function generateMapHTML(map) {
         <label for="${map.id}">${map.name}<div class="dummy-label-layer-space"></div></label>
         <div class="layer-buttons-block">
           <div class="layer-buttons-list">
-            <i class="fa fa-crosshairs zoom-to-layer" onclick="zoomtocenter('NA')" title="Zoom to Layer"></i>
+            <i class="fa fa-crosshairs zoom-to-layer" onclick="${map.zoomFunction}" title="Zoom to Layer"></i>
             <i class="fa fa-info-circle layer-info trigger-popup" id="${map.infoId}" title="Layer Info"></i>
           </div>
         </div>
