@@ -19,6 +19,14 @@ function addBeforeLayers(_, date) {
       type: "source",
       id: "dutch_grants-5ehfqe",
     },
+    {
+      type: "layer",
+      id: "new-layer-bf43eb-left",
+    },
+    {
+      type: "source",
+      id: "new-layer-bf43eb",
+    }
   ]);
 
   addMapLayer(
@@ -28,6 +36,7 @@ function addBeforeLayers(_, date) {
   );
   addMapLayer(beforeMap, getBeforeLayer("dutch_grants-5ehfqe-left"), date);
   addMapLayer(beforeMap, getBeforeLayer("lot_events-bf43eb-left"), date)
+  addMapLayer(beforeMap, getBeforeLayer("new-layer-bf43eb-left"), date)
 
     beforeMap.on("mouseenter", "dutch_grants-5ehfqe-left", function (e) {
       beforeMap.getCanvas().style.cursor = "pointer";
@@ -147,6 +156,48 @@ function addBeforeLayers(_, date) {
         )
         .addTo(beforeMap);
     });
+    
+
+    beforeMap.on("mouseenter", "new-layer-bf43eb-left", function (e) {
+      beforeMap.getCanvas().style.cursor = "pointer";
+
+      if (hoveredStateIdLeftCircle) {
+        beforeMap.setFeatureState(
+          {
+            source: "new-layer-bf43eb-left",
+            sourceLayer: "new-layer-bf43eb",
+            id: hoveredStateIdLeftCircle,
+          },
+          { hover: false }
+        );
+      }
+      hoveredStateIdLeftCircle = e.features[0].id;
+      beforeMap.setFeatureState(
+        {
+          source: "new-layer-bf43eb-left",
+          sourceLayer: "new-layer-bf43eb",
+          id: hoveredStateIdLeftCircle,
+        },
+        { hover: true }
+      );
+
+      var coordinates = e.features[0].geometry.coordinates.slice();
+
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      beforeMapPopUp
+        .setLngLat(coordinates)
+        .setHTML(
+          "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" +
+            e.features[0].properties.TAXLOT +
+            "' target='_blank'>" +
+            e.features[0].properties.TAXLOT +
+            "</a></h2></b></div>"
+        )
+        .addTo(beforeMap);
+    });
 
     // CHANGE TO POINTER WHEN NOT HOVERING
     beforeMap.on("mouseleave", "lot_events-bf43eb-left", function () {
@@ -156,6 +207,22 @@ function addBeforeLayers(_, date) {
           {
             source: "lot_events-bf43eb-left",
             sourceLayer: "lot_events-bf43eb",
+            id: hoveredStateIdLeftCircle,
+          },
+          { hover: false }
+        );
+      }
+      hoveredStateIdLeftCircle = null;
+      if (beforeMapPopUp.isOpen()) beforeMapPopUp.remove();
+    });
+
+    beforeMap.on("mouseleave", "new-layer-bf43eb-left", function () {
+      beforeMap.getCanvas().style.cursor = "";
+      if (hoveredStateIdLeftCircle) {
+        beforeMap.setFeatureState(
+          {
+            source: "new-layer-bf43eb-left",
+            sourceLayer: "new-layer-bf43eb",
             id: hoveredStateIdLeftCircle,
           },
           { hover: false }

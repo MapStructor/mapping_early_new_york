@@ -137,6 +137,7 @@ var clickedStateId = null;
 beforeMap.on("load", function () {
   beforeMap
     .on("click", "lot_events-bf43eb-left", handleLayerClick("demoLayerInfo", demoLayerView))
+    .on("click", "new-layer-bf43eb-left", handleLayerClick("demoLayerInfo", demoLayerView))
     .on("click", "places-left", handleLayerClick("infoLayerCastello", castelloLayerView, buildCastelloPopupInfo))
     .on("click", "grant-lots-left", handleLayerClick("infoLayerGrantLots", grantLotsView, buildGrantLotsPopupInfo))
     .on("click", "dutch_grants-5ehfqe-left", handleLayerClick("infoLayerDutchGrants", dutchGrantsView, buildDutchGrantPopupInfo))
@@ -203,6 +204,7 @@ function toggleLayerPanel() {
 afterMap.on("load", function () {
   afterMap
     .on("click", "lot_events-bf43eb-right", handleClickEvent("demoLayerInfo", demoLayerView, buildPopupInfo))
+    .on("click", "new-layer-bf43eb-right", handleClickEvent("demoLayerInfo", demoLayerView, buildPopupInfo))
     .on("click", "places-right", handleClickEvent("infoLayerCastello", castelloLayerView, buildCastelloPopupInfo))
     .on("click", "grant-lots-right", handleClickEvent("infoLayerGrantLots", grantLotsView, buildGrantLotsPopupInfo))
     .on("click", "dutch_grants-5ehfqe-right", handleClickEvent("infoLayerDutchGrants", dutchGrantsView, buildDutchGrantPopupInfo))
@@ -357,6 +359,10 @@ function changeDate(unixDate) {
 
   beforeMap.setFilter("lot_events-bf43eb-left", dateFilter);
   afterMap.setFilter("lot_events-bf43eb-right", dateFilter);
+
+
+  beforeMap.setFilter("new-layer-bf43eb-left", dateFilter);
+  afterMap.setFilter("new-layer-bf43eb-right", dateFilter);
 
   beforeMap.setFilter("grant-lots-left", dateFilter);
   afterMap.setFilter("grant-lots-right", dateFilter);
@@ -687,7 +693,9 @@ function addBeforeLayers(yr, date) {
     { type: "layer", id: grantLayerId },
     { type: "source", id: grantLayerId.replace("-left", "") },
     { type: "layer", id: taxLotLayerId },
+    {type: "layer", id: "new-layer-bf43eb-left"},
     { type: "source", id: taxLotLayerId.replace("-left", "") },
+    { type: "source", id: "new-layer-bf43eb-left".replace("-left", "") },
   ]);
 
   // ADD GRANTS POLYGONS
@@ -698,9 +706,11 @@ function addBeforeLayers(yr, date) {
 
   // ADD TAX LOT POINTS
   addMapLayer(beforeMap, getBeforeLayer(taxLotLayerId), date);
+  addMapLayer(beforeMap, getBeforeLayer("new-layer-bf43eb-left"), date);
 
   // CHANGE TO CURSOR WHEN HOVERING - TAX LOT POINTS
   setupHoverHandlers(beforeMap, taxLotLayerId, beforeMapPopUp, "Taxlot", "C7");
+  setupHoverHandlers(beforeMap, "new-layer-bf43eb-left", beforeMapPopUp, "Taxlot", "C7");
 }
 
 function setupHoverHandlers(map, layerId, popup, popupContentKey, popupContentValue) {
@@ -752,7 +762,9 @@ function addAfterLayers(yr, date) {
     { type: "layer", id: grantLayerId },
     { type: "source", id: grantLayerId.replace("-right", "") },
     { type: "layer", id: taxLotLayerId },
+    { type: "layer", id: "new-layer-bf43eb-right"},
     { type: "source", id: taxLotLayerId.replace("-right", "") },
+    { type: "source", id: "new-layer-bf43eb-right".replace("-right", "") },
   ]);
 
   // ADD GRANTS POLYGONS
@@ -763,9 +775,11 @@ function addAfterLayers(yr, date) {
 
   // ADD TAX LOT POINTS
   addMapLayer(afterMap, getLayer(taxLotLayerId), date);
+  addMapLayer(afterMap, getLayer("new-layer-bf43eb-right"), date);
 
   // CHANGE TO CURSOR WHEN HOVERING - TAX LOT POINTS
   setupHoverHandlers(afterMap, taxLotLayerId, afterMapPopUp, "Taxlot", "C7");
+  setupHoverHandlers(afterMap, "new-layer-bf43eb-right", afterMapPopUp, "Taxlot", "C7");
 }
 
 function setupHoverHandlers(map, layerId, popup, popupContentKey, popupContentValue) {
