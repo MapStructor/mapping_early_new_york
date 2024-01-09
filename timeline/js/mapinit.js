@@ -713,6 +713,9 @@ beforeMap.on("load", function () {
     .on("click", "lot_events-bf43eb-left", function (e) {
       DemoClickHandle(e);
     })
+    .on("click", "new-layer-bf43eb-left", function (e) {
+      DemoClickHandle(e);
+    })
     .on("click", "places-left", function (e) {
       CastelloClickHandle(e);
     })
@@ -754,6 +757,9 @@ afterMap.on("load", function () {
   // CLICK AND OPEN POPUP
   afterMap
     .on("click", "lot_events-bf43eb-right", function (e) {
+      DemoClickHandle(e);
+    })
+    .on("click", "new-layer-bf43eb-right", function (e) {
       DemoClickHandle(e);
     })
     .on("click", "places-right", function (e) {
@@ -2171,6 +2177,10 @@ function changeDate(unixDate) {
 
   beforeMap.setFilter("lot_events-bf43eb-left", dateFilter);
   afterMap.setFilter("lot_events-bf43eb-right", dateFilter);
+
+  beforeMap.setFilter("new-layer-bf43eb-left", dateFilter);
+  afterMap.setFilter("new-layer-bf43eb-right", dateFilter);
+
 
   beforeMap.setFilter("grant-lots-left", dateFilter);
   afterMap.setFilter("grant-lots-right", dateFilter);

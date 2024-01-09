@@ -160,6 +160,16 @@ const manhattanLayerSections = [
     infoId: "current-buildings-lines-info-layer",
     type: "current-buildings",
   },
+  {
+    id: "new-layer-id",
+    name: "new_layer_name",
+    checked: true,
+    label: "New Layer Label",
+    iconColor: "#097911",
+    zoomTo: "NA",
+    infoId: "demo-taxlot-info-layer",
+    type: "lots-events",
+  }
 ];
 
 const longIslandLayerSections = [
