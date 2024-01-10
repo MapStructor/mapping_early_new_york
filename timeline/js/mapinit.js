@@ -2047,7 +2047,7 @@ function closeCurrLotsInfo() {
 function demoFilterRangeCalc() {
   //A* demo filter range calculator
   demo_layer_features = afterMap.queryRenderedFeatures({
-    layers: ["lot_events-bf43eb-right"],
+    layers: ["lot_events-bf43eb-right", "new-layer-bf43eb-right"],
   });
 
 

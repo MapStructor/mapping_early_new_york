@@ -368,7 +368,7 @@ function changeDate(unixDate) {
   afterMap.setFilter("grant-lots-right", dateFilter);
 
   var layer_features = afterMap.queryRenderedFeatures({
-    layers: ["lot_events-bf43eb-right"],
+    layers: ["lot_events-bf43eb-right", "new-layer-bf43eb-right"],
   });
   if (demo_layer_view_flag) {
     buildPopUpInfo(layer_features[0].properties);
