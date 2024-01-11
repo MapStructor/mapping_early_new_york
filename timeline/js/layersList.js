@@ -339,6 +339,17 @@ const layers = [
       ],
     },
   },
+
+
+
+
+
+//HERE, UPDATE INFORMATION OF INTEREST: LABELS" LAYER.
+
+
+//PREVIOUS, WORKING LAYER:
+
+/*
   {
     id: "info-labels-right",
     type: "symbol",
@@ -375,6 +386,78 @@ const layers = [
       },
     },
   },
+
+*/
+
+
+//NEW LAYER - STYLING NOT WORKING AND NEEDS CONNECTION TO TIMELINE:
+
+{
+  id: "info-labels-right",
+  type: "symbol",
+  source: {
+    type: "vector",
+    url: "mapbox://mapny.cmczx4cf",
+  },
+  "source-layer": "info_of_interest-2teixz",
+  layout: {
+    "text-field": ["get", "Label"],
+    "text-size": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "change"], '2', 4, 12], // Size at zoom 0
+      22, ["match", ["get", "change"], '2', 21, 12] // Size at zoom 22
+    ],
+    "text-anchor": "center",
+    "text-justify": "center",
+    "text-offset": [0, 0],
+    //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
+    "visibility": document.getElementById("new-layer-id").checked ? "visible" : "none",
+  },
+  paint: {
+    "text-color": [
+      "match",
+      ["get", "change"],
+      '2', "#2c0202", // Red color for '2'
+      "#000000" // Default color
+    ],
+    "text-opacity": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "change"], '2', 6, 0.7], // Opacity at zoom 0
+      22, ["match", ["get", "change"], '2', 7, 1.0] // Opacity at zoom 22
+    ],
+    "text-halo-color": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "change"], '2', "#ffffff", "#ffffff"], // Halo color at zoom 0
+      22, ["match", ["get", "change"], '2', "#ffffff", "#ffffff"] // Halo color at zoom 22
+    ],
+    "text-halo-width": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "change"], '2', 2, 1], // Halo width at zoom 0
+      22, ["match", ["get", "change"], '2', 2, 3] // Halo width at zoom 22
+    ],
+    "text-halo-blur": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "change"], '2', 1, 0], // Halo blur at zoom 0
+      22, ["match", ["get", "change"], '2', 1, 0] // Halo blur at zoom 22
+    ],
+  },
+  minzoom: 1,
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   {
     id: "settlements-right",
     type: "circle",
@@ -873,63 +956,6 @@ const layers = [
   },
 
 
-
-
-  {
-    id: "new-layer-bf43eb-right",
-    type: "symbol",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.cmczx4cf",
-    },
-    "source-layer": "info_of_interest-2teixz",
-    layout: {
-      "text-field": ["get", "Label"],
-      "text-size": [
-        "interpolate", ["linear"], ["zoom"],
-        0, ["match", ["get", "change"], '2', 4, 12], // Size at zoom 0
-        22, ["match", ["get", "change"], '2', 21, 12] // Size at zoom 22
-      ],
-      "text-anchor": "center",
-      "text-justify": "center",
-      "text-offset": [0, 0],
-      //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-      "visibility": document.getElementById("new-layer-id").checked ? "visible" : "none",
-    },
-    paint: {
-      "text-color": [
-        "match",
-        ["get", "change"],
-        '2', "#2c0202", // Red color for '2'
-        "#000000" // Default color
-      ],
-      "text-opacity": [
-        "interpolate", ["linear"], ["zoom"],
-        0, ["match", ["get", "change"], '2', 6, 0.7], // Opacity at zoom 0
-        22, ["match", ["get", "change"], '2', 7, 1.0] // Opacity at zoom 22
-      ],
-      "text-halo-color": [
-        "interpolate", ["linear"], ["zoom"],
-        0, ["match", ["get", "change"], '2', "#ffffff", "#ffffff"], // Halo color at zoom 0
-        22, ["match", ["get", "change"], '2', "#ffffff", "#ffffff"] // Halo color at zoom 22
-      ],
-      "text-halo-width": [
-        "interpolate", ["linear"], ["zoom"],
-        0, ["match", ["get", "change"], '2', 2, 1], // Halo width at zoom 0
-        22, ["match", ["get", "change"], '2', 2, 3] // Halo width at zoom 22
-      ],
-      "text-halo-blur": [
-        "interpolate", ["linear"], ["zoom"],
-        0, ["match", ["get", "change"], '2', 1, 0], // Halo blur at zoom 0
-        22, ["match", ["get", "change"], '2', 1, 0] // Halo blur at zoom 22
-      ],
-    },
-    minzoom: 1,
-  },
-
-
-
-  /*
   {
     //ID: CHANGE THIS, 1 OF 3
     id: "new-layer-bf43eb-right",
@@ -997,9 +1023,6 @@ const layers = [
       },
     },
   },
-
-*/
-
 
 
 ];
