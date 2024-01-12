@@ -410,26 +410,37 @@ const layers = [
     "text-field": ["get", "Label"],
     "text-size": [
       "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 4, 12], // Size at zoom 0
-      22, ["match", ["get", "changetext"], "2", 21, 12] // Size at zoom 22
+      0, ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
+      22, ["match", ["get", "changetext"], "2", 21, 16] // Size at zoom 22
     ],
+
+/*
+//TRYING TO CHANGE TEXT FONT, BUT IT DISAPPEARS:
+    "text-font": [
+      "match",
+      ["get", "changetext"],
+      "2", ["literal", ["Arial Regular"]],
+      ["literal", ["Arial Italic"]]
+    ],
+*/
+
     "text-anchor": "center",
     "text-justify": "center",
-    "text-offset": [0, 0],
-    //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-    "visibility": document.getElementById("new-layer-id").checked ? "visible" : "none",
+    "text-offset": [0, 1],
+    "visibility": document.getElementById("info_labels").checked ? "visible" : "none",
+    //"visibility": document.getElementById("new-layer-id").checked ? "visible" : "none",
   },
   paint: {
     "text-color": [
       "match",
       ["get", "changetext"],
-      "2", "#2c0202", // Red color for "2"
-      "#000000" // Default color
+      "2", "#ff0000", // Red color for "2"
+      "#2c0202" // Default color
     ],
     "text-opacity": [
       "interpolate", ["linear"], ["zoom"],
-      6, ["match", ["get", "changetext"], "2", 1.0, 0.6], // Opacity at zoom 6
-      7, ["match", ["get", "changetext"], "2", 1.0, 0.6] // Opacity at zoom 7
+      6, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
+      7, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
     ],
     "text-halo-color": [
       "interpolate", ["linear"], ["zoom"],
@@ -438,8 +449,8 @@ const layers = [
     ],
     "text-halo-width": [
       "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 5, 5], // Halo width at zoom 0
-      22, ["match", ["get", "changetext"], "2", 5, 5] // Halo width at zoom 22
+      0, ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 0
+      22, ["match", ["get", "changetext"], "2", 5, 4] // Halo width at zoom 22
     ],
     "text-halo-blur": [
       "interpolate", ["linear"], ["zoom"],
@@ -1476,6 +1487,33 @@ const beforeLayers = [
       "line-opacity": 0.8,
     },
   },
+
+
+  {
+    id: "info-points-left",
+    type: "symbol",
+    source: {
+      type: "vector",
+      url: "mapbox://mapny.8c0cqfdz",
+    },
+    layout: {
+      visibility: document.getElementById("info_points").checked
+        ? "visible"
+        : "none",
+      "icon-image": "marker", // Using "marker" from the Maki icon set
+      "icon-size": 1.0, // Adjust the size as needed
+    },
+    "source-layer": "info_of_interest-17rpk9",
+    paint: {
+      // Icon related styling can be added here if needed
+    },
+  },
+  
+
+
+
+
+  /*
   {
     id: "info-points-left",
     type: "circle",
@@ -1507,6 +1545,13 @@ const beforeLayers = [
       ],
     },
   },
+
+*/
+
+
+
+
+
   {
     id: "info-labels-left",
     type: "symbol",
