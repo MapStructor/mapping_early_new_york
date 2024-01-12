@@ -397,15 +397,21 @@ const layers = [
   type: "symbol",
   source: {
     type: "vector",
-    url: "mapbox://mapny.cmczx4cf",
+    //Num type for "change"
+    //url: "mapbox://mapny.cmczx4cf",
+    //Num type for "changetext"
+    url: "mapbox://mapny.4oxcibaa",
   },
-  "source-layer": "info_of_interest-2teixz",
+  //Num type for "change"
+  //"source-layer": "info_of_interest-2teixz",
+  //Num type for "changetext"
+  "source-layer": "info_of_interest3-0euqvk",
   layout: {
     "text-field": ["get", "Label"],
     "text-size": [
       "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "change"], '2', 4, 12], // Size at zoom 0
-      22, ["match", ["get", "change"], '2', 21, 12] // Size at zoom 22
+      0, ["match", ["get", "changetext"], "2", 4, 12], // Size at zoom 0
+      22, ["match", ["get", "changetext"], "2", 21, 12] // Size at zoom 22
     ],
     "text-anchor": "center",
     "text-justify": "center",
@@ -416,29 +422,29 @@ const layers = [
   paint: {
     "text-color": [
       "match",
-      ["get", "change"],
-      '2', "#2c0202", // Red color for '2'
+      ["get", "changetext"],
+      "2", "#2c0202", // Red color for "2"
       "#000000" // Default color
     ],
     "text-opacity": [
       "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "change"], '2', 6, 0.7], // Opacity at zoom 0
-      22, ["match", ["get", "change"], '2', 7, 1.0] // Opacity at zoom 22
+      6, ["match", ["get", "changetext"], "2", 1.0, 0.6], // Opacity at zoom 6
+      7, ["match", ["get", "changetext"], "2", 1.0, 0.6] // Opacity at zoom 7
     ],
     "text-halo-color": [
       "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "change"], '2', "#ffffff", "#ffffff"], // Halo color at zoom 0
-      22, ["match", ["get", "change"], '2', "#ffffff", "#ffffff"] // Halo color at zoom 22
+      0, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 0
+      22, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"] // Halo color at zoom 22
     ],
     "text-halo-width": [
       "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "change"], '2', 2, 1], // Halo width at zoom 0
-      22, ["match", ["get", "change"], '2', 2, 3] // Halo width at zoom 22
+      0, ["match", ["get", "changetext"], "2", 5, 5], // Halo width at zoom 0
+      22, ["match", ["get", "changetext"], "2", 5, 5] // Halo width at zoom 22
     ],
     "text-halo-blur": [
       "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "change"], '2', 1, 0], // Halo blur at zoom 0
-      22, ["match", ["get", "change"], '2', 1, 0] // Halo blur at zoom 22
+      0, ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 0
+      22, ["match", ["get", "changetext"], "2", 1, 1] // Halo blur at zoom 22
     ],
   },
   minzoom: 1,
