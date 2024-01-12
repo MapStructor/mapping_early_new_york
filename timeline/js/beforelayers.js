@@ -1110,4 +1110,5 @@ function addBeforeLabelsLayer() {
     zoom_labels_click_ev = true;
     zoomtobounds("NewEngland");
   });
+
 }

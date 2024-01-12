@@ -426,9 +426,9 @@ const layers = [
 
     "text-anchor": "center",
     "text-justify": "center",
-    "text-offset": [0, 1],
+    "text-offset": [0, 0],
+    //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
     "visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-    //"visibility": document.getElementById("new-layer-id").checked ? "visible" : "none",
   },
   paint: {
     "text-color": [

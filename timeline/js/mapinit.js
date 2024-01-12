@@ -746,6 +746,26 @@ beforeMap.on("load", function () {
     .on("click", "curr-lots-left", function (e) {
       CurrLotsHandle(e);
     })
+    .on("click", "info-labels-left",function(e) {
+      console.log("info labels clicked!")
+      var features = beforeMap.queryRenderedFeatures(e.point, {
+        layers: ['info-labels-left'] 
+      });
+    
+      if (features.length) {
+        // Get the first feature from the array of returned features.
+        var label = features[0];
+    
+        // Implement your click handling logic here
+        // For example, you might display a popup with label properties
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML("<div class='demoLayerInfoPopUp'><b><h2>" +
+        label.properties.Label +
+        "</h2></b></div>")
+        .addTo(beforeMap);
+      }
+    })
     .on("click", function () {
       DefaultHandle();
     });
@@ -791,6 +811,25 @@ afterMap.on("load", function () {
     })
     .on("click", "curr-lots-right", function (e) {
       CurrLotsHandle(e);
+    })
+    .on("click", "info-labels-right", function(e) {
+      var features = afterMap.queryRenderedFeatures(e.point, {
+        layers: ['info-labels-right'] // Replace with your layer ID
+      });
+    
+      if (features.length) {
+        // Get the first feature from the array of returned features.
+        var label = features[0];
+    
+        // Implement your click handling logic here
+        // For example, you might display a popup with label properties
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML("<div class='demoLayerInfoPopUp'><b><h2>" +
+        label.properties.Label +
+        "</h2></b></div>")
+        .addTo(afterMap);
+      }
     })
     .on("click", function () {
       DefaultHandle();
