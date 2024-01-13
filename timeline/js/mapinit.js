@@ -769,6 +769,11 @@ beforeMap.on("load", function () {
     .on("click", function () {
       DefaultHandle();
     });
+
+    beforeMap.loadImage("https://cdn-icons-png.flaticon.com/512/9356/9356230.png", (err, image) => {
+      if(err) throw err;
+      beforeMap.addImage("info_points_image", image)
+    })
 });
 
 afterMap.on("load", function () {
@@ -834,6 +839,11 @@ afterMap.on("load", function () {
     .on("click", function () {
       DefaultHandle();
     });
+
+    afterMap.loadImage("https://cdn-icons-png.flaticon.com/512/9356/9356230.png", (err, image) => {
+      if(err) throw err;
+      afterMap.addImage("info_points_image", image)
+    })
 });
 
 beforeMap.on("error", function (e) {

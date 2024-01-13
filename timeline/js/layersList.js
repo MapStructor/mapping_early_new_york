@@ -310,35 +310,30 @@ const layers = [
   },
   {
     id: "info-points-right",
-    type: "circle",
+    type: "symbol", // Change the type to "symbol"
     source: {
-      type: "vector",
-      url: "mapbox://mapny.8c0cqfdz",
+        type: "vector",
+        url: "mapbox://mapny.8c0cqfdz",
     },
     layout: {
-      visibility: document.getElementById("info_points").checked
-        ? "visible"
-        : "none",
+        visibility: document.getElementById("info_points").checked
+            ? "visible"
+            : "none",
+        "icon-image": "info_points_image", // Specify the ID of the custom image
+        "icon-size": 0.04, // Adjust the size of the custom image
+        "icon-allow-overlap": true, // Allow overlapping symbols
     },
     "source-layer": "info_of_interest-17rpk9",
     paint: {
-      "circle-color": "#0dd3d3",
-      "circle-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.5,
-        1,
-      ],
-      "circle-stroke-width": 2,
-      "circle-stroke-color": "#046969",
-      "circle-stroke-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        1,
-        0,
-      ],
+        "icon-opacity": [
+            "case",
+            ["boolean", ["feature-state", "hover"], false],
+            0.5,
+            1,
+        ],
     },
-  },
+}
+,
 
 
 
@@ -1491,24 +1486,29 @@ const beforeLayers = [
 
   {
     id: "info-points-left",
-    type: "symbol",
+    type: "symbol", // Change the type to "symbol"
     source: {
-      type: "vector",
-      url: "mapbox://mapny.8c0cqfdz",
+        type: "vector",
+        url: "mapbox://mapny.8c0cqfdz",
     },
     layout: {
-      visibility: document.getElementById("info_points").checked
-        ? "visible"
-        : "none",
-      "icon-image": "marker", // Using "marker" from the Maki icon set
-      "icon-size": 1.0, // Adjust the size as needed
+        visibility: document.getElementById("info_points").checked
+            ? "visible"
+            : "none",
+        "icon-image": "info_points_image", // Specify the ID of the custom image
+        "icon-size": 0.04, // Adjust the size of the custom image
+        "icon-allow-overlap": true, // Allow overlapping symbols
     },
     "source-layer": "info_of_interest-17rpk9",
     paint: {
-      // Icon related styling can be added here if needed
+        "icon-opacity": [
+            "case",
+            ["boolean", ["feature-state", "hover"], false],
+            0.5,
+            1,
+        ],
     },
-  },
-  
+},
 
 
 
