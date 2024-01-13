@@ -1496,7 +1496,7 @@ const beforeLayers = [
             ? "visible"
             : "none",
         "icon-image": "info_points_image", // Specify the ID of the custom image
-        "icon-size": 0.04, // Adjust the size of the custom image
+        "icon-size": 0.08, // Adjust the size of the custom image
         "icon-allow-overlap": true, // Allow overlapping symbols
     },
     "source-layer": "info_of_interest-17rpk9",
@@ -1564,7 +1564,9 @@ const beforeLayers = [
         ? "visible"
         : "none",
       "text-field": "{Label}",
-      "text-offset": [0, 1],
+      "text-offset": [1.5, 0],
+      'text-justify': 'left', // Options: 'left', 'center', 'right'
+      "text-anchor": "left", // This positions the left end of the text at the anchor point
       "text-size": {
         stops: [
           [0, 4],
