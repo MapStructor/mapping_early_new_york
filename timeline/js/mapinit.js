@@ -760,7 +760,7 @@ beforeMap.on("load", function () {
         // For example, you might display a popup with label properties
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
-        .setHTML("<div class='demoLayerInfoPopUp'><b><h2>" +
+        .setHTML("<div class='infoLayerInfoPointPopUp'><b><h2>" +
         label.properties.Label +
         "</h2></b></div>")
         .addTo(beforeMap);
@@ -825,9 +825,9 @@ afterMap.on("load", function () {
         // For example, you might display a popup with label properties
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
-        .setHTML("<div class='demoLayerInfoPopUp'><b><h2>" +
+        .setHTML("<div class='infoLayerInfoPointPopUp'><b>" +
         label.properties.Label +
-        "</h2></b></div>")
+        "</b></div>")
         .addTo(afterMap);
       }
     })
