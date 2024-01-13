@@ -231,6 +231,11 @@ function addBeforeLayers(_, date) {
       hoveredStateIdLeftCircle = null;
       if (beforeMapPopUp.isOpen()) beforeMapPopUp.remove();
     });
+
+    beforeMap.loadImage("https://cdn-icons-png.flaticon.com/512/9356/9356230.png", (err, image) => {
+      if(err) throw err;
+      beforeMap.addImage("info_points_image", image)
+    })
 }
 
 function addGrantLotsBeforeLayers(date) {

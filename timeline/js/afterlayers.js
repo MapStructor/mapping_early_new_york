@@ -200,6 +200,11 @@ function addAfterLayers(_, date) {
       hoveredStateIdRightCircle = null;
       if (afterMapPopUp.isOpen()) afterMapPopUp.remove();
     });
+
+    afterMap.loadImage("https://cdn-icons-png.flaticon.com/512/9356/9356230.png", (err, image) => {
+      if(err) throw err;
+      afterMap.addImage("info_points_image", image)
+    })
 }
 
 function addGrantLotsAfterLayers(date) {
