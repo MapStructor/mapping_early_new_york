@@ -48,28 +48,6 @@ afterMap.addControl(nav, "top-right");
 
 //BASEMAP MENU SWITCHING FUNCTIONALITY
 
-var rightInputs = document.getElementsByName("rtoggle");
-
-function switchRightLayer(layer) {
-  var rightLayerClass = layer.target.className;
-  afterMap.setStyle("mapbox://styles/mapny/" + rightLayerClass);
-}
-
-for (var i = 0; i < rightInputs.length; i++) {
-  rightInputs[i].onclick = switchRightLayer;
-}
-
-var leftInputs = document.getElementsByName("ltoggle");
-
-function switchLeftLayer(layer) {
-  var leftLayerClass = layer.target.className;
-  beforeMap.setStyle("mapbox://styles/mapny/" + leftLayerClass);
-}
-
-for (var i = 0; i < leftInputs.length; i++) {
-  leftInputs[i].onclick = switchLeftLayer;
-}
-
 //NOT SURE WHAT THIS IS
 
 urlHash = window.location.hash;

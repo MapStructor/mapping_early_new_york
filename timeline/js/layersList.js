@@ -51,6 +51,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "grants_layer"
   },
   {
     id: "grant-lots-right",
@@ -75,6 +76,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "grant_lots"
   },
   {
     id: "grant-lots-lines-right",
@@ -94,6 +96,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement: "grants_layer_lines"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -120,6 +123,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "gravesend_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -146,6 +150,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "gravesend_layer"
   },
   {
     id: "gravesend-lines-right",
@@ -165,6 +170,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement: "gravesend_layer_lines"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -191,6 +197,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "karl_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -217,6 +224,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "karl_layer"
   },
   {
     id: "karl-lines-right",
@@ -236,6 +244,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement: "karl_layer_lines"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -262,6 +271,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "farms_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -288,6 +298,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "farms_layer"
   },
   {
     id: "farms-lines-right",
@@ -307,6 +318,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement: "farms_layer_lines"
   },
   {
     id: "info-points-right",
@@ -332,58 +344,9 @@ const layers = [
             1,
         ],
     },
+    toggleElement: "info_points"
 }
 ,
-
-
-
-
-
-//HERE, UPDATE INFORMATION OF INTEREST: LABELS" LAYER.
-
-
-//PREVIOUS, WORKING LAYER:
-
-/*
-  {
-    id: "info-labels-right",
-    type: "symbol",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.8c0cqfdz",
-    },
-    layout: {
-      visibility: document.getElementById("info_labels").checked
-        ? "visible"
-        : "none",
-      "text-field": "{Label}",
-      "text-offset": [0, 1],
-      "text-size": {
-        stops: [
-          [0, 4],
-          [22, 21],
-        ],
-      },
-    },
-
-    "source-layer": "info_of_interest-17rpk9",
-
-    paint: {
-      "text-color": "#2c0202",
-      "text-halo-color": "#ffffff",
-      "text-halo-width": 5,
-      "text-halo-blur": 1,
-      "text-opacity": {
-        stops: [
-          [6, 0],
-          [7, 1],
-        ],
-      },
-    },
-  },
-
-*/
-
 
 //NEW LAYER - STYLING NOT WORKING AND NEEDS CONNECTION TO TIMELINE:
 
@@ -397,9 +360,6 @@ const layers = [
     //Num type for "changetext"
     url: "mapbox://mapny.4oxcibaa",
   },
-  //Num type for "change"
-  //"source-layer": "info_of_interest-2teixz",
-  //Num type for "changetext"
   "source-layer": "info_of_interest3-0euqvk",
   layout: {
     "text-field": ["get", "Label"],
@@ -408,17 +368,6 @@ const layers = [
       0, ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
       22, ["match", ["get", "changetext"], "2", 21, 16] // Size at zoom 22
     ],
-
-/*
-//TRYING TO CHANGE TEXT FONT, BUT IT DISAPPEARS:
-    "text-font": [
-      "match",
-      ["get", "changetext"],
-      "2", ["literal", ["Arial Regular"]],
-      ["literal", ["Arial Italic"]]
-    ],
-*/
-
     "text-anchor": "center",
     "text-justify": "center",
     "text-offset": [0, 0],
@@ -454,21 +403,8 @@ const layers = [
     ],
   },
   minzoom: 1,
+  toggleElement: "info_labels"
 },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   {
     id: "settlements-right",
@@ -500,6 +436,7 @@ const layers = [
         0,
       ],
     },
+    toggleElement: "settlements_points"
   },
   {
     id: "settlements-labels-right",
@@ -536,6 +473,7 @@ const layers = [
         ],
       },
     },
+    toggleElement: "settlements_labels"
   },
   {
     id: "places-right",
@@ -567,6 +505,7 @@ const layers = [
         0,
       ],
     },
+    toggleElement: "castello_points"
   },
   {
     id: "curr-lots-high-right",
@@ -591,6 +530,7 @@ const layers = [
       ],
       "fill-outline-color": "transparent",
     },
+    toggleElement: "current_lots"
   },
   {
     id: "curr-lots-right",
@@ -615,6 +555,7 @@ const layers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "current_lots"
   },
   {
     id: "curr-lots-lines-right",
@@ -634,6 +575,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.7,
     },
+    toggleElement: "current_lots_lines"
   },
   {
     id: "curr-builds-lines-right",
@@ -653,6 +595,7 @@ const layers = [
       "line-width": 2,
       "line-opacity": 0.7,
     },
+    toggleElement: "current_buildings_lines"
   },
   {
     id: "curr-builds-right",
@@ -677,6 +620,7 @@ const layers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "current_buildings"
   },
   {
     id: "long-island-right",
@@ -696,6 +640,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 1.0,
     },
+    toggleElement: "longisland_coastline"
   },
   {
     id: "long-island-area-right",
@@ -720,6 +665,7 @@ const layers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "longisland_area"
   },
   {
     id: "lenape-trails-right",
@@ -739,6 +685,7 @@ const layers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
+    toggleElement: "lenape_trails"
   },
   {
     id: "manahatta-shoreline-right",
@@ -758,6 +705,7 @@ const layers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
+    toggleElement: "manahatta_shoreline"
   },
   {
     id: "streams-right",
@@ -777,6 +725,7 @@ const layers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
+    toggleElement: "manahatta_streams"
   },
   {
     id: "indian-paths-right",
@@ -796,6 +745,7 @@ const layers = [
       "line-width": 5,
       "line-opacity": 1.0,
     },
+    toggleElement: "indian_paths"
   },
   {
     id: "native-groups-lines-right",
@@ -816,6 +766,7 @@ const layers = [
       "line-blur": 20,
       "line-opacity": 1.0,
     },
+    toggleElement: "native_groups_lines"
   },
   {
     id: "native-groups-area-right",
@@ -840,6 +791,7 @@ const layers = [
       ],
       "fill-outline-color": "#FFD700",
     },
+    toggleElement: "native_groups_area"
   },
   {
     id: "native-groups-area-right-highlighted",
@@ -864,6 +816,7 @@ const layers = [
       ],
       "fill-outline-color": "#FFD700",
     },
+    toggleElement: "native_groups_area"
   },
   {
     id: "native-groups-labels-right",
@@ -898,6 +851,7 @@ const layers = [
         ],
       },
     },
+    toggleElement: "settlements_labels"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -965,10 +919,8 @@ const layers = [
         stops: [["C7", 9]],
       },
     },
+    toggleElement: "circle_point"
   },
-
-
-
 ];
 
 const beforeLayers = [
@@ -996,7 +948,8 @@ const beforeLayers = [
         0,
       ],
       "fill-outline-color": "#FF0000",
-    }
+    },
+    toggleElement: "grants_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1023,6 +976,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "grants_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1090,6 +1044,7 @@ const beforeLayers = [
         stops: [["C7", 9]],
       },
     },
+    toggleElement: "circle_point"
   },
   {
     id: "grant-lots-left",
@@ -1114,6 +1069,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "grant_lots"
   },
   {
     id: "grant-lots-lines-left",
@@ -1133,6 +1089,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement: "grants_layer_lines"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1159,6 +1116,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "gravesend_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1185,6 +1143,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "gravesend_layer"
   },
   {
     id: "gravesend-lines-left",
@@ -1204,6 +1163,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement: "gravesend_layer_lines"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1230,6 +1190,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "karl_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1256,6 +1217,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
+    toggleElement: "karl_layer"
   },
   {
     id: "karl-lines-left",
@@ -1275,6 +1237,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement: "karl_layer_lines"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1301,6 +1264,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "farms_layer"
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1327,6 +1291,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "farms_layer"
   },
   {
     id: "farms-lines-left",
@@ -1346,6 +1311,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
+    toggleElement:"farms_layer_lines"
   },
 
 
@@ -1373,49 +1339,8 @@ const beforeLayers = [
             1,
         ],
     },
+    toggleElement: "info_points"
 },
-
-
-
-
-  /*
-  {
-    id: "info-points-left",
-    type: "circle",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.8c0cqfdz",
-    },
-    layout: {
-      visibility: document.getElementById("info_points").checked
-        ? "visible"
-        : "none",
-    },
-    "source-layer": "info_of_interest-17rpk9",
-    paint: {
-      "circle-color": "#0dd3d3",
-      "circle-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        0.5,
-        1,
-      ],
-      "circle-stroke-width": 2,
-      "circle-stroke-color": "#008888",
-      "circle-stroke-opacity": [
-        "case",
-        ["boolean", ["feature-state", "hover"], false],
-        1,
-        0,
-      ],
-    },
-  },
-
-*/
-
-
-
-
 
   {
     id: "info-labels-left",
@@ -1454,6 +1379,7 @@ const beforeLayers = [
         ],
       },
     },
+    toggleElement: "info_labels"
   },
   {
     id: "settlements-left",
@@ -1485,6 +1411,7 @@ const beforeLayers = [
         0,
       ],
     },
+    toggleElement: "settlements_points"
   },
   {
     id: "settlements-labels-left",
@@ -1521,6 +1448,7 @@ const beforeLayers = [
         ],
       },
     },
+    toggleElement: "settlements_labels"
   },
   {
     id: "places-left",
@@ -1552,6 +1480,7 @@ const beforeLayers = [
         0,
       ],
     },
+    toggleElement: "castello_points"
   },
   {
     id: "curr-lots-high-left",
@@ -1576,6 +1505,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "current_lots"
   },
   {
     id: "curr-lots-left",
@@ -1600,6 +1530,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "current_lots"
   },
   {
     id: "curr-lots-lines-left",
@@ -1619,6 +1550,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.7,
     },
+    toggleElement: "current_lots_lines"
   },
   {
     id: "curr-builds-lines-left",
@@ -1638,6 +1570,7 @@ const beforeLayers = [
       "line-width": 2,
       "line-opacity": 0.7,
     },
+    toggleElement: "current_buildings_lines"
   },
   {
     id: "curr-builds-left",
@@ -1662,6 +1595,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "current_buildings"
   },
   {
     id: "long-island-left",
@@ -1681,6 +1615,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 1.0,
     },
+    toggleElement: "longisland_coastline"
   },
   {
     id: "long-island-area-left",
@@ -1705,6 +1640,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
+    toggleElement: "longisland_area"
   },
   {
     id: "lenape-trails-left",
@@ -1724,6 +1660,7 @@ const beforeLayers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
+    toggleElement: "lenape_trails"
   },
   {
     id: "manahatta-shoreline-left",
@@ -1743,6 +1680,7 @@ const beforeLayers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
+    toggleElement: "manahatta_shoreline"
   },
   {
     id: "streams-left",
@@ -1762,6 +1700,7 @@ const beforeLayers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
+    toggleElement: "manahatta_streams"
   },
   {
     id: "indian-paths-left",
@@ -1781,6 +1720,7 @@ const beforeLayers = [
       "line-width": 5,
       "line-opacity": 1.0,
     },
+    toggleElement: "indian_paths"
   },
   {
     id: "native-groups-lines-left",
@@ -1801,6 +1741,7 @@ const beforeLayers = [
       "line-blur": 20,
       "line-opacity": 1.0,
     },
+    toggleElement: "native_groups_lines"
   },
   {
     id: "native-groups-area-left",
@@ -1825,6 +1766,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FFD700",
     },
+    toggleElement: "native_groups_area"
   },
   {
     id: "native-groups-area-left-highlighted",
@@ -1849,6 +1791,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FFD700",
     },
+    toggleElement: "native_groups_area"
   },
   {
     id: "native-groups-labels-left",
@@ -1883,5 +1826,6 @@ const beforeLayers = [
         ],
       },
     },
+    toggleElement: "settlements_labels"
   }
 ]

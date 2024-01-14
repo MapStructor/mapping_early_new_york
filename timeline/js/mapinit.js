@@ -2560,6 +2560,7 @@ beforeMap.on("style.load", function () {
     addLongIslandCoastlineBeforeLayers();
     addIndianPathsBeforeLayers();
     addLongIslandNativeGroupsBeforeLayers();
+    refreshLayers();
   }, 2000);
 });
 
@@ -2598,5 +2599,8 @@ afterMap.on("style.load", function () {
     addLongIslandCoastlineAfterLayers();
     addIndianPathsAfterLayers();
     addLongIslandNativeGroupsAfterLayers();
+    refreshLayers()
   }, 2500);
+
+  
 });
