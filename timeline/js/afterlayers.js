@@ -1,7 +1,6 @@
 function addAfterLayers(_, date) {
   removeTaxPoints(afterMap, [
     {type: "layer", id: "lot_events-bf43eb-right"},
-    {type: "layer", id: "new-layer-bf43eb-right"},
     {type: "source", id: "lot_events-bf43eb"},
     {type: "layer", id: "dutch_grants-5ehfqe-right"},
     {type: "source", id: "dutch_grants-5ehfqe"}
@@ -85,7 +84,6 @@ function addAfterLayers(_, date) {
     });
 
   addMapLayer(afterMap, getLayer("lot_events-bf43eb-right"), date)
-  addMapLayer(afterMap, getLayer("new-layer-bf43eb-right"), date)
 
     afterMap.on("mouseenter", "lot_events-bf43eb-right", function (e) {
       afterMap.getCanvas().style.cursor = "pointer";
@@ -128,47 +126,6 @@ function addAfterLayers(_, date) {
         .addTo(afterMap);
     });
 
-    afterMap.on("mouseenter", "new-layer-bf43eb-right", function (e) {
-      afterMap.getCanvas().style.cursor = "pointer";
-
-      if (hoveredStateIdRightCircle) {
-        afterMap.setFeatureState(
-          {
-            source: "new-layer-bf43eb-right",
-            sourceLayer: "new-layer-bf43eb",
-            id: hoveredStateIdRightCircle,
-          },
-          { hover: false }
-        );
-      }
-      hoveredStateIdRightCircle = e.features[0].id;
-      afterMap.setFeatureState(
-        {
-          source: "new-layer-bf43eb-right",
-          sourceLayer: "new-layer-bf43eb",
-          id: hoveredStateIdRightCircle,
-        },
-        { hover: true }
-      );
-
-      var coordinates = e.features[0].geometry.coordinates.slice();
-
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      afterMapPopUp
-        .setLngLat(coordinates)
-        .setHTML(
-          "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" +
-            e.features[0].properties.TAXLOT +
-            "' target='_blank'>" +
-            e.features[0].properties.TAXLOT +
-            "</a></h2></b></div>"
-        )
-        .addTo(afterMap);
-    });
-
     afterMap.on("mouseleave", "lot_events-bf43eb-right", function () {
       afterMap.getCanvas().style.cursor = "";
       if (hoveredStateIdRightCircle) {
@@ -176,22 +133,6 @@ function addAfterLayers(_, date) {
           {
             source: "lot_events-bf43eb-right",
             sourceLayer: "lot_events-bf43eb",
-            id: hoveredStateIdRightCircle,
-          },
-          { hover: false }
-        );
-      }
-      hoveredStateIdRightCircle = null;
-      if (afterMapPopUp.isOpen()) afterMapPopUp.remove();
-    });
-
-    afterMap.on("mouseleave", "new-layer-bf43eb-right", function () {
-      afterMap.getCanvas().style.cursor = "";
-      if (hoveredStateIdRightCircle) {
-        afterMap.setFeatureState(
-          {
-            source: "new-layer-bf43eb-right",
-            sourceLayer: "new-layer-bf43eb",
             id: hoveredStateIdRightCircle,
           },
           { hover: false }
