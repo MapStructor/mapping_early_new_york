@@ -142,8 +142,22 @@ function addAfterLayers(_, date) {
       if (afterMapPopUp.isOpen()) afterMapPopUp.remove();
     });
 
+    /*This is not working:
+      //afterMap.loadImage("http://bakkenpipelinemap.com/external_assets/info_points_aftertime.png", (err, image) => {
+  
+    /*
+    Explanation:
+    Ultimately want to be able to use 2 icons for beforetime and aftertime (where "2" has aftertime)
+    beforetime: http://bakkenpipelinemap.com/external_assets/info_points_beforetime.png
+
+    Also, these are the preferred locations, but may be an issue with cross-referencing in site:
+    https://nahc-mapping.org/mappingNY/icons/info_points_aftertime.png
+    https://nahc-mapping.org/mappingNY/icons/info_points_beforetime.png
+    */
+
+    //Only this works, from this url:
     afterMap.loadImage("https://cdn-icons-png.flaticon.com/512/9356/9356230.png", (err, image) => {
-      if(err) throw err;
+    if(err) throw err;
       afterMap.addImage("info_points_image", image)
     })
 }
