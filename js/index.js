@@ -731,39 +731,6 @@ $(document).ready(function () {
     }
   });
 
-  $("#new-layer-id").click(function () {
-    if ($(this).prop("checked")) {
-      if (taxlot_events_info_length == 0) {
-        getTaxlotEventsInfo();
-      }
-      beforeMap.setLayoutProperty(
-        "new-layer-bf43eb-left",
-        "visibility",
-        "visible"
-      );
-      afterMap.setLayoutProperty(
-        "new-layer-bf43eb-right",
-        "visibility",
-        "visible"
-      );
-    } else {
-      beforeMap.setLayoutProperty(
-        "new-layer-bf43eb-left",
-        "visibility",
-        "none"
-      );
-      afterMap.setLayoutProperty(
-        "new-layer-bf43eb-right",
-        "visibility",
-        "none"
-      );
-
-      if (demo_layer_view_flag) {
-        closeDemoInfo();
-      }
-    }
-  });
-
   $("#grants_layer_items").change(function () {
     $(".grants_layer").prop("checked", this.checked);
     if ($(this).prop("checked")) {
