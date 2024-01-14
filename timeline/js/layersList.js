@@ -320,6 +320,7 @@ const layers = [
     },
     toggleElement: "farms_layer_lines"
   },
+
   {
     id: "info-points-right",
     type: "symbol", // Change the type to "symbol"
@@ -327,13 +328,33 @@ const layers = [
         type: "vector",
         url: "mapbox://mapny.8c0cqfdz",
     },
+
+    "layout": {
+      "visibility": document.getElementById("info_points").checked ? "visible" : "none",
+      "icon-image": "info_points_image",
+      "icon-allow-overlap": true,
+      "icon-size": [
+        "interpolate", ["linear"], ["zoom"],
+        //This is not fully working - It should change at "2" but it's not.
+        //only "Else" is working.
+        8, ["match", ["get", "changetext"], "2", 0.03, 0.05], // Size at zoom 8
+        15, ["match", ["get", "changetext"], "2", 0.12, 0.08] // Size at zoom 15
+      ]
+    },
     layout: {
         visibility: document.getElementById("info_points").checked
             ? "visible"
             : "none",
         "icon-image": "info_points_image", // Specify the ID of the custom image
-        "icon-size": 0.04, // Adjust the size of the custom image
-        "icon-allow-overlap": true, // Allow overlapping symbols
+        "icon-size": 0.08, // Adjust the size of the custom image
+        "icon-allow-overlap": true,
+        "icon-size": [
+          "interpolate", ["linear"], ["zoom"],
+          //This is not fully working - It should change at "2" but it's not.
+          //only "Else" is working.
+          8, ["match", ["get", "changetext"], "2", 0.03, 0.05], // Size at zoom 8
+          15, ["match", ["get", "changetext"], "2", 0.12, 0.08] // Size at zoom 15
+        ]
     },
     "source-layer": "info_of_interest-17rpk9",
     paint: {
@@ -368,9 +389,9 @@ const layers = [
       0, ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
       22, ["match", ["get", "changetext"], "2", 21, 16] // Size at zoom 22
     ],
-    "text-anchor": "center",
-    "text-justify": "center",
-    "text-offset": [0, 0],
+    "text-anchor": "left", // This positions the left end of the text at the anchor point
+    'text-justify': 'left', // Options: 'left', 'center', 'right'
+    "text-offset": [1.5, 0],
     //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
     "visibility": document.getElementById("info_labels").checked ? "visible" : "none",
   },
@@ -383,8 +404,8 @@ const layers = [
     ],
     "text-opacity": [
       "interpolate", ["linear"], ["zoom"],
-      6, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
-      7, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
+      8, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
+      9, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
     ],
     "text-halo-color": [
       "interpolate", ["linear"], ["zoom"],
@@ -1322,65 +1343,86 @@ const beforeLayers = [
         type: "vector",
         url: "mapbox://mapny.8c0cqfdz",
     },
-    layout: {
-        visibility: document.getElementById("info_points").checked
-            ? "visible"
-            : "none",
-        "icon-image": "info_points_image", // Specify the ID of the custom image
-        "icon-size": 0.08, // Adjust the size of the custom image
-        "icon-allow-overlap": true, // Allow overlapping symbols
+    "layout": {
+      "visibility": document.getElementById("info_points").checked ? "visible" : "none",
+      "icon-image": "info_points_image",
+      "icon-allow-overlap": true,
+      "icon-size": [
+        "interpolate", ["linear"], ["zoom"],
+        //This is not fully working - It should change at "2" but it's not.
+        //only "Else" is working.
+        8, ["match", ["get", "changetext"], "2", 0.03, 0.05], // Size at zoom 8
+        15, ["match", ["get", "changetext"], "2", 0.12, 0.08] // Size at zoom 15
+      ]
     },
     "source-layer": "info_of_interest-17rpk9",
-    paint: {
-        "icon-opacity": [
-            "case",
-            ["boolean", ["feature-state", "hover"], false],
-            0.5,
-            1,
-        ],
+    "paint": {
+      "icon-opacity": [
+        "interpolate", ["linear"], ["zoom"],
+        8, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 8
+        9, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 9
+      ],
     },
     toggleElement: "info_points"
 },
 
-  {
-    id: "info-labels-left",
-    type: "symbol",
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.8c0cqfdz",
-    },
-    layout: {
-      visibility: document.getElementById("info_labels").checked
-        ? "visible"
-        : "none",
-      "text-field": "{Label}",
-      "text-offset": [1.5, 0],
-      'text-justify': 'left', // Options: 'left', 'center', 'right'
-      "text-anchor": "left", // This positions the left end of the text at the anchor point
-      "text-size": {
-        stops: [
-          [0, 4],
-          [22, 21],
-        ],
-      },
-    },
 
-    "source-layer": "info_of_interest-17rpk9",
-
-    paint: {
-      "text-color": "#2c0202",
-      "text-halo-color": "#ffffff",
-      "text-halo-width": 5,
-      "text-halo-blur": 1,
-      "text-opacity": {
-        stops: [
-          [6, 0],
-          [7, 1],
-        ],
-      },
-    },
-    toggleElement: "info_labels"
+{
+  id: "info-labels-left",
+  type: "symbol",
+  source: {
+    type: "vector",
+    //Num type for "change"
+    //url: "mapbox://mapny.cmczx4cf",
+    //Num type for "changetext"
+    url: "mapbox://mapny.4oxcibaa",
   },
+  "source-layer": "info_of_interest3-0euqvk",
+  layout: {
+    "text-field": ["get", "Label"],
+    "text-size": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
+      22, ["match", ["get", "changetext"], "2", 21, 16] // Size at zoom 22
+    ],
+    "text-anchor": "left", // This positions the left end of the text at the anchor point
+    'text-justify': 'left', // Options: 'left', 'center', 'right'
+    "text-offset": [1.5, 0],
+    //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
+    "visibility": document.getElementById("info_labels").checked ? "visible" : "none",
+  },
+  paint: {
+    "text-color": [
+      "match",
+      ["get", "changetext"],
+      "2", "#ff0000", // Red color for "2"
+      "#2c0202" // Default color
+    ],
+    "text-opacity": [
+      "interpolate", ["linear"], ["zoom"],
+      8, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
+      9, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
+    ],
+    "text-halo-color": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 0
+      22, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"] // Halo color at zoom 22
+    ],
+    "text-halo-width": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 0
+      22, ["match", ["get", "changetext"], "2", 5, 4] // Halo width at zoom 22
+    ],
+    "text-halo-blur": [
+      "interpolate", ["linear"], ["zoom"],
+      0, ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 0
+      22, ["match", ["get", "changetext"], "2", 1, 1] // Halo blur at zoom 22
+    ],
+  },
+  minzoom: 1,
+  toggleElement: "info_labels"
+},
+
   {
     id: "settlements-left",
     type: "circle",
