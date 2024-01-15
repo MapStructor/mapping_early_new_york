@@ -355,6 +355,24 @@ const layers = [
           8, ["match", ["get", "changetext"], "2", 0.03, 0.05], // Size at zoom 8
           15, ["match", ["get", "changetext"], "2", 0.12, 0.08] // Size at zoom 15
         ]
+
+        //Trying to change icons, not working:
+        /*
+        "icon-image": [
+          "match", ["get", "changetext"], 
+          "2", "info_points_image",  // Use info_points_image when changetext is "2"
+          "info_points_image2"       // Use info_points_image2 for all other cases
+        ]
+        */
+
+        //Trying to change icons, not working:
+        /*
+        "icon-image": [
+          "case",
+          ["==", ["get", "changetext"], "2"], "info_points_image",
+          "info_points_image2"
+        ]
+        */
     },
     "source-layer": "info_of_interest-17rpk9",
     paint: {

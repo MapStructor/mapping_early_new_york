@@ -156,10 +156,19 @@ function addAfterLayers(_, date) {
     */
 
     //Only this works, from this url:
-    afterMap.loadImage("https://cdn-icons-png.flaticon.com/512/9356/9356230.png", (err, image) => {
+    afterMap.loadImage("https://menypublicresources.netlify.app/info_points_aftertime.png", (err, image) => {
       if(err) throw err;
       afterMap.addImage("info_points_image", image)
     })
+
+    //Trying to change icons, not working:
+    /*
+    afterMap.loadImage("https://menypublicresources.netlify.app/info_points_beforetime.png", (err, image) => {
+      if(err) throw err;
+      afterMap.addImage("info_points_image2", image)
+    });
+    */
+   
 }
 
 function addGrantLotsAfterLayers(date) {
