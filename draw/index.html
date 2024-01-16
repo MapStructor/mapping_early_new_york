@@ -27,8 +27,9 @@
         height: 200px;
         width: 200px;
         position: absolute;
-        bottom: 40px;
-        left: 10px;
+        top: 10px;    /* Changed from bottom to top */
+        left: 10px;   /* Adjust left position */
+        right: auto;  /* Add right position */
         background-color: rgba(255, 255, 255, 0.9);
         padding: 15px;
         text-align: center;
@@ -55,9 +56,8 @@
     <div class="calculation-box">
       <input type="text" id="title-input" placeholder="Title" />
       <textarea id="info-input" placeholder="Additional information"></textarea>
-      <button><label for="file_upload">Upload GeoJSON</label></button>
-      
       <button onclick="updateFeatureInfo()">Update Feature Info</button>
+      <button><label for="file_upload">Upload GeoJSON</label></button>
       <div id="calculated-area"></div>
       <button onclick="downloadGeoJSON()">Download GeoJSON</button>
       <input
