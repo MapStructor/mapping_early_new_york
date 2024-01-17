@@ -843,37 +843,40 @@ afterMap.on("error", function (e) {
 // ===== Layers click event functions ======
 
 function DefaultHandle() {
-  if (
-    !demo_taxlot_click_ev &&
-    !castello_click_ev &&
-    !grant_lots_click_ev &&
-    !dutch_grant_click_ev &&
-    !farms_click_ev &&
-    !curr_layer_click_ev &&
-    !settlements_click_ev &&
-    !info_click_ev &&
-    !gravesend_click_ev &&
-    !native_groups_click_ev &&
-    !karl_click_ev &&
-    !zoom_labels_click_ev
-  ) {
-    if (windoWidth > 637)
-      if ($("#view-hide-layer-panel").length > 0)
-        $("#view-hide-layer-panel").trigger("click");
+  if (!SKETCH_ENABLED){
+    if (
+      !demo_taxlot_click_ev &&
+      !castello_click_ev &&
+      !grant_lots_click_ev &&
+      !dutch_grant_click_ev &&
+      !farms_click_ev &&
+      !curr_layer_click_ev &&
+      !settlements_click_ev &&
+      !info_click_ev &&
+      !gravesend_click_ev &&
+      !native_groups_click_ev &&
+      !karl_click_ev &&
+      !zoom_labels_click_ev
+    ) {
+      if (windoWidth > 637)
+        if ($("#view-hide-layer-panel").length > 0)
+          $("#view-hide-layer-panel").trigger("click");
+    }
+  
+    demo_taxlot_click_ev = false;
+    castello_click_ev = false;
+    grant_lots_click_ev = false;
+    dutch_grant_click_ev = false;
+    farms_click_ev = false;
+    curr_layer_click_ev = false;
+    settlements_click_ev = false;
+    info_click_ev = false;
+    gravesend_click_ev = false;
+    native_groups_click_ev = false;
+    karl_click_ev = false;
+    zoom_labels_click_ev = false;
+  
   }
-
-  demo_taxlot_click_ev = false;
-  castello_click_ev = false;
-  grant_lots_click_ev = false;
-  dutch_grant_click_ev = false;
-  farms_click_ev = false;
-  curr_layer_click_ev = false;
-  settlements_click_ev = false;
-  info_click_ev = false;
-  gravesend_click_ev = false;
-  native_groups_click_ev = false;
-  karl_click_ev = false;
-  zoom_labels_click_ev = false;
 }
 
 function CurrLotsHandle(event) {

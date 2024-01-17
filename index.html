@@ -145,9 +145,17 @@
     
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js"></script>
+
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js"></script>
     <link
       href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.css"
+      type="text/css"
     />
     <link
       rel="stylesheet"
@@ -417,7 +425,7 @@
             ></i>
             &nbsp; Long Island</b
           >
-        </center>
+        </center> 
         <div id="long-island-maps-section"></div>
         <br />
         <center>
@@ -451,6 +459,8 @@
             <b>Zoom to World</b> &nbsp; &nbsp; &nbsp;
           </button>
         </center>
+        <br/>
+        <div id="sketch-content"></div>
       </div>
     </div>
 
@@ -503,6 +513,7 @@
     </div>
 
     <!-- MAP.JS SOURCE -->
+    
     <script src="js/mapData.js"></script>
     <script src="js/generateMaps.js"></script>
     <script src="timeline/js/refreshLayers.js"></script>
@@ -512,6 +523,8 @@
     <script src="timeline/js/getLayer.js"></script>
     <script src="timeline/js/layersList.js"></script>
     <script src="timeline/js/mapinit.js"></script>
+    <script src="draw/sketchMarkup.js"></script>
+    <script src="draw/controls.js"></script>
     <script src="timeline/js/beforelayers.js"></script>
     <script src="timeline/js/afterlayers.js"></script>
     <script src="timeline/js/sliderpopups.js"></script>
