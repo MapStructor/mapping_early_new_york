@@ -843,7 +843,6 @@ afterMap.on("error", function (e) {
 // ===== Layers click event functions ======
 
 function DefaultHandle() {
-  if (!SKETCH_ENABLED){
     if (
       !demo_taxlot_click_ev &&
       !castello_click_ev &&
@@ -875,8 +874,6 @@ function DefaultHandle() {
     native_groups_click_ev = false;
     karl_click_ev = false;
     zoom_labels_click_ev = false;
-  
-  }
 }
 
 function CurrLotsHandle(event) {
