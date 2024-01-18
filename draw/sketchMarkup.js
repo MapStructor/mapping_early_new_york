@@ -202,7 +202,4 @@ if (urlParams.get("sketch") === "1") {
     `;
 
     $("#sketch-content").html(markUp);
-    
-    // push pointer to the extreme right were it cannot be found again
-    map._setPosition(10_000)
 }

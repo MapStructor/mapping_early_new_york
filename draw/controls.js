@@ -1,4 +1,8 @@
+//Note: All enable/disable functionily is removed because
+//when disabled, everything is erased.
 
+
+//let SKETCH_ENABLED = false;
 
 const beforeMapDrawConfig = new MapboxDraw({
   displayControlsDefault: false,
@@ -25,6 +29,51 @@ const afterMapDrawConfig = new MapboxDraw({
 // Added these lines after removing enable/disable functionality
 $("#beforemap-drawing-controls").append(beforeMapDrawConfig.onAdd(beforeMap));
 $("#aftermap-drawing-controls").append(afterMapDrawConfig.onAdd(afterMap));
+
+
+//$("#sketch-dropdown").slideUp();
+
+/*
+
+function enable() {
+  $("#disable-edit-mode").attr("disabled", false);
+  $("#enable-edit-mode").attr("disabled", true);
+  //   afterMap.addControl(draw)
+  $("#beforemap-drawing-controls").html("");
+  $("#aftermap-drawing-controls").html("");
+  $("#beforemap-drawing-controls").append(beforeMapDrawConfig.onAdd(beforeMap));
+  $("#aftermap-drawing-controls").append(afterMapDrawConfig.onAdd(afterMap));
+  $("#sketch-dropdown").slideDown();
+  SKETCH_ENABLED = true;
+
+  // Change button text temporarily
+  const enableButton = document.getElementById("enable-edit-mode");
+  const originalText = enableButton.innerHTML;
+  enableButton.innerHTML = "<i class='fa-solid fa-pencil'></i> <b>Enabling...</b>";
+  setTimeout(() => {
+      enableButton.innerHTML = originalText;
+  }, 1000); // Reset text after 1 second
+
+}
+
+function disable() {
+  $("#enable-edit-mode").attr("disabled", false);
+  $("#disable-edit-mode").attr("disabled", true);
+  beforeMap.removeControl(beforeMapDrawConfig);
+  afterMap.removeControl(afterMapDrawConfig);
+  $("#sketch-dropdown").slideUp();
+  SKETCH_ENABLED = false;
+
+  // Change button text temporarily
+  const disableButton = document.getElementById("disable-edit-mode");
+  const originalText = disableButton.innerHTML;
+  disableButton.innerHTML = "<i class='fa-solid fa-pencil'></i> <b>Disabling...</b>";
+  setTimeout(() => {
+      disableButton.innerHTML = originalText;
+  }, 1000); // Reset text after 1 second
+
+}
+*/
 
 afterMap.on("draw.selectionchange", e => onSelectFeature(e, "aftermap"));
 beforeMap.on("draw.selectionchange", e => onSelectFeature(e, "beforemap"));
