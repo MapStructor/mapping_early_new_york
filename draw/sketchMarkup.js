@@ -202,4 +202,6 @@ if (urlParams.get("sketch") === "1") {
     `;
 
     $("#sketch-content").html(markUp);
+
+    map._setPosition(1_365)
 }
