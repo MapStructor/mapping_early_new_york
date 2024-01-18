@@ -1,4 +1,8 @@
-let SKETCH_ENABLED = false;
+//Note: All enable/disable functionily is removed because
+//when disabled, everything is erased.
+
+
+//let SKETCH_ENABLED = false;
 
 const beforeMapDrawConfig = new MapboxDraw({
   displayControlsDefault: false,
@@ -22,7 +26,14 @@ const afterMapDrawConfig = new MapboxDraw({
   defaultMode: "draw_polygon",
 });
 
-$("#sketch-dropdown").slideUp();
+// Added these lines after removing enable/disable functionality
+$("#beforemap-drawing-controls").append(beforeMapDrawConfig.onAdd(beforeMap));
+$("#aftermap-drawing-controls").append(afterMapDrawConfig.onAdd(afterMap));
+
+
+//$("#sketch-dropdown").slideUp();
+
+/*
 
 function enable() {
   $("#disable-edit-mode").attr("disabled", false);
@@ -34,6 +45,15 @@ function enable() {
   $("#aftermap-drawing-controls").append(afterMapDrawConfig.onAdd(afterMap));
   $("#sketch-dropdown").slideDown();
   SKETCH_ENABLED = true;
+
+  // Change button text temporarily
+  const enableButton = document.getElementById("enable-edit-mode");
+  const originalText = enableButton.innerHTML;
+  enableButton.innerHTML = "<i class='fa-solid fa-pencil'></i> <b>Enabling...</b>";
+  setTimeout(() => {
+      enableButton.innerHTML = originalText;
+  }, 1000); // Reset text after 1 second
+
 }
 
 function disable() {
@@ -43,7 +63,17 @@ function disable() {
   afterMap.removeControl(afterMapDrawConfig);
   $("#sketch-dropdown").slideUp();
   SKETCH_ENABLED = false;
+
+  // Change button text temporarily
+  const disableButton = document.getElementById("disable-edit-mode");
+  const originalText = disableButton.innerHTML;
+  disableButton.innerHTML = "<i class='fa-solid fa-pencil'></i> <b>Disabling...</b>";
+  setTimeout(() => {
+      disableButton.innerHTML = originalText;
+  }, 1000); // Reset text after 1 second
+
 }
+*/
 
 afterMap.on("draw.selectionchange", e => onSelectFeature(e, "aftermap"));
 beforeMap.on("draw.selectionchange", e => onSelectFeature(e, "beforemap"));
@@ -67,31 +97,48 @@ function onSelectFeature(e, mapType) {
 }
 
 function updateFeatureInfo(mapType) {
-    const draw = {
-        aftermap: afterMapDrawConfig,
-        beforemap: beforeMapDrawConfig
-    }[mapType]
-    const titleId = {
-        aftermap: "aftermap-title-input",
-        beforemap: "beforemap-title-input"
-    }[mapType]
-    const infoId = {
-        aftermap: "aftermap-info-input",
-        beforemap: "beforemap-info-input"
-    }[mapType]
+  const draw = {
+      aftermap: afterMapDrawConfig,
+      beforemap: beforeMapDrawConfig
+  }[mapType];
+  const titleId = {
+      aftermap: "aftermap-title-input",
+      beforemap: "beforemap-title-input"
+  }[mapType];
+  const infoId = {
+      aftermap: "aftermap-info-input",
+      beforemap: "beforemap-info-input"
+  }[mapType];
+
   const title = document.getElementById(titleId).value;
   const info = document.getElementById(infoId).value;
   const selectedFeatures = draw.getSelected();
+
   if (selectedFeatures.features.length > 0) {
-    const feature = selectedFeatures.features[0];
-    feature.properties.title = title;
-    feature.properties.info = info;
-    draw.setFeatureProperty(feature.id, "title", title);
-    draw.setFeatureProperty(feature.id, "info", info);
+      const feature = selectedFeatures.features[0];
+      feature.properties.title = title;
+      feature.properties.info = info;
+      draw.setFeatureProperty(feature.id, "title", title);
+      draw.setFeatureProperty(feature.id, "info", info);
+
+      // Get the "Update Info" button for the current map type
+      const updateButtonId = `${mapType}-update-info-button`; // Ensure this ID matches your button ID
+      const updateButton = document.getElementById(updateButtonId);
+      if (updateButton) {
+          const originalText = updateButton.innerHTML;
+          updateButton.innerHTML = "✓ Updated"; // Unicode checkmark
+          // Reset the button text after a short delay
+          setTimeout(() => {
+              updateButton.innerHTML = originalText;
+          }, 2000); // 2 seconds delay
+      }
   } else {
-    alert("No feature selected. Select a feature to update its information.");
+      alert("No feature selected. Select a feature to update its information.");
   }
 }
+
+
+
 
 function downloadGeoJSON(mapType) {
     const draw = {
