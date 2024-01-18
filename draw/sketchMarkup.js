@@ -46,7 +46,13 @@ if (urlParams.get("sketch") === "1") {
                 padding: 10px;
                 border-radius: 5px;
                 margin: 10px 0;
+                transition: background-color 0.01s;
             }
+
+            /* Active (pressed) state for labels */
+            label[for="beforemap-file_upload"]:active, label[for="aftermap-file_upload"]:active {
+                background-color: #2a6e2d; /* Even darker shade for pressed state */
+            }  
 
             button:hover, label[for="beforemap-file_upload"]:hover, label[for="aftermap-file_upload"]:hover {
                 background-color: #3e8e41;
@@ -65,8 +71,11 @@ if (urlParams.get("sketch") === "1") {
             
             /* Input Fields and Textareas */
             input[type="text"], textarea {
-                width: 95%;
+                width: 91%;
                 border: 1px solid #ccc;
+                padding: 10px; /* Padding for visual comfort */
+                border-radius: 5px; /* Rounded corners for aesthetics */
+                font-family: 'Arial', sans-serif; /* Consistent font */
             }
 
             /* File Upload */
@@ -96,7 +105,7 @@ if (urlParams.get("sketch") === "1") {
             
             .update-group {
                 width: 80%; /* Same width as before */
-                margin: 0 10% 0 10%; /* Reduced bottom margin */
+                margin: 2% 10% 0 10%; /* Reduced bottom margin */
                 display: flex;
                 justify-content: center;
             }
@@ -108,7 +117,7 @@ if (urlParams.get("sketch") === "1") {
             
             /* Group for Lower Buttons */
             .lower-buttons {
-                width: 80%; /* Same width as the update-group */
+                width: 79%; /* Same width as the update-group */
                 margin: 0 10% 0 10%; /* Reduced top margin, aligned with update-group */
                 display: flex;
                 justify-content: space-between;
@@ -129,6 +138,47 @@ if (urlParams.get("sketch") === "1") {
                 display: inline-block;
                 cursor: pointer;
             }
+
+            #beforemap-drawing-controls {
+                display: flex;
+                justify-content: center;
+                align-items: center; /* Optional, if you also want vertical centering */
+            }
+            
+            .mapboxgl-ctrl-group {
+                width: max-content;
+                margin-bottom: 1%;
+                background-color: #b0b0b0 /* Make sure the background color is the same as when pressed */
+            }
+
+            .mapboxgl-ctrl-group > button {
+                background-color: white
+            }
+            
+            .mapboxgl-ctrl-group button:hover {
+                background-color: #e0e0e0; /* Lighter shade when hovered */
+            }
+            
+            /* Note: when pressed, there is a small gap on the left. Address that eventually */
+            .mapboxgl-ctrl-group button:active {
+                background-color: #b0b0b0; /* Darker shade when pressed */
+            }
+
+            /* Class for the active (on) state */
+            .mapboxgl-ctrl-group button.active {
+                background-color: #e0e0e0; /* Different color when remains on */
+            }
+            
+            #beforemap-info-input {
+                max-width: 92%; /* Fixed width */
+                min-width: 92%; /* Fixed width */
+                min-height: 50px; /* Initial height */
+                overflow-y: hidden; /* Hide the vertical scrollbar */
+                /*resize: none;*/ /* Prevent manual resizing */
+            }
+            
+            
+            
             
             
         </style>
@@ -147,7 +197,8 @@ if (urlParams.get("sketch") === "1") {
         -->
 
         <div id="sketch-dropdown">
-            <b>Before Map</b>
+            <!-- <b>Before Map</b> -->
+            <br>
             <div id="beforemap-drawing-controls"></div>
 
             <div class="calculation-box">
@@ -170,35 +221,13 @@ if (urlParams.get("sketch") === "1") {
                 onchange="handleFileUpload('beforemap')"
                 style="display:none;"  <!-- Hidden input moved outside the flex container -->
         </div>
-        
+        <br>
 
 
-        </div>
-        
-            <!-- After Map Section -->
-            <b>After Map</b>
-            <div id="aftermap-drawing-controls"></div>
-            <div class="calculation-box">
-                <input type="text" id="aftermap-title-input" placeholder="Title" class="sketch-input"/>
-                <textarea id="aftermap-info-input" placeholder="Additional information"></textarea>
-                
-                <div class="button-group update-group">
-                    <button id="aftermap-update-info-button" onclick="updateFeatureInfo('aftermap')">Update Info</button>
-                </div>
-            
-                <div class="button-group lower-buttons">
-                    <button onclick="downloadGeoJSON('aftermap')">Save</button>
-                    <label for="aftermap-file_upload" class="file-upload-label">Open</label>
-                </div>
-                <input
-                    type="file"
-                    id="aftermap-file_upload"
-                    class="file_upload sketch-input"
-                    accept=".geojson"
-                    onchange="handleFileUpload('aftermap')"
-                    style="display:none;" <!-- Hidden input moved outside the flex container -->
-            </div>
-        </div>
+        <!-- NOTE: If you want to add sketching for the right side, just copy
+        what's above, and replace "beforemap" with "aftermap"
+        -->
+
     `;
 
     $("#sketch-content").html(markUp);

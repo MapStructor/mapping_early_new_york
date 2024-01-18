@@ -21,7 +21,7 @@ const afterMapDrawConfig = new MapboxDraw({
     point: true,
     line_string: true,
     polygon: true,
-    trash: true,
+    //trash: true,
   },
   defaultMode: "draw_polygon",
 });
@@ -189,3 +189,17 @@ function handleFileUpload(mapType) {
     alert("No file selected")
   }
 }
+
+document.getElementById('beforemap-info-input').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = (this.scrollHeight > 200 ? 200 : this.scrollHeight) + 'px';
+});
+
+
+
+document.querySelectorAll('.mapboxgl-ctrl-group button').forEach(button => {
+  button.addEventListener('click', () => {
+      // Toggle the 'active' class on click
+      button.classList.toggle('active');
+  });
+});
