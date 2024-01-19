@@ -205,32 +205,39 @@ function downloadGeoJSON(mapType) {
 }
 
 function handleFileUpload(mapType) {
-    const draw = {
-        aftermap: afterMapDrawConfig,
-        beforemap: beforeMapDrawConfig
-    }[mapType]
-    const fileInputId = {
-        aftermap: "aftermap-file_upload",
-        beforemap: "beforemap-file_upload"
-    }[mapType]
+  const draw = {
+      aftermap: afterMapDrawConfig,
+      beforemap: beforeMapDrawConfig
+  }[mapType];
+  const fileInputId = {
+      aftermap: "aftermap-file_upload",
+      beforemap: "beforemap-file_upload"
+  }[mapType];
   const fileInput = document.getElementById(fileInputId);
 
   const file = fileInput.files[0];
 
   if (file) {
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onload = function (e) {
-      const contents = e.target.result;
-      draw.add(JSON.parse(contents));
-      draw.changeMode("simple_select");
-    };
+      reader.onload = function (e) {
+          const contents = e.target.result;
+          const data = JSON.parse(contents);
+          draw.add(data);
+          draw.changeMode("simple_select");
 
-    reader.readAsText(file);
+          // Create labels for each feature
+          data.features.forEach(feature => {
+              createOrUpdateLabel(mapType === 'aftermap' ? afterMap : beforeMap, feature);
+          });
+      };
+
+      reader.readAsText(file);
   } else {
-    alert("No file selected")
+      alert("No file selected");
   }
 }
+
 
 document.getElementById('beforemap-info-input').addEventListener('input', function() {
   this.style.height = 'auto';
