@@ -75,74 +75,78 @@ function disable() {
 }
 */
 
-afterMap.on("draw.selectionchange", e => onSelectFeature(e, "aftermap"));
-beforeMap.on("draw.selectionchange", e => onSelectFeature(e, "beforemap"));
+function createOrUpdateLabel(mapInstance, feature) {
+  const coordinates = feature.geometry.type === 'Point' ? 
+                      feature.geometry.coordinates : 
+                      feature.geometry.coordinates[0][0];
+  const labelId = feature.properties.title || 'no-title';
 
-function onSelectFeature(e, mapType) {
-    const title = {
-        aftermap: "aftermap-title-input",
-        beforemap: "beforemap-title-input"
-    }[mapType]
-    const info = {
-        aftermap: "aftermap-info-input",
-        beforemap: "beforemap-info-input"
-    }[mapType]
-
-  if (e.features.length > 0) {
-    const feature = e.features[0];
-    document.getElementById(title).value =
-      feature.properties.title || "";
-    document.getElementById(info).value = feature.properties.info || "";
-    console.log(feature.geometry.coordinates)
-    let coordinates;
-
-    if (feature.geometry.coordinates.length === 2){
-      coordinates = feature.geometry.coordinates;
-    } else
-     coordinates = feature.geometry.coordinates[0][0];
-    console.log(coordinates)
   var label = {
-    id: feature.properties.title,
-    type: "symbol",
-    source: {
-      type: "geojson",
-      data: {
-        type: "FeatureCollection",
-        features: [
-          {
-            type: "Feature",
-            properties: {
-              title: feature.properties.title || "No title set",
-              icon: "circle",
-            },
-            geometry: {
-              type: "Point",
-              coordinates: coordinates,
-            },
+      id: labelId,
+      type: "symbol",
+      source: {
+          type: "geojson",
+          data: {
+              type: "FeatureCollection",
+              features: [{
+                  type: "Feature",
+                  properties: {
+                      title: labelId,
+                      icon: "circle",
+                  },
+                  geometry: {
+                      type: "Point",
+                      coordinates: coordinates,
+                  },
+              }],
           },
-        ],
       },
-    },
-    layout: {
-      visibility: "visible",
-      "text-font": ["Asap Medium"],
-      "text-field": "{title}",
-      "text-size": 18,
-    },
-    paint: {
-      "text-color": "#000000",
-      "text-halo-width": 3,
-      "text-halo-blur": 2,
-      "text-halo-color": "#ffffff",
-    },
+      layout: {
+          "text-font": ["Asap Medium"],
+          "text-field": "{title}",
+          "text-size": 18,
+          "text-offset": [0, 1.5],
+          "visibility": "visible"
+      },
+      paint: {
+          "text-color": "#000000",
+          "text-halo-width": 3,
+          "text-halo-blur": 2,
+          "text-halo-color": "#ffffff",
+      },
   };
 
-  beforeMap.addLayer(label)
+  if (mapInstance.getLayer(labelId)) {
+      mapInstance.getSource(labelId).setData(label.source.data);
+  } else {
+      mapInstance.addLayer(label);
   }
-
-  
 }
 
+// Event listener for feature selection changes
+beforeMap.on("draw.selectionchange", e => onSelectFeature(e, "beforemap"));
+afterMap.on("draw.selectionchange", e => onSelectFeature(e, "aftermap"));
+
+
+function onSelectFeature(e, mapType) {
+  const title = {
+      aftermap: "aftermap-title-input",
+      beforemap: "beforemap-title-input"
+  }[mapType];
+  const info = {
+      aftermap: "aftermap-info-input",
+      beforemap: "beforemap-info-input"
+  }[mapType];
+
+  if (e.features.length > 0) {
+      const feature = e.features[0];
+      document.getElementById(title).value = feature.properties.title || "";
+      document.getElementById(info).value = feature.properties.info || "";
+  }
+}
+
+
+// Update feature info and label
 function updateFeatureInfo(mapType) {
   const draw = {
       aftermap: afterMapDrawConfig,
@@ -168,17 +172,8 @@ function updateFeatureInfo(mapType) {
       draw.setFeatureProperty(feature.id, "title", title);
       draw.setFeatureProperty(feature.id, "info", info);
 
-      // Get the "Update Info" button for the current map type
-      const updateButtonId = `${mapType}-update-info-button`; // Ensure this ID matches your button ID
-      const updateButton = document.getElementById(updateButtonId);
-      if (updateButton) {
-          const originalText = updateButton.innerHTML;
-          updateButton.innerHTML = "✓ Updated"; // Unicode checkmark
-          // Reset the button text after a short delay
-          setTimeout(() => {
-              updateButton.innerHTML = originalText;
-          }, 2000); // 2 seconds delay
-      }
+      const mapInstance = mapType === 'aftermap' ? afterMap : beforeMap;
+      createOrUpdateLabel(mapInstance, feature);
   } else {
       alert("No feature selected. Select a feature to update its information.");
   }
@@ -250,3 +245,59 @@ document.querySelectorAll('.mapboxgl-ctrl-group button').forEach(button => {
       button.classList.toggle('active');
   });
 });
+
+function updateLabelPosition(mapInstance, feature) {
+  const coordinates = feature.geometry.type === 'Point' ? 
+                      feature.geometry.coordinates : 
+                      feature.geometry.coordinates[0][0];
+
+  if (mapInstance.getSource(feature.properties.title)) {
+      mapInstance.getSource(feature.properties.title).setData({
+          type: "FeatureCollection",
+          features: [{
+              type: "Feature",
+              properties: {
+                  title: feature.properties.title || "No title set",
+              },
+              geometry: {
+                  type: "Point",
+                  coordinates: coordinates,
+              }
+          }]
+      });
+  }
+}
+
+// Event listeners for updating label position and removing labels
+beforeMap.on('draw.update', function(e) {
+  if (e.features.length > 0) {
+      updateLabelPosition(beforeMap, e.features[0]);
+  }
+});
+
+afterMap.on('draw.update', function(e) {
+  if (e.features.length > 0) {
+      updateLabelPosition(afterMap, e.features[0]);
+  }
+});
+
+beforeMap.on('draw.delete', function(e) {
+  if (e.features.length > 0) {
+      removeLabel(beforeMap, e.features[0]);
+  }
+});
+
+afterMap.on('draw.delete', function(e) {
+  if (e.features.length > 0) {
+      removeLabel(afterMap, e.features[0]);
+  }
+});
+
+
+function removeLabel(mapInstance, feature) {
+  if (mapInstance.getLayer(feature.properties.title)) {
+      mapInstance.removeLayer(feature.properties.title);
+      mapInstance.removeSource(feature.properties.title);
+  }
+}
+
