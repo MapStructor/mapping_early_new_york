@@ -99,8 +99,12 @@ if (urlParams.get("sketch") === "1") {
       const feature = e.features[0];
       document.getElementById(title).value = feature.properties.title || "";
       document.getElementById(info).value = feature.properties.info || "";
-    }
+      document.getElementById(mapType + "-startdate-input").value = feature.properties.startDate || "";
+      document.getElementById(mapType + "-enddate-input").value = feature.properties.endDate || "";
+  
   }
+}
+
 
   // Update feature info and label
   function updateFeatureInfo(mapType) {
@@ -123,17 +127,36 @@ if (urlParams.get("sketch") === "1") {
 
     if (selectedFeatures.features.length > 0) {
       const feature = selectedFeatures.features[0];
+
+      // Retrieve the values from the input fields
+      const title = document.getElementById(titleId).value;
+      const info = document.getElementById(infoId).value;
+      const startDate = document.getElementById(mapType + "-startdate-input").value;
+      const endDate = document.getElementById(mapType + "-enddate-input").value;
+
+      // Set the properties on the feature
       feature.properties.title = title;
       feature.properties.info = info;
+      feature.properties.startDate = startDate;
+      feature.properties.endDate = endDate;
+
+      // Update the feature properties in the draw configuration
       draw.setFeatureProperty(feature.id, "title", title);
       draw.setFeatureProperty(feature.id, "info", info);
+      draw.setFeatureProperty(feature.id, "startDate", startDate);
+      draw.setFeatureProperty(feature.id, "endDate", endDate);
 
-      const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
+      // Update label for the feature
+      const mapInstance = mapType === 'aftermap' ? afterMap : beforeMap;
       createOrUpdateLabel(mapInstance, feature);
     } else {
       alert("No feature selected. Select a feature to update its information.");
-    }
   }
+}
+
+
+
+
 
   function downloadGeoJSON(mapType) {
     const draw = {
@@ -191,8 +214,9 @@ if (urlParams.get("sketch") === "1") {
       reader.readAsText(file);
     } else {
       alert("No file selected");
-    }
   }
+}
+
 
   document
     .getElementById("beforemap-info-input")

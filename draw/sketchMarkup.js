@@ -203,6 +203,8 @@ if (urlParams.get("sketch") === "1") {
 
             <div class="calculation-box">
             <input type="text" id="beforemap-title-input" placeholder="Title" class="sketch-input"/>
+            <input type="text" id="beforemap-startdate-input" placeholder="Start Date" class="sketch-input"/>
+            <input type="text" id="beforemap-enddate-input" placeholder="End Date" class="sketch-input"/>
             <textarea id="beforemap-info-input" placeholder="Additional information"></textarea>
             
             <div class="button-group update-group">
