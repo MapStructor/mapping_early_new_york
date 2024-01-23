@@ -361,7 +361,7 @@ function addKarlBeforeLayers(date) {
         beforeMap.setFeatureState(
           {
             source: "karl_long_island-left",
-            sourceLayer: "boundary_areas_long_island-8guvh4",
+            sourceLayer: "boundaries_LI_to_1700-8zmmzq",
             id: hoveredKarlIdLeft,
           },
           { hover: false }
@@ -372,7 +372,7 @@ function addKarlBeforeLayers(date) {
       beforeMap.setFeatureState(
         {
           source: "karl_long_island-left",
-          sourceLayer: "boundary_areas_long_island-8guvh4",
+          sourceLayer: "boundaries_LI_to_1700-8zmmzq",
           id: hoveredKarlIdLeft,
         },
         { hover: true }
@@ -381,7 +381,7 @@ function addKarlBeforeLayers(date) {
       var PopUpHTML = "";
       PopUpHTML +=
         "<div class='infoLayerDutchGrantsPopUp'><b>Name : </b>" +
-        e.features[0].properties.corr_label +
+        e.features[0].properties.NAME +
         "</div>";
 
       var coordinates = e.features[0].geometry.coordinates.slice();
@@ -402,7 +402,7 @@ function addKarlBeforeLayers(date) {
       beforeMap.setFeatureState(
         {
           source: "karl_long_island-left",
-          sourceLayer: "boundary_areas_long_island-8guvh4",
+          sourceLayer: "boundaries_LI_to_1700-8zmmzq",
           id: hoveredKarlIdLeft,
         },
         { hover: false }

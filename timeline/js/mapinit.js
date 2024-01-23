@@ -1807,7 +1807,7 @@ function NativeGroupsClickHandle(event) {
 function KarlClickHandle(event) {
   var highPopUpHTML =
     "<div class='infoLayerKarlPopUp'><b>Name : </b>" +
-    event.features[0].properties.corr_label +
+    event.features[0].properties.NAME +
     "</div>";
 
   if (karl_layer_view_id == event.features[0].id) {
@@ -1832,7 +1832,7 @@ function KarlClickHandle(event) {
       afterMap.setFeatureState(
         {
           source: "karl_long_island-right-highlighted",
-          sourceLayer: "boundary_areas_long_island-8guvh4",
+          sourceLayer: "boundaries_LI_to_1700-8zmmzq",
           id: karl_layer_view_id,
         },
         { hover: true }
@@ -1840,7 +1840,7 @@ function KarlClickHandle(event) {
       beforeMap.setFeatureState(
         {
           source: "karl_long_island-left-highlighted",
-          sourceLayer: "boundary_areas_long_island-8guvh4",
+          sourceLayer: "boundaries_LI_to_1700-8zmmzq",
           id: karl_layer_view_id,
         },
         { hover: true }
@@ -1863,7 +1863,7 @@ function KarlClickHandle(event) {
     afterMap.setFeatureState(
       {
         source: "karl_long_island-right-highlighted",
-        sourceLayer: "boundary_areas_long_island-8guvh4",
+        sourceLayer: "boundaries_LI_to_1700-8zmmzq",
         id: karl_layer_view_id,
       },
       { hover: false }
@@ -1871,7 +1871,7 @@ function KarlClickHandle(event) {
     afterMap.setFeatureState(
       {
         source: "karl_long_island-right-highlighted",
-        sourceLayer: "boundary_areas_long_island-8guvh4",
+        sourceLayer: "boundaries_LI_to_1700-8zmmzq",
         id: event.features[0].id,
       },
       { hover: true }
@@ -1879,7 +1879,7 @@ function KarlClickHandle(event) {
     beforeMap.setFeatureState(
       {
         source: "karl_long_island-left-highlighted",
-        sourceLayer: "boundary_areas_long_island-8guvh4",
+        sourceLayer: "boundaries_LI_to_1700-8zmmzq",
         id: karl_layer_view_id,
       },
       { hover: false }
@@ -1887,7 +1887,7 @@ function KarlClickHandle(event) {
     beforeMap.setFeatureState(
       {
         source: "karl_long_island-left-highlighted",
-        sourceLayer: "boundary_areas_long_island-8guvh4",
+        sourceLayer: "boundaries_LI_to_1700-8zmmzq",
         id: event.features[0].id,
       },
       { hover: true }
@@ -2017,7 +2017,7 @@ function closeKarlInfo() {
   afterMap.setFeatureState(
     {
       source: "karl_long_island-right-highlighted",
-      sourceLayer: "boundary_areas_long_island-8guvh4",
+      sourceLayer: "boundaries_LI_to_1700-8zmmzq",
       id: karl_layer_view_id,
     },
     { hover: false }
@@ -2025,7 +2025,7 @@ function closeKarlInfo() {
   beforeMap.setFeatureState(
     {
       source: "karl_long_island-left-highlighted",
-      sourceLayer: "boundary_areas_long_island-8guvh4",
+      sourceLayer: "boundaries_LI_to_1700-8zmmzq",
       id: karl_layer_view_id,
     },
     { hover: false }

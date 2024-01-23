@@ -179,14 +179,14 @@ const layers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.dv28lnbp",
+      url: "mapbox://mapny.brthat7a",
     },
     layout: {
       visibility: document.getElementById("karl_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "boundary_areas_long_island-8guvh4",
+    "source-layer": "boundaries_LI_to_1700-8zmmzq",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [
@@ -206,14 +206,14 @@ const layers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.dv28lnbp",
+      url: "mapbox://mapny.brthat7a",
     },
     layout: {
       visibility: document.getElementById("karl_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "boundary_areas_long_island-8guvh4",
+    "source-layer": "boundaries_LI_to_1700-8zmmzq",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [
@@ -231,14 +231,14 @@ const layers = [
     type: "line",
     source: {
       type: "vector",
-      url: "mapbox://mapny.ckj6h3ga",
+      url: "mapbox://mapny.6ro0a0e0",
     },
     layout: {
       visibility: document.getElementById("karl_layer_lines").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "boundary_lines_long_island-0c8elq",
+    "source-layer": "boundaries_lines_LI_to_1700-190acb",
     paint: {
       "line-color": "#FF0000",
       "line-width": 3,
@@ -1211,14 +1211,14 @@ const beforeLayers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.dv28lnbp",
+      url: "mapbox://mapny.brthat7a",
     },
     layout: {
       visibility: document.getElementById("karl_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "boundary_areas_long_island-8guvh4",
+    "source-layer": "boundaries_LI_to_1700-8zmmzq",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [
@@ -1238,14 +1238,14 @@ const beforeLayers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.dv28lnbp",
+      url: "mapbox://mapny.brthat7a",
     },
     layout: {
       visibility: document.getElementById("karl_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "boundary_areas_long_island-8guvh4",
+    "source-layer": "boundaries_LI_to_1700-8zmmzq",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [
@@ -1263,14 +1263,14 @@ const beforeLayers = [
     type: "line",
     source: {
       type: "vector",
-      url: "mapbox://mapny.ckj6h3ga",
+      url: "mapbox://mapny.6ro0a0e0",
     },
     layout: {
       visibility: document.getElementById("karl_layer_lines").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "boundary_lines_long_island-0c8elq",
+    "source-layer": "boundaries_lines_LI_to_1700-190acb",
     paint: {
       "line-color": "#FF0000",
       "line-width": 3,
