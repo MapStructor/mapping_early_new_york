@@ -67,6 +67,8 @@ const manahattaMapsData = [
   },
 ];
 
+
+
 const longIslandMapsData = [
   {
     id: "clm2yuk8t023601nsgs112fvn",
@@ -81,10 +83,28 @@ const longIslandMapsData = [
     infoId: "indians-long-island",
   },
   {
+    id: "clrzcx4vf01at01o86a0r79qi",
+    name: "1640-1700 | L.I. Families",
+    zoomFunction: "zoomtobounds('LongIsland')",
+    infoId: "long-island-families",
+  },
+  {
+    id: "clrzd1mx601ex01pbhuxp0rfe",
+    name: "1706 | Long Island",
+    zoomFunction: "zoomtobounds('LongIsland')",
+    infoId: "long-island-1706",
+  },
+  {
     id: "clm2yukk901zz01p7953m4i53",
     name: "1734 | Long Island",
     zoomFunction: "zoomtocenter('Long Island')",
     infoId: "long-island-1734",
+  },
+  {
+    id: "clrzd8axh01ay01o890wh6fvt",
+    name: "1777 | Long Island & CT",
+    zoomFunction: "zoomtocenter('Long Island')",
+    infoId: "long-island-1777",
   },
   {
     id: "clm2yumma022k01ma52i8c5b5",
@@ -97,6 +117,12 @@ const longIslandMapsData = [
     name: "1873 | Gravesend Map",
     zoomFunction: "zoomtocenter('Gravesend Map')",
     infoId: "gravesend-map",
+  },
+  {
+    id: "clrzd4yxc01e901qq5k85efld",
+    name: "1842 | Long Island",
+    zoomFunction: "zoomtocenter('Long Island')",
+    infoId: "long-island-1842",
   },
   {
     id: "clm2yupsh026401qi2lpwhhx9",
