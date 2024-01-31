@@ -107,6 +107,12 @@ const longIslandMapsData = [
     infoId: "long-island-1777",
   },
   {
+    id: "clrzd4yxc01e901qq5k85efld",
+    name: "1842 | Long Island",
+    zoomFunction: "zoomtocenter('Long Island')",
+    infoId: "long-island-1842",
+  },
+  {
     id: "clm2yumma022k01ma52i8c5b5",
     name: "1844 | NY Bay and Harbor",
     zoomFunction: "zoomtocenter('NY Bay')",
@@ -117,12 +123,6 @@ const longIslandMapsData = [
     name: "1873 | Gravesend Map",
     zoomFunction: "zoomtocenter('Gravesend Map')",
     infoId: "gravesend-map",
-  },
-  {
-    id: "clrzd4yxc01e901qq5k85efld",
-    name: "1842 | Long Island",
-    zoomFunction: "zoomtocenter('Long Island')",
-    infoId: "long-island-1842",
   },
   {
     id: "clm2yupsh026401qi2lpwhhx9",
