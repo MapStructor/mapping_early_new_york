@@ -326,7 +326,7 @@ const layers = [
     type: "symbol", // Change the type to "symbol"
     source: {
         type: "vector",
-        url: "mapbox://mapny.8c0cqfdz",
+        url: "mapbox://mapny.4oxcibaa",
     },
 
     "layout": {
@@ -335,27 +335,10 @@ const layers = [
       "icon-allow-overlap": true,
       "icon-size": [
         "interpolate", ["linear"], ["zoom"],
-        //This is not fully working - It should change at "2" but it's not.
-        //only "Else" is working.
-        8, ["match", ["get", "changetext"], "2", 0.03, 0.05], // Size at zoom 8
-        15, ["match", ["get", "changetext"], "2", 0.12, 0.08] // Size at zoom 15
-      ]
+        8, 0.05, // Constant size at zoom 8
+        15, 0.08 // Constant size at zoom 15
+      ]      
     },
-    layout: {
-        visibility: document.getElementById("info_points").checked
-            ? "visible"
-            : "none",
-        "icon-image": "info_points_image", // Specify the ID of the custom image
-        "icon-size": 0.08, // Adjust the size of the custom image
-        "icon-allow-overlap": true,
-        "icon-size": [
-          "interpolate", ["linear"], ["zoom"],
-          //This is not fully working - It should change at "2" but it's not.
-          //only "Else" is working.
-          8, ["match", ["get", "changetext"], "2", 0.03, 0.05], // Size at zoom 8
-          15, ["match", ["get", "changetext"], "2", 0.12, 0.08] // Size at zoom 15
-        ]
-
         //Trying to change icons, not working:
         /*
         "icon-image": [
@@ -373,15 +356,13 @@ const layers = [
           "info_points_image2"
         ]
         */
-    },
-    "source-layer": "info_of_interest-17rpk9",
+    "source-layer": "info_of_interest3-0euqvk",
     paint: {
-        "icon-opacity": [
-            "case",
-            ["boolean", ["feature-state", "hover"], false],
-            0.5,
-            1,
-        ],
+      "icon-opacity": [
+        "interpolate", ["linear"], ["zoom"],
+        7, 0, // Opacity at zoom 8
+        8, 1.0 // Opacity becomes fully opaque (1.0) at zoom 9
+      ]
     },
     toggleElement: "info_points"
 }
@@ -422,8 +403,8 @@ const layers = [
     ],
     "text-opacity": [
       "interpolate", ["linear"], ["zoom"],
-      8, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
-      9, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
+      7, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
+      8, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
     ],
     "text-halo-color": [
       "interpolate", ["linear"], ["zoom"],
@@ -1359,27 +1340,26 @@ const beforeLayers = [
     type: "symbol", // Change the type to "symbol"
     source: {
         type: "vector",
-        url: "mapbox://mapny.8c0cqfdz",
+        url: "mapbox://mapny.4oxcibaa",
     },
+
     "layout": {
       "visibility": document.getElementById("info_points").checked ? "visible" : "none",
       "icon-image": "info_points_image",
       "icon-allow-overlap": true,
       "icon-size": [
         "interpolate", ["linear"], ["zoom"],
-        //This is not fully working - It should change at "2" but it's not.
-        //only "Else" is working.
-        8, ["match", ["get", "changetext"], "2", 0.03, 0.05], // Size at zoom 8
-        15, ["match", ["get", "changetext"], "2", 0.12, 0.08] // Size at zoom 15
-      ]
+        8, 0.05, // Constant size at zoom 8
+        15, 0.08 // Constant size at zoom 15
+      ]      
     },
-    "source-layer": "info_of_interest-17rpk9",
+    "source-layer": "info_of_interest3-0euqvk",
     "paint": {
       "icon-opacity": [
         "interpolate", ["linear"], ["zoom"],
-        8, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 8
-        9, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 9
-      ],
+        7, 0, // Opacity at zoom 8
+        8, 1.0 // Opacity becomes fully opaque (1.0) at zoom 9
+      ]
     },
     toggleElement: "info_points"
 },
@@ -1418,8 +1398,8 @@ const beforeLayers = [
     ],
     "text-opacity": [
       "interpolate", ["linear"], ["zoom"],
-      8, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
-      9, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
+      7, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
+      8, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
     ],
     "text-halo-color": [
       "interpolate", ["linear"], ["zoom"],
