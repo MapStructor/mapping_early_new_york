@@ -2250,10 +2250,17 @@ function changeDate(unixDate) {
     "gravesend_boundaries-c6qrbw-left-highlighted",
     dateFilter
   );
+
+  beforeMap.setFilter("long-island-lot-left", dateFilter)
+  beforeMap.setFilter("long-island-lot-labels-left", dateFilter)
   afterMap.setFilter(
     "gravesend_boundaries-c6qrbw-right-highlighted",
     dateFilter
   );
+
+    afterMap.setFilter("long-island-lot-right", dateFilter);
+  afterMap.setFilter("long-island-lot-labels-right", dateFilter)
+
 
   beforeMap.setFilter("gravesend-lines-left", dateFilter);
   afterMap.setFilter("gravesend-lines-right", dateFilter);
