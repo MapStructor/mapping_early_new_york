@@ -188,6 +188,16 @@ $(document).ready(function () {
     $("#footnotediv").toggle("slide");
   });
 
+  $("#long-island-lot").change(function (){
+    $(".long_island_lot").prop("checked", this.checked);
+    if($(this).prop("checked")){
+
+    } else {
+
+    }
+  })
+
+
   $("#current_lots_items").change(function () {
     $(".current_lots").prop("checked", this.checked);
     if ($(this).prop("checked")) {
@@ -567,6 +577,87 @@ $(document).ready(function () {
       $("#settlements_items").prop("checked", false);
     }
   });
+  // for sub layers
+  $(".long_island_lot").change(function () {
+    if ($(".long_island_lot:checked").length == $(".long_island_lot").length) {
+      $("#long-island-lot").prop("checked", "checked");
+    } else {
+      $("#long-island-lot").prop("checked", false);
+    }
+  })
+
+
+// Duplicate for new layer
+  $("#long-island-lot").click(function () {
+    if ($(this).prop("checked")) {
+      /* if (settlements_info_length == 0) {
+        getSettlementsInfo();
+      } */
+      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
+      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
+    } else {
+      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "none");
+      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
+
+      /* if (settlements_layer_view_flag) {
+        closeSettlementsInfo();
+      } */
+    }
+  });
+
+  $("#long-island-lot").click(function () {
+    if ($(this).prop("checked")) {
+      /* if (settlements_info_length == 0) {
+        getSettlementsInfo();
+      } */
+      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
+      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
+      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "visible");
+      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "visible");
+    } else {
+      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "none");
+      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
+      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "none");
+      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "none");
+      /* if (settlements_layer_view_flag) {
+        closeSettlementsInfo();
+      } */
+    }
+  });
+
+  $("#long_island_lot_labels").change(function () {
+    if ($(this).prop("checked")) {
+      /* if (settlements_info_length == 0) {
+        getSettlementsInfo();
+      } */
+      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "visible");
+      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "visible");
+    } else {
+      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "none");
+      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "none");
+
+      /* if (settlements_layer_view_flag) {
+        closeSettlementsInfo();
+      } */
+    }
+  })
+
+  $("#long_island-lot_points").change(function () {
+    if ($(this).prop("checked")) {
+      /* if (settlements_info_length == 0) {
+        getSettlementsInfo();
+      } */
+      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
+      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
+    } else {
+      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "none");
+      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
+
+      /* if (settlements_layer_view_flag) {
+        closeSettlementsInfo();
+      } */
+    }
+  })
 
   $("#settlements_points").click(function () {
     if ($(this).prop("checked")) {

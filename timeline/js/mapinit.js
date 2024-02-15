@@ -692,6 +692,8 @@ var hoveredStateIdRight = null,
   hoveredCurrLotsIdRight = null,
   hoveredCurrLotsIdLeft = null,
   hoveredSettlementsIdRight = null,
+  hoveredLongIslandLotIdLeft = null,
+  hoveredLongIslandLotIdRight = null,
   hoveredSettlementsIdLeft = null;
 (hoveredInfoIdRight = null), (hoveredInfoIdLeft = null);
 
@@ -2542,6 +2544,7 @@ beforeMap.on("style.load", function () {
   addSettlementsLabelsBeforeLayers(date);
   addInfoBeforeLayers(date);
   addInfoLabelsBeforeLayers(date);
+  addLongIsLandLotLabelsBeforeLayers(date)
 
   setTimeout(function () {
     addGravesendBeforeLayers(date);
@@ -2563,6 +2566,7 @@ beforeMap.on("style.load", function () {
     addLongIslandCoastlineBeforeLayers();
     addIndianPathsBeforeLayers();
     addLongIslandNativeGroupsBeforeLayers();
+  addLongIslandLotBeforeLayers(date)
     refreshLayers();
   }, 2000);
 });
@@ -2580,6 +2584,7 @@ afterMap.on("style.load", function () {
     addSettlementsLabelsAfterLayers(date);
     addInfoAfterLayers(date);
     addInfoLabelsAfterLayers(date);
+    addLongIslandLotLabelAfterLayers(date)
   }, 500);
 
   setTimeout(function () {
@@ -2588,6 +2593,7 @@ afterMap.on("style.load", function () {
     addGrantLotsAfterLayers(date);
     addGrantLotsLinesAfterLayers(date);
     addAfterLayers(yr, date);
+    addLongIslandLotAfterLayers(date)
     addAfterFarmsLayer(date);
   }, 1500);
 

@@ -940,6 +940,80 @@ function addLongIslandNativeGroupsAfterLayers() {
   });
 }
 
+
+
+function addLongIslandLotAfterLayers(date){
+  addMapLayer(afterMap, getLayer("long-island-lot-right"), date)
+
+  //ON HOVER
+  afterMap.on("mouseenter", "long-island-lot-right", function (e) {
+    afterMap.getCanvas().style.cursor = "pointer";
+    if (e.features.length > 0) {
+      if (hoveredLongIslandLotIdRight) {
+        afterMap.setFeatureState(
+          {
+            source: "long-island-lot-right",
+            sourceLayer: "LI_lots-4xr18y",
+            id: hoveredLongIslandLotIdRight,
+          },
+          { hover: false }
+        );
+      }
+      hoveredLongIslandLotIdRight = e.features[0].id;
+      afterMap.setFeatureState(
+        {
+          source: "long-island-lot-right",
+          sourceLayer: "LI_lots-4xr18y",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: true }
+      );
+
+      var coordinates = e.features[0].geometry.coordinates.slice();
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      //BEFORE MAP POP UP CONTENTS
+      afterMapSettlementsPopUp
+        .setLngLat(coordinates)
+        .setHTML(
+          "<div class='infoLayerSettlementsPopUp'><b>" +
+            e.features[0].properties.Name +
+            "</b><br>" +
+            "</div>"
+        )
+        .addTo(afterMap);
+    }
+  });
+
+  //OFF HOVER
+  afterMap.on("mouseleave", "long-island-lot-right", function () {
+    afterMap.getCanvas().style.cursor = "";
+    if (hoveredLongIslandLotIdRight) {
+      afterMap.setFeatureState(
+        {
+          source: "long-island-lot-right",
+          sourceLayer: "LI_lots-4xr18y",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: false }
+      );
+    }
+    hoveredLongIslandLotIdRight = null;
+    if (afterMapSettlementsPopUp.isOpen()) afterMapSettlementsPopUp.remove();
+  });
+}
+
+function addLongIslandLotLabelAfterLayers(date){
+  addMapLayer(afterMap, getLayer("long-island-lot-labels-right"), date)
+}
+
+
 // Interactive Zoom Labels Layer
 
 function addAfterLabelsLayer() {

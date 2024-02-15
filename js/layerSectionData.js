@@ -193,6 +193,35 @@ const longIslandLayerSections = [
     isSolid: true,
   },
   {
+    id: "long-island-lot",
+    caretId: "long-island-lot-layer-caret",
+    label: "Long Island Lots",
+    itemSelector: ".long_island_lot_item",
+    zoomTo: "Brooklyn",
+    infoId: "long-island-lot",
+    type: "group",
+  },
+  {
+    className: "long_island_lot",
+    id: "long_island-lot_points",
+    name: "settlements_points",
+    iconColor: "#0b0ee5",
+    label: "Lots",
+    topLayerClass: "long_island_lot",
+    iconType: "circle",
+    isSolid: true,
+  },
+  {
+    id: "long_island_lot_labels",
+    name: "long_island_lot_labels",
+    className: "long_island_lot",
+    iconColor: "#0b0ee5",
+    label: "Labels",
+    topLayerClass: "long_island_lot",
+    iconType: "comment-dots",
+    isSolid: true,
+  },
+  {
     id: 'custom_indian_paths',
     name: 'custom_indian_paths',
     iconColor: '#00ff00',
@@ -326,7 +355,8 @@ const longIslandLayerSections = [
     label: 'Coastline',
     topLayerClass: "long_island",
     isSolid: true
-  }
+  },
+  
 ];
 
 const informationOfInterest = [
