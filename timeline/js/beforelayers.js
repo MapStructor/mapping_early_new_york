@@ -963,7 +963,7 @@ function addLongIslandLotBeforeLayers(date){
         .setLngLat(coordinates)
         .setHTML(
           "<div class='infoLayerSettlementsPopUp'><b>" +
-            e.features[0].properties.Name +
+            e.features[0].properties.Label +
             "</b><br>" +
             "</div>"
         )

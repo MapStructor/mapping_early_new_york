@@ -977,13 +977,13 @@ function addLongIslandLotAfterLayers(date){
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
-
+      console.log(e.features)
       //BEFORE MAP POP UP CONTENTS
       afterMapSettlementsPopUp
         .setLngLat(coordinates)
         .setHTML(
           "<div class='infoLayerSettlementsPopUp'><b>" +
-            e.features[0].properties.Name +
+            e.features[0].properties.Label +
             "</b><br>" +
             "</div>"
         )
