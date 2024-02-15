@@ -988,7 +988,7 @@ const layers = [
     visibility: document.getElementById("long_island_lot_labels").checked
       ? "visible"
       : "none",
-    "text-field": "{corr_label}",
+    "text-field": "{Label}",
     "text-offset": [0, 1],
     "text-size": {
       stops: [
@@ -1579,7 +1579,7 @@ const beforeLayers = [
     visibility: document.getElementById("long_island_lot_labels").checked
       ? "visible"
       : "none",
-    "text-field": "{corr_label}",
+    "text-field": "{Label}",
     "text-offset": [0, 1],
     "text-size": {
       stops: [

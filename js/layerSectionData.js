@@ -206,7 +206,7 @@ const longIslandLayerSections = [
     id: "long_island-lot_points",
     name: "settlements_points",
     iconColor: "#0b0ee5",
-    label: "corr_label",
+    label: "Lots",
     topLayerClass: "long_island_lot",
     iconType: "circle",
     isSolid: true,
