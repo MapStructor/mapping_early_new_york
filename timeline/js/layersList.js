@@ -946,14 +946,16 @@ const layers = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://mapny.dm346dz9",
+      // url: "mapbox://mapny.dm346dz9",
+    url: "mapbox://mapny.3dc1c3h2",
     },
     layout: {
       visibility: document.getElementById("long-island-lot").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "settlements-5551dw",
+    // "source-layer": "settlements-5551dw",
+  "source-layer": "LI_lots-4xr18y",
     paint: {
       "circle-color": "#0b0ee5",
       "circle-opacity": [
@@ -979,7 +981,8 @@ const layers = [
   type: "symbol",
   source: {
     type: "vector",
-    url: "mapbox://mapny.dm346dz9",
+    // url: "mapbox://mapny.dm346dz9",
+    url: "mapbox://mapny.3dc1c3h2",
   },
   layout: {
     visibility: document.getElementById("long_island_lot_labels").checked
@@ -995,7 +998,8 @@ const layers = [
     },
   },
 
-  "source-layer": "settlements-5551dw",
+  // "source-layer": "settlements-5551dw",
+  "source-layer": "LI_lots-4xr18y",
 
   paint: {
     "text-color": "#0b0ee5",
@@ -1532,14 +1536,16 @@ const beforeLayers = [
   type: "circle",
   source: {
     type: "vector",
-    url: "mapbox://mapny.dm346dz9",
+    // url: "mapbox://mapny.dm346dz9",
+    url: "mapbox://mapny.3dc1c3h2",
   },
   layout: {
     visibility: document.getElementById("long-island-lot").checked
       ? "visible"
       : "none",
   },
-  "source-layer": "settlements-5551dw",
+  // "source-layer": "settlements-5551dw",
+  "source-layer": "LI_lots-4xr18y",
   paint: {
     "circle-color": "#0b0ee5",
     "circle-opacity": [
@@ -1566,7 +1572,8 @@ const beforeLayers = [
   type: "symbol",
   source: {
     type: "vector",
-    url: "mapbox://mapny.dm346dz9",
+    // url: "mapbox://mapny.dm346dz9",
+    url: "mapbox://mapny.3dc1c3h2",
   },
   layout: {
     visibility: document.getElementById("long_island_lot_labels").checked
@@ -1582,7 +1589,8 @@ const beforeLayers = [
     },
   },
 
-  "source-layer": "settlements-5551dw",
+  // "source-layer": "settlements-5551dw",
+  "source-layer": "LI_lots-4xr18y",
 
   paint: {
     "text-color": "#0b0ee5",
