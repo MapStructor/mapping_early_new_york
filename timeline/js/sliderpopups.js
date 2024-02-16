@@ -507,3 +507,25 @@ function buildCurrLotsPopUpInfo(props) {
     "<br><br>";
   $("#infoLayerCurrLots").html(popup_html);
 }
+
+function buildLongIslandLot(props) {
+  // Needs more styling
+  var popup_html =
+    "<h3>Current Lot</h3><hr>" +
+    "<b>Name of Cemetary:</b>" +
+    "<br>" +
+    props.Label +
+    "<br><br>" +
+    "<b>Person:</b>" +
+    "<br>" +
+    props.Person +
+    "<br><br>" +
+    "<b>Type:</b>" +
+    "<br>" +
+    props.lot_type +
+    "<br><br>" +
+    "<b>Date:</b>" +
+    props.datetext
+    ;
+  $("#longIslandLots").html(popup_html);
+}

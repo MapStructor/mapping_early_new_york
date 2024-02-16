@@ -28,6 +28,7 @@ $("#infoLayerInfoPoint").slideUp();
 $("#infoLayerGravesend").slideUp(); // REPLACE THIS
 $("#infoLayerNativeGroups").slideUp();
 $("#infoLayerKarl").slideUp();
+// $("#longIslandLots").slideUp();
 
 // world bounds
 const WorldBounds = [
@@ -413,6 +414,7 @@ var castello_click_ev = false,
   curr_layer_click_ev = false,
   settlements_click_ev = false,
   info_click_ev = false,
+  long_island_ev = false,
   zoom_labels_click_ev = false;
 
 var afterMapPopUp = new mapboxgl.Popup({
@@ -669,6 +671,14 @@ var afterHighMapInfoPopUp = new mapboxgl.Popup({
     closeOnClick: false,
   });
 
+  var afterLongIslandLotPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  }), beforeLongIslandLotPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+
 var hoveredStateIdRight = null,
   hoveredStateIdLeft = null,
   hoveredStateIdRightCircle = null,
@@ -764,6 +774,8 @@ beforeMap.on("load", function () {
         "</h2></b></div>")
         .addTo(beforeMap);
       }
+    }).on("click", "long-island-lot-labels-left", function (e) {
+      longIslandLotClickHandle(e)
     })
     .on("click", function () {
       DefaultHandle();
@@ -826,6 +838,9 @@ afterMap.on("load", function () {
         "</b></div>")
         .addTo(afterMap);
       }
+    }).on("click", "long-island-lot-labels-right", function (e) {
+      // call LI lot func here
+      longIslandLotClickHandle(e)
     })
     .on("click", function () {
       DefaultHandle();
@@ -845,7 +860,7 @@ afterMap.on("error", function (e) {
 // ===== Layers click event functions ======
 
 function DefaultHandle() {
-  if (!SKETCH_ENABLED){
+  if (!window.SKETCH_ENABLED){
     if (
       !demo_taxlot_click_ev &&
       !castello_click_ev &&
@@ -858,7 +873,8 @@ function DefaultHandle() {
       !gravesend_click_ev &&
       !native_groups_click_ev &&
       !karl_click_ev &&
-      !zoom_labels_click_ev
+      !zoom_labels_click_ev 
+      // && !long_island_ev
     ) {
       if (windoWidth > 637)
         if ($("#view-hide-layer-panel").length > 0)
@@ -877,8 +893,44 @@ function DefaultHandle() {
     native_groups_click_ev = false;
     karl_click_ev = false;
     zoom_labels_click_ev = false;
-  
+    // long_island_ev = false;
   }
+}
+// LI Lot click handler
+function longIslandLotClickHandle(e){
+  
+  // BUG: some times it doesn't work at a certain zoom level, you would have to zoom in
+  buildLongIslandLot(e.features[0].properties);
+  // BUG: Some pup ups get stuck in the before map
+  
+  // long_island_ev = true
+  var coordinates = [];
+    coordinates = e.features[0].geometry.coordinates.slice();
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    beforeLongIslandLotPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerSettlementsPopUp'><b>" +
+        e.features[0].properties.Label +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!beforeLongIslandLotPopUp.isOpen())
+    beforeLongIslandLotPopUp.addTo(beforeMap);
+
+    afterLongIslandLotPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerSettlementsPopUp'><b>" +
+        e.features[0].properties.Label +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!afterLongIslandLotPopUp.isOpen())
+    afterLongIslandLotPopUp.addTo(afterMap);
 }
 
 function CurrLotsHandle(event) {
