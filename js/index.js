@@ -9,6 +9,7 @@ function handleAjaxError(xhr, textStatus) {
 var dutch_grant_lots_info = [],
   farms_grants_info = [],
   settlements_info = [],
+  long_island_lots_info = [],
   infos_entity = [],
   settlements_linked_location = [],
   brooklyn_grants_info = [],
@@ -17,6 +18,7 @@ var dutch_grant_lots_info = [],
 var dutch_grant_lots_info_length = 0,
   farms_grants_info_length = 0,
   settlements_info_length = 0,
+  long_island_lots_info_length = 0,
   infos_entity_length = 0,
   brooklyn_grants_length = 0,
   taxlot_events_info_length = 0,
@@ -188,14 +190,6 @@ $(document).ready(function () {
     $("#footnotediv").toggle("slide");
   });
 
-  $("#long-island-lot").change(function (){
-    $(".long_island_lot").prop("checked", this.checked);
-    if($(this).prop("checked")){
-
-    } else {
-
-    }
-  })
 
 
   $("#current_lots_items").change(function () {
@@ -587,29 +581,12 @@ $(document).ready(function () {
   })
 
 
-// Duplicate for new layer
-  $("#long-island-lot").click(function () {
-    if ($(this).prop("checked")) {
-      /* if (settlements_info_length == 0) {
-        getSettlementsInfo();
-      } */
-      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
-      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
-    } else {
-      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "none");
-      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
-
-      /* if (settlements_layer_view_flag) {
-        closeSettlementsInfo();
-      } */
-    }
-  });
 
   $("#long-island-lot").click(function () {
     if ($(this).prop("checked")) {
-      /* if (settlements_info_length == 0) {
-        getSettlementsInfo();
-      } */
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
       beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
       afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
       beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "visible");
@@ -619,43 +596,39 @@ $(document).ready(function () {
       afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
       beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "none");
       afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "none");
-      /* if (settlements_layer_view_flag) {
-        closeSettlementsInfo();
-      } */
+      if (long_island_lot_layer_view_flag) {
+        closeLayerLongIslandLotsInfo();
+      }
     }
   });
 
   $("#long_island_lot_labels").change(function () {
     if ($(this).prop("checked")) {
-      /* if (settlements_info_length == 0) {
-        getSettlementsInfo();
-      } */
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
       beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "visible");
       afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "visible");
     } else {
       beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "none");
       afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "none");
-
-      /* if (settlements_layer_view_flag) {
-        closeSettlementsInfo();
-      } */
     }
   })
 
   $("#long_island-lot_points").change(function () {
     if ($(this).prop("checked")) {
-      /* if (settlements_info_length == 0) {
-        getSettlementsInfo();
-      } */
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
       beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
       afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
     } else {
       beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "none");
       afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
 
-      /* if (settlements_layer_view_flag) {
-        closeSettlementsInfo();
-      } */
+      if (long_island_lot_layer_view_flag) {
+        closeLayerLongIslandLotsInfo();
+      }
     }
   })
 
@@ -733,6 +706,10 @@ $(document).ready(function () {
         "visibility",
         "none"
       );
+	  
+	  if (settlements_layer_view_flag) {
+        closeSettlementsInfo();
+      }
     }
   });
 
@@ -2238,14 +2215,17 @@ function getLotsInfo() {
       if (data.length > 0) {
         for (let i = 0; i < data.length; i++) {
           if (typeof data[i].field_old_nid != "undefined") {
-            if (data[i].field_old_nid != "") {
+            //if (data[i].field_old_nid != "") {
               if (data[i].field_content_type == "Grant Lots") {
                 data_info_index = data[i].field_old_title;
                 data_info_index = data_info_index.replace(/\s+/g, "");
                 if (/FortAmsterdam/.test(data_info_index)) {
                   data_info_index = "Fort Amsterdam";
                 }
-              } else {
+              } else if(data[i].field_content_type == "Graveyard") {
+				  data_info_index = "" + data[i].nid + "";
+				  //console.log(data_info_index);
+			  } else {
                 data_info_index = "" + data[i].field_old_nid + "";
               }
 
@@ -2314,10 +2294,10 @@ function getLotsInfo() {
                   "href=\u0022",
                   "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
                 ),
+				body: data[i].body,
               };
-
               lots_info_length += 1;
-            }
+            //}
           }
         }
       }
