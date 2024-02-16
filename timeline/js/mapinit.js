@@ -9,6 +9,7 @@ var grant_lots_view_id = null,
   demo_layer_view_flag = false,
   castello_layer_view_flag = false,
   settlements_layer_view_flag = false,
+  long_island_lot_layer_view_flag = false,
   info_layer_view_flag = false,
   dgrants_layer_view_flag = false,
   gravesend_layer_view_flag = false, // REPLACE THIS
@@ -24,6 +25,7 @@ $("#demoLayerInfo").slideUp();
 $("#infoLayerCastello").slideUp();
 $("#infoLayerCurrLots").slideUp();
 $("#infoLayerSettlements").slideUp();
+$("#infoLayerLongIslandLots").slideUp();
 $("#infoLayerInfoPoint").slideUp();
 $("#infoLayerGravesend").slideUp(); // REPLACE THIS
 $("#infoLayerNativeGroups").slideUp();
@@ -414,7 +416,7 @@ var castello_click_ev = false,
   curr_layer_click_ev = false,
   settlements_click_ev = false,
   info_click_ev = false,
-  long_island_ev = false,
+  long_island_lots_ev = false,
   zoom_labels_click_ev = false;
 
 var afterMapPopUp = new mapboxgl.Popup({
@@ -428,7 +430,8 @@ var afterMapPopUp = new mapboxgl.Popup({
 
 var info_popup_html = "",
   places_popup_html = "",
-  settlements_popup_html = "";
+  settlements_popup_html = "",
+  long_island_lots_popup_html = "";
 
 var afterMapPlacesPopUp = new mapboxgl.Popup({
     closeButton: false,
@@ -652,6 +655,15 @@ var afterHighMapSettlementsPopUp = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
   });
+  
+var afterHighLongIslandLotsPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  }),
+  beforeHighMapLongIslandLotsPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
 
 var afterMapInfoPopUp = new mapboxgl.Popup({
     closeButton: false,
@@ -709,7 +721,8 @@ var hoveredStateIdRight = null,
 
 var clickedInfoId = null,
   clickedStateId = null,
-  clickedSettlementsId = null;
+  clickedSettlementsId = null,
+  clickedLongIslandId = null;
 
 var demo_layer_feature_props = null,
   demo_layer_features = null,
@@ -774,7 +787,7 @@ beforeMap.on("load", function () {
         "</h2></b></div>")
         .addTo(beforeMap);
       }
-    }).on("click", "long-island-lot-labels-left", function (e) {
+    }).on("click", "long-island-lot-left", function (e) {
       longIslandLotClickHandle(e)
     })
     .on("click", function () {
@@ -838,7 +851,7 @@ afterMap.on("load", function () {
         "</b></div>")
         .addTo(afterMap);
       }
-    }).on("click", "long-island-lot-labels-right", function (e) {
+    }).on("click", "long-island-lot-right", function (e) {
       // call LI lot func here
       longIslandLotClickHandle(e)
     })
@@ -873,8 +886,8 @@ function DefaultHandle() {
       !gravesend_click_ev &&
       !native_groups_click_ev &&
       !karl_click_ev &&
-      !zoom_labels_click_ev 
-      // && !long_island_ev
+      !zoom_labels_click_ev &&
+      !long_island_lots_ev
     ) {
       if (windoWidth > 637)
         if ($("#view-hide-layer-panel").length > 0)
@@ -893,44 +906,92 @@ function DefaultHandle() {
     native_groups_click_ev = false;
     karl_click_ev = false;
     zoom_labels_click_ev = false;
-    // long_island_ev = false;
+    long_island_lots_ev = false;
   }
 }
 // LI Lot click handler
-function longIslandLotClickHandle(e){
+function longIslandLotClickHandle(event){
   
-  // BUG: some times it doesn't work at a certain zoom level, you would have to zoom in
-  buildLongIslandLot(e.features[0].properties);
-  // BUG: Some pup ups get stuck in the before map
-  
-  // long_island_ev = true
-  var coordinates = [];
-    coordinates = e.features[0].geometry.coordinates.slice();
+  if (
+    long_island_lot_layer_view_flag &&
+    clickedLongIslandId == event.features[0].id
+  ) {
+    if ($("#view-hide-layer-panel").length > 0)
+      if (!layer_view_flag) {
+        $("#rightInfoBar").css("display", "block");
+        setTimeout(function () {
+          $("#rightInfoBar").slideUp();
+        }, 500);
+      }
+
+    closeLayerLongIslandLotsInfo();
+  } else {
+    clickedLongIslandId = event.features[0].id;
+
+    var ref_name = "" + event.features[0].properties.NID + ""; //parseInt(event.features[0].properties.NID); //event.features[0].properties.Label;
+	
+	console.log(ref_name);
+	
+    long_island_lots_popup_html = "<h3>Long Island Lots</h3><hr>";
+    
+	console.log(event.features[0].properties);
+	
+	//console.log(lots_info);
+	console.warn(lots_info[ref_name]);
+	console.warn(typeof lots_info[ref_name]);
+	
+    if (typeof lots_info[ref_name] == "undefined") {
+      long_island_lots_popup_html +=
+	    "<h3>" + event.features[0].properties.Label + "</h3>" +
+		"<b>" + event.features[0].properties.Person + "</b><br>" +
+		"<b>" + event.features[0].properties.datetext + "</b><br>" + 
+		"<i>" + event.features[0].properties.lot_type + "</i><br>"
+		;
+    } else {
+      long_island_lots_popup_html +=
+	    "<h3>" + ((lots_info[ref_name].title_linked.length > 0) ? lots_info[ref_name].title_linked : ((lots_info[ref_name].title.length > 0) ? lots_info[ref_name].title : event.features[0].properties.Label)) + "</h3>" +
+		"<b>" + lots_info[ref_name].date_start + "</b><br>" + 
+		"<i>" + lots_info[ref_name].body + "</i><br>"
+        ;
+    }
+	
+    var coordinates = [];
+    coordinates = event.features[0].geometry.coordinates.slice();
 
     // Ensure that if the map is zoomed out such that multiple
     // copies of the feature are visible, the popup appears
     // over the copy being pointed to.
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
     }
-
-    beforeLongIslandLotPopUp.setLngLat(coordinates).setHTML(
-      "<div class='infoLayerSettlementsPopUp'><b>" +
-        e.features[0].properties.Label +
+    beforeHighMapLongIslandLotsPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerLongIslandLotsPopUp'><b>" +
+        event.features[0].properties.Label +
         "</b><br>" +
         "</div>"
     );
-    if (!beforeLongIslandLotPopUp.isOpen())
-    beforeLongIslandLotPopUp.addTo(beforeMap);
+    if (!beforeHighMapLongIslandLotsPopUp.isOpen())
+      beforeHighMapLongIslandLotsPopUp.addTo(beforeMap);
 
-    afterLongIslandLotPopUp.setLngLat(coordinates).setHTML(
-      "<div class='infoLayerSettlementsPopUp'><b>" +
-        e.features[0].properties.Label +
+    afterHighLongIslandLotsPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerLongIslandLotsPopUp'><b>" +
+        event.features[0].properties.Label +
         "</b><br>" +
         "</div>"
     );
-    if (!afterLongIslandLotPopUp.isOpen())
-    afterLongIslandLotPopUp.addTo(afterMap);
+    if (!afterHighLongIslandLotsPopUp.isOpen())
+      afterHighLongIslandLotsPopUp.addTo(afterMap);
+    if ($(".infoLayerElem").first().attr("id") != "infoLayerLongIslandLots")
+      $("#infoLayerLongIslandLots").insertBefore($(".infoLayerElem").first());
+    $("#infoLayerLongIslandLots").html(long_island_lots_popup_html).slideDown();
+
+    if (!layer_view_flag)
+      if ($("#view-hide-layer-panel").length > 0)
+        $("#view-hide-layer-panel").trigger("click");
+    long_island_lot_layer_view_flag = true;
+  }
+  long_island_lots_ev = true;
+  
 }
 
 function CurrLotsHandle(event) {
@@ -1986,6 +2047,15 @@ function closeSettlementsInfo() {
     beforeHighMapSettlementsPopUp.remove();
 }
 
+function closeLayerLongIslandLotsInfo() {
+  $("#infoLayerLongIslandLots").slideUp();
+  long_island_lot_layer_view_flag = false;
+  if (afterHighLongIslandLotsPopUp.isOpen())
+    afterHighLongIslandLotsPopUp.remove();
+  if (beforeHighMapLongIslandLotsPopUp.isOpen())
+    beforeHighMapLongIslandLotsPopUp.remove();
+}
+
 function closeInfoLayerInfo() {
   $("#infoLayerInfoPoint").slideUp();
   info_layer_view_flag = false;
@@ -2302,15 +2372,16 @@ function changeDate(unixDate) {
     "gravesend_boundaries-c6qrbw-left-highlighted",
     dateFilter
   );
-
-  beforeMap.setFilter("long-island-lot-left", dateFilter)
-  beforeMap.setFilter("long-island-lot-labels-left", dateFilter)
   afterMap.setFilter(
     "gravesend_boundaries-c6qrbw-right-highlighted",
     dateFilter
   );
 
-    afterMap.setFilter("long-island-lot-right", dateFilter);
+
+  beforeMap.setFilter("long-island-lot-left", dateFilter)
+  beforeMap.setFilter("long-island-lot-labels-left", dateFilter)
+  
+  afterMap.setFilter("long-island-lot-right", dateFilter);
   afterMap.setFilter("long-island-lot-labels-right", dateFilter)
 
 
