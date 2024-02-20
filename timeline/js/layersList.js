@@ -431,14 +431,14 @@ const layers = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://mapny.dm346dz9",
+      url: "mapbox://mapny.98y0pxrl",
     },
     layout: {
       visibility: document.getElementById("settlements_points").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "settlements-5551dw",
+    "source-layer": "settlements-1yjzfy",
     paint: {
       "circle-color": "#0b0ee5",
       "circle-opacity": [
@@ -463,7 +463,7 @@ const layers = [
     type: "symbol",
     source: {
       type: "vector",
-      url: "mapbox://mapny.dm346dz9",
+      url: "mapbox://mapny.98y0pxrl",
     },
     layout: {
       visibility: document.getElementById("settlements_labels").checked
@@ -479,7 +479,7 @@ const layers = [
       },
     },
 
-    "source-layer": "settlements-5551dw",
+    "source-layer": "settlements-1yjzfy",
 
     paint: {
       "text-color": "#0b0ee5",
@@ -946,18 +946,18 @@ const layers = [
     type: "circle",
     source: {
       type: "vector",
-      // url: "mapbox://mapny.dm346dz9",
-    url: "mapbox://mapny.3dc1c3h2",
+      // url: "mapbox://mapny.98y0pxrl",
+    url: "mapbox://mapny.0884by5y",
     },
     layout: {
       visibility: document.getElementById("long-island-lot").checked
         ? "visible"
         : "none",
     },
-    // "source-layer": "settlements-5551dw",
-  "source-layer": "LI_lots-4xr18y",
+    // "source-layer": "settlements-1yjzfy",
+  "source-layer": "LI_lots-4gv85t",
     paint: {
-      "circle-color": "#0b0ee5",
+      "circle-color": "#e5870b",
       "circle-opacity": [
         "case",
         ["boolean", ["feature-state", "hover"], false],
@@ -965,7 +965,7 @@ const layers = [
         1,
       ],
       "circle-stroke-width": 2,
-      "circle-stroke-color": "#0b0ee5",
+      "circle-stroke-color": "#e5870b",
       "circle-stroke-opacity": [
         "case",
         ["boolean", ["feature-state", "hover"], false],
@@ -981,8 +981,8 @@ const layers = [
   type: "symbol",
   source: {
     type: "vector",
-    // url: "mapbox://mapny.dm346dz9",
-    url: "mapbox://mapny.3dc1c3h2",
+    // url: "mapbox://mapny.98y0pxrl",
+    url: "mapbox://mapny.0884by5y",
   },
   layout: {
     visibility: document.getElementById("long_island_lot_labels").checked
@@ -998,8 +998,8 @@ const layers = [
     },
   },
 
-  // "source-layer": "settlements-5551dw",
-  "source-layer": "LI_lots-4xr18y",
+  // "source-layer": "settlements-1yjzfy",
+  "source-layer": "LI_lots-4gv85t",
 
   paint: {
     "text-color": "#0b0ee5",
@@ -1008,8 +1008,8 @@ const layers = [
     "text-halo-blur": 1,
     "text-opacity": {
       stops: [
-        [8, 0],
-        [9, 1],
+        [10, 0],
+        [11, 1],
       ],
     },
   },
@@ -1502,14 +1502,14 @@ const beforeLayers = [
   type: "circle",
   source: {
     type: "vector",
-    url: "mapbox://mapny.3dc1c3h2",
+    url: "mapbox://mapny.0884by5y",
   },
   layout: {
     visibility: document.getElementById("long-island-lot").checked
       ? "visible"
       : "none",
   },
-  "source-layer": "LI_lots-4xr18y",
+  "source-layer": "LI_lots-4gv85t",
   paint: {
     "circle-color": "#0b0ee5",
     "circle-opacity": [
@@ -1536,18 +1536,18 @@ const beforeLayers = [
   type: "circle",
   source: {
     type: "vector",
-    // url: "mapbox://mapny.dm346dz9",
-    url: "mapbox://mapny.3dc1c3h2",
+    // url: "mapbox://mapny.98y0pxrl",
+    url: "mapbox://mapny.0884by5y",
   },
   layout: {
     visibility: document.getElementById("long-island-lot").checked
       ? "visible"
       : "none",
   },
-  // "source-layer": "settlements-5551dw",
-  "source-layer": "LI_lots-4xr18y",
+  // "source-layer": "settlements-1yjzfy",
+  "source-layer": "LI_lots-4gv85t",
   paint: {
-    "circle-color": "#0b0ee5",
+    "circle-color": "#e5870b",
     "circle-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1555,7 +1555,7 @@ const beforeLayers = [
       1,
     ],
     "circle-stroke-width": 2,
-    "circle-stroke-color": "#0b0ee5",
+    "circle-stroke-color": "#e5870b",
     "circle-stroke-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1572,8 +1572,8 @@ const beforeLayers = [
   type: "symbol",
   source: {
     type: "vector",
-    // url: "mapbox://mapny.dm346dz9",
-    url: "mapbox://mapny.3dc1c3h2",
+    // url: "mapbox://mapny.98y0pxrl",
+    url: "mapbox://mapny.0884by5y",
   },
   layout: {
     visibility: document.getElementById("long_island_lot_labels").checked
@@ -1589,8 +1589,8 @@ const beforeLayers = [
     },
   },
 
-  // "source-layer": "settlements-5551dw",
-  "source-layer": "LI_lots-4xr18y",
+  // "source-layer": "settlements-1yjzfy",
+  "source-layer": "LI_lots-4gv85t",
 
   paint: {
     "text-color": "#0b0ee5",
@@ -1599,8 +1599,8 @@ const beforeLayers = [
     "text-halo-blur": 1,
     "text-opacity": {
       stops: [
-        [8, 0],
-        [9, 1],
+        [10, 0],
+        [11, 1],
       ],
     },
   },
@@ -1613,14 +1613,14 @@ const beforeLayers = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://mapny.dm346dz9",
+      url: "mapbox://mapny.98y0pxrl",
     },
     layout: {
       visibility: document.getElementById("settlements_points").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "settlements-5551dw",
+    "source-layer": "settlements-1yjzfy",
     paint: {
       "circle-color": "#0b0ee5",
       "circle-opacity": [
@@ -1645,7 +1645,7 @@ const beforeLayers = [
     type: "symbol",
     source: {
       type: "vector",
-      url: "mapbox://mapny.dm346dz9",
+      url: "mapbox://mapny.98y0pxrl",
     },
     layout: {
       visibility: document.getElementById("settlements_labels").checked
@@ -1661,7 +1661,7 @@ const beforeLayers = [
       },
     },
 
-    "source-layer": "settlements-5551dw",
+    "source-layer": "settlements-1yjzfy",
 
     paint: {
       "text-color": "#0b0ee5",

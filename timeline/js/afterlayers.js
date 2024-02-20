@@ -604,7 +604,7 @@ function addSettlementsAfterLayers(date) {
         afterMap.setFeatureState(
           {
             source: "settlements-right",
-            sourceLayer: "settlements-5551dw",
+            sourceLayer: "settlements-1yjzfy",
             id: hoveredSettlementsIdRight,
           },
           { hover: false }
@@ -614,7 +614,7 @@ function addSettlementsAfterLayers(date) {
       afterMap.setFeatureState(
         {
           source: "settlements-right",
-          sourceLayer: "settlements-5551dw",
+          sourceLayer: "settlements-1yjzfy",
           id: hoveredSettlementsIdRight,
         },
         { hover: true }
@@ -646,7 +646,7 @@ function addSettlementsAfterLayers(date) {
       afterMap.setFeatureState(
         {
           source: "settlements-right",
-          sourceLayer: "settlements-5551dw",
+          sourceLayer: "settlements-1yjzfy",
           id: hoveredSettlementsIdRight,
         },
         { hover: false }
@@ -953,7 +953,7 @@ function addLongIslandLotAfterLayers(date){
         afterMap.setFeatureState(
           {
             source: "long-island-lot-right",
-            sourceLayer: "LI_lots-4xr18y",
+            sourceLayer: "LI_lots-4gv85t",
             id: hoveredLongIslandLotIdRight,
           },
           { hover: false }
@@ -963,7 +963,7 @@ function addLongIslandLotAfterLayers(date){
       afterMap.setFeatureState(
         {
           source: "long-island-lot-right",
-          sourceLayer: "LI_lots-4xr18y",
+          sourceLayer: "LI_lots-4gv85t",
           id: hoveredLongIslandLotIdRight,
         },
         { hover: true }
@@ -983,7 +983,7 @@ function addLongIslandLotAfterLayers(date){
         .setLngLat(coordinates)
         .setHTML(
           "<div class='infoLayerSettlementsPopUp'><b>" +
-            e.features[0].properties.Label +
+            e.features[0].properties.Popup +
             "</b><br>" +
             "</div>"
         )
@@ -998,7 +998,7 @@ function addLongIslandLotAfterLayers(date){
       afterMap.setFeatureState(
         {
           source: "long-island-lot-right",
-          sourceLayer: "LI_lots-4xr18y",
+          sourceLayer: "LI_lots-4gv85t",
           id: hoveredLongIslandLotIdRight,
         },
         { hover: false }

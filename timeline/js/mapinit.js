@@ -966,7 +966,7 @@ function longIslandLotClickHandle(event){
     }
     beforeHighMapLongIslandLotsPopUp.setLngLat(coordinates).setHTML(
       "<div class='infoLayerLongIslandLotsPopUp'><b>" +
-        event.features[0].properties.Label +
+        event.features[0].properties.Popup +
         "</b><br>" +
         "</div>"
     );
@@ -975,7 +975,7 @@ function longIslandLotClickHandle(event){
 
     afterHighLongIslandLotsPopUp.setLngLat(coordinates).setHTML(
       "<div class='infoLayerLongIslandLotsPopUp'><b>" +
-        event.features[0].properties.Label +
+        event.features[0].properties.Popup +
         "</b><br>" +
         "</div>"
     );
