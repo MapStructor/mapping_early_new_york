@@ -195,7 +195,7 @@ const longIslandLayerSections = [
   {
     id: "long-island-lot",
     caretId: "long-island-lot-layer-caret",
-    label: "Long Island Lots",
+    label: "1630-1700 | Long Island Lots ",
     itemSelector: ".long_island_lot_item",
     zoomTo: "LongIsland",
     infoId: "long-island-lot",
