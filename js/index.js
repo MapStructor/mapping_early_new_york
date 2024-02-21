@@ -2260,20 +2260,35 @@ function getLotsInfo() {
     .done(function (data) {
       if (data.length > 0) {
         for (let i = 0; i < data.length; i++) {
-          if (typeof data[i].field_old_nid != "undefined") {
-            //if (data[i].field_old_nid != "") {
-            if (data[i].field_content_type == "Grant Lots") {
-              data_info_index = data[i].field_old_title;
-              data_info_index = data_info_index.replace(/\s+/g, "");
-              if (/FortAmsterdam/.test(data_info_index)) {
-                data_info_index = "Fort Amsterdam";
-              }
-            } else if (data[i].field_content_type == "Graveyard") {
-              data_info_index = "" + data[i].nid + "";
-              //console.log(data_info_index);
-            } else {
-              data_info_index = "" + data[i].field_old_nid + "";
-            }
+			
+            data_info_index = "";
+				
+            switch (data[i].field_content_type.trim()) {
+                case "Grant Lots":
+				    data_info_index = data[i].field_old_title;
+                    data_info_index = data_info_index.replace(/\s+/g, "");
+                    if (/FortAmsterdam/.test(data_info_index)) {
+                       data_info_index = "Fort Amsterdam";
+                    }
+				break;
+				case "Brooklyn Grants":
+				case "Original Grants and Farms":
+				    if (typeof data[i].field_old_nid != "undefined") {
+                       if (data[i].field_old_nid != "") {
+                            data_info_index = "" + data[i].field_old_nid + "";
+					    }
+				    }
+				break;
+				default:
+				    if (typeof data[i].nid != "undefined") {
+                        if (data[i].nid != "") {
+				            data_info_index = "" + data[i].nid + "";
+						}
+					}
+			}
+
+            
+			if(data_info_index != "") {
 
             lots_info[data_info_index] = {
               name: data[i].field_content_type,
@@ -2336,8 +2351,8 @@ function getLotsInfo() {
               body: data[i].body,
             };
             lots_info_length += 1;
-            //}
-          }
+            
+			}
         }
       }
     })
