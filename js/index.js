@@ -190,8 +190,6 @@ $(document).ready(function () {
     $("#footnotediv").toggle("slide");
   });
 
-
-
   $("#current_lots_items").change(function () {
     $(".current_lots").prop("checked", this.checked);
     if ($(this).prop("checked")) {
@@ -571,31 +569,55 @@ $(document).ready(function () {
       $("#settlements_items").prop("checked", false);
     }
   });
-  // for sub layers
+  // for sub layers 
   $(".long_island_lot").change(function () {
     if ($(".long_island_lot:checked").length == $(".long_island_lot").length) {
       $("#long-island-lot").prop("checked", "checked");
     } else {
       $("#long-island-lot").prop("checked", false);
     }
-  })
-
-
+  });
 
   $("#long-island-lot").click(function () {
     if ($(this).prop("checked")) {
       if (lots_info_length == 0) {
         getLotsInfo();
       }
-      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
-      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
-      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "visible");
-      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "visible");
+      beforeMap.setLayoutProperty(
+        "long-island-lot-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "long-island-lot-right",
+        "visibility",
+        "visible"
+      );
+      beforeMap.setLayoutProperty(
+        "long-island-lot-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "long-island-lot-labels-right",
+        "visibility",
+        "visible"
+      );
+      $(".long_island_lot").prop("checked", "checked");
     } else {
       beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "none");
       afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
-      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "none");
-      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "none");
+      beforeMap.setLayoutProperty(
+        "long-island-lot-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "long-island-lot-labels-right",
+        "visibility",
+        "none"
+      );
+      $(".long_island_lot").prop("checked", false);
       if (long_island_lot_layer_view_flag) {
         closeLayerLongIslandLotsInfo();
       }
@@ -607,21 +629,45 @@ $(document).ready(function () {
       if (lots_info_length == 0) {
         getLotsInfo();
       }
-      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "visible");
-      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "visible");
+      beforeMap.setLayoutProperty(
+        "long-island-lot-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "long-island-lot-labels-right",
+        "visibility",
+        "visible"
+      );
     } else {
-      beforeMap.setLayoutProperty("long-island-lot-labels-left", "visibility", "none");
-      afterMap.setLayoutProperty("long-island-lot-labels-right", "visibility", "none");
+      beforeMap.setLayoutProperty(
+        "long-island-lot-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "long-island-lot-labels-right",
+        "visibility",
+        "none"
+      );
     }
-  })
+  });
 
   $("#long_island-lot_points").change(function () {
     if ($(this).prop("checked")) {
       if (lots_info_length == 0) {
         getLotsInfo();
       }
-      beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "visible");
-      afterMap.setLayoutProperty("long-island-lot-right", "visibility", "visible");
+      beforeMap.setLayoutProperty(
+        "long-island-lot-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "long-island-lot-right",
+        "visibility",
+        "visible"
+      );
     } else {
       beforeMap.setLayoutProperty("long-island-lot-left", "visibility", "none");
       afterMap.setLayoutProperty("long-island-lot-right", "visibility", "none");
@@ -630,7 +676,7 @@ $(document).ready(function () {
         closeLayerLongIslandLotsInfo();
       }
     }
-  })
+  });
 
   $("#settlements_points").click(function () {
     if ($(this).prop("checked")) {
@@ -706,8 +752,8 @@ $(document).ready(function () {
         "visibility",
         "none"
       );
-	  
-	  if (settlements_layer_view_flag) {
+
+      if (settlements_layer_view_flag) {
         closeSettlementsInfo();
       }
     }
@@ -2216,87 +2262,80 @@ function getLotsInfo() {
         for (let i = 0; i < data.length; i++) {
           if (typeof data[i].field_old_nid != "undefined") {
             //if (data[i].field_old_nid != "") {
-              if (data[i].field_content_type == "Grant Lots") {
-                data_info_index = data[i].field_old_title;
-                data_info_index = data_info_index.replace(/\s+/g, "");
-                if (/FortAmsterdam/.test(data_info_index)) {
-                  data_info_index = "Fort Amsterdam";
-                }
-              } else if(data[i].field_content_type == "Graveyard") {
-				  data_info_index = "" + data[i].nid + "";
-				  //console.log(data_info_index);
-			  } else {
-                data_info_index = "" + data[i].field_old_nid + "";
+            if (data[i].field_content_type == "Grant Lots") {
+              data_info_index = data[i].field_old_title;
+              data_info_index = data_info_index.replace(/\s+/g, "");
+              if (/FortAmsterdam/.test(data_info_index)) {
+                data_info_index = "Fort Amsterdam";
               }
+            } else if (data[i].field_content_type == "Graveyard") {
+              data_info_index = "" + data[i].nid + "";
+              //console.log(data_info_index);
+            } else {
+              data_info_index = "" + data[i].field_old_nid + "";
+            }
 
-              lots_info[data_info_index] = {
-                name: data[i].field_content_type,
-                title: data[i].field_old_title,
-                title_linked: data[i].title
-                  .replace(
-                    />[^<]+<\/a>/,
-                    ">" + data[i].field_old_title + "</a>"
-                  )
-                  .replace(
-                    "href=\u0022",
-                    "target=\u0022_blank\u0022 href=\u0022https://encyclopedia.nahc-mapping.org/"
-                  ),
-                brooklyn_title: data[i].field_original_title_temp,
-
-
-
-
-
-                to_party_linked: data[i].field_to_party_1222.replace(
+            lots_info[data_info_index] = {
+              name: data[i].field_content_type,
+              title: data[i].field_old_title,
+              title_linked: data[i].title
+                .replace(/>[^<]+<\/a>/, ">" + data[i].field_old_title + "</a>")
+                .replace(
                   "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
+                  "target=\u0022_blank\u0022 href=\u0022https://encyclopedia.nahc-mapping.org/"
                 ),
-                from_party_linked: data[i].field_from_party.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-                to_party: data[i].field_to_party_1_text_,
-                from_party: data[i].field_from_party_text_,
-                to_party2: data[i].field_to_party_2_text222,
-                to_party2_linked: data[i].field_to_party_2_text_.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
+              brooklyn_title: data[i].field_original_title_temp,
 
-                //ADDED FIELDS
-                to_party_linked2: data[i].field_name456
+              to_party_linked: data[i].field_to_party_1222.replace(
+                "href=\u0022",
+                "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
+              ),
+              from_party_linked: data[i].field_from_party.replace(
+                "href=\u0022",
+                "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
+              ),
+              to_party: data[i].field_to_party_1_text_,
+              from_party: data[i].field_from_party_text_,
+              to_party2: data[i].field_to_party_2_text222,
+              to_party2_linked: data[i].field_to_party_2_text_.replace(
+                "href=\u0022",
+                "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
+              ),
+
+              //ADDED FIELDS
+              to_party_linked2: data[i].field_name456
                 ? data[i].field_name456.replace(
-                    "href=\"",
-                    "target=\"_blank\" href=\"https://your-link-prefix/"
+                    'href="',
+                    'target="_blank" href="https://your-link-prefix/'
                   )
                 : "",
-                to_party_text2: data[i].field_name || "",
-        
-                from_party_linked2: data[i].field_from_party_12222
-                  ? data[i].field_from_party_12222.replace(
-                      "href=\"",
-                      "target=\"_blank\" href=\"https://your-link-prefix/"
-                    )
-                  : "",
-                from_party_text2: data[i].field_from_party_1222 || "",
-                //END ADDED FIELDS
+              to_party_text2: data[i].field_name || "",
 
-                date_start: data[i].field_date_start_text_,
-                date_end: data[i].field_date_end_text_,
-                indigenous_signatories: data[i].field_history_notes222,
-                notes: "", // ???
-                descr: data[i].field_grant_description,
-                builds:
-                  data[i].field_current_buildings_and_land.length > 0
-                    ? data[i].field_current_buildings_and_land.split(", ")
-                    : [],
-                type: data[i].field_proptype.replace(
-                  "href=\u0022",
-                  "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
-                ),
-				body: data[i].body,
-              };
-              lots_info_length += 1;
+              from_party_linked2: data[i].field_from_party_12222
+                ? data[i].field_from_party_12222.replace(
+                    'href="',
+                    'target="_blank" href="https://your-link-prefix/'
+                  )
+                : "",
+              from_party_text2: data[i].field_from_party_1222 || "",
+              //END ADDED FIELDS
+
+              date_start: data[i].field_date_start_text_,
+              date_end: data[i].field_date_end_text_,
+              indigenous_signatories: data[i].field_history_notes222,
+              notes: "", // ???
+              descr: data[i].field_grant_description,
+              builds:
+                data[i].field_current_buildings_and_land.length > 0
+                  ? data[i].field_current_buildings_and_land.split(", ")
+                  : [],
+              type: data[i].field_proptype.replace(
+                "href=\u0022",
+                "target=\u0022_blank\u0022 href=\u0022https://nahc-mapping.org/mappingNY/encyclopedia"
+              ),
+              body: data[i].body,
+            };
+            lots_info_length += 1;
             //}
           }
         }

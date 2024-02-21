@@ -982,12 +982,12 @@ function addLongIslandLotAfterLayers(date){
       afterMapSettlementsPopUp
         .setLngLat(coordinates)
         .setHTML(
-          "<div class='infoLayerSettlementsPopUp'><b>" +
+          `<div class='infoLayerLongIslandLotsPopUp'><b>` +
             e.features[0].properties.Popup +
             "</b><br>" +
             "</div>"
         )
-        .addTo(afterMap);
+        .addTo(afterMap); 
     }
   });
 
