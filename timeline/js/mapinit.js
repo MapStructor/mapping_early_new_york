@@ -927,33 +927,37 @@ function longIslandLotClickHandle(event){
     closeLayerLongIslandLotsInfo();
   } else {
     clickedLongIslandId = event.features[0].id;
+    const nid = event.features[0].properties.NID
+    fetch(
+      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+    )
+      .then((buffer) => buffer.json())
+      .then((res) => {
+        const html = res[0].rendered_entity;
+        // Define the prefix
+        var prefix = "https://encyclopedia.nahc-mapping.org";
 
-    var ref_name = "" + event.features[0].properties.NID + ""; //parseInt(event.features[0].properties.NID); //event.features[0].properties.Label;
-	
-	console.log(ref_name);
-	
-    long_island_lots_popup_html = "<h3>Long Island Lots</h3><hr>";
-    
-	console.log(event.features[0].properties);
-	
-	//console.log(lots_info);
-	console.warn(lots_info[ref_name]);
-	console.warn(typeof lots_info[ref_name]);
-	
-    if (typeof lots_info[ref_name] == "undefined") {
-      long_island_lots_popup_html +=
-	    "<h3>" + event.features[0].properties.Label + "</h3>" +
-		"<b>" + event.features[0].properties.Person + "</b><br>" +
-		"<b>" + event.features[0].properties.datetext + "</b><br>" + 
-		"<i>" + event.features[0].properties.lot_type + "</i><br>"
-		;
-    } else {
-      long_island_lots_popup_html +=
-	    "<h3>" + ((lots_info[ref_name].title_linked.length > 0) ? lots_info[ref_name].title_linked : ((lots_info[ref_name].title.length > 0) ? lots_info[ref_name].title : event.features[0].properties.Label)) + "</h3>" +
-		"<b>" + lots_info[ref_name].date_start + "</b><br>" + 
-		"<i>" + lots_info[ref_name].body + "</i><br>"
-        ;
-    }
+        // Define the regular expression pattern
+        var pattern = /(<a\s+href=")([^"]+)(")/g;
+        var modifiedHtmlString = "";
+        modifiedHtmlString += "<h3>Long Island Lots</h3><hr>";
+        
+        // Replace href attributes with the prefixed version
+        modifiedHtmlString += html
+          .replace(pattern, (_, p1, p2, p3) => {
+            if (p2.slice(0, 4) === "http") {
+              return p1 + p2 + p3;
+            }
+            return p1 + prefix + p2 + p3;
+          })
+          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+            return p1 + ' target="_blank"' + p2;
+          });
+          
+          if ($(".infoLayerElem").first().attr("id") != "infoLayerLongIslandLots")
+          $("#infoLayerLongIslandLots").insertBefore($(".infoLayerElem").first());
+        $("#infoLayerLongIslandLots").html(modifiedHtmlString).slideDown();
+      });
 	
     var coordinates = [];
     coordinates = event.features[0].geometry.coordinates.slice();
@@ -981,9 +985,7 @@ function longIslandLotClickHandle(event){
     );
     if (!afterHighLongIslandLotsPopUp.isOpen())
       afterHighLongIslandLotsPopUp.addTo(afterMap);
-    if ($(".infoLayerElem").first().attr("id") != "infoLayerLongIslandLots")
-      $("#infoLayerLongIslandLots").insertBefore($(".infoLayerElem").first());
-    $("#infoLayerLongIslandLots").html(long_island_lots_popup_html).slideDown();
+    
 
     if (!layer_view_flag)
       if ($("#view-hide-layer-panel").length > 0)
@@ -1015,7 +1017,7 @@ function CurrLotsHandle(event) {
         }
 
       closeCurrLotsInfo();
-    } else {
+    } else { 
       buildCurrLotsPopUpInfo(event.features[0].properties);
       if ($(".infoLayerElem").first().attr("id") != "infoLayerCurrLots")
         $("#infoLayerCurrLots").insertBefore($(".infoLayerElem").first());
@@ -1098,6 +1100,16 @@ function CurrLotsHandle(event) {
 }
 
 function GrantLotsHandle(event) {
+  const props = event.features[0].properties;
+  const nid =
+    props.drupalNid ||
+    props.nid ||
+    props.node_id ||
+    props.node ||
+    props.NID_num ||
+    null;
+
+    console.log("Grant Lots Handle NID: ", nid)
   var highPopUpHTML =
     "<div class='infoLayerGrantLotsPopUp'>" +
     event.features[0].properties.name +
@@ -1164,6 +1176,7 @@ function GrantLotsHandle(event) {
 }
 
 function DemoClickHandle(event) {
+  // const props = event.features[0].properties
   if (demo_layer_view_flag) {
     if ($("#view-hide-layer-panel").length > 0)
       if (!layer_view_flag) {
@@ -1227,7 +1240,7 @@ function DemoClickHandle(event) {
 }
 
 function SettlementsClickHandle(event) {
-
+  console.log(event.features[0].properties)
   if (
     settlements_layer_view_flag &&
     clickedSettlementsId == event.features[0].id
@@ -1243,6 +1256,37 @@ function SettlementsClickHandle(event) {
     closeSettlementsInfo();
   } else {
     clickedSettlementsId = event.features[0].id;
+    const nid = event.features[0].properties.NID
+    
+    fetch(
+      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+    )
+      .then((buffer) => buffer.json())
+      .then((res) => {
+        const html = res[0].rendered_entity;
+        // Define the prefix
+        var prefix = "https://encyclopedia.nahc-mapping.org";
+    
+        // Define the regular expression pattern
+        var pattern = /(<a\s+href=")([^"]+)(")/g;
+        var modifiedHtmlString = "<h3>Settlement</h3><hr>";
+    
+        // Replace href attributes with the prefixed version
+        modifiedHtmlString += html
+          .replace(pattern, (_, p1, p2, p3) => {
+            if (p2.slice(0, 4) === "http") {
+              return p1 + p2 + p3;
+            }
+            return p1 + prefix + p2 + p3;
+          })
+          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+            return p1 + ' target="_blank"' + p2;
+          });
+          console.log("http request completed for settlements layer in long islands")
+          if ($(".infoLayerElem").first().attr("id") != "infoLayerSettlements");
+          $("#infoLayerSettlements").insertBefore($(".infoLayerElem").first());
+        $("#infoLayerSettlements").html(modifiedHtmlString).slideDown();
+      }).catch(console.log);
 
     var ref_name = event.features[0].properties.node_id.replace(
       /\/node\//g,
@@ -1316,9 +1360,7 @@ function SettlementsClickHandle(event) {
     );
     if (!afterHighMapSettlementsPopUp.isOpen())
       afterHighMapSettlementsPopUp.addTo(afterMap);
-    if ($(".infoLayerElem").first().attr("id") != "infoLayerSettlements")
-      $("#infoLayerSettlements").insertBefore($(".infoLayerElem").first());
-    $("#infoLayerSettlements").html(settlements_popup_html).slideDown();
+    
 
     if (!layer_view_flag)
       if ($("#view-hide-layer-panel").length > 0)
@@ -1329,7 +1371,6 @@ function SettlementsClickHandle(event) {
 }
 
 function InfoClickHandle(event) {
-  //#infoLayerInfoPoint
 
   if (info_layer_view_flag && clickedInfoId == event.features[0].id) {
     if ($("#view-hide-layer-panel").length > 0)
@@ -1343,25 +1384,36 @@ function InfoClickHandle(event) {
     closeInfoLayerInfo();
   } else {
     clickedInfoId = event.features[0].id;
-
-    var ref_name = event.features[0].properties.nid;
-    info_popup_html = "<h3>Info</h3><hr>";
-
-    if (typeof infos_entity[ref_name] == "undefined" || ref_name == "") {
-      info_popup_html +=
-        "<b>" + event.features[0].properties.Label + "</b><br><br>";
-    } else {
-      info_popup_html +=
-        "<b>" +
-        (infos_entity[ref_name].name_html.length > 0
-          ? infos_entity[ref_name].name_html
-          : event.features[0].properties.Label) +
-        "</b>" +
-        "<br><br>" +
-        "<i>" +
-        infos_entity[ref_name].descr +
-        "</i>";
-    }
+    const nid = event.features[0].properties.nid
+    fetch(
+      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+    )
+      .then((buffer) => buffer.json())
+      .then((res) => {
+        const html = res[0].rendered_entity;
+        // Define the prefix
+        var prefix = "https://encyclopedia.nahc-mapping.org";
+    
+        // Define the regular expression pattern
+        var pattern = /(<a\s+href=")([^"]+)(")/g;
+        var modifiedHtmlString = "<h3>Info</h3><hr>";
+    
+        // Replace href attributes with the prefixed version
+        modifiedHtmlString += html
+          .replace(pattern, (_, p1, p2, p3) => {
+            if (p2.slice(0, 4) === "http") {
+              return p1 + p2 + p3;
+            }
+            return p1 + prefix + p2 + p3;
+          })
+          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+            return p1 + ' target="_blank"' + p2;
+          });
+          
+          if ($(".infoLayerElem").first().attr("id") != "infoLayerInfoPoint")
+          $("#infoLayerInfoPoint").insertBefore($(".infoLayerElem").first());
+        $("#infoLayerInfoPoint").html(modifiedHtmlString).slideDown();
+      });
 
     var coordinates = [];
     coordinates = event.features[0].geometry.coordinates.slice();
@@ -1388,9 +1440,7 @@ function InfoClickHandle(event) {
         "</div>"
     );
     if (!afterHighMapInfoPopUp.isOpen()) afterHighMapInfoPopUp.addTo(afterMap);
-    if ($(".infoLayerElem").first().attr("id") != "infoLayerInfoPoint")
-      $("#infoLayerInfoPoint").insertBefore($(".infoLayerElem").first());
-    $("#infoLayerInfoPoint").html(info_popup_html).slideDown();
+    
 
     if (!layer_view_flag)
       if ($("#view-hide-layer-panel").length > 0)
@@ -2314,7 +2364,7 @@ function demoFilterRangeCalc() {
   }
 }
 
-//TIME LAYER FILTERING. NOT SURE HOW WORKS.
+// TIME LAYER FILTERING. NOT SURE HOW WORKS.
 
 function changeDate(unixDate) {
   var date = parseInt(moment.unix(unixDate).format("YYYYMMDD"));

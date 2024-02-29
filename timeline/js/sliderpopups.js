@@ -19,98 +19,36 @@ function addFieldToPopup(
 }
 
 function buildPopUpInfo(props) {
-  var prop_nid = "" + props.nid + "";
-  var popup_html =
-    "<b><h2>Lot:<br>" +
-    addFieldToPopup(taxlot_events_info[prop_nid].taxlot, true) +
-    "</h2></b>";
+  const nid =props.nid;
 
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].property_type,
-    "unlinked"
-  );
-  popup_html += "<hr>";
+  fetch(
+      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+    )
+      .then((buffer) => buffer.json())
+      .then((res) => {
+        const html = res[0].rendered_entity;
+        // Define the prefix
+        var prefix = "https://encyclopedia.nahc-mapping.org";
 
-  popup_html +=
-    "<b>DATE: </b>" +
-    addFieldToPopup(
-      taxlot_events_info[prop_nid].start,
-      "unlinked",
-      "",
-      "Unknown"
-    );
-  popup_html += "<hr>";
+        // Define the regular expression pattern
+        var pattern = /(<a\s+href=")([^"]+)(")/g;
+        var modifiedHtmlString = "<h2>Lot:</h2>";
 
-  popup_html += "<b>OWNERSHIP: </b><br>";
-
-  // To Party 1
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].to_party_1_role,
-    "unlinked",
-    "",
-    "Unknown"
-  );
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_1_text);
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party);
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].to_party_1_entity,
-    "unlinked"
-  );
-
-  // To Party 2
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].to_party_2_role,
-    "unlinked",
-    "break"
-  );
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party_2_text);
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].to_party2);
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].to_party_2_entity,
-    "unlinked"
-  );
-
-  // Taxlot Event
-  if (taxlot_events_info[prop_nid].taxlotevent) {
-    popup_html +=
-      "<br><b>LOT EVENT: </b><br>" +
-      addFieldToPopup(taxlot_events_info[prop_nid].taxlotevent);
-  }
-
-  popup_html += "<hr>";
-
-  // From 1
-  popup_html += "<b>FROM: </b><br>";
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].from_party_1_role,
-    "unlinked"
-  );
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_1_text);
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party);
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].from_party_1_entity,
-    "unlinked"
-  );
-
-  // From 2 - With extra line break
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].from_party_2_role,
-    "unlinked",
-    "break"
-  );
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party_2_text);
-  popup_html += addFieldToPopup(taxlot_events_info[prop_nid].from_party2);
-  popup_html += addFieldToPopup(
-    taxlot_events_info[prop_nid].from_party_2_entity,
-    "unlinked"
-  );
-
-  popup_html += "<hr>";
-  popup_html +=
-    "<b>Lot Event ID:</b><br>" +
-    addFieldToPopup(taxlot_events_info[prop_nid].title);
-
-  $("#demoLayerInfo").html(popup_html);
+        
+        modifiedHtmlString += html
+          .replace(pattern, (_, p1, p2, p3) => {
+            if (p2.slice(0, 4) === "http") {
+              return p1 + p2 + p3;
+            }
+            return p1 + prefix + p2 + p3;
+          })
+          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+            return p1 + ' target="_blank"' + p2;
+          });
+          
+        $("#demoLayerInfo").html(modifiedHtmlString);
+      });
+  
 }
 
 function buildGrantLotsPopUpInfo(props) {
@@ -246,6 +184,7 @@ function buildDutchGrantPopUpInfo(props) {
 
 function buildGravesendPopUpInfo(props) {
   var popup_html = "<h3>Brooklyn Grants</h3><hr>";
+  // this layer has an nid, but no data has been uploaded to drupal for it's corresponding nid
 
   if (typeof lots_info[props.node] == "undefined") {
     popup_html +=
@@ -322,62 +261,104 @@ function buildGravesendPopUpInfo(props) {
 }
 
 function buildNativeGroupPopUpInfo(props) {
-  var popup_html = "<h3>Long Island Tribes</h3><hr>";
+  const nid =
+    props.drupalNid ||
+    props.nid ||
+    props.node_id ||
+    props.node ||
+    props.NID_num ||
+    null;
 
-  if (
-    typeof taxlot_event_entities_info[props.nid] == "undefined" ||
-    props.nid == ""
-  ) {
-    popup_html += "<b>" + props.name + "</b>";
-  } else {
-    popup_html +=
-      "<b>" +
-      (taxlot_event_entities_info[props.nid].name_html.length > 0
-        ? taxlot_event_entities_info[props.nid].name_html
-        : props.name) +
-      "</b>" +
-      "<br><br>" +
-      "<b>Description:</b>" +
-      "<br>" +
-      taxlot_event_entities_info[props.nid].descr +
-      "<br><br>";
-  }
+  fetch(
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      const html = res[0].rendered_entity;
+      // Define the prefix
+      var prefix = "https://encyclopedia.nahc-mapping.org";
 
-  popup_html += "<br><br>";
+      // Define the regular expression pattern
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "<h3>Long Island Tribes</h3><hr>";
 
-  $("#infoLayerNativeGroups").html(popup_html);
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        });
+        
+      $("#infoLayerNativeGroups").html(modifiedHtmlString);
+    });
 }
 
 function buildKarlPopUpInfo(props) {
-  var popup_html = "";
-  var node_id = props.node_id.replace(/\/node\//g, "");
-
-  popup_html = "<h3>Long Island Towns</h3><hr>";
-  if (typeof settlements_info[node_id] == "undefined") {
-    popup_html += "<b>" + props.enc_name + "</b>";
-  } else {
-    popup_html +=
-      "<b>" +
-      settlements_info[node_id].name +
-      "</b><br>" +
-      "<b>Date:</b> <i>" +
-      settlements_info[node_id].date +
-      "</i>" +
-      "<br><br>" +
-      "<b>Description:</b>" +
-      "<br>" +
-      "<i>" +
-      settlements_info[node_id].descr +
-      "</i>";
-  }
-
-  popup_html += "<br>";
-
-  $("#infoLayerKarl").html(popup_html);
+  var nid = props.node_id.replace(/\/node\//g, "");
+  fetch(
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      const html = res[0].rendered_entity;
+      // Define the prefix
+      var prefix = "https://encyclopedia.nahc-mapping.org";
+  
+      // Define the regular expression pattern
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "<h3>Long Island Towns</h3><hr>";
+  
+      // Replace href attributes with the prefixed version
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        });
+        
+      $("#infoLayerKarl").html(modifiedHtmlString);
+    });
 }
 
 function buildFarmsPopUpInfo(props) {
   var popup_html = "";
+  // There's an NID present for this layer, but there's no associated data in drupal. Once added, uncomment the following code
+  // const nid = props.NID_num;
+  /* fetch(
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      // NO 
+      const html = res[0].rendered_entity;
+      // Define the prefix
+      var prefix = "https://encyclopedia.nahc-mapping.org";
+
+      // Define the regular expression pattern
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "<h3>Original Grants &amp; Farms</h3><hr>";
+
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        });
+        
+      $("#infoLayerFarms").html(modifiedHtmlString);
+    }); */
 
   if (typeof lots_info[props.NID_num] == "undefined") {
     popup_html =
@@ -485,9 +466,8 @@ function buildFarmsPopUpInfo(props) {
     }
   }
 
-  $("#infoLayerFarms").html(popup_html);
+ $("#infoLayerFarms").html(popup_html);
 
-  $("#infoLayerFarms").html(popup_html);
 }
 
 function buildCurrLotsPopUpInfo(props) {
@@ -510,22 +490,39 @@ function buildCurrLotsPopUpInfo(props) {
 
 function buildLongIslandLot(props) {
   // Needs more styling
-  var popup_html =
-    "<h3>Current Lot</h3><hr>" +
-    "<b>Name of Cemetary:</b>" +
-    "<br>" +
-    props.Label +
-    "<br><br>" +
-    "<b>Person:</b>" +
-    "<br>" +
-    props.Person +
-    "<br><br>" +
-    "<b>Type:</b>" +
-    "<br>" +
-    props.lot_type +
-    "<br><br>" +
-    "<b>Date:</b>" +
-    props.datetext
-    ;
-  $("#longIslandLots").html(popup_html);
+  const nid =
+  props.drupalNid ||
+  props.nid ||
+  props.node_id ||
+  props.node ||
+  props.NID_num ||
+  null;
+
+fetch(
+  `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+)
+  .then((buffer) => buffer.json())
+  .then((res) => {
+    const html = res[0].rendered_entity;
+    // Define the prefix
+    var prefix = "https://encyclopedia.nahc-mapping.org";
+
+    // Define the regular expression pattern
+    var pattern = /(<a\s+href=")([^"]+)(")/g;
+    var modifiedHtmlString = "";
+
+    // Replace href attributes with the prefixed version
+    modifiedHtmlString += html
+      .replace(pattern, (_, p1, p2, p3) => {
+        if (p2.slice(0, 4) === "http") {
+          return p1 + p2 + p3;
+        }
+        return p1 + prefix + p2 + p3;
+      })
+      .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+        return p1 + ' target="_blank"' + p2;
+      });
+      
+    $("#longIslandLots").html(modifiedHtmlString);
+  });
 }
