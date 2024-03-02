@@ -1282,9 +1282,8 @@ function SettlementsClickHandle(event) {
           .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
             return p1 + ' target="_blank"' + p2;
           });
-          console.log("http request completed for settlements layer in long islands")
-          if ($(".infoLayerElem").first().attr("id") != "infoLayerSettlements");
-          $("#infoLayerSettlements").insertBefore($(".infoLayerElem").first());
+          if ($(".infoLayerElem").first().attr("id") != "infoLayerSettlements")
+            $("#infoLayerSettlements").insertBefore($(".infoLayerElem").first());
         $("#infoLayerSettlements").html(modifiedHtmlString).slideDown();
       }).catch(console.log);
 
@@ -1547,7 +1546,7 @@ function FarmsClickHandle(event) {
         }
 
       closeFarmsInfo();
-    } else {
+    } else { 
       buildFarmsPopUpInfo(event.features[0].properties);
       if ($(".infoLayerElem").first().attr("id") != "infoLayerFarms")
         $("#infoLayerFarms").insertBefore($(".infoLayerElem").first());

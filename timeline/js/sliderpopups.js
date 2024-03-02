@@ -185,6 +185,7 @@ function buildDutchGrantPopUpInfo(props) {
 function buildGravesendPopUpInfo(props) {
   var popup_html = "<h3>Brooklyn Grants</h3><hr>";
   // this layer has an nid, but no data has been uploaded to drupal for it's corresponding nid
+  console.log(props)
 
   if (typeof lots_info[props.node] == "undefined") {
     popup_html +=
