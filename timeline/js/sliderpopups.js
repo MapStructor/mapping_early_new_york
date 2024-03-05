@@ -52,6 +52,44 @@ function buildPopUpInfo(props) {
 }
 
 function buildGrantLotsPopUpInfo(props) {
+
+  const nid =
+  props.drupalNid ||
+  props.nid ||
+  props.node_id ||
+  props.node ||
+  props.NID_num ||
+  null;
+
+fetch(
+  `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+)
+  .then((buffer) => buffer.json())
+  .then((res) => {
+    const html = res[0].rendered_entity;
+    // Define the prefix
+    var prefix = "https://encyclopedia.nahc-mapping.org";
+
+    // Define the regular expression pattern
+    var pattern = /(<a\s+href=")([^"]+)(")/g;
+    var modifiedHtmlString = "";
+
+    // Replace href attributes with the prefixed version
+    modifiedHtmlString += html
+      .replace(pattern, (_, p1, p2, p3) => {
+        if (p2.slice(0, 4) === "http") {
+          return p1 + p2 + p3;
+        }
+        return p1 + prefix + p2 + p3;
+      })
+      .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+        return p1 + ' target="_blank"' + p2;
+      });
+      
+    $("#infoLayerGrantLots").html(modifiedHtmlString);
+  });
+
+/* 
   var popup_html =
     "<h3>Grant Lot Division</h3><hr>" +
     "<br>" +
@@ -87,7 +125,7 @@ function buildGrantLotsPopUpInfo(props) {
     "<br>" +
     props.descriptio +
     "<br><br>";
-  $("#infoLayerGrantLots").html(popup_html);
+  $("#infoLayerGrantLots").html(popup_html); */
 }
 
 function buildDutchGrantPopUpInfo(props) {
@@ -425,6 +463,11 @@ function buildFarmsPopUpInfo(props) {
 }
 
 function buildCurrLotsPopUpInfo(props) {
+  
+
+
+
+
   var popup_html =
     "<h3>Current Lot</h3><hr>" +
     "<b>Owner:</b>" +

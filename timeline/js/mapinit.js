@@ -429,7 +429,6 @@ var afterMapPopUp = new mapboxgl.Popup({
   });
 
 var info_popup_html = "",
-  places_popup_html = "",
   settlements_popup_html = "",
   long_island_lots_popup_html = "";
 
@@ -1462,30 +1461,45 @@ function CastelloClickHandle(event) {
     closeCastelloInfo();
   } else {
     clickedStateId = event.features[0].id;
+    const props = event.features[0].properties
+    const nid =
+  props.drupalNid ||
+  props.nid ||
+  props.node_id ||
+  props.node ||
+  props.NID_num ||
+  null;
 
-    places_popup_html =
-      "<h3>Castello Taxlot (1660)</h3><hr>" +
-      "<br>" +
-      "<b>" +
-      "Taxlot: " +
-      "</b>" +
-      event.features[0].properties.LOT2 +
-      "<br>" +
-      "<b>" +
-      "Property Type: " +
-      "</b>" +
-      event.features[0].properties.tax_lots_1 +
-      "<br>" +
-      "<br>" +
-      "<b>" +
-      "Encyclopedia Page: " +
-      "</b>" +
-      "<br>" +
-      '<a href="https://encyclopedia.nahc-mapping.org/lots/taxlot' +
-      event.features[0].properties.LOT2 +
-      '" target="_blank">https://encyclopedia.nahc-mapping.org/lots/taxlot' +
-      event.features[0].properties.LOT2 +
-      "</a>";
+fetch(
+  `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+)
+  .then((buffer) => buffer.json())
+  .then((res) => {
+    const html = res[0].rendered_entity;
+    // Define the prefix
+    var prefix = "https://encyclopedia.nahc-mapping.org";
+
+    // Define the regular expression pattern
+    var pattern = /(<a\s+href=")([^"]+)(")/g;
+    var modifiedHtmlString = "";
+
+    // Replace href attributes with the prefixed version
+    modifiedHtmlString += html
+      .replace(pattern, (_, p1, p2, p3) => {
+        if (p2.slice(0, 4) === "http") {
+          return p1 + p2 + p3;
+        }
+        return p1 + prefix + p2 + p3;
+      })
+      .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+        return p1 + ' target="_blank"' + p2;
+      });
+      
+      if ($(".infoLayerElem").first().attr("id") != "infoLayerCastello")
+      $("#infoLayerCastello").insertBefore($(".infoLayerElem").first());
+    $("#infoLayerCastello").html(modifiedHtmlString).slideDown();
+  });
+
 
     var coordinates = [];
     coordinates = event.features[0].geometry.coordinates.slice();
@@ -1516,9 +1530,6 @@ function CastelloClickHandle(event) {
       );
     if (!afterHighCastelloPopUp.isOpen())
       afterHighCastelloPopUp.addTo(afterMap);
-    if ($(".infoLayerElem").first().attr("id") != "infoLayerCastello")
-      $("#infoLayerCastello").insertBefore($(".infoLayerElem").first());
-    $("#infoLayerCastello").html(places_popup_html).slideDown();
 
     if (!layer_view_flag)
       if ($("#view-hide-layer-panel").length > 0)
