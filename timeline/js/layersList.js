@@ -253,14 +253,14 @@ const layers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.0508movm",
+      url: "mapbox://mapny.dv6se6sa",
     },
     layout: {
       visibility: document.getElementById("farms_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "original_farms-6me5t0",
+    "source-layer": "original_farms-6bsj3k",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [
@@ -280,14 +280,14 @@ const layers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.0508movm",
+      url: "mapbox://mapny.dv6se6sa",
     },
     layout: {
       visibility: document.getElementById("farms_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "original_farms-6me5t0",
+    "source-layer": "original_farms-6bsj3k",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [
@@ -1341,14 +1341,14 @@ const beforeLayers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.0508movm",
+      url: "mapbox://mapny.dv6se6sa",
     },
     layout: {
       visibility: document.getElementById("farms_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "original_farms-6me5t0",
+    "source-layer": "original_farms-6bsj3k",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [
@@ -1368,14 +1368,14 @@ const beforeLayers = [
     source: {
       type: "vector",
       //URL: CHANGE THIS, 2 OF 3
-      url: "mapbox://mapny.0508movm",
+      url: "mapbox://mapny.dv6se6sa",
     },
     layout: {
       visibility: document.getElementById("farms_layer").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "original_farms-6me5t0",
+    "source-layer": "original_farms-6bsj3k",
     paint: {
       "fill-color": "#e3ed58",
       "fill-opacity": [

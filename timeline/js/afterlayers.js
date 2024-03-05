@@ -454,7 +454,7 @@ function addAfterFarmsLayer(date) {
           afterMap.setFeatureState(
             {
               source: "original_grants_and_farms-right",
-              sourceLayer: "original_farms-6me5t0",
+              sourceLayer: "original_farms-6bsj3k",
               id: hoveredFarmsIdRight,
             },
             { hover: false }
@@ -464,7 +464,7 @@ function addAfterFarmsLayer(date) {
         afterMap.setFeatureState(
           {
             source: "original_grants_and_farms-right",
-            sourceLayer: "original_farms-6me5t0",
+            sourceLayer: "original_farms-6bsj3k",
             id: hoveredFarmsIdRight,
           },
           { hover: true }
@@ -498,7 +498,7 @@ function addAfterFarmsLayer(date) {
         afterMap.setFeatureState(
           {
             source: "original_grants_and_farms-right",
-            sourceLayer: "original_farms-6me5t0",
+            sourceLayer: "original_farms-6bsj3k",
             id: hoveredFarmsIdRight,
           },
           { hover: false }

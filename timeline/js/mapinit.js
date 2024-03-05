@@ -1568,7 +1568,7 @@ function FarmsClickHandle(event) {
       afterMap.setFeatureState(
         {
           source: "original_grants_and_farms-right-highlighted",
-          sourceLayer: "original_farms-6me5t0",
+          sourceLayer: "original_farms-6bsj3k",
           id: farms_layer_view_id,
         },
         { hover: true }
@@ -1576,7 +1576,7 @@ function FarmsClickHandle(event) {
       beforeMap.setFeatureState(
         {
           source: "original_grants_and_farms-left-highlighted",
-          sourceLayer: "original_farms-6me5t0",
+          sourceLayer: "original_farms-6bsj3k",
           id: farms_layer_view_id,
         },
         { hover: true }
@@ -1597,7 +1597,7 @@ function FarmsClickHandle(event) {
     afterMap.setFeatureState(
       {
         source: "original_grants_and_farms-right-highlighted",
-        sourceLayer: "original_farms-6me5t0",
+        sourceLayer: "original_farms-6bsj3k",
         id: farms_layer_view_id,
       },
       { hover: false }
@@ -1605,7 +1605,7 @@ function FarmsClickHandle(event) {
     afterMap.setFeatureState(
       {
         source: "original_grants_and_farms-right-highlighted",
-        sourceLayer: "original_farms-6me5t0",
+        sourceLayer: "original_farms-6bsj3k",
         id: event.features[0].id,
       },
       { hover: true }
@@ -1613,7 +1613,7 @@ function FarmsClickHandle(event) {
     beforeMap.setFeatureState(
       {
         source: "original_grants_and_farms-left-highlighted",
-        sourceLayer: "original_farms-6me5t0",
+        sourceLayer: "original_farms-6bsj3k",
         id: farms_layer_view_id,
       },
       { hover: false }
@@ -1621,7 +1621,7 @@ function FarmsClickHandle(event) {
     beforeMap.setFeatureState(
       {
         source: "original_grants_and_farms-left-highlighted",
-        sourceLayer: "original_farms-6me5t0",
+        sourceLayer: "original_farms-6bsj3k",
         id: event.features[0].id,
       },
       { hover: true }
@@ -2224,7 +2224,7 @@ function closeFarmsInfo() {
   afterMap.setFeatureState(
     {
       source: "original_grants_and_farms-right-highlighted",
-      sourceLayer: "original_farms-6me5t0",
+      sourceLayer: "original_farms-6bsj3k",
       id: farms_layer_view_id,
     },
     { hover: false }
@@ -2232,7 +2232,7 @@ function closeFarmsInfo() {
   beforeMap.setFeatureState(
     {
       source: "original_grants_and_farms-left-highlighted",
-      sourceLayer: "original_farms-6me5t0",
+      sourceLayer: "original_farms-6bsj3k",
       id: farms_layer_view_id,
     },
     { hover: false }
