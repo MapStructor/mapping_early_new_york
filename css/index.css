@@ -699,3 +699,14 @@ img#logo-img {
 i.slash-icon {
   font-size: 11px;
 }
+
+.field__label {
+  font-weight: bold;
+}
+
+.field__item::after {
+  content: "";
+  display: block;
+  clear: both; /* Optional: Clear floats if necessary */
+  height: 1rem;
+}
