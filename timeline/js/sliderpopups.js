@@ -183,82 +183,35 @@ function buildDutchGrantPopUpInfo(props) {
 }
 
 function buildGravesendPopUpInfo(props) {
-  var popup_html = "<h3>Brooklyn Grants</h3><hr>";
-  // this layer has an nid, but no data has been uploaded to drupal for it's corresponding nid
-  console.log(props)
+  const nid = props.node;
 
-  if (typeof lots_info[props.node] == "undefined") {
-    popup_html +=
-      "<b>" +
-      props.Name +
-      "</b>" +
-      "<br><br>" +
-      "<b>Date:</b> <i>" +
-      props["Date Text"] +
-      "</i>" +
-      "<br><br>" +
-      "<i>" +
-      props["Groups Dyl"] +
-      "</i>" +
-      "<br><br>";
-  } else {
-    if (lots_info[props.node].brooklyn_title.length > 0) {
-      popup_html +=
-        "<b>" + lots_info[props.node].brooklyn_title + "</b><br><br>";
-    }
+  fetch(
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      // NO 
+      const html = res[0].rendered_entity;
+      // Define the prefix
+      var prefix = "https://encyclopedia.nahc-mapping.org";
 
-    if (lots_info[props.node].title_linked.length > 0) {
-      popup_html += "<b>" + lots_info[props.node].title_linked + "</b><br><br>";
-    } else if (lots_info[props.node].title.length > 0) {
-      popup_html += "<b>" + lots_info[props.node].title + "</b><br><br>";
-    }
+      // Define the regular expression pattern
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "<h3>Brooklyn Grants</h3><hr>";
 
-    if (lots_info[props.node].date_start.length > 0) {
-      popup_html +=
-        "<b>Start:</b> <i>" + lots_info[props.node].date_start + "</i><br><br>";
-    }
-
-    if (
-      lots_info[props.node].to_party.length > 0 ||
-      lots_info[props.node].to_party2.length > 0
-    ) {
-      popup_html += "<b>To Party:</b><br>";
-
-      if (lots_info[props.node].to_party_linked.length > 0)
-        popup_html +=
-          "<i>" + lots_info[props.node].to_party_linked + "</i><br>";
-      else popup_html += "<i>" + lots_info[props.node].to_party + "</i><br>";
-
-      if (lots_info[props.node].to_party2_linked.length > 0)
-        popup_html +=
-          "<i>" + lots_info[props.node].to_party2_linked + "</i><br>";
-      else popup_html += "<i>" + lots_info[props.node].to_party2 + "</i><br>";
-    }
-    if (lots_info[props.node].from_party.length > 0) {
-      if (lots_info[props.node].from_party_linked.length > 0)
-        popup_html +=
-          "<br><b>From Party:</b><br> <a href='" +
-          lots_info[props.node].from_party_linked +
-          "' target='_blank'>" +
-          lots_info[props.node].from_party +
-          "</a><br><br>";
-      else
-        popup_html +=
-          "<br><b>From Party:</b><br><i>" +
-          lots_info[props.node].from_party +
-          "</i><br><br>";
-    }
-    if (lots_info[props.node].indigenous_signatories.length > 0) {
-      popup_html +=
-        "<b>Indigenous Signatories:</b><br><i>" +
-        lots_info[props.node].indigenous_signatories.replace(/\\n/g, "<br>") +
-        "</i><br>";
-    }
-  }
-
-  $("#infoLayerGravesend").html(popup_html);
-
-  $("#infoLayerGravesend").html(popup_html);
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        });
+        console.log(html);
+      $("#infoLayerGravesend").html(modifiedHtmlString);
+    });
 }
 
 function buildNativeGroupPopUpInfo(props) {
