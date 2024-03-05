@@ -677,7 +677,7 @@ function addCastelloAfterLayers() {
         afterMap.setFeatureState(
           {
             source: "places-right",
-            sourceLayer: "taxlots-cpwvol",
+            sourceLayer: "taxlots-7i9lld",
             id: hoveredStateIdRight,
           },
           { hover: false }
@@ -687,7 +687,7 @@ function addCastelloAfterLayers() {
       afterMap.setFeatureState(
         {
           source: "places-right",
-          sourceLayer: "taxlots-cpwvol",
+          sourceLayer: "taxlots-7i9lld",
           id: hoveredStateIdRight,
         },
         { hover: true }
@@ -717,7 +717,7 @@ function addCastelloAfterLayers() {
       afterMap.setFeatureState(
         {
           source: "places-right",
-          sourceLayer: "taxlots-cpwvol",
+          sourceLayer: "taxlots-7i9lld",
           id: hoveredStateIdRight,
         },
         { hover: false }

@@ -500,14 +500,14 @@ const layers = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://mapny.cvcg7wo0",
+      url: "mapbox://mapny.25sxlb0c",
     },
     layout: {
       visibility: document.getElementById("castello_points").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "taxlots-cpwvol",
+    "source-layer": "taxlots-7i9lld",
     paint: {
       "circle-color": "#FF0000",
       "circle-opacity": [
@@ -1682,14 +1682,14 @@ const beforeLayers = [
     type: "circle",
     source: {
       type: "vector",
-      url: "mapbox://mapny.cvcg7wo0",
+      url: "mapbox://mapny.25sxlb0c",
     },
     layout: {
       visibility: document.getElementById("castello_points").checked
         ? "visible"
         : "none",
     },
-    "source-layer": "taxlots-cpwvol",
+    "source-layer": "taxlots-7i9lld",
     paint: {
       "circle-color": "#FF0000",
       "circle-opacity": [

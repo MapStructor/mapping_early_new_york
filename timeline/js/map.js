@@ -454,7 +454,7 @@ function addCastelloBeforeLayers() {
         beforeMap.setFeatureState(
           {
             source: "places-left",
-            sourceLayer: "taxlots-cpwvol",
+            sourceLayer: "taxlots-7i9lld",
             id: hoveredStateIdLeft,
           },
           { hover: false }
@@ -464,7 +464,7 @@ function addCastelloBeforeLayers() {
       beforeMap.setFeatureState(
         {
           source: "places-left",
-          sourceLayer: "taxlots-cpwvol",
+          sourceLayer: "taxlots-7i9lld",
           id: hoveredStateIdLeft,
         },
         { hover: true }
@@ -500,7 +500,7 @@ function addCastelloBeforeLayers() {
       beforeMap.setFeatureState(
         {
           source: "places-left",
-          sourceLayer: "taxlots-cpwvol",
+          sourceLayer: "taxlots-7i9lld",
           id: hoveredStateIdLeft,
         },
         { hover: false }
@@ -591,7 +591,7 @@ function addGrantLotsAfterLayers(date) {
 
 function addCastelloAfterLayers() {
   const layerId = "places-right";
-  const sourceLayer = "taxlots-cpwvol";
+  const sourceLayer = "taxlots-7i9lld";
 
   // Add a layer showing the places.
   addMapLayer(afterMap, getLayer(layerId));
