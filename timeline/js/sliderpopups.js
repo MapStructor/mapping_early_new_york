@@ -67,14 +67,11 @@ fetch(
   .then((buffer) => buffer.json())
   .then((res) => {
     const html = res[0].rendered_entity;
-    // Define the prefix
     var prefix = "https://encyclopedia.nahc-mapping.org";
 
-    // Define the regular expression pattern
     var pattern = /(<a\s+href=")([^"]+)(")/g;
     var modifiedHtmlString = "";
 
-    // Replace href attributes with the prefixed version
     modifiedHtmlString += html
       .replace(pattern, (_, p1, p2, p3) => {
         if (p2.slice(0, 4) === "http") {
@@ -88,44 +85,6 @@ fetch(
       
     $("#infoLayerGrantLots").html(modifiedHtmlString);
   });
-
-/* 
-  var popup_html =
-    "<h3>Grant Lot Division</h3><hr>" +
-    "<br>" +
-    "<b>Original Dutch Grant: </b>" +
-    props.Lot +
-    "<br>" +
-    "<b>Lot Division: </b>" +
-    props.dutchlot +
-    "<br>" +
-    "<b>Castello Taxlot (1660): </b>" +
-    props.castello +
-    "<br>" +
-    "<br>" +
-    "<b>Ownership:</b> " +
-    props.name +
-    "<br>" +
-    "<b>From:</b> " +
-    props.from +
-    "<br>" +
-    "<br>" +
-    "<b>Start:</b> " +
-    props.day1 +
-    ", " +
-    props.year1 +
-    "<br>" +
-    "<b>End:</b> " +
-    props.day2 +
-    ", " +
-    props.year2 +
-    "<br>" +
-    "<br>" +
-    "<b>Description:</b> " +
-    "<br>" +
-    props.descriptio +
-    "<br><br>";
-  $("#infoLayerGrantLots").html(popup_html); */
 }
 
 function buildDutchGrantPopUpInfo(props) {
@@ -366,21 +325,16 @@ function buildKarlPopUpInfo(props) {
 }
 
 function buildFarmsPopUpInfo(props) {
-  var popup_html = "";
-  // There's an NID present for this layer, but there's no associated data in drupal. Once added, uncomment the following code
-  /* const nid = props.NID_num;
-  console.log(nid)
+  const nid = props.nid;
+
    fetch(
     `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
   )
     .then((buffer) => buffer.json())
     .then((res) => {
-      // NO 
       const html = res[0].rendered_entity;
-      // Define the prefix
       var prefix = "https://encyclopedia.nahc-mapping.org";
 
-      // Define the regular expression pattern
       var pattern = /(<a\s+href=")([^"]+)(")/g;
       var modifiedHtmlString = "<h3>Original Grants &amp; Farms</h3><hr>";
 
@@ -396,124 +350,10 @@ function buildFarmsPopUpInfo(props) {
         });
         
       $("#infoLayerFarms").html(modifiedHtmlString);
-    });  */
-
-  if (typeof lots_info[props.NID_num] == "undefined") {
-    popup_html =
-      "<h3>Original Grants &amp; Farms</h3><hr>" +
-      "<br>" +
-      "<b>To:</b> <i>" +
-      props.To +
-      "</i><br>" +
-      "<b>Date:</b> <i>" +
-      props.Date +
-      "</i><br>" +
-      "<br>";
-  } else {
-    popup_html = "<h3>Original Grants &amp; Farms</h3><hr><br>";
-    if (lots_info[props.NID_num].title_linked.length > 0) {
-      popup_html +=
-        "<b>" + lots_info[props.NID_num].title_linked + "</b><br><br>";
-    } else if (lots_info[props.NID_num].title.length > 0) {
-      popup_html += "<b>" + lots_info[props.NID_num].title + "</b><br><br>";
-    }
-    if (lots_info[props.NID_num].to_party.length > 0) {
-      if (lots_info[props.NID_num].to_party_linked.length > 0)
-        popup_html +=
-          "<b>To Party:</b> <i>" +
-          lots_info[props.NID_num].to_party_linked +
-          "</i><br>";
-      //RESTORE THIS:
-      else
-        popup_html +=
-          "<b>To Party:</b> <i>" +
-          lots_info[props.NID_num].to_party +
-          "</i><br>";
-    }
-      // Check if to_party2_linked is defined and has content, and use it first
-      if (lots_info[props.NID_num].to_party2_linked && lots_info[props.NID_num].to_party2_linked.length > 0) {
-        popup_html +=
-          "<b>To Party 2:</b> <i>" +
-          lots_info[props.NID_num].to_party2_linked.replace(
-          //  /href="\u0022/g,
-              /href="/g,
-            "target=\"_blank\" href=\"https://nahc-mapping.org/mappingNY/encyclopedia"
-          ) +
-          "</i><br>";
-      }
-      // We only add the plain text version if to_party2_linked is not present
-      else if (lots_info[props.NID_num].to_party2 && lots_info[props.NID_num].to_party2.length > 0) {
-        popup_html +=
-          "<b>To Party 2:</b> <i>" + lots_info[props.NID_num].to_party2 + "</i><br>";
-      }
-
-
-      // Inside the else block, where other properties are added:
-      if (lots_info[props.NID_num].to_party_linked2.length > 0) {
-        popup_html +=
-          "<b>To Party 2:</b> <i>" +
-          lots_info[props.NID_num].to_party_linked2 +
-          "</i><br>";
-      } else if (lots_info[props.NID_num].to_party_text2.length > 0) {
-        popup_html +=
-          "<b>To Party 2:</b> <i>" +
-          lots_info[props.NID_num].to_party_text2 +
-          "</i><br>";
-      }
-
-    if (lots_info[props.NID_num].from_party.length > 0) {
-      if (lots_info[props.NID_num].from_party_linked.length > 0)
-        //RESTORE THIS TOO:
-        popup_html +=
-          "<b>From Party:</b> <i>" +
-          lots_info[props.NID_num].from_party_linked +
-          "</i><br>";
-      else
-        popup_html +=
-          "<b>From Party:</b> <i>" +
-          lots_info[props.NID_num].from_party +
-          "</i><br>";
-    }
-
-
-    if (lots_info[props.NID_num].from_party_linked2.length > 0) {
-      popup_html +=
-        "<b>From Party 2:</b> <i>" +
-        lots_info[props.NID_num].from_party_linked2 +
-        "</i><br>";
-    } else if (lots_info[props.NID_num].from_party_text2.length > 0) {
-      popup_html +=
-        "<b>From Party 2:</b> <i>" +
-        lots_info[props.NID_num].from_party_text2 +
-        "</i><br>";
-    }
-
-
-
-    if (lots_info[props.NID_num].date_start.length > 0) {
-      popup_html +=
-        "<b>Start:</b> <i>" + lots_info[props.NID_num].date_start + "</i><br>";
-    }
-    if (lots_info[props.NID_num].date_end.length > 0) {
-      popup_html +=
-        "<b>End:</b> <i>" + lots_info[props.NID_num].date_end + "</i><br>";
-    }
-    if (lots_info[props.NID_num].type.length > 0) {
-      popup_html +=
-        "<br><b>Type:</b> <i>" + lots_info[props.NID_num].type + "</i><br>";
-    }
-  }
-
- $("#infoLayerFarms").html(popup_html); 
-
+    });
 }
 
 function buildCurrLotsPopUpInfo(props) {
-  
-
-
-
-
   var popup_html =
     "<h3>Current Lot</h3><hr>" +
     "<b>Owner:</b>" +
@@ -532,7 +372,6 @@ function buildCurrLotsPopUpInfo(props) {
 }
 
 function buildLongIslandLot(props) {
-  // Needs more styling
   const nid =
   props.drupalNid ||
   props.nid ||
@@ -547,14 +386,11 @@ fetch(
   .then((buffer) => buffer.json())
   .then((res) => {
     const html = res[0].rendered_entity;
-    // Define the prefix
     var prefix = "https://encyclopedia.nahc-mapping.org";
 
-    // Define the regular expression pattern
     var pattern = /(<a\s+href=")([^"]+)(")/g;
     var modifiedHtmlString = "";
 
-    // Replace href attributes with the prefixed version
     modifiedHtmlString += html
       .replace(pattern, (_, p1, p2, p3) => {
         if (p2.slice(0, 4) === "http") {
