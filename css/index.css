@@ -716,3 +716,19 @@ i.slash-icon {
   height: auto;
   display: block;
 }
+
+div[class="field field--name-field-daystart field--type-datetime field--label-above"] .field__item {
+  font-weight: bold;
+  font-style: italic;
+}
+
+div[class="field field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"] .field__item a {
+  pointer-events: none;
+  text-decoration: none;
+  color: #000;
+}
+
+div[class="field field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"]::before {
+  content: "OWNERSHIP";
+  font-weight: bold;
+}

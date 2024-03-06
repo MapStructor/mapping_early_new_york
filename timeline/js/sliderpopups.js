@@ -19,119 +19,118 @@ function addFieldToPopup(
 }
 
 function buildPopUpInfo(props) {
-  const nid =props.nid;
+  const nid = props.nid;
 
   fetch(
-      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
-    )
-      .then((buffer) => buffer.json())
-      .then((res) => {
-        const html = res[0].rendered_entity;
-        // Define the prefix
-        var prefix = "https://encyclopedia.nahc-mapping.org";
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      const html = res[0].rendered_entity;
+      // Define the prefix
+      var prefix = "https://encyclopedia.nahc-mapping.org";
 
-        // Define the regular expression pattern
-        var pattern = /(<a\s+href=")([^"]+)(")/g;
-        var modifiedHtmlString = "<h2>Lot:</h2>";
+      // Define the regular expression pattern
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "<h2>Lot:</h2>";
 
-        
-        modifiedHtmlString += html
-          .replace(pattern, (_, p1, p2, p3) => {
-            if (p2.slice(0, 4) === "http") {
-              return p1 + p2 + p3;
-            }
-            return p1 + prefix + p2 + p3;
-          })
-          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
-            return p1 + ' target="_blank"' + p2;
-          });
-          
-        $("#demoLayerInfo").html(modifiedHtmlString);
-      });
-  
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        });
+
+      $("#demoLayerInfo").html(modifiedHtmlString);
+    });
 }
 
 function buildGrantLotsPopUpInfo(props) {
-
   const nid =
-  props.drupalNid ||
-  props.nid ||
-  props.node_id ||
-  props.node ||
-  props.NID_num ||
-  null;
+    props.drupalNid ||
+    props.nid ||
+    props.node_id ||
+    props.node ||
+    props.NID_num ||
+    null;
 
-fetch(
-  `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
-)
-  .then((buffer) => buffer.json())
-  .then((res) => {
-    const html = res[0].rendered_entity;
-    var prefix = "https://encyclopedia.nahc-mapping.org";
+  fetch(
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      const html = res[0].rendered_entity;
+      var prefix = "https://encyclopedia.nahc-mapping.org";
 
-    var pattern = /(<a\s+href=")([^"]+)(")/g;
-    var modifiedHtmlString = "";
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "";
 
-    modifiedHtmlString += html
-      .replace(pattern, (_, p1, p2, p3) => {
-        if (p2.slice(0, 4) === "http") {
-          return p1 + p2 + p3;
-        }
-        return p1 + prefix + p2 + p3;
-      })
-      .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
-        return p1 + ' target="_blank"' + p2;
-      });
-      
-    $("#infoLayerGrantLots").html(modifiedHtmlString);
-  });
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        });
+
+      $("#infoLayerGrantLots").html(modifiedHtmlString);
+    });
 }
 
 function buildDutchGrantPopUpInfo(props) {
-
   const nid =
-  props.drupalNid ||
-  props.nid ||
-  props.node_id ||
-  props.node ||
-  props.NID_num ||
-  null;
+    props.drupalNid ||
+    props.nid ||
+    props.node_id ||
+    props.node ||
+    props.NID_num ||
+    null;
 
-fetch(
-  `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
-)
-  .then((buffer) => buffer.json())
-  .then((res) => {
-    const html = res[0].rendered_entity;
-    // Define the prefix
-    var prefix = "https://encyclopedia.nahc-mapping.org";
+  fetch(
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      const html = res[0].rendered_entity;
+      // Define the prefix
+      var prefix = "https://encyclopedia.nahc-mapping.org";
 
-    // Define the regular expression pattern
-    var pattern = /(<a\s+href=")([^"]+)(")/g;
-    var modifiedHtmlString = "";
-    console.log("expression present = ", /(<img.*src=")([^"]+)(")/g.test(modifiedHtmlString))
-    // Replace href attributes with the prefixed version
-    modifiedHtmlString += html
-      .replace(pattern, (_, p1, p2, p3) => {
-        if (p2.slice(0, 4) === "http") {
-          return p1 + p2 + p3;
-        }
-        return p1 + prefix + p2 + p3;
-      })
-      .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
-        return p1 + ' target="_blank"' + p2;
-      }).replace(/(<img.*src=")([^"]+)(")/g, (_, p1, p2, p3) => {
-        console.log(p1, p2, p3)
+      // Define the regular expression pattern
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "";
+      console.log(
+        "expression present = ",
+        /(<img.*src=")([^"]+)(")/g.test(modifiedHtmlString)
+      );
+      // Replace href attributes with the prefixed version
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        })
+        .replace(/(<img.*src=")([^"]+)(")/g, (_, p1, p2, p3) => {
+          console.log(p1, p2, p3);
 
-        if (p2.slice(0, 4) === "http") {
-          return p1 + p2 + p3;
-        }
-        return p1 + prefix + p2 + p3;
-      });
-      
-    $("#infoLayerDutchGrants").html(modifiedHtmlString);
-  });
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        });
 
+      $("#infoLayerDutchGrants").html(modifiedHtmlString);
+    });
 
   var popup_html = "";
   if (typeof lots_info[props.Lot] == "undefined") {
@@ -232,7 +231,7 @@ function buildGravesendPopUpInfo(props) {
   )
     .then((buffer) => buffer.json())
     .then((res) => {
-      // NO 
+      // NO
       const html = res[0].rendered_entity;
       // Define the prefix
       var prefix = "https://encyclopedia.nahc-mapping.org";
@@ -251,7 +250,7 @@ function buildGravesendPopUpInfo(props) {
         .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
           return p1 + ' target="_blank"' + p2;
         });
-        console.log(html);
+      console.log(html);
       $("#infoLayerGravesend").html(modifiedHtmlString);
     });
 }
@@ -288,7 +287,7 @@ function buildNativeGroupPopUpInfo(props) {
         .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
           return p1 + ' target="_blank"' + p2;
         });
-        
+
       $("#infoLayerNativeGroups").html(modifiedHtmlString);
     });
 }
@@ -303,11 +302,11 @@ function buildKarlPopUpInfo(props) {
       const html = res[0].rendered_entity;
       // Define the prefix
       var prefix = "https://encyclopedia.nahc-mapping.org";
-  
+
       // Define the regular expression pattern
       var pattern = /(<a\s+href=")([^"]+)(")/g;
       var modifiedHtmlString = "<h3>Long Island Towns</h3><hr>";
-  
+
       // Replace href attributes with the prefixed version
       modifiedHtmlString += html
         .replace(pattern, (_, p1, p2, p3) => {
@@ -319,7 +318,7 @@ function buildKarlPopUpInfo(props) {
         .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
           return p1 + ' target="_blank"' + p2;
         });
-        
+
       $("#infoLayerKarl").html(modifiedHtmlString);
     });
 }
@@ -327,7 +326,7 @@ function buildKarlPopUpInfo(props) {
 function buildFarmsPopUpInfo(props) {
   const nid = props.nid;
 
-   fetch(
+  fetch(
     `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
   )
     .then((buffer) => buffer.json())
@@ -348,8 +347,17 @@ function buildFarmsPopUpInfo(props) {
         .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
           return p1 + ' target="_blank"' + p2;
         });
-        
+
       $("#infoLayerFarms").html(modifiedHtmlString);
+      const title = $("#infoLayerFarms h2.node__title a");
+      const href = title.attr("href");
+      title.hide();
+      const targetElement = $(
+        '#infoLayerFarms .field.field--name-field-old-title.field--type-string.field--label-above .field__item'
+      );
+      const text = targetElement.text();
+      const anchorTag = $("<a>").attr("href", href).attr("target", "_blank").text(text);
+      targetElement.replaceWith(anchorTag);
     });
 }
 
@@ -373,35 +381,35 @@ function buildCurrLotsPopUpInfo(props) {
 
 function buildLongIslandLot(props) {
   const nid =
-  props.drupalNid ||
-  props.nid ||
-  props.node_id ||
-  props.node ||
-  props.NID_num ||
-  null;
+    props.drupalNid ||
+    props.nid ||
+    props.node_id ||
+    props.node ||
+    props.NID_num ||
+    null;
 
-fetch(
-  `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
-)
-  .then((buffer) => buffer.json())
-  .then((res) => {
-    const html = res[0].rendered_entity;
-    var prefix = "https://encyclopedia.nahc-mapping.org";
+  fetch(
+    `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+  )
+    .then((buffer) => buffer.json())
+    .then((res) => {
+      const html = res[0].rendered_entity;
+      var prefix = "https://encyclopedia.nahc-mapping.org";
 
-    var pattern = /(<a\s+href=")([^"]+)(")/g;
-    var modifiedHtmlString = "";
+      var pattern = /(<a\s+href=")([^"]+)(")/g;
+      var modifiedHtmlString = "";
 
-    modifiedHtmlString += html
-      .replace(pattern, (_, p1, p2, p3) => {
-        if (p2.slice(0, 4) === "http") {
-          return p1 + p2 + p3;
-        }
-        return p1 + prefix + p2 + p3;
-      })
-      .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
-        return p1 + ' target="_blank"' + p2;
-      });
-      
-    $("#longIslandLots").html(modifiedHtmlString);
-  });
+      modifiedHtmlString += html
+        .replace(pattern, (_, p1, p2, p3) => {
+          if (p2.slice(0, 4) === "http") {
+            return p1 + p2 + p3;
+          }
+          return p1 + prefix + p2 + p3;
+        })
+        .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+          return p1 + ' target="_blank"' + p2;
+        });
+
+      $("#longIslandLots").html(modifiedHtmlString);
+    });
 }
