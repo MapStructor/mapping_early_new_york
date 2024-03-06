@@ -710,3 +710,9 @@ i.slash-icon {
   clear: both; /* Optional: Clear floats if necessary */
   height: 1rem;
 }
+
+.field__item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
