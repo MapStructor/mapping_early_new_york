@@ -1284,6 +1284,11 @@ function SettlementsClickHandle(event) {
           if ($(".infoLayerElem").first().attr("id") != "infoLayerSettlements")
             $("#infoLayerSettlements").insertBefore($(".infoLayerElem").first());
         $("#infoLayerSettlements").html(modifiedHtmlString).slideDown();
+        $(
+          '#infoLayerSettlements .node__title'
+        ).css({
+          "font-size": "1.17em"
+        });
       }).catch(console.log);
 
     var ref_name = event.features[0].properties.node_id.replace(
@@ -1411,6 +1416,9 @@ function InfoClickHandle(event) {
           if ($(".infoLayerElem").first().attr("id") != "infoLayerInfoPoint")
           $("#infoLayerInfoPoint").insertBefore($(".infoLayerElem").first());
         $("#infoLayerInfoPoint").html(modifiedHtmlString).slideDown();
+        $("#infoLayerInfoPoint h2.node__title").css({
+          "font-size": "1em"
+        })
       });
 
     var coordinates = [];
@@ -1481,7 +1489,7 @@ fetch(
 
     // Define the regular expression pattern
     var pattern = /(<a\s+href=")([^"]+)(")/g;
-    var modifiedHtmlString = "";
+    var modifiedHtmlString = "<h3>Castello Taxlot (1660)</h3><hr>";
 
     // Replace href attributes with the prefixed version
     modifiedHtmlString += html
@@ -1498,6 +1506,15 @@ fetch(
       if ($(".infoLayerElem").first().attr("id") != "infoLayerCastello")
       $("#infoLayerCastello").insertBefore($(".infoLayerElem").first());
     $("#infoLayerCastello").html(modifiedHtmlString).slideDown();
+    const title = $("#infoLayerCastello h2.node__title a");
+      const href = title.attr("href");
+      title.hide();
+      const targetElement = $(
+        '#infoLayerCastello .field.field--name-field-old-title.field--type-string.field--label-above .field__item'
+      );
+      const text = targetElement.text();
+      const anchorTag = $("<a>").attr("href", href).attr("target", "_blank").text(text);
+      targetElement.replaceWith(anchorTag);
   });
 
 

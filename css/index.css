@@ -732,3 +732,7 @@ div[class="field field--name-field-party-role-in-transaction- field--type-entity
   content: "OWNERSHIP";
   font-weight: bold;
 }
+
+#infoLayerNativeGroups .node__title {
+  font-size: 1rem;
+}
