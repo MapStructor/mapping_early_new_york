@@ -717,22 +717,116 @@ i.slash-icon {
   display: block;
 }
 
+/*
 div[class="field field--name-field-daystart field--type-datetime field--label-above"] .field__item {
   font-weight: bold;
   font-style: italic;
 }
+*/
 
-div[class="field field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"] .field__item a {
-  pointer-events: none;
-  text-decoration: none;
-  color: #000;
-}
 
-div[class="field field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"]::before {
-  content: "OWNERSHIP";
+
+/*INFO SIDEBAR SECTION TITLES*/
+div[class*="field--label-above"]::before {
   font-weight: bold;
+  display: block;
+  padding-top: 10px;
 }
+
+
 
 #infoLayerNativeGroups .node__title {
   font-size: 1rem;
 }
+
+
+
+/*LOT EVENTS STYLING*/
+
+
+/*SECTION TITLES AND BORDERS*/
+div[class*="field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"]::before {
+  content: "OWNERSHIP:";
+  border-top: 1px solid #ce5c00;
+}
+
+div[class*="field--name-field-partyrole field--type-entity-reference field--label-above"]::before {
+  content: "FROM:";
+  border-top: 2px solid #ce5c00;
+}
+
+div[class*="field--name-field-taxlotevent field--type-entity-reference field--label-above"]::before {
+  content: "LOT EVENT:";
+}
+
+div[class*="field--name-field-daystart field--type-datetime field--label-above"]::before {
+  content: "DATE:";
+  border-top: 1px solid #ce5c00;
+}
+
+
+
+/*REMOVE LINKS*/
+div[class="field field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"] .field__item a,
+div[class="field field--name-field-entity-description-to- field--type-entity-reference field--label-above"] .field__item a,
+div[class="field field--name-field-entity-description-to-part field--type-entity-reference field--label-above"] .field__item a,
+div[class="field field--name-field-partyrole field--type-entity-reference field--label-above"] .field__item a,
+div[class="field field--name-field-entity-desc field--type-entity-reference field--label-above"] .field__item a,
+div[class="field field--name-field-party-role3 field--type-entity-reference field--label-above"] .field__item a {
+  pointer-events: none;
+  text-decoration: none;
+  color: #000;
+  font-weight: 300;
+}
+
+
+
+/*REMOVE FIELD NAMES*/
+div[class*="field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"].field--label-above .field__label,
+div[class*="field--name-field-to field--type-entity-reference field--label-above"].field--label-above .field__label,
+div[class*="field--name-field-entity-description-to- field--type-entity-reference field--label-above"].field--label-above .field__label,
+div[class*="field--name-field-taxlotevent field--type-entity-reference field--label-above"].field--label-above .field__label,
+div[class*="field--name-field-daystart field--type-datetime field--label-above"].field--label-above .field__label,
+div[class*="field--name-field-partyrole field--type-entity-reference field--label-above"].field--label-above .field__label,
+div[class*="field--name-field-from field--type-entity-reference field--label-above"].field--label-above .field__label,
+div[class*="field--name-field-entity-desc field--type-entity-reference field--label-above"].field--label-above .field__label,
+
+div[class*="field field--name-field-to-party-1 field--type-entity-reference field--label-above"].field--label-above .field__label,
+div[class*="field field--name-field-entity-description-to-part field--type-entity-reference field--label-above"].field--label-above .field__label,
+
+
+div[class*="field--name-field-party-role3 field--type-entity-reference field--label-above"].field--label-above .field__label {
+  display: none;
+}
+
+
+/*REMOVE SPACES BENEATH*/
+div[class*="field--name-field-party-role-in-transaction- field--type-entity-reference field--label-above"].field--label-above .field__item::after,
+div[class*="field--name-field-to field--type-entity-reference field--label-above"].field--label-above .field__item::after,
+div[class*="field--name-field-partyrole field--type-entity-reference field--label-above"].field--label-above .field__item::after,
+div[class*="field--name-field-from field--type-entity-reference field--label-above"].field--label-above .field__item::after,
+div[class*="field field--name-field-to-party-1 field--type-entity-reference field--label-above"].field--label-above .field__item::after,
+div[class*="field--name-field-party-role3 field--type-entity-reference field--label-above"].field--label-above .field__item::after {
+  height: 0;
+}
+
+
+
+
+
+/*LOTS STYLING*/
+
+
+/*SECTION TITLES AND BORDERS*/
+
+div[class*="field field--name-field-date-start-text- field--type-string field--label-above"]::before {
+  content: "Start:";
+}
+
+/*REMOVE LABELS*/
+
+div[class*="field field--name-field-date-start-text- field--type-string field--label-above"].field--label-above .field__label,
+div[class*="field field--name-field-old-title field--type-string field--label-above"].field--label-above .field__label {
+  display: none;
+}
+
