@@ -193,7 +193,6 @@ function buildGravesendPopUpInfo(props) {
         .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
           return p1 + ' target="_blank"' + p2;
         });
-      console.log(html);
       $("#infoLayerGravesend").html(modifiedHtmlString);
       const title = $("#infoLayerGravesend h2.node__title a");
       const href = title.attr("href");
@@ -204,6 +203,21 @@ function buildGravesendPopUpInfo(props) {
       const text = targetElement.text();
       const anchorTag = $("<a>").attr("href", href).attr("target", "_blank").text(text);
       targetElement.replaceWith(anchorTag);
+
+      // remove unlinked text if linked text exist for the to party field
+      const anchorElement1 = $("#infoLayerGravesend .field.field--name-field-from-party.field--type-entity-reference.field--label-above .field__item a")
+      console.log("Checking if anchor element is present === ", anchorElement1.length)
+      if(anchorElement1.length){
+        $("#infoLayerGravesend .field.field--name-field-to-party-1-text-.field--type-string.field--label-above").hide()
+      }
+      const anchorElement2 = $("#infoLayerGravesend .field.field--name-field-to-party-2-text-.field--type-entity-reference.field--label-above .field__item a")
+      if(anchorElement2.length){
+        $("#infoLayerGravesend .field.field--name-field-to-party-2-text222.field--type-string.field--label-above").hide()
+      }
+      const anchorElement3 = $("#infoLayerGravesend .field.field--name-field-from-party.field--type-entity-reference.field--label-above .field__item a")
+      if(anchorElement3.length){
+        $("#infoLayerGravesend .field.field--name-field-from-party-text-.field--type-string.field--label-above").hide()
+      }
     });
 }
 
