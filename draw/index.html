@@ -27,9 +27,8 @@
         height: 200px;
         width: 200px;
         position: absolute;
-        top: 10px;    /* Changed from bottom to top */
-        left: 10px;   /* Adjust left position */
-        right: auto;  /* Add right position */
+        top: 10px;
+        left: 10px;
         background-color: rgba(255, 255, 255, 0.9);
         padding: 15px;
         text-align: center;
@@ -43,7 +42,6 @@
         width: 100%;
         margin-bottom: 10px;
       }
-
       input[id="file_upload"] {
         height: 0px;
         opacity: 0;
@@ -53,10 +51,13 @@
   </head>
   <body>
     <div id="map"></div>
+
+
     <div class="calculation-box">
       <input type="text" id="title-input" placeholder="Title" />
       <textarea id="info-input" placeholder="Additional information"></textarea>
-      <button onclick="updateFeatureInfo()">Update Feature Info</button>
+      <!-- <textarea id="description-input" placeholder="Description"></textarea> -->
+      <button onclick="updateFeatureInfo()">Save</button>
       <button><label for="file_upload">Upload GeoJSON</label></button>
       <div id="calculated-area"></div>
       <button onclick="downloadGeoJSON()">Download GeoJSON</button>
@@ -67,6 +68,8 @@
         onchange="handleFileUpload()"
       />
     </div>
+    
+
 
     <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js"></script>
@@ -98,6 +101,23 @@
 
       map.addControl(draw);
 
+      function loadGeoJSON() {
+    const url = 'https://storage.googleapis.com/meny_geojsons_bucket/example.geojson';
+    const cacheBuster = new Date().getTime(); // Current timestamp
+
+    fetch(`${url}?nocache=${cacheBuster}`)
+    .then(response => response.json())
+    .then(data => {
+        draw.set(data);
+        localGeoJSON = data; // Update the local GeoJSON variable
+    })
+    .catch(error => console.error('Error loading GeoJSON:', error));
+}
+
+
+
+
+
       map.on("draw.create", updateArea);
       map.on("draw.delete", updateArea);
       map.on("draw.update", updateArea);
@@ -105,34 +125,74 @@
 
       function updateArea(e) {
         // Your existing area calculation logic
+
+        // Update the local GeoJSON copy
+        if (e.type === "draw.create" || e.type === "draw.delete") {
+          localGeoJSON = draw.getAll();
+        }
       }
 
       function onSelectFeature(e) {
-        if (e.features.length > 0) {
-          const feature = e.features[0];
-          document.getElementById("title-input").value =
-            feature.properties.title || "";
-          document.getElementById("info-input").value =
-            feature.properties.info || "";
-        }
-      }
+    if (e.features.length > 0) {
+        const feature = e.features[0];
+        document.getElementById("title-input").value = feature.properties.title || "";
+        document.getElementById("info-input").value = feature.properties.info || "";
+        // document.getElementById("description-input").value = feature.properties.description || "";
+    }
+}
 
-      function updateFeatureInfo() {
-        const title = document.getElementById("title-input").value;
-        const info = document.getElementById("info-input").value;
-        const selectedFeatures = draw.getSelected();
-        if (selectedFeatures.features.length > 0) {
-          const feature = selectedFeatures.features[0];
-          feature.properties.title = title;
-          feature.properties.info = info;
-          draw.setFeatureProperty(feature.id, "title", title);
-          draw.setFeatureProperty(feature.id, "info", info);
+
+
+
+function updateFeatureInfo() {
+    const title = document.getElementById("title-input").value;
+    const info = document.getElementById("info-input").value;
+    // const description = document.getElementById("description-input").value;
+    const selectedFeatures = draw.getSelected();
+
+    if (selectedFeatures.features.length > 0) {
+        const feature = selectedFeatures.features[0];
+        feature.properties.title = title;
+        feature.properties.info = info;
+        // feature.properties.description = description;
+
+        // Update the local GeoJSON copy
+        const featureIndex = localGeoJSON.features.findIndex(
+            (f) => f.id === feature.id
+        );
+        if (featureIndex !== -1) {
+            localGeoJSON.features[featureIndex] = feature;
         } else {
-          alert(
-            "No feature selected. Select a feature to update its information."
-          );
+            localGeoJSON.features.push(feature);
         }
-      }
+
+        // Upload the updated GeoJSON to Google Cloud Storage
+        const url = 'https://storage.googleapis.com/meny_geojsons_bucket/example.geojson';
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(localGeoJSON)
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Success:', response);
+                // Reload the GeoJSON from the storage
+                loadGeoJSON();
+            } else {
+                console.error('Upload failed:', response);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    } else {
+        alert("No feature selected. Select a feature to update its information.");
+    }
+}
+
+
 
       function downloadGeoJSON() {
         const data = draw.getAll();
@@ -154,8 +214,6 @@
 
       function handleFileUpload() {
         const fileInput = document.getElementById("file_upload");
-        const fileContentsDiv = document.getElementById("file_contents");
-
         const file = fileInput.files[0];
 
         if (file) {
@@ -164,14 +222,41 @@
           reader.onload = function (e) {
             const contents = e.target.result;
             draw.add(JSON.parse(contents));
-            draw.changeMode("simple_select")
+            draw.changeMode("simple_select");
           };
 
           reader.readAsText(file);
-        } else {
-          fileContentsDiv.innerText = "No file selected.";
         }
       }
+
+map.on('load', function () {
+    loadGeoJSON();
+
+    // Add a click event listener for the features
+    map.on('click', function(e) {
+        // Query rendered features at the clicked point
+        // from the 'gl-draw-point' layer.
+        const features = map.queryRenderedFeatures(e.point, { layers: ['gl-draw-point'] });
+
+        if (features.length > 0) {
+            const feature = features[0];
+
+            // If a feature is clicked, select it in the MapboxDraw control
+            draw.changeMode('simple_select', { featureIds: [feature.id] });
+
+            // Update the input fields with the feature's properties
+            document.getElementById("title-input").value = feature.properties.title || "";
+            document.getElementById("info-input").value = feature.properties.info || "";
+        }
+    });
+});
+
+
+
+
+
+
+
     </script>
   </body>
 </html>
