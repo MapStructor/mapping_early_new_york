@@ -18,8 +18,8 @@
             width: 100%;
         }
         .calculation-box {
-            height: auto; /* Adjusted from a fixed height to auto */
-            min-height: 200px; /* Optional: set a minimum height */
+            height: auto;
+            min-height: 200px;
             width: 200px;
             position: absolute;
             top: 10px;
@@ -27,11 +27,12 @@
             background-color: rgba(255, 255, 255, 0.9);
             padding: 15px;
             text-align: center;
-            overflow: auto; /* Add scroll if content overflows */
+            overflow: auto;
         }
         p,
         input,
-        button {
+        button,
+        select {
             font-family: "Open Sans";
             margin: 0;
             font-size: 13px;
@@ -68,6 +69,9 @@
           <option value="drawn_polygon2.geojson">drawn_polygon2.geojson</option>
           <option value="info_of_interest.geojson">info_of_interest.geojson</option>
       </select>
+      <select id="feature-id-dropdown">
+          <option value="">Select a Feature ID</option>
+      </select>
     </div>
 
     <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
@@ -76,12 +80,11 @@
     <script>
         mapboxgl.accessToken = "pk.eyJ1IjoibWFwbnkiLCJhIjoiY2xtMG93amk4MnBrZTNnczUzY2VvYjg0ciJ9.MDMHYBlVbG14TJD120t6NQ";
         const map = new mapboxgl.Map({
-            container: "map", // container ID
-            style: "mapbox://styles/mapbox/satellite-v9", // style URL
-            center: [-73.935242, 40.730610], // starting position [lng, lat] (Central NYC)
-            zoom: 10, // starting zoom
+            container: "map",
+            style: "mapbox://styles/mapbox/satellite-v9",
+            center: [-73.935242, 40.730610],
+            zoom: 10,
         });
-
 
         const draw = new MapboxDraw({
             displayControlsDefault: false,
@@ -100,20 +103,37 @@
             const selector = document.getElementById('geojson-selector');
             const selectedFile = selector.value;
             if (selectedFile) {
-                // Load the selected GeoJSON file
                 loadGeoJSON(selectedFile);
             }
         }
 
+
+        // Add the event listener to the feature ID dropdown
+        document.getElementById('feature-id-dropdown').addEventListener('change', function() {
+            const selectedFeatureId = this.value;
+            if (selectedFeatureId) {
+                const selectedFeature = localGeoJSON.features.find(feature => feature.id === selectedFeatureId);
+                if (selectedFeature) {
+                    // Update the input fields with the selected feature's properties
+                    document.getElementById("title-input").value = selectedFeature.properties.Label || "";
+                    document.getElementById("info-input").value = selectedFeature.properties.changetext || "";
+                    document.getElementById("nid-input").value = selectedFeature.properties.nid || "";
+                    document.getElementById("daystart-input").value = selectedFeature.properties.DayStart || "";
+                    document.getElementById("dayend-input").value = selectedFeature.properties.DayEnd || "";
+                    document.getElementById("daystart2-input").value = selectedFeature.properties.DayStart2 || "";
+                    document.getElementById("change-input").value = selectedFeature.properties.change || "";
+                    document.getElementById("changetext-input").value = selectedFeature.properties.changetext || "";
+                }
+            }
+        });
+
         function loadGeoJSON(filename) {
             const url = `https://storage.googleapis.com/meny_geojsons_bucket/${filename}`;
-            const cacheBuster = new Date().getTime(); // Current timestamp
-
-            fetch(`${url}?nocache=${cacheBuster}`)
+            fetch(`${url}?nocache=${new Date().getTime()}`)
             .then(response => response.json())
             .then(data => {
                 draw.set(data);
-                localGeoJSON = data; // Update the local GeoJSON variable
+                localGeoJSON = data;
             })
             .catch(error => console.error('Error loading GeoJSON:', error));
         }
@@ -124,9 +144,6 @@
         map.on("draw.selectionchange", onSelectFeature);
 
         function updateArea(e) {
-            // Your existing area calculation logic
-
-            // Update the local GeoJSON copy
             if (e.type === "draw.create" || e.type === "draw.delete") {
                 localGeoJSON = draw.getAll();
             }
@@ -145,45 +162,30 @@
             }
         }
 
-
         function updateFeatureInfo() {
             const title = document.getElementById("title-input").value;
             const info = document.getElementById("info-input").value;
-            // const description = document.getElementById("description-input").value;
-
-            // Update properties for all features in the localGeoJSON
             localGeoJSON.features.forEach(feature => {
                 feature.properties.title = title;
                 feature.properties.info = info;
-                // feature.properties.description = description;
             });
 
-            // Upload the updated GeoJSON to Google Cloud Storage
             const url = `https://storage.googleapis.com/meny_geojsons_bucket/${document.getElementById('geojson-selector').value}`;
             fetch(url, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(localGeoJSON)
             })
             .then(response => {
                 if (response.ok) {
                     console.log('Success:', response);
-                    // Reload the GeoJSON from the storage
                     loadSelectedGeoJSON();
                 } else {
                     console.error('Upload failed:', response);
                 }
             })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            .catch(error => console.error('Error:', error));
         }
-
-
-
-
 
         function downloadGeoJSON() {
             const data = draw.getAll();
@@ -206,16 +208,12 @@
         function handleFileUpload() {
             const fileInput = document.getElementById("file_upload");
             const file = fileInput.files[0];
-
             if (file) {
                 const reader = new FileReader();
-
                 reader.onload = function (e) {
-                    const contents = e.target.result;
-                    draw.add(JSON.parse(contents));
+                    draw.add(JSON.parse(e.target.result));
                     draw.changeMode("simple_select");
                 };
-
                 reader.readAsText(file);
             }
         }
@@ -225,29 +223,25 @@
 
             // Add a click event listener for the features
             map.on('click', function(e) {
-                // Query rendered features at the clicked point
-                // from the 'gl-draw-point' layer.
-                const features = map.queryRenderedFeatures(e.point, { layers: ['gl-draw-point'] });
-
+                const features = map.queryRenderedFeatures(e.point);
                 if (features.length > 0) {
-                    const feature = features[0];
-
-                    // If a feature is clicked, select it in the MapboxDraw control
-                    draw.changeMode('simple_select', { featureIds: [feature.id] });
-                    document.getElementById("title-input").value = feature.properties.title || "";
-                    document.getElementById("info-input").value = feature.properties.info || "";
-                    document.getElementById("title-input").value = feature.properties.Label || "";
-                    document.getElementById("info-input").value = feature.properties.changetext || "";
-                    document.getElementById("nid-input").value = feature.properties.nid || "";
-                    document.getElementById("daystart-input").value = feature.properties.DayStart || "";
-                    document.getElementById("dayend-input").value = feature.properties.DayEnd || "";
-                    document.getElementById("daystart2-input").value = feature.properties.DayStart2 || "";
-                    document.getElementById("change-input").value = feature.properties.change || "";
-                    document.getElementById("changetext-input").value = feature.properties.changetext || "";
-
+                    populateFeatureIdDropdown(features);
                 }
             });
         });
+
+        function populateFeatureIdDropdown(features) {
+            const dropdown = document.getElementById('feature-id-dropdown');
+            dropdown.innerHTML = '<option value="">Select a Feature ID</option>'; // Clear existing options
+            features.forEach(feature => {
+                const option = document.createElement('option');
+                option.value = feature.properties.id; // Access id from properties
+                option.textContent = feature.properties.id; // Access id from properties
+                dropdown.appendChild(option);
+            });
+        }
+
+
     </script>
   </body>
 </html>
