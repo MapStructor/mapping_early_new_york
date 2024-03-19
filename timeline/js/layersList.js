@@ -321,17 +321,21 @@ const layers = [
     toggleElement: "farms_layer_lines"
   },
 
+
   {
     id: "info-points-right",
     type: "symbol", // Change the type to "symbol"
     source: {
-        type: "vector",
-        url: "mapbox://mapny.4oxcibaa",
+        type: "geojson",
+        data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson"
     },
-
     "layout": {
       "visibility": document.getElementById("info_points").checked ? "visible" : "none",
-      "icon-image": "info_points_image",
+      "icon-image": [
+          "case",
+          ["==", ["get", "changetext"], "2"], "info_points_image", // Use info_points_image when changetext is "2"
+          "info_points_image2" // Use info_points_image2 for all other cases
+      ],
       "icon-allow-overlap": true,
       "icon-size": [
         "interpolate", ["linear"], ["zoom"],
@@ -339,34 +343,15 @@ const layers = [
         15, 0.08 // Constant size at zoom 15
       ]      
     },
-        //Trying to change icons, not working:
-        /*
-        "icon-image": [
-          "match", ["get", "changetext"], 
-          "2", "info_points_image",  // Use info_points_image when changetext is "2"
-          "info_points_image2"       // Use info_points_image2 for all other cases
-        ]
-        */
-
-        //Trying to change icons, not working:
-        /*
-        "icon-image": [
-          "case",
-          ["==", ["get", "changetext"], "2"], "info_points_image",
-          "info_points_image2"
-        ]
-        */
-    "source-layer": "info_of_interest3-0euqvk",
     paint: {
       "icon-opacity": [
         "interpolate", ["linear"], ["zoom"],
-        7, 0, // Opacity at zoom 8
-        8, 1.0 // Opacity becomes fully opaque (1.0) at zoom 9
+        7, 0, // Opacity at zoom 7
+        8, 1.0 // Opacity becomes fully opaque (1.0) at zoom 8
       ]
     },
     toggleElement: "info_points"
-}
-,
+},
 
 //NEW LAYER - STYLING NOT WORKING AND NEEDS CONNECTION TO TIMELINE:
 
