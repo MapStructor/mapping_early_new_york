@@ -327,7 +327,11 @@ const layers = [
     type: "symbol", // Change the type to "symbol"
     source: {
         type: "geojson",
+        //Public URL:
         data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson"
+        //"Authenticated URL" Does not show anything:
+        //data: "https://storage.cloud.google.com/meny_geojsons_bucket/info_of_interest.geojson
+
     },
     "layout": {
       "visibility": document.getElementById("info_points").checked ? "visible" : "none",
@@ -351,7 +355,7 @@ const layers = [
       ]
     },
     toggleElement: "info_points"
-},
+  },
 
 //NEW LAYER - STYLING NOT WORKING AND NEEDS CONNECTION TO TIMELINE:
 

@@ -1216,22 +1216,18 @@ function DemoClickHandle(event) {
     beforeHighDemoPopUp
       .setLngLat(coordinates)
       .setHTML(
-        "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" +
+        "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: " +
           demo_layer_taxlot +
-          "' target='_blank'>" +
-          demo_layer_taxlot +
-          "</a></h2></b></div>"
+          "</h2></b></div>"
       );
     if (!beforeHighDemoPopUp.isOpen()) beforeHighDemoPopUp.addTo(beforeMap);
 
     afterHighDemoPopUp
       .setLngLat(coordinates)
       .setHTML(
-        "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" +
+        "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: " +
           demo_layer_taxlot +
-          "' target='_blank'>" +
-          demo_layer_taxlot +
-          "</a></h2></b></div>"
+          "</h2></b></div>"
       );
     if (!afterHighDemoPopUp.isOpen()) afterHighDemoPopUp.addTo(afterMap);
   }

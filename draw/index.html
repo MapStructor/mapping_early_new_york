@@ -53,7 +53,7 @@
       <input type="text" id="title-input" placeholder="Title" />
       <textarea id="info-input" placeholder="Additional information"></textarea>
       <input type="text" id="nid-input" placeholder="NID" />
-      <input type="text" id="daystart-input" placeholder="Day Start" />
+      <input type="text" id="daystart-input" placeholder="DayStart" />
       <input type="text" id="dayend-input" placeholder="Day End" />
       <input type="text" id="daystart2-input" placeholder="Day Start 2" />
       <input type="text" id="change-input" placeholder="Change" />
@@ -165,27 +165,55 @@
         function updateFeatureInfo() {
             const title = document.getElementById("title-input").value;
             const info = document.getElementById("info-input").value;
-            localGeoJSON.features.forEach(feature => {
-                feature.properties.title = title;
-                feature.properties.info = info;
-            });
+            const nid = document.getElementById("nid-input").value;
+            const dayStart = document.getElementById("daystart-input").value;
+            const dayEnd = document.getElementById("dayend-input").value;
+            const dayStart2 = document.getElementById("daystart2-input").value;
+            const change = document.getElementById("change-input").value;
+            const changeText = document.getElementById("changetext-input").value;
 
-            const url = `https://storage.googleapis.com/meny_geojsons_bucket/${document.getElementById('geojson-selector').value}`;
-            fetch(url, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(localGeoJSON)
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Success:', response);
-                    loadSelectedGeoJSON();
-                } else {
-                    console.error('Upload failed:', response);
+            const selectedFeatures = draw.getSelected();
+
+            if (selectedFeatures.features.length > 0) {
+                const feature = selectedFeatures.features[0];
+                feature.properties.Label = title;
+                feature.properties.changetext = info;
+                feature.properties.nid = nid;
+                feature.properties.DayStart = dayStart;
+                feature.properties.DayEnd = dayEnd;
+                feature.properties.DayStart2 = dayStart2;
+                feature.properties.change = change;
+                feature.properties.changetext = changeText;
+
+                // Update the local GeoJSON copy
+                const featureIndex = localGeoJSON.features.findIndex((f) => f.id === feature.id);
+                if (featureIndex !== -1) {
+                    localGeoJSON.features[featureIndex].properties = feature.properties;
                 }
-            })
-            .catch(error => console.error('Error:', error));
+
+                // Upload the updated GeoJSON to Google Cloud Storage
+                const url = `https://storage.googleapis.com/meny_geojsons_bucket/${document.getElementById('geojson-selector').value}`;
+                fetch(url, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(localGeoJSON)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Success:', response);
+                        loadSelectedGeoJSON();
+                    } else {
+                        console.error('Upload failed:', response);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                alert("No feature selected. Select a feature to update its information.");
+            }
         }
+
+
+
 
         function downloadGeoJSON() {
             const data = draw.getAll();

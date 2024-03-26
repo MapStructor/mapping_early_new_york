@@ -139,12 +139,10 @@ function addBeforeLayers(_, date) {
       beforeMapPopUp
         .setLngLat(coordinates)
         .setHTML(
-          "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: <a href='https://encyclopedia.nahc-mapping.org/taxlot/" +
+          "<div class='demoLayerInfoPopUp'><b><h2>Taxlot: " +
             e.features[0].properties.TAXLOT +
-            "' target='_blank'>" +
-            e.features[0].properties.TAXLOT +
-            "</a></h2></b></div>"
-        )
+            "</h2></b></div>"
+        )        
         .addTo(beforeMap);
     });
 
