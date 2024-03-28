@@ -328,7 +328,8 @@ const layers = [
     source: {
         type: "geojson",
         //Public URL:
-        data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson"
+        data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+        //data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson"
         //"Authenticated URL" Does not show anything:
         //data: "https://storage.cloud.google.com/meny_geojsons_bucket/info_of_interest.geojson
 
