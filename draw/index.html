@@ -52,12 +52,12 @@
     <div class="calculation-box">
       <input type="text" id="title-input" placeholder="Title" />
       <textarea id="info-input" placeholder="Additional information"></textarea>
-      <input type="text" id="nid-input" placeholder="NID" />
-      <input type="text" id="daystart-input" placeholder="DayStart" />
-      <input type="text" id="dayend-input" placeholder="Day End" />
-      <input type="text" id="daystart2-input" placeholder="Day Start 2" />
+      <input type="number" id="nid-input" placeholder="NID" />
+      <input type="number" id="daystart-input" placeholder="DayStart" />
+      <input type="number" id="dayend-input" placeholder="Day End" />
+      <input type="number" id="daystart2-input" placeholder="Day Start 2" />
       <input type="text" id="change-input" placeholder="Change" />
-      <textarea id="changetext-input" placeholder="Change Text"></textarea>
+      <textarea id="changetext-input" placeholder="Change Text" >2</textarea>
       <button onclick="updateFeatureInfo()">Save</button>
       <button><label for="file_upload">Upload GeoJSON</label></button>
       <div id="calculated-area"></div>
@@ -117,10 +117,10 @@
                     // Update the input fields with the selected feature's properties
                     document.getElementById("title-input").value = selectedFeature.properties.Label || "";
                     document.getElementById("info-input").value = selectedFeature.properties.changetext || "";
-                    document.getElementById("nid-input").value = selectedFeature.properties.nid || "";
-                    document.getElementById("daystart-input").value = selectedFeature.properties.DayStart || "";
-                    document.getElementById("dayend-input").value = selectedFeature.properties.DayEnd || "";
-                    document.getElementById("daystart2-input").value = selectedFeature.properties.DayStart2 || "";
+                    document.getElementById("nid-input").value = selectedFeature.properties.nid || 0;
+                    document.getElementById("daystart-input").value = selectedFeature.properties.DayStart || 0;
+                    document.getElementById("dayend-input").value = selectedFeature.properties.DayEnd || 0;
+                    document.getElementById("daystart2-input").value = selectedFeature.properties.DayStart2 || 0;
                     document.getElementById("change-input").value = selectedFeature.properties.change || "";
                     document.getElementById("changetext-input").value = selectedFeature.properties.changetext || "";
                 }
@@ -154,27 +154,29 @@
                 const feature = e.features[0];
                 document.getElementById("title-input").value = feature.properties.Label || "";
                 document.getElementById("info-input").value = feature.properties.changetext || "";
-                document.getElementById("nid-input").value = feature.properties.nid || "";
-                document.getElementById("daystart-input").value = feature.properties.DayStart || "";
-                document.getElementById("dayend-input").value = feature.properties.DayEnd || "";
-                document.getElementById("daystart2-input").value = feature.properties.DayStart2 || "";
+                document.getElementById("nid-input").value = feature.properties.nid || 0;
+                document.getElementById("daystart-input").value = feature.properties.DayStart || 0;
+                document.getElementById("dayend-input").value = feature.properties.DayEnd || 0;
+                document.getElementById("daystart2-input").value = feature.properties.DayStart2 || 0;
                 document.getElementById("change-input").value = feature.properties.change || "";
             }
         }
 
         function updateFeatureInfo() {
+            console.log("Updating feature info")
             const title = document.getElementById("title-input").value;
             const info = document.getElementById("info-input").value;
-            const nid = document.getElementById("nid-input").value;
-            const dayStart = document.getElementById("daystart-input").value;
-            const dayEnd = document.getElementById("dayend-input").value;
-            const dayStart2 = document.getElementById("daystart2-input").value;
+            const nid = Number(document.getElementById("nid-input").value);
+            const dayStart = Number(document.getElementById("daystart-input").value);
+            const dayEnd = Number(document.getElementById("dayend-input").value);
+            const dayStart2 = Number(document.getElementById("daystart2-input").value);
             const change = document.getElementById("change-input").value;
             const changeText = document.getElementById("changetext-input").value;
 
             const selectedFeatures = draw.getSelected();
 
             if (selectedFeatures.features.length > 0) {
+                console.log("Inside if statement of updating feature info")
                 const feature = selectedFeatures.features[0];
                 feature.properties.Label = title;
                 feature.properties.changetext = info;
@@ -216,7 +218,7 @@
 
 
         function downloadGeoJSON() {
-            const data = draw.getAll();
+            const data = localGeoJSON;
             if (data.features.length > 0) {
                 const geojson = JSON.stringify(data);
                 const blob = new Blob([geojson], { type: "application/json" });
