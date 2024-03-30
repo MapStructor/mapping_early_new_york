@@ -328,7 +328,7 @@ const layers = [
     source: {
         type: "geojson",
         //Public URL:
-        data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+        data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?x-goog-signature=1530e8239a867ca65a75b15dd0409f9c5e9f20b8909ca6b5b08b5a5c914a1edfe959e1f5295f32cbfe7822401f0ed39e32c864f7849b2cde9af115a9c53f31c731dcb74133d2f782cfeb6d09bcebb81867f242f75dcf806f0a7b6a9d31d0a54f74714af76307868daa874c4928d9c2e5ca5b0a1060d9ea63b6e0aec444e322674be820911c3a40939142ea4a3d8fd5fa0e7f416dcd84eb9889e216dc6c90cac656ddcb2ea230e40d8983cc46d417b9722cac7fc4131c9dd938b859993a52b2476c54991d2bcd862c7503a4f48afd360336899e9c5362e351c3335dbab1214d241271fc316feb3bf0e9985206a56a2b1de2c275c604a1ed0ddc1910aa91999df0&x-goog-algorithm=GOOG4-RSA-SHA256&x-goog-credential=meny-geojsons-service-account%40meny-geojsons.iam.gserviceaccount.com%2F20240330%2Fus%2Fstorage%2Fgoog4_request&x-goog-date=20240330T065939Z&x-goog-expires=604800&x-goog-signedheaders=host"
         //data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson"
         //"Authenticated URL" Does not show anything:
         //data: "https://storage.cloud.google.com/meny_geojsons_bucket/info_of_interest.geojson
