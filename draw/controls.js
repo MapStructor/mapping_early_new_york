@@ -4,6 +4,7 @@
 //let SKETCH_ENABLED = false;
 
 if (urlParams.get("sketch") === "1") {
+  let isFileUploaded = false;
   const beforeMapDrawConfig = new MapboxDraw({
     displayControlsDefault: false,
     controls: {
@@ -99,12 +100,12 @@ if (urlParams.get("sketch") === "1") {
       const feature = e.features[0];
       document.getElementById(title).value = feature.properties.title || "";
       document.getElementById(info).value = feature.properties.info || "";
-      document.getElementById(mapType + "-startdate-input").value = feature.properties.startDate || "";
-      document.getElementById(mapType + "-enddate-input").value = feature.properties.endDate || "";
-  
+      document.getElementById(mapType + "-startdate-input").value =
+        feature.properties.startDate || "";
+      document.getElementById(mapType + "-enddate-input").value =
+        feature.properties.endDate || "";
+    }
   }
-}
-
 
   // Update feature info and label
   function updateFeatureInfo(mapType) {
@@ -131,32 +132,40 @@ if (urlParams.get("sketch") === "1") {
       // Retrieve the values from the input fields
       const title = document.getElementById(titleId).value;
       const info = document.getElementById(infoId).value;
-      const startDate = document.getElementById(mapType + "-startdate-input").value;
+      const startDate = document.getElementById(
+        mapType + "-startdate-input"
+      ).value;
       const endDate = document.getElementById(mapType + "-enddate-input").value;
+      const nid = document.getElementById('beforemap-nid-input').value
+      const DayStart2 = document.getElementById('startdate2').value
 
       // Set the properties on the feature
-      feature.properties.title = title;
-      feature.properties.info = info;
-      feature.properties.startDate = startDate;
-      feature.properties.endDate = endDate;
+      feature.properties.Label = title;
+      feature.properties.info = info || undefined;
+      feature.properties.DayStart= +startDate;
+      feature.properties.DayEnd = +endDate;
+      feature.properties.nid = +nid;
+      feature.properties.changetext = '2';
+      feature.properties.change = '1';
+      feature.properties.DayStart2 = +DayStart2
 
       // Update the feature properties in the draw configuration
-      draw.setFeatureProperty(feature.id, "title", title);
-      draw.setFeatureProperty(feature.id, "info", info);
-      draw.setFeatureProperty(feature.id, "startDate", startDate);
-      draw.setFeatureProperty(feature.id, "endDate", endDate);
+      draw.setFeatureProperty(feature.id, "Label", title);
+      if (info) draw.setFeatureProperty(feature.id, "info", info);
+      draw.setFeatureProperty(feature.id, "DayStart", +startDate);
+      draw.setFeatureProperty(feature.id, "DayStart2", +DayStart2)
+      draw.setFeatureProperty(feature.id, "DayEnd", +endDate);
+      draw.setFeatureProperty(feature.id, "nid", +nid)
+      draw.setFeatureProperty(feature.id, "changetext", '2')
+      draw.setFeatureProperty(feature.id, "change", '1')
 
       // Update label for the feature
-      const mapInstance = mapType === 'aftermap' ? afterMap : beforeMap;
+      const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
       createOrUpdateLabel(mapInstance, feature);
     } else {
       alert("No feature selected. Select a feature to update its information.");
+    }
   }
-}
-
-
-
-
 
   function downloadGeoJSON(mapType) {
     const draw = {
@@ -164,6 +173,23 @@ if (urlParams.get("sketch") === "1") {
       beforemap: beforeMapDrawConfig,
     }[mapType];
     const data = draw.getAll();
+
+    if (isFileUploaded) {
+      // Upload the updated GeoJSON to Google Cloud Storage
+      const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          loadSelectedGeoJSON();
+        });
+    }
+
     if (data.features.length > 0) {
       const geojson = JSON.stringify(data);
       const blob = new Blob([geojson], { type: "application/json" });
@@ -214,9 +240,8 @@ if (urlParams.get("sketch") === "1") {
       reader.readAsText(file);
     } else {
       alert("No file selected");
+    }
   }
-}
-
 
   document
     .getElementById("beforemap-info-input")
@@ -288,5 +313,29 @@ if (urlParams.get("sketch") === "1") {
       mapInstance.removeLayer(feature.properties.title);
       mapInstance.removeSource(feature.properties.title);
     }
+  }
+
+  function loadSelectedGeoJSON() {
+    const selector = document.getElementById("geojson-selector");
+    const selectedFile = selector.value;
+    if (selectedFile) {
+      loadGeoJSON(selectedFile);
+    }
+  }
+
+  function loadGeoJSON(filename) {
+    const url =
+      `https://storage.googleapis.com/meny_geojsons_bucket/${filename}` +
+      "?nocache=" +
+      new Date().getTime();
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        beforeMapDrawConfig.set(data);
+        isFileUploaded = true;
+      })
+      .catch((error) => console.error("Error loading GeoJSON:", error));
   }
 }

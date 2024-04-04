@@ -197,7 +197,6 @@
 
                 // Upload the updated GeoJSON to Google Cloud Storage
                 const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
-                console.log(JSON.stringify(localGeoJSON))
                 fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -206,7 +205,6 @@
                 .then(response => {
                         return response.json()
                 }).then(data => {
-                    console.log(data)
                     loadSelectedGeoJSON();
                 })
                 .catch(error => console.error('Error:', error));

@@ -70,7 +70,7 @@ if (urlParams.get("sketch") === "1") {
             
             
             /* Input Fields and Textareas */
-            input[type="text"], textarea {
+            input[type="text"], textarea, input[type="number"] {
                 width: 91%;
                 border: 1px solid #ccc;
                 padding: 10px; /* Padding for visual comfort */
@@ -178,7 +178,17 @@ if (urlParams.get("sketch") === "1") {
             }
             
             
-            
+            /* Style for GeoJSON Selector */
+            #geojson-selector {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: 'Arial', sans-serif;
+            margin: 10px 0;
+            box-sizing: border-box; /* Ensure padding and border don't increase element width */
+            }
+
             
             
         </style>
@@ -203,9 +213,18 @@ if (urlParams.get("sketch") === "1") {
 
             <div class="calculation-box">
             <input type="text" id="beforemap-title-input" placeholder="Title" class="sketch-input"/>
-            <input type="text" id="beforemap-startdate-input" placeholder="Start Date" class="sketch-input"/>
-            <input type="text" id="beforemap-enddate-input" placeholder="End Date" class="sketch-input"/>
+            <input type="number" id="beforemap-startdate-input" placeholder="Start Date" class="sketch-input"/>
+            <input type="number" id="startdate2" placeholder="Start Date 2" class="sketch-input"/>
+            <input type="number" id="beforemap-nid-input" placeholder="Nid" class="sketch-input"/>
+            <input type="number" id="beforemap-enddate-input" placeholder="End Date" class="sketch-input"/>
             <textarea id="beforemap-info-input" placeholder="Additional information"></textarea>
+
+            <select id="geojson-selector" onchange="loadSelectedGeoJSON()">
+                <option value="">Select a GeoJSON</option>
+                <option value="example.geojson">example.geojson</option>
+                <option value="drawn_polygon2.geojson">drawn_polygon2.geojson</option>
+                <option value="info_of_interest.geojson">info_of_interest.geojson</option>
+            </select>
             
             <div class="button-group update-group">
                 <button id="beforemap-update-info-button" onclick="updateFeatureInfo('beforemap')">Update Info</button>
