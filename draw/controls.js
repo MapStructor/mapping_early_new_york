@@ -109,65 +109,94 @@ if (urlParams.get("sketch") === "1") {
     }
   }
 
-  // Update feature info and label
-  function updateFeatureInfo(mapType) {
-    const draw = {
+// Update feature info and label
+function updateFeatureInfo(mapType) {
+  const draw = {
       aftermap: afterMapDrawConfig,
       beforemap: beforeMapDrawConfig,
-    }[mapType];
-    const titleId = {
+  }[mapType];
+  const titleId = {
       aftermap: "aftermap-title-input",
       beforemap: "beforemap-title-input",
-    }[mapType];
-    const infoId = {
+  }[mapType];
+  const infoId = {
       aftermap: "aftermap-info-input",
       beforemap: "beforemap-info-input",
-    }[mapType];
+  }[mapType];
 
-    const title = document.getElementById(titleId).value;
-    const info = document.getElementById(infoId).value;
-    const selectedFeatures = draw.getSelected();
+  const title = document.getElementById(titleId).value;
+  const info = document.getElementById(infoId).value;
+  const selectedFeatures = draw.getSelected();
 
-    if (selectedFeatures.features.length > 0) {
+  if (selectedFeatures.features.length > 0) {
       const feature = selectedFeatures.features[0];
 
       // Retrieve the values from the input fields
       const title = document.getElementById(titleId).value;
       const info = document.getElementById(infoId).value;
-      const startDate = document.getElementById(
-        mapType + "-startdate-input"
-      ).value;
+      const startDate = document.getElementById(mapType + "-startdate-input").value;
       const endDate = document.getElementById(mapType + "-enddate-input").value;
-      const nid = document.getElementById('beforemap-nid-input').value
-      const DayStart2 = document.getElementById('startdate2').value
+      const nid = document.getElementById('beforemap-nid-input').value;
+      const DayStart2 = document.getElementById('startdate2').value;
 
       // Set the properties on the feature
       feature.properties.Label = title;
       feature.properties.info = info || undefined;
-      feature.properties.DayStart= +startDate;
+      feature.properties.DayStart = +startDate;
       feature.properties.DayEnd = +endDate;
       feature.properties.nid = +nid;
       feature.properties.changetext = '2';
       feature.properties.change = '1';
-      feature.properties.DayStart2 = +DayStart2
+      feature.properties.DayStart2 = +DayStart2;
 
       // Update the feature properties in the draw configuration
       draw.setFeatureProperty(feature.id, "Label", title);
       if (info) draw.setFeatureProperty(feature.id, "info", info);
       draw.setFeatureProperty(feature.id, "DayStart", +startDate);
-      draw.setFeatureProperty(feature.id, "DayStart2", +DayStart2)
+      draw.setFeatureProperty(feature.id, "DayStart2", +DayStart2);
       draw.setFeatureProperty(feature.id, "DayEnd", +endDate);
-      draw.setFeatureProperty(feature.id, "nid", +nid)
-      draw.setFeatureProperty(feature.id, "changetext", '2')
-      draw.setFeatureProperty(feature.id, "change", '1')
+      draw.setFeatureProperty(feature.id, "nid", +nid);
+      draw.setFeatureProperty(feature.id, "changetext", '2');
+      draw.setFeatureProperty(feature.id, "change", '1');
 
       // Update label for the feature
       const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
       createOrUpdateLabel(mapInstance, feature);
-    } else {
-      alert("No feature selected. Select a feature to update its information.");
-    }
   }
+
+  // Save the changes to the features (add, move, delete) to the GeoJSON data
+  saveGeoJSONData(draw);
+}
+
+function saveGeoJSONData(draw) {
+  const data = draw.getAll();
+  const geojson = JSON.stringify(data);
+
+  const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=drawn_features.geojson`;
+  fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: geojson,
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log("Success:", data);
+  })
+  .catch((error) => {
+      console.error("Error:", error);
+  });
+}
+
+
+// Event listeners for feature creation, update, and deletion
+beforeMap.on("draw.create", () => saveGeoJSONData(beforeMapDrawConfig));
+beforeMap.on("draw.update", () => saveGeoJSONData(beforeMapDrawConfig));
+beforeMap.on("draw.delete", () => saveGeoJSONData(beforeMapDrawConfig));
+
+afterMap.on("draw.create", () => saveGeoJSONData(afterMapDrawConfig));
+afterMap.on("draw.update", () => saveGeoJSONData(afterMapDrawConfig));
+afterMap.on("draw.delete", () => saveGeoJSONData(afterMapDrawConfig));
+
 
   function downloadGeoJSON(mapType) {
     const draw = {

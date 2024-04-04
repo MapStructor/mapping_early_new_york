@@ -227,11 +227,11 @@ if (urlParams.get("sketch") === "1") {
             </select>
             
             <div class="button-group update-group">
-                <button id="beforemap-update-info-button" onclick="updateFeatureInfo('beforemap')">Update Info</button>
+                <button id="beforemap-update-info-button" onclick="updateFeatureInfo('beforemap')">Save</button>
             </div>
         
             <div class="button-group lower-buttons">
-                <button onclick="downloadGeoJSON('beforemap')">Save</button>
+                <button onclick="downloadGeoJSON('beforemap')">Download</button>
                 <label for="beforemap-file_upload" class="file-upload-label">Open</label>
             </div>
             <input
