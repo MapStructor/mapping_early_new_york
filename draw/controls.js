@@ -36,7 +36,7 @@ if (urlParams.get("sketch") === "1") {
       feature.geometry.type === "Point"
         ? feature.geometry.coordinates
         : feature.geometry.coordinates[0][0];
-    const labelId = feature.properties.title || "no-title";
+    const labelId = feature.properties.Label || "no-title";
 
     var label = {
       id: labelId,
