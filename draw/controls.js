@@ -98,12 +98,14 @@ if (urlParams.get("sketch") === "1") {
 
     if (e.features.length > 0) {
       const feature = e.features[0];
-      document.getElementById(title).value = feature.properties.title || "";
+      document.getElementById(title).value = feature.properties.Label || "";
       document.getElementById(info).value = feature.properties.info || "";
       document.getElementById(mapType + "-startdate-input").value =
-        feature.properties.startDate || "";
+        feature.properties.DayStart || "";
       document.getElementById(mapType + "-enddate-input").value =
-        feature.properties.endDate || "";
+        feature.properties.DayEnd || "";
+      document.getElementById("startdate2").value = feature.properties.DayStart2;
+      document.getElementById("beforemap-nid-input").value = feature.properties.nid;
     }
   }
 
