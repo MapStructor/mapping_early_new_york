@@ -112,61 +112,56 @@ if (urlParams.get("sketch") === "1") {
 // Update feature info and label
 function updateFeatureInfo(mapType) {
   const draw = {
-      aftermap: afterMapDrawConfig,
-      beforemap: beforeMapDrawConfig,
+    aftermap: afterMapDrawConfig,
+    beforemap: beforeMapDrawConfig,
   }[mapType];
   const titleId = {
-      aftermap: "aftermap-title-input",
-      beforemap: "beforemap-title-input",
+    aftermap: "aftermap-title-input",
+    beforemap: "beforemap-title-input",
   }[mapType];
   const infoId = {
-      aftermap: "aftermap-info-input",
-      beforemap: "beforemap-info-input",
+    aftermap: "aftermap-info-input",
+    beforemap: "beforemap-info-input",
   }[mapType];
 
   const title = document.getElementById(titleId).value;
   const info = document.getElementById(infoId).value;
+  const startDate = document.getElementById(mapType + "-startdate-input").value;
+  const endDate = document.getElementById(mapType + "-enddate-input").value;
+  const nid = document.getElementById('beforemap-nid-input').value;
+  const DayStart2 = document.getElementById('startdate2').value;
+
   const selectedFeatures = draw.getSelected();
 
   if (selectedFeatures.features.length > 0) {
-      const feature = selectedFeatures.features[0];
+    const feature = selectedFeatures.features[0];
 
-      // Retrieve the values from the input fields
-      const title = document.getElementById(titleId).value;
-      const info = document.getElementById(infoId).value;
-      const startDate = document.getElementById(mapType + "-startdate-input").value;
-      const endDate = document.getElementById(mapType + "-enddate-input").value;
-      const nid = document.getElementById('beforemap-nid-input').value;
-      const DayStart2 = document.getElementById('startdate2').value;
+    // Set the properties on the feature
+    feature.properties.Label = title;
+    feature.properties.info = info || undefined;
+    feature.properties.DayStart = +startDate;
+    feature.properties.DayEnd = +endDate;
+    feature.properties.nid = +nid;
+    feature.properties.changetext = '2';
+    feature.properties.change = '1';
+    feature.properties.DayStart2 = +DayStart2;
 
-      // Set the properties on the feature
-      feature.properties.Label = title;
-      feature.properties.info = info || undefined;
-      feature.properties.DayStart = +startDate;
-      feature.properties.DayEnd = +endDate;
-      feature.properties.nid = +nid;
-      feature.properties.changetext = '2';
-      feature.properties.change = '1';
-      feature.properties.DayStart2 = +DayStart2;
+    // Update the feature properties in the draw configuration
+    draw.setFeatureProperty(feature.id, "Label", title);
+    if (info) draw.setFeatureProperty(feature.id, "info", info);
+    draw.setFeatureProperty(feature.id, "DayStart", +startDate);
+    draw.setFeatureProperty(feature.id, "DayStart2", +DayStart2);
+    draw.setFeatureProperty(feature.id, "DayEnd", +endDate);
+    draw.setFeatureProperty(feature.id, "nid", +nid);
+    draw.setFeatureProperty(feature.id, "changetext", '2');
+    draw.setFeatureProperty(feature.id, "change", '1');
 
-      // Update the feature properties in the draw configuration
-      draw.setFeatureProperty(feature.id, "Label", title);
-      if (info) draw.setFeatureProperty(feature.id, "info", info);
-      draw.setFeatureProperty(feature.id, "DayStart", +startDate);
-      draw.setFeatureProperty(feature.id, "DayStart2", +DayStart2);
-      draw.setFeatureProperty(feature.id, "DayEnd", +endDate);
-      draw.setFeatureProperty(feature.id, "nid", +nid);
-      draw.setFeatureProperty(feature.id, "changetext", '2');
-      draw.setFeatureProperty(feature.id, "change", '1');
-
-      // Update label for the feature
-      const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
-      createOrUpdateLabel(mapInstance, feature);
+    // Update label for the feature
+    const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
+    createOrUpdateLabel(mapInstance, feature);
   }
-
-  // Save the changes to the features (add, move, delete) to the GeoJSON data
-  saveGeoJSONData(draw);
 }
+
 
 function saveGeoJSONData(draw) {
   const data = draw.getAll();
