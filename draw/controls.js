@@ -123,6 +123,7 @@ function updateFeatureInfo(mapType) {
     aftermap: "aftermap-info-input",
     beforemap: "beforemap-info-input",
   }[mapType];
+  saveGeoJSONData(draw)
 
   const title = document.getElementById(titleId).value;
   const info = document.getElementById(infoId).value;
@@ -166,8 +167,9 @@ function updateFeatureInfo(mapType) {
 function saveGeoJSONData(draw) {
   const data = draw.getAll();
   const geojson = JSON.stringify(data);
+  console.log("Updating geojson data => ", data)
 
-  const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=drawn_features.geojson`;
+  const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
   fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
