@@ -9,8 +9,8 @@ if (urlParams.get("sketch") === "1") {
   const session = localStorage.getItem("SESSION_KEY")
   if(!session){
     window.location.href = 'sketch.html';
-  }
-  const url = "https://meny-backend.onrender.com/session"
+  } else {
+    const url = "https://meny-backend.onrender.com/session"
   fetch(url, {
     method: 'POST',
     headers: {
@@ -29,6 +29,8 @@ if (urlParams.get("sketch") === "1") {
       console.log(data)
     }
   })
+  }
+  
 
   let isFileUploaded = false;
   const beforeMapDrawConfig = new MapboxDraw({
