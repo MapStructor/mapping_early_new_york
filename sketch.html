@@ -90,6 +90,7 @@
                 console.log(data)
                 if (data.message === "success"){  
                     localStorage.setItem("SESSION_KEY", data.sessionKey)
+                    console.log(data.sessionKey)
                     window.location.href = 'index.html?sketch=1'}
                 else alert(data.message)
             }).catch(err => alert(err.message));

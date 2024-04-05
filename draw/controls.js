@@ -7,6 +7,7 @@ if (urlParams.get("sketch") === "1") {
   // Initialize the FirebaseUI Widget using Firebase.
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
   const session = localStorage.getItem("SESSION_KEY")
+  alert("Session ==>", session === null)
   if(!session){
     window.location.href = 'sketch.html';
   } else {
