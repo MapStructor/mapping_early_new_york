@@ -8,7 +8,7 @@ if (urlParams.get("sketch") === "1") {
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
   const session = localStorage.getItem("SESSION_KEY")
   if(!session){
-    window.href = '/sketch.html'
+    window.location.href = 'sketch.html';
   }
   const url = "https://meny-backend.onrender.com/session"
   fetch(url, {
@@ -19,7 +19,9 @@ if (urlParams.get("sketch") === "1") {
     body: JSON.stringify({
       session
     })
-  }).then(blob => blob.json()).then(data => {
+  }).then(blob => {
+    blob.json()
+  }).then(data => {
     if (data.message !== "valid"){
       localStorage.removeItem("SESSION_KEY")
       window.href = '/sketch.html'
