@@ -4,6 +4,30 @@
 //let SKETCH_ENABLED = false;
 
 if (urlParams.get("sketch") === "1") {
+  // Initialize the FirebaseUI Widget using Firebase.
+  // var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  const session = localStorage.getItem("SESSION_KEY")
+  if(!session){
+    window.href = '/sketch.html'
+  }
+  const url = "https://meny-backend.onrender.com/session"
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      session
+    })
+  }).then(blob => blob.json()).then(data => {
+    if (data.message !== "valid"){
+      localStorage.removeItem("SESSION_KEY")
+      window.href = '/sketch.html'
+    } else {
+      console.log(data)
+    }
+  })
+
   let isFileUploaded = false;
   const beforeMapDrawConfig = new MapboxDraw({
     displayControlsDefault: false,
@@ -123,7 +147,6 @@ function updateFeatureInfo(mapType) {
     aftermap: "aftermap-info-input",
     beforemap: "beforemap-info-input",
   }[mapType];
-  saveGeoJSONData(draw)
 
   const title = document.getElementById(titleId).value;
   const info = document.getElementById(infoId).value;
@@ -144,7 +167,7 @@ function updateFeatureInfo(mapType) {
     feature.properties.DayEnd = +endDate;
     feature.properties.nid = +nid;
     feature.properties.changetext = '2';
-    feature.properties.change = '1';
+    feature.properties.change = 1;
     feature.properties.DayStart2 = +DayStart2;
 
     // Update the feature properties in the draw configuration
@@ -155,12 +178,13 @@ function updateFeatureInfo(mapType) {
     draw.setFeatureProperty(feature.id, "DayEnd", +endDate);
     draw.setFeatureProperty(feature.id, "nid", +nid);
     draw.setFeatureProperty(feature.id, "changetext", '2');
-    draw.setFeatureProperty(feature.id, "change", '1');
+    draw.setFeatureProperty(feature.id, "change", 1);
 
     // Update label for the feature
     const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
     createOrUpdateLabel(mapInstance, feature);
   }
+  saveGeoJSONData(draw)
 }
 
 

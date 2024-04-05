@@ -1,6 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get("sketch") === "1") {
     const markUp = `
+    
         <style>
             .sketch-input {
                 display: block;
