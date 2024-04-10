@@ -51,7 +51,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "grants_layer"
+    toggleElement: "grants_layer",
   },
   {
     id: "grant-lots-right",
@@ -76,7 +76,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "grant_lots"
+    toggleElement: "grant_lots",
   },
   {
     id: "grant-lots-lines-right",
@@ -96,7 +96,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement: "grants_layer_lines"
+    toggleElement: "grants_layer_lines",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -123,7 +123,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "gravesend_layer"
+    toggleElement: "gravesend_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -150,7 +150,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "gravesend_layer"
+    toggleElement: "gravesend_layer",
   },
   {
     id: "gravesend-lines-right",
@@ -170,7 +170,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement: "gravesend_layer_lines"
+    toggleElement: "gravesend_layer_lines",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -197,7 +197,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "karl_layer"
+    toggleElement: "karl_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -224,7 +224,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "karl_layer"
+    toggleElement: "karl_layer",
   },
   {
     id: "karl-lines-right",
@@ -244,7 +244,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement: "karl_layer_lines"
+    toggleElement: "karl_layer_lines",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -271,7 +271,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "farms_layer"
+    toggleElement: "farms_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -298,7 +298,7 @@ const layers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "farms_layer"
+    toggleElement: "farms_layer",
   },
   {
     id: "farms-lines-right",
@@ -318,103 +318,135 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement: "farms_layer_lines"
+    toggleElement: "farms_layer_lines",
   },
-
 
   {
     id: "info-points-right",
     type: "symbol", // Change the type to "symbol"
     source: {
-        type: "geojson",
-        //Public URL:
-        data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
-        //data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson"
-        //"Authenticated URL" Does not show anything:
-        //data: "https://storage.cloud.google.com/meny_geojsons_bucket/info_of_interest.geojson
-
+      type: "geojson",
+      //Public URL:
+      data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+      //data: "https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson"
+      //"Authenticated URL" Does not show anything:
+      //data: "https://storage.cloud.google.com/meny_geojsons_bucket/info_of_interest.geojson
     },
-    "layout": {
-      "visibility": document.getElementById("info_points").checked ? "visible" : "none",
+    layout: {
+      visibility: document.getElementById("info_points").checked
+        ? "visible"
+        : "none",
       "icon-image": [
-          "case",
-          ["==", ["get", "changetext"], "2"], "info_points_image", // Use info_points_image when changetext is "2"
-          "info_points_image2" // Use info_points_image2 for all other cases
+        "case",
+        ["==", ["get", "changetext"], "2"],
+        "info_points_image", // Use info_points_image when changetext is "2"
+        "info_points_image2", // Use info_points_image2 for all other cases
       ],
       "icon-allow-overlap": true,
       "icon-size": [
-        "interpolate", ["linear"], ["zoom"],
-        8, 0.05, // Constant size at zoom 8
-        15, 0.08 // Constant size at zoom 15
-      ]      
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        8,
+        0.05, // Constant size at zoom 8
+        15,
+        0.08, // Constant size at zoom 15
+      ],
     },
     paint: {
       "icon-opacity": [
-        "interpolate", ["linear"], ["zoom"],
-        7, 0, // Opacity at zoom 7
-        8, 1.0 // Opacity becomes fully opaque (1.0) at zoom 8
-      ]
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        7,
+        0, // Opacity at zoom 7
+        8,
+        1.0, // Opacity becomes fully opaque (1.0) at zoom 8
+      ],
     },
-    toggleElement: "info_points"
+    toggleElement: "info_points",
   },
 
-//NEW LAYER - STYLING NOT WORKING AND NEEDS CONNECTION TO TIMELINE:
+  //NEW LAYER - STYLING NOT WORKING AND NEEDS CONNECTION TO TIMELINE:
 
-{
-  id: "info-labels-right",
-  type: "symbol",
-  source: {
-    type: "vector",
-    //Num type for "change"
-    //url: "mapbox://mapny.cmczx4cf",
-    //Num type for "changetext"
-    url: "mapbox://mapny.4oxcibaa",
+  {
+    id: "info-labels-right",
+    type: "symbol",
+    source: {
+      type: "vector",
+      //Num type for "change"
+      //url: "mapbox://mapny.cmczx4cf",
+      //Num type for "changetext"
+      url: "mapbox://mapny.4oxcibaa",
+    },
+    "source-layer": "info_of_interest3-0euqvk",
+    layout: {
+      "text-field": ["get", "Label"],
+      "text-size": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", 21, 16], // Size at zoom 22
+      ],
+      "text-anchor": "left", // This positions the left end of the text at the anchor point
+      "text-justify": "left", // Options: 'left', 'center', 'right'
+      "text-offset": [1.5, 0],
+      //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
+      visibility: document.getElementById("info_labels").checked
+        ? "visible"
+        : "none",
+    },
+    paint: {
+      "text-color": [
+        "match",
+        ["get", "changetext"],
+        "2",
+        "#ff0000", // Red color for "2"
+        "#2c0202", // Default color
+      ],
+      "text-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        7,
+        ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
+        8,
+        ["match", ["get", "changetext"], "2", 1.0, 1.0], // Opacity at zoom 7
+      ],
+      "text-halo-color": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 22
+      ],
+      "text-halo-width": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 22
+      ],
+      "text-halo-blur": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 22
+      ],
+    },
+    minzoom: 1,
+    toggleElement: "info_labels",
   },
-  "source-layer": "info_of_interest3-0euqvk",
-  layout: {
-    "text-field": ["get", "Label"],
-    "text-size": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
-      22, ["match", ["get", "changetext"], "2", 21, 16] // Size at zoom 22
-    ],
-    "text-anchor": "left", // This positions the left end of the text at the anchor point
-    'text-justify': 'left', // Options: 'left', 'center', 'right'
-    "text-offset": [1.5, 0],
-    //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-    "visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-  },
-  paint: {
-    "text-color": [
-      "match",
-      ["get", "changetext"],
-      "2", "#ff0000", // Red color for "2"
-      "#2c0202" // Default color
-    ],
-    "text-opacity": [
-      "interpolate", ["linear"], ["zoom"],
-      7, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
-      8, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
-    ],
-    "text-halo-color": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 0
-      22, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"] // Halo color at zoom 22
-    ],
-    "text-halo-width": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 0
-      22, ["match", ["get", "changetext"], "2", 5, 4] // Halo width at zoom 22
-    ],
-    "text-halo-blur": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 0
-      22, ["match", ["get", "changetext"], "2", 1, 1] // Halo blur at zoom 22
-    ],
-  },
-  minzoom: 1,
-  toggleElement: "info_labels"
-},
 
   {
     id: "settlements-right",
@@ -446,7 +478,7 @@ const layers = [
         0,
       ],
     },
-    toggleElement: "settlements_points"
+    toggleElement: "settlements_points",
   },
   {
     id: "settlements-labels-right",
@@ -483,7 +515,7 @@ const layers = [
         ],
       },
     },
-    toggleElement: "settlements_labels"
+    toggleElement: "settlements_labels",
   },
   {
     id: "places-right",
@@ -515,7 +547,7 @@ const layers = [
         0,
       ],
     },
-    toggleElement: "castello_points"
+    toggleElement: "castello_points",
   },
   {
     id: "curr-lots-high-right",
@@ -540,7 +572,7 @@ const layers = [
       ],
       "fill-outline-color": "transparent",
     },
-    toggleElement: "current_lots"
+    toggleElement: "current_lots",
   },
   {
     id: "curr-lots-right",
@@ -565,7 +597,7 @@ const layers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "current_lots"
+    toggleElement: "current_lots",
   },
   {
     id: "curr-lots-lines-right",
@@ -585,7 +617,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 0.7,
     },
-    toggleElement: "current_lots_lines"
+    toggleElement: "current_lots_lines",
   },
   {
     id: "curr-builds-lines-right",
@@ -605,7 +637,7 @@ const layers = [
       "line-width": 2,
       "line-opacity": 0.7,
     },
-    toggleElement: "current_buildings_lines"
+    toggleElement: "current_buildings_lines",
   },
   {
     id: "curr-builds-right",
@@ -630,7 +662,7 @@ const layers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "current_buildings"
+    toggleElement: "current_buildings",
   },
   {
     id: "long-island-right",
@@ -650,7 +682,7 @@ const layers = [
       "line-width": 3,
       "line-opacity": 1.0,
     },
-    toggleElement: "longisland_coastline"
+    toggleElement: "longisland_coastline",
   },
   {
     id: "long-island-area-right",
@@ -675,7 +707,7 @@ const layers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "longisland_area"
+    toggleElement: "longisland_area",
   },
   {
     id: "lenape-trails-right",
@@ -695,7 +727,7 @@ const layers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
-    toggleElement: "lenape_trails"
+    toggleElement: "lenape_trails",
   },
   {
     id: "manahatta-shoreline-right",
@@ -715,7 +747,7 @@ const layers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
-    toggleElement: "manahatta_shoreline"
+    toggleElement: "manahatta_shoreline",
   },
   {
     id: "streams-right",
@@ -735,7 +767,7 @@ const layers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
-    toggleElement: "manahatta_streams"
+    toggleElement: "manahatta_streams",
   },
   {
     id: "indian-paths-right",
@@ -755,7 +787,7 @@ const layers = [
       "line-width": 5,
       "line-opacity": 1.0,
     },
-    toggleElement: "indian_paths"
+    toggleElement: "indian_paths",
   },
   {
     id: "native-groups-lines-right",
@@ -776,7 +808,7 @@ const layers = [
       "line-blur": 20,
       "line-opacity": 1.0,
     },
-    toggleElement: "native_groups_lines"
+    toggleElement: "native_groups_lines",
   },
   {
     id: "native-groups-area-right",
@@ -801,7 +833,7 @@ const layers = [
       ],
       "fill-outline-color": "#FFD700",
     },
-    toggleElement: "native_groups_area"
+    toggleElement: "native_groups_area",
   },
   {
     id: "native-groups-area-right-highlighted",
@@ -826,7 +858,7 @@ const layers = [
       ],
       "fill-outline-color": "#FFD700",
     },
-    toggleElement: "native_groups_area"
+    toggleElement: "native_groups_area",
   },
   {
     id: "native-groups-labels-right",
@@ -861,7 +893,7 @@ const layers = [
         ],
       },
     },
-    toggleElement: "settlements_labels"
+    toggleElement: "settlements_labels",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -929,7 +961,7 @@ const layers = [
         stops: [["C7", 9]],
       },
     },
-    toggleElement: "circle_point"
+    toggleElement: "circle_point",
   },
   {
     id: "long-island-lot-right",
@@ -937,7 +969,7 @@ const layers = [
     source: {
       type: "vector",
       // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
+      url: "mapbox://mapny.0884by5y",
     },
     layout: {
       visibility: document.getElementById("long-island-lot").checked
@@ -945,7 +977,7 @@ const layers = [
         : "none",
     },
     // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
+    "source-layer": "LI_lots-4gv85t",
     paint: {
       "circle-color": "#e5870b",
       "circle-opacity": [
@@ -963,49 +995,48 @@ const layers = [
         0,
       ],
     },
-    toggleElement: "long-island-lot"
+    toggleElement: "long-island-lot",
   },
 
-{
-  id: "long-island-lot-labels-right",
-  type: "symbol",
-  source: {
-    type: "vector",
-    // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
-  },
-  layout: {
-    visibility: document.getElementById("long_island_lot_labels").checked
-      ? "visible"
-      : "none",
-    "text-field": "{Label}",
-    "text-offset": [0, 1],
-    "text-size": {
-      stops: [
-        [0, 4],
-        [22, 21],
-      ],
+  {
+    id: "long-island-lot-labels-right",
+    type: "symbol",
+    source: {
+      type: "vector",
+      // url: "mapbox://mapny.98y0pxrl",
+      url: "mapbox://mapny.0884by5y",
     },
-  },
-
-  // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
-
-  paint: {
-    "text-color": "#0b0ee5",
-    "text-halo-color": "#ffffff",
-    "text-halo-width": 5,
-    "text-halo-blur": 1,
-    "text-opacity": {
-      stops: [
-        [10, 0],
-        [11, 1],
-      ],
+    layout: {
+      visibility: document.getElementById("long_island_lot_labels").checked
+        ? "visible"
+        : "none",
+      "text-field": "{Label}",
+      "text-offset": [0, 1],
+      "text-size": {
+        stops: [
+          [0, 4],
+          [22, 21],
+        ],
+      },
     },
-  },
-  toggleElement: "long_island_lot_labels"
-},
 
+    // "source-layer": "settlements-1yjzfy",
+    "source-layer": "LI_lots-4gv85t",
+
+    paint: {
+      "text-color": "#0b0ee5",
+      "text-halo-color": "#ffffff",
+      "text-halo-width": 5,
+      "text-halo-blur": 1,
+      "text-opacity": {
+        stops: [
+          [10, 0],
+          [11, 1],
+        ],
+      },
+    },
+    toggleElement: "long_island_lot_labels",
+  },
 ];
 
 const beforeLayers = [
@@ -1034,7 +1065,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "grants_layer"
+    toggleElement: "grants_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1061,7 +1092,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "grants_layer"
+    toggleElement: "grants_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1129,7 +1160,7 @@ const beforeLayers = [
         stops: [["C7", 9]],
       },
     },
-    toggleElement: "circle_point"
+    toggleElement: "circle_point",
   },
   {
     id: "grant-lots-left",
@@ -1154,7 +1185,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "grant_lots"
+    toggleElement: "grant_lots",
   },
   {
     id: "grant-lots-lines-left",
@@ -1174,7 +1205,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement: "grants_layer_lines"
+    toggleElement: "grants_layer_lines",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1201,7 +1232,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "gravesend_layer"
+    toggleElement: "gravesend_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1228,7 +1259,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "gravesend_layer"
+    toggleElement: "gravesend_layer",
   },
   {
     id: "gravesend-lines-left",
@@ -1248,7 +1279,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement: "gravesend_layer_lines"
+    toggleElement: "gravesend_layer_lines",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1275,7 +1306,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "karl_layer"
+    toggleElement: "karl_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1302,7 +1333,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FF0000",
     },
-    toggleElement: "karl_layer"
+    toggleElement: "karl_layer",
   },
   {
     id: "karl-lines-left",
@@ -1322,7 +1353,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement: "karl_layer_lines"
+    toggleElement: "karl_layer_lines",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1349,7 +1380,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "farms_layer"
+    toggleElement: "farms_layer",
   },
   {
     //ID: CHANGE THIS, 1 OF 3
@@ -1376,7 +1407,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "farms_layer"
+    toggleElement: "farms_layer",
   },
   {
     id: "farms-lines-left",
@@ -1396,97 +1427,128 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.8,
     },
-    toggleElement:"farms_layer_lines"
+    toggleElement: "farms_layer_lines",
   },
-
 
   {
     id: "info-points-left",
     type: "symbol", // Change the type to "symbol"
     source: {
-        type: "vector",
-        url: "mapbox://mapny.4oxcibaa",
+      type: "vector",
+      url: "mapbox://mapny.4oxcibaa",
     },
 
-    "layout": {
-      "visibility": document.getElementById("info_points").checked ? "visible" : "none",
+    layout: {
+      visibility: document.getElementById("info_points").checked
+        ? "visible"
+        : "none",
       "icon-image": "info_points_image",
       "icon-allow-overlap": true,
       "icon-size": [
-        "interpolate", ["linear"], ["zoom"],
-        8, 0.05, // Constant size at zoom 8
-        15, 0.08 // Constant size at zoom 15
-      ]      
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        8,
+        0.05, // Constant size at zoom 8
+        15,
+        0.08, // Constant size at zoom 15
+      ],
     },
     "source-layer": "info_of_interest3-0euqvk",
-    "paint": {
+    paint: {
       "icon-opacity": [
-        "interpolate", ["linear"], ["zoom"],
-        7, 0, // Opacity at zoom 8
-        8, 1.0 // Opacity becomes fully opaque (1.0) at zoom 9
-      ]
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        7,
+        0, // Opacity at zoom 8
+        8,
+        1.0, // Opacity becomes fully opaque (1.0) at zoom 9
+      ],
     },
-    toggleElement: "info_points"
-},
-
-
-{
-  id: "info-labels-left",
-  type: "symbol",
-  source: {
-    type: "vector",
-    //Num type for "change"
-    //url: "mapbox://mapny.cmczx4cf",
-    //Num type for "changetext"
-    url: "mapbox://mapny.4oxcibaa",
+    toggleElement: "info_points",
   },
-  "source-layer": "info_of_interest3-0euqvk",
-  layout: {
-    "text-field": ["get", "Label"],
-    "text-size": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
-      22, ["match", ["get", "changetext"], "2", 21, 16] // Size at zoom 22
-    ],
-    "text-anchor": "left", // This positions the left end of the text at the anchor point
-    'text-justify': 'left', // Options: 'left', 'center', 'right'
-    "text-offset": [1.5, 0],
-    //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-    "visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-  },
-  paint: {
-    "text-color": [
-      "match",
-      ["get", "changetext"],
-      "2", "#ff0000", // Red color for "2"
-      "#2c0202" // Default color
-    ],
-    "text-opacity": [
-      "interpolate", ["linear"], ["zoom"],
-      7, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
-      8, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
-    ],
-    "text-halo-color": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 0
-      22, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"] // Halo color at zoom 22
-    ],
-    "text-halo-width": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 0
-      22, ["match", ["get", "changetext"], "2", 5, 4] // Halo width at zoom 22
-    ],
-    "text-halo-blur": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 0
-      22, ["match", ["get", "changetext"], "2", 1, 1] // Halo blur at zoom 22
-    ],
-  },
-  minzoom: 1,
-  toggleElement: "info_labels"
-},
 
-/* 
+  {
+    id: "info-labels-left",
+    type: "symbol",
+    source: {
+      type: "vector",
+      //Num type for "change"
+      //url: "mapbox://mapny.cmczx4cf",
+      //Num type for "changetext"
+      url: "mapbox://mapny.4oxcibaa",
+    },
+    "source-layer": "info_of_interest3-0euqvk",
+    layout: {
+      "text-field": ["get", "Label"],
+      "text-size": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", 21, 16], // Size at zoom 22
+      ],
+      "text-anchor": "left", // This positions the left end of the text at the anchor point
+      "text-justify": "left", // Options: 'left', 'center', 'right'
+      "text-offset": [1.5, 0],
+      //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
+      visibility: document.getElementById("info_labels").checked
+        ? "visible"
+        : "none",
+    },
+    paint: {
+      "text-color": [
+        "match",
+        ["get", "changetext"],
+        "2",
+        "#ff0000", // Red color for "2"
+        "#2c0202", // Default color
+      ],
+      "text-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        7,
+        ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
+        8,
+        ["match", ["get", "changetext"], "2", 1.0, 1.0], // Opacity at zoom 7
+      ],
+      "text-halo-color": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 22
+      ],
+      "text-halo-width": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 22
+      ],
+      "text-halo-blur": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 0
+        22,
+        ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 22
+      ],
+    },
+    minzoom: 1,
+    toggleElement: "info_labels",
+  },
+
+  /* 
 {
   id: "long-island-lot-left",
   type: "circle",
@@ -1521,82 +1583,80 @@ const beforeLayers = [
 },
  */
 
-{
-  id: "long-island-lot-left",
-  type: "circle",
-  source: {
-    type: "vector",
-    // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
-  },
-  layout: {
-    visibility: document.getElementById("long-island-lot").checked
-      ? "visible"
-      : "none",
-  },
-  // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
-  paint: {
-    "circle-color": "#e5870b",
-    "circle-opacity": [
-      "case",
-      ["boolean", ["feature-state", "hover"], false],
-      0.5,
-      1,
-    ],
-    "circle-stroke-width": 2,
-    "circle-stroke-color": "#e5870b",
-    "circle-stroke-opacity": [
-      "case",
-      ["boolean", ["feature-state", "hover"], false],
-      1,
-      0,
-    ],
-  },
-  toggleElement: "long-island-lot"
-},
-
-
-{
-  id: "long-island-lot-labels-left",
-  type: "symbol",
-  source: {
-    type: "vector",
-    // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
-  },
-  layout: {
-    visibility: document.getElementById("long_island_lot_labels").checked
-      ? "visible"
-      : "none",
-    "text-field": "{Label}",
-    "text-offset": [0, 1],
-    "text-size": {
-      stops: [
-        [0, 4],
-        [22, 21],
+  {
+    id: "long-island-lot-left",
+    type: "circle",
+    source: {
+      type: "vector",
+      // url: "mapbox://mapny.98y0pxrl",
+      url: "mapbox://mapny.0884by5y",
+    },
+    layout: {
+      visibility: document.getElementById("long-island-lot").checked
+        ? "visible"
+        : "none",
+    },
+    // "source-layer": "settlements-1yjzfy",
+    "source-layer": "LI_lots-4gv85t",
+    paint: {
+      "circle-color": "#e5870b",
+      "circle-opacity": [
+        "case",
+        ["boolean", ["feature-state", "hover"], false],
+        0.5,
+        1,
+      ],
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "#e5870b",
+      "circle-stroke-opacity": [
+        "case",
+        ["boolean", ["feature-state", "hover"], false],
+        1,
+        0,
       ],
     },
+    toggleElement: "long-island-lot",
   },
 
-  // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
-
-  paint: {
-    "text-color": "#0b0ee5",
-    "text-halo-color": "#ffffff",
-    "text-halo-width": 5,
-    "text-halo-blur": 1,
-    "text-opacity": {
-      stops: [
-        [10, 0],
-        [11, 1],
-      ],
+  {
+    id: "long-island-lot-labels-left",
+    type: "symbol",
+    source: {
+      type: "vector",
+      // url: "mapbox://mapny.98y0pxrl",
+      url: "mapbox://mapny.0884by5y",
     },
-  },
-  toggleElement: "long_island_lot_labels"
-},
+    layout: {
+      visibility: document.getElementById("long_island_lot_labels").checked
+        ? "visible"
+        : "none",
+      "text-field": "{Label}",
+      "text-offset": [0, 1],
+      "text-size": {
+        stops: [
+          [0, 4],
+          [22, 21],
+        ],
+      },
+    },
 
+    // "source-layer": "settlements-1yjzfy",
+    "source-layer": "LI_lots-4gv85t",
+
+    paint: {
+      "text-color": "#0b0ee5",
+      "text-halo-color": "#ffffff",
+      "text-halo-width": 5,
+      "text-halo-blur": 1,
+      "text-opacity": {
+        stops: [
+          [10, 0],
+          [11, 1],
+        ],
+      },
+    },
+    toggleElement: "long_island_lot_labels",
+  },
 
   {
     id: "settlements-left",
@@ -1628,7 +1688,7 @@ const beforeLayers = [
         0,
       ],
     },
-    toggleElement: "settlements_points"
+    toggleElement: "settlements_points",
   },
   {
     id: "settlements-labels-left",
@@ -1665,7 +1725,7 @@ const beforeLayers = [
         ],
       },
     },
-    toggleElement: "settlements_labels"
+    toggleElement: "settlements_labels",
   },
   {
     id: "places-left",
@@ -1697,7 +1757,7 @@ const beforeLayers = [
         0,
       ],
     },
-    toggleElement: "castello_points"
+    toggleElement: "castello_points",
   },
   {
     id: "curr-lots-high-left",
@@ -1722,7 +1782,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "current_lots"
+    toggleElement: "current_lots",
   },
   {
     id: "curr-lots-left",
@@ -1747,7 +1807,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "current_lots"
+    toggleElement: "current_lots",
   },
   {
     id: "curr-lots-lines-left",
@@ -1767,7 +1827,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 0.7,
     },
-    toggleElement: "current_lots_lines"
+    toggleElement: "current_lots_lines",
   },
   {
     id: "curr-builds-lines-left",
@@ -1787,7 +1847,7 @@ const beforeLayers = [
       "line-width": 2,
       "line-opacity": 0.7,
     },
-    toggleElement: "current_buildings_lines"
+    toggleElement: "current_buildings_lines",
   },
   {
     id: "curr-builds-left",
@@ -1812,7 +1872,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "current_buildings"
+    toggleElement: "current_buildings",
   },
   {
     id: "long-island-left",
@@ -1832,7 +1892,7 @@ const beforeLayers = [
       "line-width": 3,
       "line-opacity": 1.0,
     },
-    toggleElement: "longisland_coastline"
+    toggleElement: "longisland_coastline",
   },
   {
     id: "long-island-area-left",
@@ -1857,7 +1917,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#000000",
     },
-    toggleElement: "longisland_area"
+    toggleElement: "longisland_area",
   },
   {
     id: "lenape-trails-left",
@@ -1877,7 +1937,7 @@ const beforeLayers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
-    toggleElement: "lenape_trails"
+    toggleElement: "lenape_trails",
   },
   {
     id: "manahatta-shoreline-left",
@@ -1897,7 +1957,7 @@ const beforeLayers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
-    toggleElement: "manahatta_shoreline"
+    toggleElement: "manahatta_shoreline",
   },
   {
     id: "streams-left",
@@ -1917,7 +1977,7 @@ const beforeLayers = [
       "line-width": 4,
       "line-opacity": 1.0,
     },
-    toggleElement: "manahatta_streams"
+    toggleElement: "manahatta_streams",
   },
   {
     id: "indian-paths-left",
@@ -1937,7 +1997,7 @@ const beforeLayers = [
       "line-width": 5,
       "line-opacity": 1.0,
     },
-    toggleElement: "indian_paths"
+    toggleElement: "indian_paths",
   },
   {
     id: "native-groups-lines-left",
@@ -1958,7 +2018,7 @@ const beforeLayers = [
       "line-blur": 20,
       "line-opacity": 1.0,
     },
-    toggleElement: "native_groups_lines"
+    toggleElement: "native_groups_lines",
   },
   {
     id: "native-groups-area-left",
@@ -1983,7 +2043,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FFD700",
     },
-    toggleElement: "native_groups_area"
+    toggleElement: "native_groups_area",
   },
   {
     id: "native-groups-area-left-highlighted",
@@ -2008,7 +2068,7 @@ const beforeLayers = [
       ],
       "fill-outline-color": "#FFD700",
     },
-    toggleElement: "native_groups_area"
+    toggleElement: "native_groups_area",
   },
   {
     id: "native-groups-labels-left",
@@ -2043,6 +2103,6 @@ const beforeLayers = [
         ],
       },
     },
-    toggleElement: "settlements_labels"
-  }
-]
+    toggleElement: "settlements_labels",
+  },
+];
