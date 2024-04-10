@@ -1,9 +1,9 @@
 //Note: All enable/disable functionily is removed because
 //when disabled, everything is erased.
 
-//let SKETCH_ENABLED = false;
 
 if (urlParams.get("sketch") === "1") {
+  window.SKETCH_ENABLED = true;
   // Initialize the FirebaseUI Widget using Firebase.
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
   const session = localStorage.getItem("SESSION_KEY")
@@ -41,7 +41,6 @@ if (urlParams.get("sketch") === "1") {
       polygon: true,
       trash: true,
     },
-    defaultMode: "draw_polygon",
   });
 
   const afterMapDrawConfig = new MapboxDraw({
