@@ -41,7 +41,6 @@ if (urlParams.get("sketch") === "1") {
       polygon: true,
       trash: true,
     },
-    defaultMode: "draw_polygon",
   });
 
   const afterMapDrawConfig = new MapboxDraw({
