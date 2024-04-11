@@ -6,30 +6,6 @@ if (urlParams.get("sketch") === "1") {
   window.SKETCH_ENABLED = true;
   // Initialize the FirebaseUI Widget using Firebase.
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
-  const session = localStorage.getItem("SESSION_KEY")
-  if(!session){
-    window.location.href = 'sketch.html';
-  } else {
-    const url = "https://meny-backend.onrender.com/session"
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      session
-    })
-  }).then(blob => {
-    blob.json()
-  }).then(data => {
-    if (data.message !== "valid"){
-      localStorage.removeItem("SESSION_KEY")
-      window.href = '/sketch.html'
-    } else {
-      console.log(data)
-    }
-  })
-  }
   
 
   let isFileUploaded = false;
@@ -392,5 +368,15 @@ afterMap.on("draw.delete", () => saveGeoJSONData(afterMapDrawConfig));
         isFileUploaded = true;
       })
       .catch((error) => console.error("Error loading GeoJSON:", error));
+  }
+
+  function logUserOut(){
+    window.signOut(window.auth).then(() => {
+      // Sign-out successful.
+      window.location.href = "login"
+    }).catch((error) => {
+      // An error happened.
+      alert(error)
+    });
   }
 }

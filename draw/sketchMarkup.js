@@ -27,7 +27,9 @@ if (urlParams.get("sketch") === "1") {
                 padding: 10px; /* Keeping the padding as it was */
             }
 
-            
+            .logout-btn{
+                background-color: #AF4C50 !important;
+            }
 
             /* Buttons */
             button {
@@ -234,6 +236,9 @@ if (urlParams.get("sketch") === "1") {
             <div class="button-group lower-buttons">
                 <button onclick="downloadGeoJSON('beforemap')">Download</button>
                 <label for="beforemap-file_upload" class="file-upload-label">Open</label>
+            </div>
+            <div class="button-group lower-buttons">
+            <button onclick="logUserOut()" class="logout-btn">Log out</button>
             </div>
             <input
                 type="file"

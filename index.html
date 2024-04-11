@@ -193,6 +193,41 @@
   </head>
 
   <body>
+    <script type="module" async>
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
+      import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js"
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyC2lueQJPOT2DqZMvGhnXkSHGd1ELXJNYg",
+        authDomain: "meny-firebase.firebaseapp.com",
+        projectId: "meny-firebase",
+        storageBucket: "meny-firebase.appspot.com",
+        messagingSenderId: "426318777741",
+        appId: "1:426318777741:web:52cf7896f3f4ed410a81c4",
+        measurementId: "G-H32RX557FG"
+      };
+    
+      // Initialize Firebase
+      let app = initializeApp(firebaseConfig);
+      let analytics = getAnalytics(app);
+      window.auth = getAuth(app)
+      window.auth.onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log("User is authenticated");
+        } else {
+          // No user is signed in.
+          window.location.href = 'login.html'
+        }
+      })
+      window.signOut = signOut
+    </script>
     <div id="firebaseui-auth-container"></div>
     <!-------------------->
     <!---ADD MODAL DIV---->
