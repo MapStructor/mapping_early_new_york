@@ -147,7 +147,7 @@ function updateFeatureInfo(mapType) {
     feature.properties.DayStart = +startDate;
     feature.properties.DayEnd = +endDate;
     feature.properties.nid = +nid;
-    feature.properties.changetext = changeTextValue;
+    feature.properties.changetext = +changeTextValue;
     feature.properties.change = 1;
     feature.properties.DayStart2 = +DayStart2;
 
@@ -158,7 +158,7 @@ function updateFeatureInfo(mapType) {
     draw.setFeatureProperty(feature.id, "DayStart2", +DayStart2);
     draw.setFeatureProperty(feature.id, "DayEnd", +endDate);
     draw.setFeatureProperty(feature.id, "nid", +nid);
-    draw.setFeatureProperty(feature.id, "changetext", '2');
+    draw.setFeatureProperty(feature.id, "changetext", changeTextValue);
     draw.setFeatureProperty(feature.id, "change", 1);
 
     // Update label for the feature
