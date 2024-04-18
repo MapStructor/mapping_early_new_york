@@ -224,8 +224,6 @@ if (urlParams.get("sketch") === "1") {
 
             <select id="geojson-selector" onchange="loadSelectedGeoJSON()">
                 <option value="">Select a GeoJSON</option>
-                <option value="example.geojson">example.geojson</option>
-                <option value="drawn_polygon2.geojson">drawn_polygon2.geojson</option>
                 <option value="info_of_interest.geojson">info_of_interest.geojson</option>
             </select>
             

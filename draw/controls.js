@@ -6,7 +6,7 @@ if (urlParams.get("sketch") === "1") {
   window.SKETCH_ENABLED = true;
   // Initialize the FirebaseUI Widget using Firebase.
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
-  
+  let selectedFile
 
   let isFileUploaded = false;
   const beforeMapDrawConfig = new MapboxDraw({
@@ -163,6 +163,10 @@ function updateFeatureInfo(mapType) {
     const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
     createOrUpdateLabel(mapInstance, feature);
   }
+  if (!selectedFile){
+    alert("Select a file before saving!")
+    return
+  }
   saveGeoJSONData(draw)
 }
 
@@ -170,7 +174,7 @@ function updateFeatureInfo(mapType) {
 function saveGeoJSONData(draw) {
   const data = draw.getAll();
   const geojson = JSON.stringify(data);
-  console.log("Updating geojson data => ", data)
+  
 
   const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
   fetch(url, {
@@ -207,6 +211,7 @@ afterMap.on("draw.delete", () => saveGeoJSONData(afterMapDrawConfig));
 
     if (isFileUploaded) {
       // Upload the updated GeoJSON to Google Cloud Storage
+      console.log("Uploading geojson when downloading ==> ", data)
       const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
       fetch(url, {
         method: "POST",
@@ -348,7 +353,7 @@ afterMap.on("draw.delete", () => saveGeoJSONData(afterMapDrawConfig));
 
   function loadSelectedGeoJSON() {
     const selector = document.getElementById("geojson-selector");
-    const selectedFile = selector.value;
+    selectedFile = selector.value;
     if (selectedFile) {
       loadGeoJSON(selectedFile);
     }
