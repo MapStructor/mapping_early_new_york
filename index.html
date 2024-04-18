@@ -216,7 +216,8 @@
       // Initialize Firebase
       let app = initializeApp(firebaseConfig);
       let analytics = getAnalytics(app);
-      window.auth = getAuth(app)
+      if (urlParams.get("sketch") === "1"){
+        window.auth = getAuth(app)
       window.auth.onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
@@ -227,6 +228,7 @@
         }
       })
       window.signOut = signOut
+      }
     </script>
     <div id="firebaseui-auth-container"></div>
     <!-------------------->
