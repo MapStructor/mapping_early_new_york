@@ -360,13 +360,9 @@ const layers = [
   id: "info-labels-right",
   type: "symbol",
   source: {
-    type: "vector",
-    //Num type for "change"
-    //url: "mapbox://mapny.cmczx4cf",
-    //Num type for "changetext"
-    url: "mapbox://mapny.4oxcibaa",
+    type: "geojson",
+    data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
   },
-  "source-layer": "info_of_interest3-0euqvk",
   layout: {
     "text-field": ["get", "Label"],
     "text-size": [
@@ -374,11 +370,10 @@ const layers = [
       0, ["match", ["get", "changetext"], "2", 4, 4], // Size at zoom 0
       22, ["match", ["get", "changetext"], "2", 21, 16] // Size at zoom 22
     ],
-    "text-anchor": "left", // This positions the left end of the text at the anchor point
-    'text-justify': 'left', // Options: 'left', 'center', 'right'
+    "text-anchor": "left",
+    "text-justify": "left",
     "text-offset": [1.5, 0],
-    //"visibility": document.getElementById("info_labels").checked ? "visible" : "none",
-    "visibility": document.getElementById("info_labels").checked ? "visible" : "none",
+    "visibility": document.getElementById("info_labels").checked ? "visible" : "none"
   },
   paint: {
     "text-color": [
@@ -392,11 +387,7 @@ const layers = [
       7, ["match", ["get", "changetext"], "2", 0, 0], // Opacity at zoom 6
       8, ["match", ["get", "changetext"], "2", 1.0, 1.0] // Opacity at zoom 7
     ],
-    "text-halo-color": [
-      "interpolate", ["linear"], ["zoom"],
-      0, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"], // Halo color at zoom 0
-      22, ["match", ["get", "changetext"], "2", "#ffffff", "#ffffff"] // Halo color at zoom 22
-    ],
+    "text-halo-color": "#ffffff",
     "text-halo-width": [
       "interpolate", ["linear"], ["zoom"],
       0, ["match", ["get", "changetext"], "2", 5, 4], // Halo width at zoom 0
@@ -406,7 +397,7 @@ const layers = [
       "interpolate", ["linear"], ["zoom"],
       0, ["match", ["get", "changetext"], "2", 1, 1], // Halo blur at zoom 0
       22, ["match", ["get", "changetext"], "2", 1, 1] // Halo blur at zoom 22
-    ],
+    ]
   },
   minzoom: 1,
   toggleElement: "info_labels"
