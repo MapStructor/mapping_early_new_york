@@ -220,6 +220,7 @@ if (urlParams.get("sketch") === "1") {
             <input type="number" id="startdate2" placeholder="Start Date 2" class="sketch-input"/>
             <input type="number" id="beforemap-nid-input" placeholder="Nid" class="sketch-input"/>
             <input type="number" id="beforemap-enddate-input" placeholder="End Date" class="sketch-input"/>
+            <input type="text" id="changetext-field" placeholder="changetext" class="sketch-input"/>
             <textarea id="beforemap-info-input" placeholder="Additional information"></textarea>
 
             <select id="geojson-selector" onchange="loadSelectedGeoJSON()">

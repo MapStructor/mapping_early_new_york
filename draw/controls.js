@@ -109,6 +109,7 @@ if (urlParams.get("sketch") === "1") {
         feature.properties.DayEnd || "";
       document.getElementById("startdate2").value = feature.properties.DayStart2;
       document.getElementById("beforemap-nid-input").value = feature.properties.nid;
+      document.getElementById("changetext-field").value = feature.properties.changetext
     }
   }
 
@@ -133,6 +134,7 @@ function updateFeatureInfo(mapType) {
   const endDate = document.getElementById(mapType + "-enddate-input").value;
   const nid = document.getElementById('beforemap-nid-input').value;
   const DayStart2 = document.getElementById('startdate2').value;
+  const changeTextValue = document.getElementById("changetext-field").value
 
   const selectedFeatures = draw.getSelected();
 
@@ -145,7 +147,7 @@ function updateFeatureInfo(mapType) {
     feature.properties.DayStart = +startDate;
     feature.properties.DayEnd = +endDate;
     feature.properties.nid = +nid;
-    feature.properties.changetext = '2';
+    feature.properties.changetext = changeTextValue;
     feature.properties.change = 1;
     feature.properties.DayStart2 = +DayStart2;
 
