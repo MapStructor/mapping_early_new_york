@@ -7,6 +7,17 @@ if (urlParams.get("sketch") === "1") {
   // Initialize the FirebaseUI Widget using Firebase.
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
   let selectedFile
+  function notify(message) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    if (message === "Firebase: Error (auth/invalid-credential)."){
+        x.innerHTML = "<p>Invalid login Credentials</p>"
+    }else{
+        x.innerHTML=`<p>${message}</p>`
+    }
+    
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
 
   let isFileUploaded = false;
   const beforeMapDrawConfig = new MapboxDraw({
@@ -166,7 +177,7 @@ function updateFeatureInfo(mapType) {
     createOrUpdateLabel(mapInstance, feature);
   }
   if (!selectedFile){
-    alert("Select a file before saving!")
+    notify("Select a file before saving!")
     return
   }
   saveGeoJSONData(draw)
@@ -179,6 +190,7 @@ function saveGeoJSONData(draw) {
   
 
   const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
+  notify("Saving...")
   fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -186,10 +198,11 @@ function saveGeoJSONData(draw) {
   })
   .then(response => response.json())
   .then(data => {
-      console.log("Success:", data);
+      notify("Saved successfully")
   })
   .catch((error) => {
       console.error("Error:", error);
+      notify("There was an error saving geojson")
   });
 }
 
@@ -213,7 +226,6 @@ afterMap.on("draw.delete", () => saveGeoJSONData(afterMapDrawConfig));
 
     if (isFileUploaded) {
       // Upload the updated GeoJSON to Google Cloud Storage
-      console.log("Uploading geojson when downloading ==> ", data)
       const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
       fetch(url, {
         method: "POST",

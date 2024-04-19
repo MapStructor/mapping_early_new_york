@@ -192,8 +192,52 @@ if (urlParams.get("sketch") === "1") {
             box-sizing: border-box; /* Ensure padding and border don't increase element width */
             }
 
+            button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+              }
             
-            
+              #snackbar {
+                visibility: hidden;
+                min-width: 250px;
+                margin-left: -125px;
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                border-radius: 2px;
+                padding: 16px;
+                position: fixed;
+                z-index: 1;
+                left: 50%;
+                bottom: 30px;
+                font-size: 17px;
+              }
+              
+              #snackbar.show {
+                visibility: visible;
+                -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                animation: fadein 0.5s, fadeout 0.5s 2.5s;
+              }
+              
+              @-webkit-keyframes fadein {
+                from {bottom: 0; opacity: 0;} 
+                to {bottom: 30px; opacity: 1;}
+              }
+              
+              @keyframes fadein {
+                from {bottom: 0; opacity: 0;}
+                to {bottom: 30px; opacity: 1;}
+              }
+              
+              @-webkit-keyframes fadeout {
+                from {bottom: 30px; opacity: 1;} 
+                to {bottom: 0; opacity: 0;}
+              }
+              
+              @keyframes fadeout {
+                from {bottom: 30px; opacity: 1;}
+                to {bottom: 0; opacity: 0;}
+              }
         </style>
         <hr/>
         <p class="title">SKETCH</p>
@@ -248,6 +292,7 @@ if (urlParams.get("sketch") === "1") {
                 style="display:none;"  <!-- Hidden input moved outside the flex container -->
         </div>
         <br>
+    <div id="snackbar"></div>
 
 
         <!-- NOTE: If you want to add sketching for the right side, just copy
