@@ -238,6 +238,15 @@ if (urlParams.get("sketch") === "1") {
                 from {bottom: 30px; opacity: 1;}
                 to {bottom: 0; opacity: 0;}
               }
+
+              .dead {
+                opacity: 0.5; /* reduce opacity to give a "disabled" appearance */
+                cursor: not-allowed; /* change cursor to indicate button is not clickable */
+                pointer-events: none; /* make button unresponsive to clicks */
+                background-color: gray; /* change background color to gray to indicate "dead" state */
+                color: white; /* change text color to white for contrast */
+                border: none; /* remove border to give a flat appearance */
+              }
         </style>
         <hr/>
         <p class="title">SKETCH</p>
@@ -273,7 +282,7 @@ if (urlParams.get("sketch") === "1") {
             </select>
             
             <div class="button-group update-group">
-                <button id="beforemap-update-info-button" onclick="updateFeatureInfo('beforemap')">Save</button>
+                <button id="beforemap-update-info-button" onclick="updateFeatureInfo('beforemap')" class="dead">Save</button>
             </div>
         
             <div class="button-group lower-buttons">

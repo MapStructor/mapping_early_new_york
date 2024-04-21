@@ -366,11 +366,23 @@ afterMap.on("draw.delete", () => saveGeoJSONData(afterMapDrawConfig));
     }
   }
 
+  function togleSaveButton(isClickable){
+    if(isClickable){
+      document.getElementById("beforemap-update-info-button").className = ""
+    } else {
+      document.getElementById("beforemap-update-info-button").className = "dead"
+    }
+  }
+
+
   function loadSelectedGeoJSON() {
     const selector = document.getElementById("geojson-selector");
     selectedFile = selector.value;
     if (selectedFile) {
+      togleSaveButton(true)
       loadGeoJSON(selectedFile);
+    } else {
+      togleSaveButton(false)
     }
   }
 
