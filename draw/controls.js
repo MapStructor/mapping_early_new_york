@@ -176,6 +176,7 @@ function updateFeatureInfo(mapType) {
     const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
     createOrUpdateLabel(mapInstance, feature);
   }
+  console.log(draw.getAll())
   if (!selectedFile){
     notify("Select a file before saving!")
     return
@@ -187,7 +188,7 @@ function updateFeatureInfo(mapType) {
 function saveGeoJSONData(draw) {
   const data = draw.getAll();
   const geojson = JSON.stringify(data);
-  
+  if(data.features.length === 0) return // prevent saving of empty geojsons
 
   const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
   notify("Saving...")
