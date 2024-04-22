@@ -325,12 +325,6 @@ const layers = [
   {
     id: "info-points-right",
     type: "symbol", // Change the type to "symbol"
-    //MAPBOX:
-    source: {
-      type: "vector",
-      url: "mapbox://mapny.4oxcibaa",
-    },
-    /*GEOJSON:
     source: {
         type: "geojson",
         //Public URL:
@@ -340,7 +334,6 @@ const layers = [
         //data: "https://storage.cloud.google.com/meny_geojsons_bucket/info_of_interest.geojson
 
     },
-    */
     "layout": {
       "visibility": document.getElementById("info_points").checked ? "visible" : "none",
       "icon-image": "info_points_image",
@@ -351,8 +344,6 @@ const layers = [
         15, 0.08 // Constant size at zoom 15
       ]      
     },
-    //COMMENT THIS OUT IF GEOJSON:
-    "source-layer": "info_of_interest3-0euqvk",
     paint: {
       "icon-opacity": [
         "interpolate", ["linear"], ["zoom"],
@@ -368,18 +359,9 @@ const layers = [
 {
   id: "info-labels-right",
   type: "symbol",
-
-  /*
-  //GEOJSON:
   source: {
     type: "geojson",
     data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
-  },
-  */
-  //MAPBOX:
-  source: {
-    type: "vector",
-    url: "mapbox://mapny.4oxcibaa",
   },
   layout: {
     "text-field": ["get", "Label"],
@@ -393,7 +375,6 @@ const layers = [
     "text-offset": [1.5, 0],
     "visibility": document.getElementById("info_labels").checked ? "visible" : "none"
   },
-  "source-layer": "info_of_interest3-0euqvk",
   paint: {
     "text-color": [
       "match",
