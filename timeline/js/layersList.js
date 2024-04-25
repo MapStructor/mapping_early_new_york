@@ -364,8 +364,6 @@ const layers = [
     toggleElement: "info_points"
   },
 
-//NEW LAYER - STYLING NOT WORKING AND NEEDS CONNECTION TO TIMELINE:
-
 {
   id: "info-labels-right",
   type: "symbol",
@@ -1415,9 +1413,20 @@ const beforeLayers = [
   {
     id: "info-points-left",
     type: "symbol", // Change the type to "symbol"
+
+    /*
+    //MAPBOX:
     source: {
         type: "vector",
         url: "mapbox://mapny.4oxcibaa",
+    },
+    */
+
+    //GEOJSON:
+    source: {
+      type: "geojson",
+      //Public URL:
+      data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
     },
 
     "layout": {
@@ -1430,7 +1439,9 @@ const beforeLayers = [
         15, 0.08 // Constant size at zoom 15
       ]      
     },
-    "source-layer": "info_of_interest3-0euqvk",
+
+    //"source-layer": "info_of_interest3-0euqvk",
+    
     "paint": {
       "icon-opacity": [
         "interpolate", ["linear"], ["zoom"],
@@ -1445,14 +1456,21 @@ const beforeLayers = [
 {
   id: "info-labels-left",
   type: "symbol",
+
+  /*
+  //MAPBOX:
   source: {
     type: "vector",
-    //Num type for "change"
-    //url: "mapbox://mapny.cmczx4cf",
-    //Num type for "changetext"
     url: "mapbox://mapny.4oxcibaa",
   },
-  "source-layer": "info_of_interest3-0euqvk",
+  */
+
+  //GEOJSON:
+  source: {
+    type: "geojson",
+    data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+  },
+
   layout: {
     "text-field": ["get", "Label"],
     "text-size": [
