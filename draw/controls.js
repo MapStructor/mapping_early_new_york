@@ -6,6 +6,7 @@ if (urlParams.get("sketch") === "1") {
   window.SKETCH_ENABLED = true;
   // Initialize the FirebaseUI Widget using Firebase.
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  let isReadyToSave = true
   let selectedFile
   function notify(message) {
     var x = document.getElementById("snackbar");
@@ -125,24 +126,15 @@ if (urlParams.get("sketch") === "1") {
   }
 
 // Update feature info and label
-function updateFeatureInfo(mapType) {
-  const draw = {
-    aftermap: afterMapDrawConfig,
-    beforemap: beforeMapDrawConfig,
-  }[mapType];
-  const titleId = {
-    aftermap: "aftermap-title-input",
-    beforemap: "beforemap-title-input",
-  }[mapType];
-  const infoId = {
-    aftermap: "aftermap-info-input",
-    beforemap: "beforemap-info-input",
-  }[mapType];
+function updateFeatureInfo() {
+  const draw = beforeMapDrawConfig
+  const titleId = "beforemap-title-input"
+  const infoId ="beforemap-info-input"
 
   const title = document.getElementById(titleId).value;
   const info = document.getElementById(infoId).value;
-  const startDate = document.getElementById(mapType + "-startdate-input").value;
-  const endDate = document.getElementById(mapType + "-enddate-input").value;
+  const startDate = document.getElementById("beforemap-startdate-input").value;
+  const endDate = document.getElementById("beforemap-enddate-input").value;
   const nid = document.getElementById('beforemap-nid-input').value;
   const DayStart2 = document.getElementById('startdate2').value;
   const changeTextValue = document.getElementById("changetext-field").value
@@ -173,8 +165,7 @@ function updateFeatureInfo(mapType) {
     draw.setFeatureProperty(feature.id, "change", 1);
 
     // Update label for the feature
-    const mapInstance = mapType === "aftermap" ? afterMap : beforeMap;
-    createOrUpdateLabel(mapInstance, feature);
+    createOrUpdateLabel(beforeMap, feature);
   }
   console.log(draw.getAll())
   if (!selectedFile){
@@ -199,6 +190,7 @@ function saveGeoJSONData(draw) {
 
   const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=${selectedFile}`;
   notify("Saving...")
+  isReadyToSave = false
   fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -211,6 +203,8 @@ function saveGeoJSONData(draw) {
   .catch((error) => {
       console.error("Error:", error);
       notify("There was an error saving geojson")
+  }).finally(()=>{
+    isReadyToSave = true
   });
 }
 
@@ -413,4 +407,23 @@ function saveGeoJSONData(draw) {
       alert(error)
     });
   }
+
+  // add event listeners to save fields as user types
+  [...document.getElementsByClassName("sketch-input")].forEach(node => {
+    node.addEventListener("input", () => {
+      const draw = beforeMapDrawConfig
+      const selected = draw.getSelected()
+      console.log(selected)
+      if (selected.features.length && selectedFile){
+        // save the geojson
+        // making sure each save request is queued before the other
+        let v = setInterval(()=>{
+          if(isReadyToSave){
+            updateFeatureInfo()
+            clearInterval(v)
+          }
+        }, 500)
+      }
+    })
+  })
 }

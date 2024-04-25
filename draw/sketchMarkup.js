@@ -282,7 +282,7 @@ if (urlParams.get("sketch") === "1") {
             </select>
             
             <div class="button-group update-group">
-                <button id="beforemap-update-info-button" onclick="updateFeatureInfo('beforemap')" class="dead">Save</button>
+                <button id="beforemap-update-info-button" onclick="updateFeatureInfo()" class="dead">Save</button>
             </div>
         
             <div class="button-group lower-buttons">
