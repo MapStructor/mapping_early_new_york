@@ -188,9 +188,16 @@ function updateFeatureInfo(mapType) {
 function saveGeoJSONData(draw) {
   const data = draw.getAll();
   const geojson = JSON.stringify(data);
-  if(data.features.length === 0) return // prevent saving of empty geojsons
+  if(data.features.length === 0) {
+    notify("Can't save empty map data")  
+    return // prevent saving of empty geojsons
+  }
+  if(!selectedFile) { // prevent saving of no selected file
+    notify("No file selected") 
+    return
+  }
 
-  const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
+  const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=${selectedFile}`;
   notify("Saving...")
   fetch(url, {
       method: "POST",
@@ -209,14 +216,9 @@ function saveGeoJSONData(draw) {
 
 
 // Event listeners for feature creation, update, and deletion
-beforeMap.on("draw.create", () => saveGeoJSONData(beforeMapDrawConfig));
-beforeMap.on("draw.update", () => saveGeoJSONData(beforeMapDrawConfig));
-beforeMap.on("draw.delete", () => saveGeoJSONData(beforeMapDrawConfig));
-
-afterMap.on("draw.create", () => saveGeoJSONData(afterMapDrawConfig));
-afterMap.on("draw.update", () => saveGeoJSONData(afterMapDrawConfig));
-afterMap.on("draw.delete", () => saveGeoJSONData(afterMapDrawConfig));
-
+// beforeMap.on("draw.create", () => saveGeoJSONData(beforeMapDrawConfig));
+// beforeMap.on("draw.update", () => saveGeoJSONData(beforeMapDrawConfig));
+// beforeMap.on("draw.delete", () => saveGeoJSONData(beforeMapDrawConfig));
 
   function downloadGeoJSON(mapType) {
     const draw = {
