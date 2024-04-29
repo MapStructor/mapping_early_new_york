@@ -947,7 +947,8 @@ const layers = [
     source: {
       type: "vector",
       // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
+      // url: "mapbox://mapny.0884by5y",
+	  url: "mapbox://mapny.5bsrtpc9",
     },
     layout: {
       visibility: document.getElementById("long-island-lot").checked
@@ -955,7 +956,8 @@ const layers = [
         : "none",
     },
     // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
+    // "source-layer": "LI_lots-4gv85t",
+	"source-layer": "wikipedia_villages_and_hamlet-2oq6k9",
     paint: {
       "circle-color": "#e5870b",
       "circle-opacity": [
@@ -982,7 +984,8 @@ const layers = [
   source: {
     type: "vector",
     // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
+    // url: "mapbox://mapny.0884by5y",
+	url: "mapbox://mapny.5bsrtpc9",
   },
   layout: {
     visibility: document.getElementById("long_island_lot_labels").checked
@@ -999,7 +1002,8 @@ const layers = [
   },
 
   // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
+  // "source-layer": "LI_lots-4gv85t",
+  "source-layer": "wikipedia_villages_and_hamlet-2oq6k9",
 
   paint: {
     "text-color": "#0b0ee5",
@@ -1015,6 +1019,230 @@ const layers = [
   },
   toggleElement: "long_island_lot_labels"
 },
+
+  // -> Start  Historic Markers Right
+{
+  id: "historic-markers-right",
+  type: "circle",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.3cy8p1tr",
+  },
+  layout: {
+    visibility: document.getElementById("historic-markers").checked
+      ? "visible"
+      : "none",
+  },
+  "source-layer": "historic_markers-8989o0",
+  paint: {
+    "circle-color": "#7b68ee",
+    "circle-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      0.5,
+      1,
+    ],
+    "circle-stroke-width": 2,
+    "circle-stroke-color": "#7b68ee",
+    "circle-stroke-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      1,
+      0,
+    ],
+  },
+  toggleElement: "historic-markers"
+},
+
+
+{
+  id: "historic-markers-labels-right",
+  type: "symbol",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.3cy8p1tr",
+  },
+  layout: {
+    visibility: document.getElementById("historic_markers_labels").checked
+      ? "visible"
+      : "none",
+    "text-field": "{Label}",
+    "text-offset": [0, 1],
+    "text-size": {
+      stops: [
+        [0, 4],
+        [22, 21],
+      ],
+    },
+  },
+  "source-layer": "historic_markers-8989o0",
+
+  paint: {
+    "text-color": "#0b0ee5",
+    "text-halo-color": "#ffffff",
+    "text-halo-width": 5,
+    "text-halo-blur": 1,
+    "text-opacity": {
+      stops: [
+        [10, 0],
+        [11, 1],
+      ],
+    },
+  },
+  toggleElement: "historic_markers_labels"
+},
+
+  // -> End    Historic Markers Right
+
+  // -> Start  Historic Places Right
+
+{
+  id: "historic-places-right",
+  type: "circle",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.bo77v2ph",
+  },
+  layout: {
+    visibility: document.getElementById("historic-places").checked
+      ? "visible"
+      : "none",
+  },
+  "source-layer": "national_register-6ohqde",
+  paint: {
+    "circle-color": "#097911",
+    "circle-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      0.5,
+      1,
+    ],
+    "circle-stroke-width": 2,
+    "circle-stroke-color": "#097911",
+    "circle-stroke-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      1,
+      0,
+    ],
+  },
+  toggleElement: "historic-places"
+},
+
+
+{
+  id: "historic-places-labels-right",
+  type: "symbol",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.bo77v2ph",
+  },
+  layout: {
+    visibility: document.getElementById("historic_places_labels").checked
+      ? "visible"
+      : "none",
+    "text-field": "{Label}",
+    "text-offset": [0, 1],
+    "text-size": {
+      stops: [
+        [0, 4],
+        [22, 21],
+      ],
+    },
+  },
+  "source-layer": "national_register-6ohqde",
+
+  paint: {
+    "text-color": "#0b0ee5",
+    "text-halo-color": "#ffffff",
+    "text-halo-width": 5,
+    "text-halo-blur": 1,
+    "text-opacity": {
+      stops: [
+        [10, 0],
+        [11, 1],
+      ],
+    },
+  },
+  toggleElement: "historic_places_labels"
+},
+
+  // -> End    Historic Places Right
+
+  // -> Start  Burials Right
+
+{
+  id: "burials-anemhn-right",
+  type: "circle",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.1j270qhp",
+  },
+  layout: {
+    visibility: document.getElementById("burials-anemhn").checked
+      ? "visible"
+      : "none",
+  },
+  "source-layer": "burials-anemhn",
+  paint: {
+    "circle-color": "#ff0000",
+    "circle-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      0.5,
+      1,
+    ],
+    "circle-stroke-width": 2,
+    "circle-stroke-color": "#ff0000",
+    "circle-stroke-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      1,
+      0,
+    ],
+  },
+  toggleElement: "burials-anemhn"
+},
+
+
+{
+  id: "burials-anemhn-labels-right",
+  type: "symbol",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.1j270qhp",
+  },
+  layout: {
+    visibility: document.getElementById("burials_anemhn_labels").checked
+      ? "visible"
+      : "none",
+    "text-field": "{Label}",
+    "text-offset": [0, 1],
+    "text-size": {
+      stops: [
+        [0, 4],
+        [22, 21],
+      ],
+    },
+  },
+  "source-layer": "burials-anemhn",
+
+  paint: {
+    "text-color": "#0b0ee5",
+    "text-halo-color": "#ffffff",
+    "text-halo-width": 5,
+    "text-halo-blur": 1,
+    "text-opacity": {
+      stops: [
+        [10, 0],
+        [11, 1],
+      ],
+    },
+  },
+  toggleElement: "burials_anemhn_labels"
+},
+
+  // -> End    Burials Right
 
 ];
 
@@ -1557,7 +1785,8 @@ const beforeLayers = [
   source: {
     type: "vector",
     // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
+    //url: "mapbox://mapny.0884by5y",
+	url: "mapbox://mapny.5bsrtpc9",
   },
   layout: {
     visibility: document.getElementById("long-island-lot").checked
@@ -1565,7 +1794,8 @@ const beforeLayers = [
       : "none",
   },
   // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
+  // "source-layer": "LI_lots-4gv85t",
+  "source-layer": "wikipedia_villages_and_hamlet-2oq6k9",
   paint: {
     "circle-color": "#e5870b",
     "circle-opacity": [
@@ -1593,7 +1823,8 @@ const beforeLayers = [
   source: {
     type: "vector",
     // url: "mapbox://mapny.98y0pxrl",
-    url: "mapbox://mapny.0884by5y",
+    // url: "mapbox://mapny.0884by5y",
+	url: "mapbox://mapny.5bsrtpc9",
   },
   layout: {
     visibility: document.getElementById("long_island_lot_labels").checked
@@ -1610,7 +1841,8 @@ const beforeLayers = [
   },
 
   // "source-layer": "settlements-1yjzfy",
-  "source-layer": "LI_lots-4gv85t",
+  // "source-layer": "LI_lots-4gv85t",
+  "source-layer": "wikipedia_villages_and_hamlet-2oq6k9",
 
   paint: {
     "text-color": "#0b0ee5",
@@ -1626,6 +1858,231 @@ const beforeLayers = [
   },
   toggleElement: "long_island_lot_labels"
 },
+
+
+  // -> Start  Historic Markers Left
+{
+  id: "historic-markers-left",
+  type: "circle",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.3cy8p1tr",
+  },
+  layout: {
+    visibility: document.getElementById("historic-markers").checked
+      ? "visible"
+      : "none",
+  },
+  "source-layer": "historic_markers-8989o0",
+  paint: {
+    "circle-color": "#7b68ee",
+    "circle-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      0.5,
+      1,
+    ],
+    "circle-stroke-width": 2,
+    "circle-stroke-color": "#7b68ee",
+    "circle-stroke-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      1,
+      0,
+    ],
+  },
+  toggleElement: "historic-markers"
+},
+
+
+{
+  id: "historic-markers-labels-left",
+  type: "symbol",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.3cy8p1tr",
+  },
+  layout: {
+    visibility: document.getElementById("historic_markers_labels").checked
+      ? "visible"
+      : "none",
+    "text-field": "{Label}",
+    "text-offset": [0, 1],
+    "text-size": {
+      stops: [
+        [0, 4],
+        [22, 21],
+      ],
+    },
+  },
+  "source-layer": "historic_markers-8989o0",
+
+  paint: {
+    "text-color": "#0b0ee5",
+    "text-halo-color": "#ffffff",
+    "text-halo-width": 5,
+    "text-halo-blur": 1,
+    "text-opacity": {
+      stops: [
+        [10, 0],
+        [11, 1],
+      ],
+    },
+  },
+  toggleElement: "historic_markers_labels"
+},
+
+  // -> End    Historic Markers Left
+
+  // -> Start  Historic Places Left
+
+{
+  id: "historic-places-left",
+  type: "circle",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.bo77v2ph",
+  },
+  layout: {
+    visibility: document.getElementById("historic-places").checked
+      ? "visible"
+      : "none",
+  },
+  "source-layer": "national_register-6ohqde",
+  paint: {
+    "circle-color": "#097911",
+    "circle-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      0.5,
+      1,
+    ],
+    "circle-stroke-width": 2,
+    "circle-stroke-color": "#097911",
+    "circle-stroke-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      1,
+      0,
+    ],
+  },
+  toggleElement: "historic-places"
+},
+
+
+{
+  id: "historic-places-labels-left",
+  type: "symbol",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.bo77v2ph",
+  },
+  layout: {
+    visibility: document.getElementById("historic_places_labels").checked
+      ? "visible"
+      : "none",
+    "text-field": "{Label}",
+    "text-offset": [0, 1],
+    "text-size": {
+      stops: [
+        [0, 4],
+        [22, 21],
+      ],
+    },
+  },
+  "source-layer": "national_register-6ohqde",
+
+  paint: {
+    "text-color": "#0b0ee5",
+    "text-halo-color": "#ffffff",
+    "text-halo-width": 5,
+    "text-halo-blur": 1,
+    "text-opacity": {
+      stops: [
+        [10, 0],
+        [11, 1],
+      ],
+    },
+  },
+  toggleElement: "historic_places_labels"
+},
+
+  // -> End    Historic Places Left
+
+  // -> Start  Burials Left
+
+{
+  id: "burials-anemhn-left",
+  type: "circle",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.1j270qhp",
+  },
+  layout: {
+    visibility: document.getElementById("burials-anemhn").checked
+      ? "visible"
+      : "none",
+  },
+  "source-layer": "burials-anemhn",
+  paint: {
+    "circle-color": "#ff0000",
+    "circle-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      0.5,
+      1,
+    ],
+    "circle-stroke-width": 2,
+    "circle-stroke-color": "#ff0000",
+    "circle-stroke-opacity": [
+      "case",
+      ["boolean", ["feature-state", "hover"], false],
+      1,
+      0,
+    ],
+  },
+  toggleElement: "burials-anemhn"
+},
+
+
+{
+  id: "burials-anemhn-labels-left",
+  type: "symbol",
+  source: {
+    type: "vector",
+	url: "mapbox://mapny.1j270qhp",
+  },
+  layout: {
+    visibility: document.getElementById("burials_anemhn_labels").checked
+      ? "visible"
+      : "none",
+    "text-field": "{Label}",
+    "text-offset": [0, 1],
+    "text-size": {
+      stops: [
+        [0, 4],
+        [22, 21],
+      ],
+    },
+  },
+  "source-layer": "burials-anemhn",
+
+  paint: {
+    "text-color": "#0b0ee5",
+    "text-halo-color": "#ffffff",
+    "text-halo-width": 5,
+    "text-halo-blur": 1,
+    "text-opacity": {
+      stops: [
+        [10, 0],
+        [11, 1],
+      ],
+    },
+  },
+  toggleElement: "burials_anemhn_labels"
+},
+
+  // -> End    Burials Left
 
 
   {
