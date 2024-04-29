@@ -677,6 +677,320 @@ $(document).ready(function () {
       }
     }
   });
+  
+   // -> Start  Historic Markers
+   
+     $("#historic-markers").click(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "historic-markers-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-markers-right",
+        "visibility",
+        "visible"
+      );
+      beforeMap.setLayoutProperty(
+        "historic-markers-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-markers-labels-right",
+        "visibility",
+        "visible"
+      );
+      $(".historic_markers").prop("checked", "checked");
+    } else {
+      beforeMap.setLayoutProperty("historic-markers-left", "visibility", "none");
+      afterMap.setLayoutProperty("historic-markers-right", "visibility", "none");
+      beforeMap.setLayoutProperty(
+        "historic-markers-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "historic-markers-labels-right",
+        "visibility",
+        "none"
+      );
+      $(".historic_markers").prop("checked", false);
+      if (historic_markers_layer_view_flag) {
+        closeLayerHistoricMarkersInfo();
+      }
+    }
+  });
+
+  $("#historic_markers_labels").change(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "historic-markers-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-markers-labels-right",
+        "visibility",
+        "visible"
+      );
+    } else {
+      beforeMap.setLayoutProperty(
+        "historic-markers-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "historic-markers-labels-right",
+        "visibility",
+        "none"
+      );
+    }
+  });
+
+  $("#historic_markers_points").change(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "historic-markers-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-markers-right",
+        "visibility",
+        "visible"
+      );
+    } else {
+      beforeMap.setLayoutProperty("historic-markers-left", "visibility", "none");
+      afterMap.setLayoutProperty("historic-markers-right", "visibility", "none");
+
+      if (historic_markers_layer_view_flag) {
+        closeLayerHistoricMarkersInfo();
+      }
+    }
+  });
+   
+   // -> End    Historic Markers
+   
+   // -> Start  Historic Places
+   
+     $("#historic-places").click(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "historic-places-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-places-right",
+        "visibility",
+        "visible"
+      );
+      beforeMap.setLayoutProperty(
+        "historic-places-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-places-labels-right",
+        "visibility",
+        "visible"
+      );
+      $(".historic_places").prop("checked", "checked");
+    } else {
+      beforeMap.setLayoutProperty("historic-places-left", "visibility", "none");
+      afterMap.setLayoutProperty("historic-places-right", "visibility", "none");
+      beforeMap.setLayoutProperty(
+        "historic-places-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "historic-places-labels-right",
+        "visibility",
+        "none"
+      );
+      $(".historic_places").prop("checked", false);
+      if (historic_places_layer_view_flag) {
+        closeLayerHistoricPlacesInfo();
+      }
+    }
+  });
+
+  $("#historic_places_labels").change(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "historic-places-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-places-labels-right",
+        "visibility",
+        "visible"
+      );
+    } else {
+      beforeMap.setLayoutProperty(
+        "historic-places-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "historic-places-labels-right",
+        "visibility",
+        "none"
+      );
+    }
+  });
+
+  $("#historic_places_points").change(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "historic-places-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "historic-places-right",
+        "visibility",
+        "visible"
+      );
+    } else {
+      beforeMap.setLayoutProperty("historic-places-left", "visibility", "none");
+      afterMap.setLayoutProperty("historic-places-right", "visibility", "none");
+
+      if (historic_places_layer_view_flag) {
+        closeLayerHistoricPlacesInfo();
+      }
+    }
+  });
+   
+   // -> End    Historic Places
+   
+   // -> Start  Burials
+   
+     $("#burials-anemhn").click(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "burials-anemhn-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "burials-anemhn-right",
+        "visibility",
+        "visible"
+      );
+      beforeMap.setLayoutProperty(
+        "burials-anemhn-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "burials-anemhn-labels-right",
+        "visibility",
+        "visible"
+      );
+      $(".burials_anemhn").prop("checked", "checked");
+    } else {
+      beforeMap.setLayoutProperty("burials-anemhn-left", "visibility", "none");
+      afterMap.setLayoutProperty("burials-anemhn-right", "visibility", "none");
+      beforeMap.setLayoutProperty(
+        "burials-anemhn-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "burials-anemhn-labels-right",
+        "visibility",
+        "none"
+      );
+      $(".burials_anemhn").prop("checked", false);
+      if (burials_anemhn_layer_view_flag) {
+        closeLayerBurialsAnemhnInfo();
+      }
+    }
+  });
+
+  $("#burials_anemhn_labels").change(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "burials-anemhn-labels-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "burials-anemhn-labels-right",
+        "visibility",
+        "visible"
+      );
+    } else {
+      beforeMap.setLayoutProperty(
+        "burials-anemhn-labels-left",
+        "visibility",
+        "none"
+      );
+      afterMap.setLayoutProperty(
+        "burials-anemhn-labels-right",
+        "visibility",
+        "none"
+      );
+    }
+  });
+
+  $("#burials_anemhn_points").change(function () {
+    if ($(this).prop("checked")) {
+      if (lots_info_length == 0) {
+        getLotsInfo();
+      }
+      beforeMap.setLayoutProperty(
+        "burials-anemhn-left",
+        "visibility",
+        "visible"
+      );
+      afterMap.setLayoutProperty(
+        "burials-anemhn-right",
+        "visibility",
+        "visible"
+      );
+    } else {
+      beforeMap.setLayoutProperty("burials-anemhn-left", "visibility", "none");
+      afterMap.setLayoutProperty("burials-anemhn-right", "visibility", "none");
+
+      if (burials_anemhn_layer_view_flag) {
+        closeLayerBurialsAnemhnInfo();
+      }
+    }
+  });
+   
+   // -> End    Burials
+    
+	
 
   $("#settlements_points").click(function () {
     if ($(this).prop("checked")) {
