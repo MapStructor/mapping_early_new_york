@@ -339,6 +339,9 @@ label[for="current_buildings"] {
 } /* 300px */
 #demoLayerInfo,
 #infoLayerCastello,
+#infoLayerHistoricMarkers,
+#infoLayerHistoricPlaces,
+#infoLayerBurialsAnemhn,
 #infoLayerGrantLots,
 #infoLayerDutchGrants,
 #infoLayerGravesend,
@@ -384,11 +387,13 @@ button#hide-zoom-label {
   display: none;
 }
 
+#infoLayerHistoricPlaces,
 #demoLayerInfo,
 .demoLayerInfoPopUp {
   background-color: rgb(50, 205, 50, 0.3); /* #32CD32 LimeGreen */
   border: solid #32cd32 2px;
 }
+#infoLayerBurialsAnemhn,
 #infoLayerCastello,
 .infoLayerCastelloPopUp {
   background-color: rgb(255, 192, 203, 0.3); /* #FFC0CB Pink */
@@ -446,6 +451,7 @@ button#hide-zoom-label {
   background-color: rgb(255, 255, 0, 0.5); /* #FFFF00 Yellow */
   border: solid #ffff00 2px;
 }
+#infoLayerHistoricMarkers,
 #infoLayerCurrLots,
 .infoLayerCurrLotsPopUp {
   background-color: rgb(123, 104, 238, 0.3); /* #7B68EE MediumSlateBlue */
