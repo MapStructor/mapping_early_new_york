@@ -10,6 +10,9 @@ var grant_lots_view_id = null,
   castello_layer_view_flag = false,
   settlements_layer_view_flag = false,
   long_island_lot_layer_view_flag = false,
+  historic_markers_layer_view_flag = false,
+  historic_places_layer_view_flag = false,
+  burials_anemhn_layer_view_flag = false,
   info_layer_view_flag = false,
   dgrants_layer_view_flag = false,
   gravesend_layer_view_flag = false, // REPLACE THIS
@@ -26,6 +29,9 @@ $("#infoLayerCastello").slideUp();
 $("#infoLayerCurrLots").slideUp();
 $("#infoLayerSettlements").slideUp();
 $("#infoLayerLongIslandLots").slideUp();
+$("#infoLayerHistoricPlaces").slideUp();
+$("#infoLayerHistoricMarkers").slideUp();
+$("#infoLayerBurialsAnemhn").slideUp();
 $("#infoLayerInfoPoint").slideUp();
 $("#infoLayerGravesend").slideUp(); // REPLACE THIS
 $("#infoLayerNativeGroups").slideUp();
@@ -417,6 +423,9 @@ var castello_click_ev = false,
   settlements_click_ev = false,
   info_click_ev = false,
   long_island_lots_ev = false,
+  historic_markers_ev = false,
+  historic_places_ev = false,
+  burials_anemhn_ev = false,
   zoom_labels_click_ev = false;
 
 var afterMapPopUp = new mapboxgl.Popup({
@@ -664,6 +673,33 @@ var afterHighLongIslandLotsPopUp = new mapboxgl.Popup({
     closeOnClick: false,
   });
 
+var afterHighHistoricMarkersPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  }),
+  beforeHighHistoricMarkersPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+
+var afterHighHistoricPlacesPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  }),
+  beforeHighHistoricPlacesPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+
+var afterHighBurialsAnemhnPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  }),
+  beforeHighBurialsAnemhnPopUp = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+
 var afterMapInfoPopUp = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false,
@@ -787,7 +823,13 @@ beforeMap.on("load", function () {
         .addTo(beforeMap);
       }
     }).on("click", "long-island-lot-left", function (e) {
-      longIslandLotClickHandle(e)
+      longIslandLotClickHandle(e);
+    }).on("click", "historic-markers-left", function (e) {
+      historicMarkersClickHandle(e);
+    }).on("click", "historic-places-left", function (e) {
+      historicPlacesClickHandle(e);
+    }).on("click", "burials-anemhn-left", function (e) {
+      burialsAnemhnClickHandle(e);
     })
     .on("click", function () {
       DefaultHandle();
@@ -852,7 +894,13 @@ afterMap.on("load", function () {
       }
     }).on("click", "long-island-lot-right", function (e) {
       // call LI lot func here
-      longIslandLotClickHandle(e)
+      longIslandLotClickHandle(e);
+    }).on("click", "historic-markers-right", function (e) {
+      historicMarkersClickHandle(e);
+    }).on("click", "historic-places-right", function (e) {
+      historicPlacesClickHandle(e);
+    }).on("click", "burials-anemhn-right", function (e) {
+      burialsAnemhnClickHandle(e);
     })
     .on("click", function () {
       DefaultHandle();
@@ -886,7 +934,10 @@ function DefaultHandle() {
       !native_groups_click_ev &&
       !karl_click_ev &&
       !zoom_labels_click_ev &&
-      !long_island_lots_ev
+      !long_island_lots_ev &&
+	  !historic_markers_ev &&
+	  !historic_places_ev &&
+	  !burials_anemhn_ev
     ) {
       if (windoWidth > 637)
         if ($("#view-hide-layer-panel").length > 0)
@@ -906,6 +957,9 @@ function DefaultHandle() {
     karl_click_ev = false;
     zoom_labels_click_ev = false;
     long_island_lots_ev = false;
+	historic_markers_ev = false;
+	historic_places_ev = false;
+	burials_anemhn_ev = false;
   }
 }
 // LI Lot click handler
@@ -994,6 +1048,278 @@ function longIslandLotClickHandle(event){
   long_island_lots_ev = true;
   
 }
+
+
+// -> Start  Historic Markers
+
+function historicMarkersClickHandle(event){
+  
+  if (
+    historic_markers_layer_view_flag &&
+    clickedLongIslandId == event.features[0].id
+  ) {
+    if ($("#view-hide-layer-panel").length > 0)
+      if (!layer_view_flag) {
+        $("#rightInfoBar").css("display", "block");
+        setTimeout(function () {
+          $("#rightInfoBar").slideUp();
+        }, 500);
+      }
+
+    closeLayerHistoricMarkersInfo();
+  } else {
+    clickedLongIslandId = event.features[0].id;
+    const nid = event.features[0].properties.NID
+    fetch(
+      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+    )
+      .then((buffer) => buffer.json())
+      .then((res) => {
+        const html = res[0].rendered_entity;
+        // Define the prefix
+        var prefix = "https://encyclopedia.nahc-mapping.org";
+
+        // Define the regular expression pattern
+        var pattern = /(<a\s+href=")([^"]+)(")/g;
+        var modifiedHtmlString = "";
+        modifiedHtmlString += "<h3>Historic Markers</h3><hr>";
+        
+        // Replace href attributes with the prefixed version
+        modifiedHtmlString += html
+          .replace(pattern, (_, p1, p2, p3) => {
+            if (p2.slice(0, 4) === "http") {
+              return p1 + p2 + p3;
+            }
+            return p1 + prefix + p2 + p3;
+          })
+          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+            return p1 + ' target="_blank"' + p2;
+          });
+          
+          if ($(".infoLayerElem").first().attr("id") != "infoLayerHistoricMarkers")
+          $("#infoLayerHistoricMarkers").insertBefore($(".infoLayerElem").first());
+        $("#infoLayerHistoricMarkers").html(modifiedHtmlString).slideDown();
+      });
+	
+    var coordinates = [];
+    coordinates = event.features[0].geometry.coordinates.slice();
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+    beforeHighHistoricMarkersPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerCurrLotsPopUp'><b>" +
+        event.features[0].properties.Popup +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!beforeHighHistoricMarkersPopUp.isOpen())
+      beforeHighHistoricMarkersPopUp.addTo(beforeMap);
+
+    afterHighHistoricMarkersPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerCurrLotsPopUp'><b>" +
+        event.features[0].properties.Popup +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!afterHighHistoricMarkersPopUp.isOpen())
+      afterHighHistoricMarkersPopUp.addTo(afterMap);
+    
+
+    if (!layer_view_flag)
+      if ($("#view-hide-layer-panel").length > 0)
+        $("#view-hide-layer-panel").trigger("click");
+    historic_markers_layer_view_flag = true;
+  }
+  historic_markers_ev = true;
+  
+}
+
+// -> End    Historic Markers
+
+// -> Start  Historic Places
+
+function historicPlacesClickHandle(event){
+  
+  if (
+    historic_places_layer_view_flag &&
+    clickedLongIslandId == event.features[0].id
+  ) {
+    if ($("#view-hide-layer-panel").length > 0)
+      if (!layer_view_flag) {
+        $("#rightInfoBar").css("display", "block");
+        setTimeout(function () {
+          $("#rightInfoBar").slideUp();
+        }, 500);
+      }
+
+    closeLayerHistoricPlacesInfo();
+  } else {
+    clickedLongIslandId = event.features[0].id;
+    const nid = event.features[0].properties.NID
+    fetch(
+      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+    )
+      .then((buffer) => buffer.json())
+      .then((res) => {
+        const html = res[0].rendered_entity;
+        // Define the prefix
+        var prefix = "https://encyclopedia.nahc-mapping.org";
+
+        // Define the regular expression pattern
+        var pattern = /(<a\s+href=")([^"]+)(")/g;
+        var modifiedHtmlString = "";
+        modifiedHtmlString += "<h3>National Register of Historic Places</h3><hr>";
+        
+        // Replace href attributes with the prefixed version
+        modifiedHtmlString += html
+          .replace(pattern, (_, p1, p2, p3) => {
+            if (p2.slice(0, 4) === "http") {
+              return p1 + p2 + p3;
+            }
+            return p1 + prefix + p2 + p3;
+          })
+          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+            return p1 + ' target="_blank"' + p2;
+          });
+          
+          if ($(".infoLayerElem").first().attr("id") != "infoLayerHistoricPlaces")
+          $("#infoLayerHistoricPlaces").insertBefore($(".infoLayerElem").first());
+        $("#infoLayerHistoricPlaces").html(modifiedHtmlString).slideDown();
+      });
+	
+    var coordinates = [];
+    coordinates = event.features[0].geometry.coordinates.slice();
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+    beforeHighHistoricPlacesPopUp.setLngLat(coordinates).setHTML(
+      "<div class='demoLayerInfoPopUp'><b>" +
+        event.features[0].properties.Popup +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!beforeHighHistoricPlacesPopUp.isOpen())
+      beforeHighHistoricPlacesPopUp.addTo(beforeMap);
+
+    afterHighHistoricPlacesPopUp.setLngLat(coordinates).setHTML(
+      "<div class='demoLayerInfoPopUp'><b>" +
+        event.features[0].properties.Popup +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!afterHighHistoricPlacesPopUp.isOpen())
+      afterHighHistoricPlacesPopUp.addTo(afterMap);
+    
+
+    if (!layer_view_flag)
+      if ($("#view-hide-layer-panel").length > 0)
+        $("#view-hide-layer-panel").trigger("click");
+    historic_places_layer_view_flag = true;
+  }
+  historic_places_ev = true;
+  
+}
+
+// -> End    Historic Places
+
+// -> Start  Burials
+
+function burialsAnemhnClickHandle(event){
+  
+  if (
+    burials_anemhn_layer_view_flag &&
+    clickedLongIslandId == event.features[0].id
+  ) {
+    if ($("#view-hide-layer-panel").length > 0)
+      if (!layer_view_flag) {
+        $("#rightInfoBar").css("display", "block");
+        setTimeout(function () {
+          $("#rightInfoBar").slideUp();
+        }, 500);
+      }
+
+    closeLayerBurialsAnemhnInfo();
+  } else {
+    clickedLongIslandId = event.features[0].id;
+    const nid = event.features[0].properties.NID
+    fetch(
+      `https://encyclopedia.nahc-mapping.org/rendered-export-single?nid=${nid}`
+    )
+      .then((buffer) => buffer.json())
+      .then((res) => {
+        const html = res[0].rendered_entity;
+        // Define the prefix
+        var prefix = "https://encyclopedia.nahc-mapping.org";
+
+        // Define the regular expression pattern
+        var pattern = /(<a\s+href=")([^"]+)(")/g;
+        var modifiedHtmlString = "";
+        modifiedHtmlString += "<h3>Burials Anemhn</h3><hr>";
+        
+        // Replace href attributes with the prefixed version
+        modifiedHtmlString += html
+          .replace(pattern, (_, p1, p2, p3) => {
+            if (p2.slice(0, 4) === "http") {
+              return p1 + p2 + p3;
+            }
+            return p1 + prefix + p2 + p3;
+          })
+          .replace(/(<a\s+[^>]*)(>)/g, (_, p1, p2) => {
+            return p1 + ' target="_blank"' + p2;
+          });
+          
+          if ($(".infoLayerElem").first().attr("id") != "infoLayerBurialsAnemhn")
+          $("#infoLayerBurialsAnemhn").insertBefore($(".infoLayerElem").first());
+        $("#infoLayerBurialsAnemhn").html(modifiedHtmlString).slideDown();
+      });
+	
+    var coordinates = [];
+    coordinates = event.features[0].geometry.coordinates.slice();
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+    beforeHighBurialsAnemhnPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerCastelloPopUp'><b>" +
+        event.features[0].properties.Popup +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!beforeHighBurialsAnemhnPopUp.isOpen())
+      beforeHighBurialsAnemhnPopUp.addTo(beforeMap);
+
+    afterHighBurialsAnemhnPopUp.setLngLat(coordinates).setHTML(
+      "<div class='infoLayerCastelloPopUp'><b>" +
+        event.features[0].properties.Popup +
+        "</b><br>" +
+        "</div>"
+    );
+    if (!afterHighBurialsAnemhnPopUp.isOpen())
+      afterHighBurialsAnemhnPopUp.addTo(afterMap);
+    
+
+    if (!layer_view_flag)
+      if ($("#view-hide-layer-panel").length > 0)
+        $("#view-hide-layer-panel").trigger("click");
+    burials_anemhn_layer_view_flag = true;
+  }
+  burials_anemhn_ev = true;
+  
+}
+
+// -> End    Burials
+
 
 function CurrLotsHandle(event) {
   var highPopUpHTML =
@@ -2129,6 +2455,33 @@ function closeLayerLongIslandLotsInfo() {
     beforeHighMapLongIslandLotsPopUp.remove();
 }
 
+function closeLayerHistoricMarkersInfo() {
+  $("#infoLayerHistoricMarkers").slideUp();
+  historic_markers_layer_view_flag = false;
+  if (afterHighHistoricMarkersPopUp.isOpen())
+    afterHighHistoricMarkersPopUp.remove();
+  if (beforeHighHistoricMarkersPopUp.isOpen())
+    beforeHighHistoricMarkersPopUp.remove();
+}
+
+function closeLayerHistoricPlacesInfo() {
+  $("#infoLayerHistoricPlaces").slideUp();
+  historic_places_layer_view_flag = false;
+  if (afterHighHistoricPlacesPopUp.isOpen())
+    afterHighHistoricPlacesPopUp.remove();
+  if (beforeHighHistoricPlacesPopUp.isOpen())
+    beforeHighHistoricPlacesPopUp.remove();
+}
+
+function closeLayerBurialsAnemhnInfo() {
+  $("#infoLayerBurialsAnemhn").slideUp();
+  burials_anemhn_layer_view_flag = false;
+  if (afterHighBurialsAnemhnPopUp.isOpen())
+    afterHighBurialsAnemhnPopUp.remove();
+  if (beforeHighBurialsAnemhnPopUp.isOpen())
+    beforeHighBurialsAnemhnPopUp.remove();
+}
+
 function closeInfoLayerInfo() {
   $("#infoLayerInfoPoint").slideUp();
   info_layer_view_flag = false;
@@ -2451,12 +2804,29 @@ function changeDate(unixDate) {
   );
 
 
-  beforeMap.setFilter("long-island-lot-left", dateFilter)
-  beforeMap.setFilter("long-island-lot-labels-left", dateFilter)
+  beforeMap.setFilter("long-island-lot-left", dateFilter);
+  beforeMap.setFilter("long-island-lot-labels-left", dateFilter);
   
   afterMap.setFilter("long-island-lot-right", dateFilter);
-  afterMap.setFilter("long-island-lot-labels-right", dateFilter)
+  afterMap.setFilter("long-island-lot-labels-right", dateFilter);
 
+  beforeMap.setFilter("historic-markers-left", dateFilter);
+  beforeMap.setFilter("historic-markers-labels-left", dateFilter);
+  
+  afterMap.setFilter("historic-markers-right", dateFilter);
+  afterMap.setFilter("historic-markers-labels-right", dateFilter);
+  
+  beforeMap.setFilter("historic-places-left", dateFilter);
+  beforeMap.setFilter("historic-places-labels-left", dateFilter);
+  
+  afterMap.setFilter("historic-places-right", dateFilter);
+  afterMap.setFilter("historic-places-labels-right", dateFilter);
+  
+  beforeMap.setFilter("burials-anemhn-left", dateFilter);
+  beforeMap.setFilter("burials-anemhn-labels-left", dateFilter);
+  
+  afterMap.setFilter("burials-anemhn-right", dateFilter);
+  afterMap.setFilter("burials-anemhn-labels-right", dateFilter);
 
   beforeMap.setFilter("gravesend-lines-left", dateFilter);
   afterMap.setFilter("gravesend-lines-right", dateFilter);
@@ -2747,7 +3117,10 @@ beforeMap.on("style.load", function () {
   addSettlementsLabelsBeforeLayers(date);
   addInfoBeforeLayers(date);
   addInfoLabelsBeforeLayers(date);
-  addLongIsLandLotLabelsBeforeLayers(date)
+  addLongIsLandLotLabelsBeforeLayers(date);
+  addBurialsAnemhnLabelsBeforeLayers(date);
+  addHistoricPlacesLabelsBeforeLayers(date);
+  addHistoricMarkersLabelsBeforeLayers(date);
 
   setTimeout(function () {
     addGravesendBeforeLayers(date);
@@ -2769,7 +3142,10 @@ beforeMap.on("style.load", function () {
     addLongIslandCoastlineBeforeLayers();
     addIndianPathsBeforeLayers();
     addLongIslandNativeGroupsBeforeLayers();
-  addLongIslandLotBeforeLayers(date)
+    addLongIslandLotBeforeLayers(date);
+	addBurialsAnemhnBeforeLayers(date);
+	addHistoricPlacesBeforeLayers(date);
+	addHistoricMarkersBeforeLayers(date);
     refreshLayers();
   }, 2000);
 });
@@ -2788,6 +3164,9 @@ afterMap.on("style.load", function () {
     addInfoAfterLayers(date);
     addInfoLabelsAfterLayers(date);
     addLongIslandLotLabelAfterLayers(date)
+	addBurialsAnemhnLabelsAfterLayers(date);
+    addHistoricPlacesLabelsAfterLayers(date);
+    addHistoricMarkersLabelsAfterLayers(date);
   }, 500);
 
   setTimeout(function () {
@@ -2797,6 +3176,9 @@ afterMap.on("style.load", function () {
     addGrantLotsLinesAfterLayers(date);
     addAfterLayers(yr, date);
     addLongIslandLotAfterLayers(date)
+	addBurialsAnemhnAfterLayers(date);
+	addHistoricPlacesAfterLayers(date);
+	addHistoricMarkersAfterLayers(date);
     addAfterFarmsLayer(date);
   }, 1500);
 
