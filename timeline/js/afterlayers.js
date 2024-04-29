@@ -145,12 +145,12 @@ function addAfterLayers(_, date) {
   
     /*
     Explanation:
-    Ultimately want to be able to use 2 icons for beforetime and aftertime (where "2" has aftertime)
-    beforetime: http://bakkenpipelinemap.com/external_assets/info_points_beforetime.png
+    Ultimately want to be able to use 2 icons for aftertime and aftertime (where "2" has aftertime)
+    aftertime: http://bakkenpipelinemap.com/external_assets/info_points_aftertime.png
 
     Also, these are the preferred locations, but may be an issue with cross-referencing in site:
     https://nahc-mapping.org/mappingNY/icons/info_points_aftertime.png
-    https://nahc-mapping.org/mappingNY/icons/info_points_beforetime.png
+    https://nahc-mapping.org/mappingNY/icons/info_points_aftertime.png
     */
 
     //Only this works, from this url:
@@ -161,7 +161,7 @@ function addAfterLayers(_, date) {
 
     //Trying to change icons, not working:
     /*
-    afterMap.loadImage("https://menypublicresources.netlify.app/info_points_beforetime.png", (err, image) => {
+    afterMap.loadImage("https://menypublicresources.netlify.app/info_points_aftertime.png", (err, image) => {
       if(err) throw err;
       afterMap.addImage("info_points_image2", image)
     });
@@ -951,7 +951,7 @@ function addLongIslandLotAfterLayers(date){
         afterMap.setFeatureState(
           {
             source: "long-island-lot-right",
-            sourceLayer: "LI_lots-4gv85t",
+            sourceLayer: "wikipedia_villages_and_hamlet-2oq6k9",
             id: hoveredLongIslandLotIdRight,
           },
           { hover: false }
@@ -961,7 +961,7 @@ function addLongIslandLotAfterLayers(date){
       afterMap.setFeatureState(
         {
           source: "long-island-lot-right",
-          sourceLayer: "LI_lots-4gv85t",
+          sourceLayer: "wikipedia_villages_and_hamlet-2oq6k9",
           id: hoveredLongIslandLotIdRight,
         },
         { hover: true }
@@ -996,7 +996,7 @@ function addLongIslandLotAfterLayers(date){
       afterMap.setFeatureState(
         {
           source: "long-island-lot-right",
-          sourceLayer: "LI_lots-4gv85t",
+          sourceLayer: "wikipedia_villages_and_hamlet-2oq6k9",
           id: hoveredLongIslandLotIdRight,
         },
         { hover: false }
@@ -1010,6 +1010,232 @@ function addLongIslandLotAfterLayers(date){
 function addLongIslandLotLabelAfterLayers(date){
   addMapLayer(afterMap, getLayer("long-island-lot-labels-right"), date)
 }
+
+
+// -> Start  Historic Markers
+
+function addHistoricMarkersAfterLayers(date){
+  addMapLayer(afterMap, getLayer("historic-markers-right"), date)
+
+  //ON HOVER
+  afterMap.on("mouseenter", "historic-markers-right", function (e) {
+    afterMap.getCanvas().style.cursor = "pointer";
+    if (e.features.length > 0) {
+      if (hoveredLongIslandLotIdRight) {
+        afterMap.setFeatureState(
+          {
+            source: "historic-markers-right",
+            sourceLayer: "historic_markers-8989o0",
+            id: hoveredLongIslandLotIdRight,
+          },
+          { hover: false }
+        );
+      }
+      hoveredLongIslandLotIdRight = e.features[0].id;
+      afterMap.setFeatureState(
+        {
+          source: "historic-markers-right",
+          sourceLayer: "historic_markers-8989o0",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: true }
+      );
+
+      var coordinates = e.features[0].geometry.coordinates.slice();
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      //BEFORE MAP POP UP CONTENTS
+      afterMapSettlementsPopUp
+        .setLngLat(coordinates)
+        .setHTML(
+          "<div class='infoLayerCurrLotsPopUp'><b>" +
+            e.features[0].properties.Popup +
+            "</b><br>" +
+            "</div>"
+        )
+        .addTo(afterMap);
+    }
+  });
+
+  //OFF HOVER
+  afterMap.on("mouseleave", "historic-markers-right", function () {
+    afterMap.getCanvas().style.cursor = "";
+    if (hoveredLongIslandLotIdRight) {
+      afterMap.setFeatureState(
+        {
+          source: "historic-markers-right",
+          sourceLayer: "historic_markers-8989o0",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: false }
+      );
+    }
+    hoveredLongIslandLotIdRight = null;
+    if (afterMapSettlementsPopUp.isOpen()) afterMapSettlementsPopUp.remove();
+  });
+}
+
+function addHistoricMarkersLabelsAfterLayers(date){
+  addMapLayer(afterMap, getLayer("historic-markers-labels-right"), date)
+}
+
+// -> End    Historic Markers
+
+// -> Start  Historic Places
+
+function addHistoricPlacesAfterLayers(date){
+  addMapLayer(afterMap, getLayer("historic-places-right"), date)
+
+  //ON HOVER
+  afterMap.on("mouseenter", "historic-places-right", function (e) {
+    afterMap.getCanvas().style.cursor = "pointer";
+    if (e.features.length > 0) {
+      if (hoveredLongIslandLotIdRight) {
+        afterMap.setFeatureState(
+          {
+            source: "historic-places-right",
+            sourceLayer: "national_register-6ohqde",
+            id: hoveredLongIslandLotIdRight,
+          },
+          { hover: false }
+        );
+      }
+      hoveredLongIslandLotIdRight = e.features[0].id;
+      afterMap.setFeatureState(
+        {
+          source: "historic-places-right",
+          sourceLayer: "national_register-6ohqde",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: true }
+      );
+
+      var coordinates = e.features[0].geometry.coordinates.slice();
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      //BEFORE MAP POP UP CONTENTS
+      afterMapSettlementsPopUp
+        .setLngLat(coordinates)
+        .setHTML(
+          "<div class='demoLayerInfoPopUp'><b>" +
+            e.features[0].properties.Popup +
+            "</b><br>" +
+            "</div>"
+        )
+        .addTo(afterMap);
+    }
+  });
+
+  //OFF HOVER
+  afterMap.on("mouseleave", "historic-places-right", function () {
+    afterMap.getCanvas().style.cursor = "";
+    if (hoveredLongIslandLotIdRight) {
+      afterMap.setFeatureState(
+        {
+          source: "historic-places-right",
+          sourceLayer: "national_register-6ohqde",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: false }
+      );
+    }
+    hoveredLongIslandLotIdRight = null;
+    if (afterMapSettlementsPopUp.isOpen()) afterMapSettlementsPopUp.remove();
+  });
+}
+
+function addHistoricPlacesLabelsAfterLayers(date){
+  addMapLayer(afterMap, getLayer("historic-places-labels-right"), date)
+}
+
+// -> End    Historic Places
+
+// -> Start  Burials
+
+function addBurialsAnemhnAfterLayers(date){
+  addMapLayer(afterMap, getLayer("burials-anemhn-right"), date)
+
+  //ON HOVER
+  afterMap.on("mouseenter", "burials-anemhn-right", function (e) {
+    afterMap.getCanvas().style.cursor = "pointer";
+    if (e.features.length > 0) {
+      if (hoveredLongIslandLotIdRight) {
+        afterMap.setFeatureState(
+          {
+            source: "burials-anemhn-right",
+            sourceLayer: "burials-anemhn",
+            id: hoveredLongIslandLotIdRight,
+          },
+          { hover: false }
+        );
+      }
+      hoveredLongIslandLotIdRight = e.features[0].id;
+      afterMap.setFeatureState(
+        {
+          source: "burials-anemhn-right",
+          sourceLayer: "burials-anemhn",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: true }
+      );
+
+      var coordinates = e.features[0].geometry.coordinates.slice();
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      //BEFORE MAP POP UP CONTENTS
+      afterMapSettlementsPopUp
+        .setLngLat(coordinates)
+        .setHTML(
+          "<div class='infoLayerCastelloPopUp'><b>" +
+            e.features[0].properties.Popup +
+            "</b><br>" +
+            "</div>"
+        )
+        .addTo(afterMap);
+    }
+  });
+
+  //OFF HOVER
+  afterMap.on("mouseleave", "burials-anemhn-right", function () {
+    afterMap.getCanvas().style.cursor = "";
+    if (hoveredLongIslandLotIdRight) {
+      afterMap.setFeatureState(
+        {
+          source: "burials-anemhn-right",
+          sourceLayer: "burials-anemhn",
+          id: hoveredLongIslandLotIdRight,
+        },
+        { hover: false }
+      );
+    }
+    hoveredLongIslandLotIdRight = null;
+    if (afterMapSettlementsPopUp.isOpen()) afterMapSettlementsPopUp.remove();
+  });
+}
+
+function addBurialsAnemhnLabelsAfterLayers(date){
+  addMapLayer(afterMap, getLayer("burials-anemhn-labels-right"), date)
+}
+
+// -> End    Burials
 
 
 // Interactive Zoom Labels Layer
