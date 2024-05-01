@@ -1035,7 +1035,7 @@ const layers = [
   },
   "source-layer": "historic_markers-8989o0",
   paint: {
-    "circle-color": "#7b68ee",
+    "circle-color": "#00FFF2",
     "circle-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1043,7 +1043,7 @@ const layers = [
       1,
     ],
     "circle-stroke-width": 2,
-    "circle-stroke-color": "#7b68ee",
+    "circle-stroke-color": "#00FFF2",
     "circle-stroke-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1110,7 +1110,7 @@ const layers = [
   },
   "source-layer": "national_register-6ohqde",
   paint: {
-    "circle-color": "#097911",
+    "circle-color": "#74EC00",
     "circle-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1118,7 +1118,7 @@ const layers = [
       1,
     ],
     "circle-stroke-width": 2,
-    "circle-stroke-color": "#097911",
+    "circle-stroke-color": "#74EC00",
     "circle-stroke-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1875,7 +1875,7 @@ const beforeLayers = [
   },
   "source-layer": "historic_markers-8989o0",
   paint: {
-    "circle-color": "#7b68ee",
+    "circle-color": "#00FFF2",
     "circle-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1883,7 +1883,7 @@ const beforeLayers = [
       1,
     ],
     "circle-stroke-width": 2,
-    "circle-stroke-color": "#7b68ee",
+    "circle-stroke-color": "#00FFF2",
     "circle-stroke-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1950,7 +1950,7 @@ const beforeLayers = [
   },
   "source-layer": "national_register-6ohqde",
   paint: {
-    "circle-color": "#097911",
+    "circle-color": "#74EC00",
     "circle-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
@@ -1958,7 +1958,7 @@ const beforeLayers = [
       1,
     ],
     "circle-stroke-width": 2,
-    "circle-stroke-color": "#097911",
+    "circle-stroke-color": "#74EC00",
     "circle-stroke-opacity": [
       "case",
       ["boolean", ["feature-state", "hover"], false],
