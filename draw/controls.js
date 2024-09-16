@@ -1,8 +1,44 @@
 //Note: All enable/disable functionily is removed because
 //when disabled, everything is erased.
 
+// Configure Cloudinary
+
 
 if (urlParams.get("sketch") === "1") {
+  cloudinary.config({
+    cloud_name: 'dk8ilk3ek',
+    api_key: '952178457432538',
+    api_secret: 'LSoYMb8BaWHRzEfe0Bw2wskivwM'
+  });
+  
+  const uploadToCloudinary = async (selectedFile, geojson) => {
+    try {
+      notify("Saving...");
+      isReadyToSave = false;
+  
+      const uploadResponse = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream(
+          {
+            public_id: selectedFile.replace(/\.[^/.]+$/, ""), // Remove file extension
+            resource_type: "raw",
+            folder: "geojsons" // Optional: specify a folder in your Cloudinary account
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        ).end(geojson);
+      });
+  
+      console.log("File uploaded successfully", uploadResponse);
+      notify("Saved successfully");
+    } catch (error) {
+      console.error("Error:", error);
+      notify("There was an error saving geojson");
+    } finally {
+      isReadyToSave = true;
+    }
+  };
   window.SKETCH_ENABLED = true;
   // Initialize the FirebaseUI Widget using Firebase.
   // var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -188,24 +224,8 @@ function saveGeoJSONData(draw) {
     return
   }
 
-  const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=${selectedFile}`;
-  notify("Saving...")
-  isReadyToSave = false
-  fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: geojson,
-  })
-  .then(response => response.json())
-  .then(data => {
-      notify("Saved successfully")
-  })
-  .catch((error) => {
-      console.error("Error:", error);
-      notify("There was an error saving geojson")
-  }).finally(()=>{
-    isReadyToSave = true
-  });
+  uploadToCloudinary(selectedFile, geojson);
+  
 }
 
 
@@ -223,7 +243,7 @@ function saveGeoJSONData(draw) {
 
     if (isFileUploaded) {
       // Upload the updated GeoJSON to Google Cloud Storage
-      const url = `https://storage.googleapis.com/upload/storage/v1/b/meny_geojsons_bucket/o?uploadType=media&name=info_of_interest.geojson`;
+      const url = `https://res.cloudinary.com/dk8ilk3ek/raw/upload/v1726027162/info_of_interest_kel5xa.geojson`;
       fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -383,9 +403,7 @@ function saveGeoJSONData(draw) {
   }
 
   function loadGeoJSON(filename) {
-    const url =
-      `https://storage.googleapis.com/meny_geojsons_bucket/${filename}` +
-      "?nocache=" +
+    const url = `https://res.cloudinary.com/dk8ilk3ek/raw/upload/v1726027162/info_of_interest_kel5xa.geojson`
       new Date().getTime();
     fetch(url)
       .then((response) => {

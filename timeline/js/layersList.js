@@ -338,7 +338,7 @@ const layers = [
     source: {
         type: "geojson",
         //Public URL:
-        data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+        data: 'https://res.cloudinary.com/dk8ilk3ek/raw/upload/v1726463420/info_of_interest_kel5xa.geojson'
     },
 
     "layout": {
@@ -379,7 +379,7 @@ const layers = [
   //GEOJSON:
   source: {
     type: "geojson",
-    data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+    data: 'https://res.cloudinary.com/dk8ilk3ek/raw/upload/v1726463420/info_of_interest_kel5xa.geojson'
   },
 
   layout: {
@@ -1654,7 +1654,7 @@ const beforeLayers = [
     source: {
       type: "geojson",
       //Public URL:
-      data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+      data: 'https://res.cloudinary.com/dk8ilk3ek/raw/upload/v1726463420/info_of_interest_kel5xa.geojson'
     },
 
     "layout": {
@@ -1696,7 +1696,7 @@ const beforeLayers = [
   //GEOJSON:
   source: {
     type: "geojson",
-    data: 'https://storage.googleapis.com/meny_geojsons_bucket/info_of_interest.geojson?nocache=' + new Date().getTime()
+    data: 'https://res.cloudinary.com/dk8ilk3ek/raw/upload/v1726463420/info_of_interest_kel5xa.geojson'
   },
 
   layout: {
