@@ -88,7 +88,7 @@ var LongIslandBounds = [
 mapboxgl.accessToken =
 
   //mapny access token
-  "pk.eyJ1IjoibWFwbnkiLCJhIjoiY2xtMG93amk4MnBrZTNnczUzY2VvYjg0ciJ9.MDMHYBlVbG14TJD120t6NQ";
+  "pk.eyJ1IjoibWFwbnkiLCJhIjoiY200OW82cThoMDZuZTJpcHVkY3piOTJwcyJ9.IJOzxnZ9Acm1L-RwQcUcng";
 
 //ADD MAP CONTAINER
 
