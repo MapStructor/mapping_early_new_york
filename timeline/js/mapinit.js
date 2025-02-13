@@ -98,7 +98,7 @@ var beforeMap = new mapboxgl.Map({
   center: [0, 0],
   hash: true,
   zoom: 0,
-  attributionControl: false,
+  attributionControl: true,
 });
 
 var afterMap = new mapboxgl.Map({
@@ -107,7 +107,7 @@ var afterMap = new mapboxgl.Map({
   center: [0, 0],
   hash: true,
   zoom: 0,
-  attributionControl: false,
+  attributionControl: true,
 });
 
 var map = new mapboxgl.Compare(beforeMap, afterMap, {

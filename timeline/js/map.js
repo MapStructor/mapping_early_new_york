@@ -18,7 +18,7 @@ const beforeMapConfig = {
   style: "mapbox://styles/mapny/clm2yrx1y025401p93v26bhyl",
   center: [0, 0],
   zoom: 0,
-  attributionControl: false,
+  attributionControl: true,
 };
 
 const afterMapConfig = {
@@ -26,8 +26,9 @@ const afterMapConfig = {
   style: "mapbox://styles/mapny/clm2yu5fg022801phfh479c8x",
   center: [0, 0],
   zoom: 0,
-  attributionControl: false,
+  attributionControl: true,
 };
+
 
 var beforeMap = new mapboxgl.Map(beforeMapConfig);
 

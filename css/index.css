@@ -26,9 +26,11 @@ body * {
   user-select: none;
 }
 
+/*
 .mapboxgl-ctrl-bottom-left {
   display: none !important;
 }
+*/
 
 .mapboxgl-ctrl-bottom-right {
   bottom: 17px;
