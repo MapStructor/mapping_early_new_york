@@ -1,3 +1,8 @@
+## An important note for development
+
+- The key is set to only work on one domain. Whenever you work locally or on another domain, the map will not show, along with features like attributions.
+- You will need to swap the token to see the map. Make sure you only use the swapped token temporarily, and do not push any token changes, or leave it online anywhere.
+
 # How to run
 
 ## Run with NodeJS
